@@ -245,11 +245,15 @@
                                 <segue destination="yiB-p8-bwf" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="8n4-f3-f0Y"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="save" id="L8i-Xg-sDN">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="contentTextView" destination="TFZ-f7-TiU" id="6HV-CB-gt2"/>
                         <outlet property="photoImageView" destination="VQ5-fa-FRe" id="HtL-p3-kx5"/>
                         <outlet property="titleTextField" destination="K1O-ej-xrT" id="Fan-tm-5f8"/>
+                        <outlet property="weatherButton" destination="hxf-j9-PYe" id="535-FT-z80"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0j-cN-he6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -276,7 +280,7 @@
                                 </constraints>
                                 <state key="normal" image="cross"/>
                                 <connections>
-                                    <segue destination="AKy-HA-L12" kind="unwind" unwindAction="closeWeatherWithSegue:" id="BAi-e6-myU"/>
+                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="close" unwindAction="closeWeatherWithSegue:" id="BAi-e6-myU"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rTn-yo-dFx">
@@ -291,6 +295,9 @@
                                                 <state key="normal" title="Sunny">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="sunny" unwindAction="chooseWeatherWithSegue:" id="FfX-lW-LUP"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbu-rQ-uDd">
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="149"/>
@@ -298,6 +305,9 @@
                                                 <state key="normal" title="Cloudy">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="cloudy" unwindAction="chooseWeatherWithSegue:" id="Gpl-vi-YAS"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aE-mN-4Fm">
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="149"/>
@@ -305,6 +315,9 @@
                                                 <state key="normal" title="Rain">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="rain" unwindAction="chooseWeatherWithSegue:" id="dg7-CD-mHv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -317,6 +330,9 @@
                                                 <state key="normal" title="Snow">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="snow" unwindAction="chooseWeatherWithSegue:" id="5qf-sm-sf0"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJt-Fo-oKH">
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="149"/>
@@ -324,6 +340,9 @@
                                                 <state key="normal" title="foggy">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="foggy" unwindAction="chooseWeatherWithSegue:" id="Wvp-WO-45r"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="of8-Tc-qgp">
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="149"/>
@@ -331,6 +350,9 @@
                                                 <state key="normal" title="Overcast">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="overcast" unwindAction="chooseWeatherWithSegue:" id="KgF-Mt-qqp"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -343,6 +365,9 @@
                                                 <state key="normal" title="sand storm">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="sand storm" unwindAction="chooseWeatherWithSegue:" id="4KA-oO-wYn"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcE-Bd-SV3">
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="149"/>
@@ -350,6 +375,9 @@
                                                 <state key="normal" title="tornado">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="tornado" unwindAction="chooseWeatherWithSegue:" id="gPB-wW-Cmt"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dl8-ah-8sf">
                                                 <rect key="frame" x="228.5" y="0.0" width="114.5" height="149"/>
@@ -357,6 +385,9 @@
                                                 <state key="normal" title="Lighting">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="lighting" unwindAction="chooseWeatherWithSegue:" id="XHQ-ZH-hlH"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -674,6 +705,7 @@
         <image name="cross" width="33" height="32"/>
         <image name="photo" width="24" height="18"/>
         <image name="plus" width="16" height="16"/>
+        <image name="save" width="20" height="20"/>
         <image name="sunny" width="96" height="96"/>
     </resources>
 </document>

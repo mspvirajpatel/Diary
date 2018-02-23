@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewDiaryTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewDiaryTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
     @IBOutlet var titleTextField: UITextField!
     
@@ -16,17 +16,49 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     @IBOutlet var contentTextView: UITextView!
     
+    @IBOutlet weak var weatherButton: UIButton!
+    
+    @IBAction func chooseWeather(segue: UIStoryboardSegue) {
+        if let choosedWeather = segue.identifier {
+            self.weatherButton.imageView?.image = UIImage(named: choosedWeather)
+        }
+    }
+    
     @IBAction func closeWeather(segue: UIStoryboardSegue) {
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        
+        tableView.separatorStyle = .none
+        contentTextView.delegate = self
 
         // Configure navigation bar appearance
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView)
+    {
+        if (textView.text == "write some thing today...")
+        {
+            textView.text = ""
+            textView.textColor = .black
+        }
+        textView.becomeFirstResponder() //Optional
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        if textView.text == ""
+        {
+            textView.text = "write some thing today..."
+            textView.textColor = .lightGray
+        }
+        textView.resignFirstResponder()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
