@@ -272,17 +272,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F4t-BH-CeG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZX-bZs">
-                                <rect key="frame" x="319" y="28" width="33" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="F6E-EE-6Fu"/>
-                                    <constraint firstAttribute="height" constant="32" id="LeF-8w-O06"/>
-                                </constraints>
-                                <state key="normal" image="cross"/>
-                                <connections>
-                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="close" unwindAction="closeWeatherWithSegue:" id="BAi-e6-myU"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rTn-yo-dFx">
                                 <rect key="frame" x="16" y="100" width="343" height="447"/>
                                 <subviews>
@@ -393,6 +382,17 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-ZX-bZs">
+                                <rect key="frame" x="23" y="28" width="33" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="F6E-EE-6Fu"/>
+                                    <constraint firstAttribute="height" constant="32" id="LeF-8w-O06"/>
+                                </constraints>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <segue destination="AKy-HA-L12" kind="unwind" identifier="close" unwindAction="closeWeatherWithSegue:" id="BAi-e6-myU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -405,7 +405,7 @@
                             <constraint firstItem="F4t-BH-CeG" firstAttribute="leading" secondItem="nv5-CR-dj0" secondAttribute="leading" id="PVz-4Q-TKv"/>
                             <constraint firstItem="o9W-ZX-bZs" firstAttribute="top" secondItem="nv5-CR-dj0" secondAttribute="top" constant="8" id="Vcw-E2-5AS"/>
                             <constraint firstItem="rTn-yo-dFx" firstAttribute="leading" secondItem="nv5-CR-dj0" secondAttribute="leading" constant="16" id="aGq-Xo-ZEH"/>
-                            <constraint firstItem="nv5-CR-dj0" firstAttribute="trailing" secondItem="o9W-ZX-bZs" secondAttribute="trailing" constant="23" id="teZ-xv-rU4"/>
+                            <constraint firstItem="o9W-ZX-bZs" firstAttribute="leading" secondItem="nv5-CR-dj0" secondAttribute="leading" constant="23" id="teZ-xv-rU4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nv5-CR-dj0"/>
                     </view>
