@@ -10,7 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var diary = Diary()
+    var diary: DiaryMO!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var titleLabel: UILabel!
@@ -26,8 +26,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         
         titleLabel.text = diary.title
-        tagLabel.text = diary.tag[0]
-        fullImageView.image = UIImage(named: diary.image[0])
+        tagLabel.text = diary.tag
+        fullImageView.image = UIImage(data: diary.image!)
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -57,13 +57,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailAuthorTableViewCell.self), for: indexPath) as! DetailAuthorTableViewCell
-            cell.avatarImageView.image = UIImage(named: diary.avatar)
+            cell.avatarImageView.image = UIImage(named: "avatar-man-stubble")
             cell.authorLabel.text = diary.author
             
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailWeatherAndLocationTableViewCell.self), for: indexPath) as! DetailWeatherAndLocationTableViewCell
-            cell.weatherImageView.image = UIImage(named: diary.weather)
+            cell.weatherImageView.image = UIImage(named: diary.weather!)
             cell.weatherLabel.text = diary.weather
             cell.locationIconImageView.image = UIImage(named: "map")
             cell.locationButton.setTitle(diary.location, for: UIControlState.normal)

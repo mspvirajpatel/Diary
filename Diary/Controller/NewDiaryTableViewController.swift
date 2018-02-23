@@ -7,8 +7,33 @@
 //
 
 import UIKit
+import CoreData
 
 class NewDiaryTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+    
+    var diary: DiaryMO!
+    var choosedWeatherButtonText = ""
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            diary = DiaryMO(context: appDelegate.persistentContainer.viewContext)
+            diary.title = titleTextField.text
+            diary.tag = "日记"
+            diary.author = "匿名"
+            diary.weather = self.choosedWeatherButtonText
+            diary.location = "郑州市二七区"
+            diary.content = contentTextView.text
+            diary.review = ""
+            
+            if let diaryImage = photoImageView.image {
+                diary.image = UIImagePNGRepresentation(diaryImage)
+            }
+            
+            print("Saving data to context")
+            appDelegate.saveContext()
+        }
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet var titleTextField: UITextField!
     
@@ -21,6 +46,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     @IBAction func chooseWeather(segue: UIStoryboardSegue) {
         if let choosedWeather = segue.identifier {
             self.weatherButton.imageView?.image = UIImage(named: choosedWeather)
+            self.choosedWeatherButtonText = choosedWeather
         }
     }
     

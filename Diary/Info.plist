@@ -40,6 +40,8 @@
 	<string>You need to grant the app access to your photo library so you can pick your favorite diary photo.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>You need to grant the app access to your camera in order to take photes.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME)</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

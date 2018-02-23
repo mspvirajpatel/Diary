@@ -13,7 +13,7 @@ class MapViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     
-    var diary = Diary()
+    var diary: DiaryMO!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class MapViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(diary.location, completionHandler: { placemarks, error in
+        geoCoder.geocodeAddressString(diary.location ?? "", completionHandler: { placemarks, error in
             if let error = error {
                 print(error)
                 return

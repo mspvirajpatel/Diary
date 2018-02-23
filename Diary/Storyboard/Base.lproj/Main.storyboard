@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -106,8 +107,30 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emptyDiaryView" destination="3lo-yw-lpj" id="E2i-Ro-JNv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfj-2U-3eT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="3lo-yw-lpj">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="o4a-Jl-SeZ">
+                            <rect key="frame" x="28" y="100" width="319" height="355"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="o4a-Jl-SeZ" secondAttribute="height" multiplier="80:89" id="Sds-hF-YGA"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="fYN-iD-b6n" firstAttribute="trailing" secondItem="o4a-Jl-SeZ" secondAttribute="trailing" constant="28" id="9kQ-82-XwX"/>
+                        <constraint firstItem="o4a-Jl-SeZ" firstAttribute="top" secondItem="3lo-yw-lpj" secondAttribute="top" constant="100" id="cne-VV-sdJ"/>
+                        <constraint firstItem="o4a-Jl-SeZ" firstAttribute="leading" secondItem="fYN-iD-b6n" secondAttribute="leading" constant="28" id="pta-fd-qBh"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="fYN-iD-b6n"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-44" y="131.78410794602701"/>
         </scene>
@@ -247,6 +270,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="save" id="L8i-Xg-sDN">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="BOg-4X-0NR" id="EIg-lU-sAl"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -484,7 +510,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailAuthorTableViewCell" rowHeight="70" id="1z2-dG-U1Z" customClass="DetailAuthorTableViewCell" customModule="Diary" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailAuthorTableViewCell" rowHeight="70" id="1z2-dG-U1Z" customClass="DetailAuthorTableViewCell" customModule="Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="378" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1z2-dG-U1Z" id="rBB-aK-PgS">
@@ -522,7 +548,7 @@
                                             <outlet property="avatarImageView" destination="gLs-PG-zQA" id="GnK-3R-AIB"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailWeatherAndLocationTableViewCell" rowHeight="40" id="4Ud-7r-Twn" customClass="DetailWeatherAndLocationTableViewCell" customModule="Diary" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailWeatherAndLocationTableViewCell" rowHeight="40" id="4Ud-7r-Twn" customClass="DetailWeatherAndLocationTableViewCell" customModule="Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="448" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Ud-7r-Twn" id="WiH-CX-1u0">
@@ -582,7 +608,7 @@
                                             <outlet property="weatherLabel" destination="IGe-XL-b6m" id="YMK-K2-BeX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailTextTableViewCell" id="JMP-Jl-GhS" customClass="DetailTextTableViewCell" customModule="Diary" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailTextTableViewCell" id="JMP-Jl-GhS" customClass="DetailTextTableViewCell" customModule="Diary" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="488" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JMP-Jl-GhS" id="hTK-ZT-YRF">
@@ -703,6 +729,7 @@
     <resources>
         <image name="close" width="16" height="16"/>
         <image name="cross" width="33" height="32"/>
+        <image name="empty" width="310" height="372"/>
         <image name="photo" width="24" height="18"/>
         <image name="plus" width="16" height="16"/>
         <image name="save" width="20" height="20"/>

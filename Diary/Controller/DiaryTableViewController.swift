@@ -7,36 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
-class DiaryTableViewController: UITableViewController {
+class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    @IBOutlet var emptyDiaryView: UIView!
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
     }
     
-    var diarys:[Diary] = [
-        Diary(title: "Cafe Deadend", content: "This is content.", author: "jack", tag: ["Coffee & Tea Shop"], location: "郑州市二七区", image: ["cafedeadend"], avatar: "avatar-afro-black-man-beard", weather: "sunny", review: 1),
-        Diary(title: "Homei", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "tim", tag: ["Cafe"], location: "郑州市二七区", image: ["homei"], avatar: "avatar-albert-einstein-hair", weather: "foggy", review: 12),
-        Diary(title: "Teakha", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "fab", tag: ["Tea House"], location: "郑州市二七区", image: ["teakha"], avatar: "avatar-asian-business-woman", weather: "lighting", review: 12),
-        Diary(title: "Cafe loisl", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "tom", tag: ["Austrian / Causual Drink"], location: "郑州市二七区", image: ["cafeloisl"], avatar: "avatar-beard-shades-cool", weather: "overcast", review: 123),
-        Diary(title: "Petite Oyster", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "ben", tag: ["French"], location: "郑州市二七区", image: ["petiteoyster"], avatar: "avatar-bernie-sanders-old-man", weather: "rain", review: 12300),
-        Diary(title: "For Kee Diary", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "ran", tag: ["Bakery"], location: "郑州市二七区", image: ["forkeerestaurant"], avatar: "avatar-black-african-american-woman", weather: "sand storm", review: 1230),
-        Diary(title: "Po's Atelier", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "tee", tag: ["Bakery"], location: "郑州市二七区", image: ["posatelier"], avatar: "avatar-black-man-beard-glasses", weather: "snow", review: 123),
-        Diary(title: "Bourke Street Backery", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "bika", tag: ["Chocolate"], location: "郑州市二七区", image: ["bourkestreetbakery"], avatar: "avatar-black-man-beard", weather: "cloudy", review: 123),
-        Diary(title: "Haigh's Chocolate", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "coo", tag: ["Cafe"], location: "郑州市二七区", image: ["haighschocolate"], avatar: "avatar-black-man-clean-shaven", weather: "tornado", review: 123),
-        Diary(title: "Palomino Espresso", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "tta", tag: ["American / Seafood"], location: "郑州市二七区", image: ["palominoespresso"], avatar: "avatar-black-man-professor", weather: "sunny", review: 123),
-        Diary(title: "Upstate", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "q", tag: ["American"], location: "郑州市二七区", image: ["upstate"], avatar: "avatar-black-woman-young", weather: "sunny", review: 123),
-        Diary(title: "Traif", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "qinfeng", tag: ["American"], location: "郑州市二七区", image: ["traif"], avatar: "avatar-hillary-clinton-woman", weather: "sunny", review: 123),
-        Diary(title: "Graham Avenue Meats", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "aa", tag: ["Breakfast & Brunch"], location: "郑州市二七区", image: ["grahamavenuemeats"], avatar: "avatar-hipster-beard-flannel", weather: "sunny", review: 123),
-        Diary(title: "Waffle & Wolf", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "ee", tag: ["Coffee & Tea"], location: "郑州市二七区", image: ["wafflewolf"], avatar: "avatar-indian-bengali-woman", weather: "sunny", review: 123),
-        Diary(title: "Five Leaves", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "tt", tag: ["Coffee & Tea"], location: "郑州市二七区", image: ["fiveleaves"], avatar: "avatar-indian-man-beard", weather: "sunny", review: 123),
-        Diary(title: "Cafe Lore", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "zxc", tag: ["Latin American"], location: "郑州市二七区", image: ["cafelore"], avatar: "avatar-indian-man-clean-shaven", weather: "sunny", review: 123),
-        Diary(title: "Confessional", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "xx", tag: ["Spanish"], location: "郑州市二七区", image: ["confessional"], avatar: "avatar-man-stubble", weather: "sunny", review: 123),
-        Diary(title: "Barrafina", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "sf", tag: ["Spanish"], location: "郑州市二七区", image: ["barrafina"], avatar: "avatar-modern-indian-woman", weather: "sunny", review: 123),
-        Diary(title: "Donostia", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "fs", tag: ["Spanish"], location: "郑州市二七区", image: ["donostia"], avatar: "avatar-mohawk-punk-man", weather: "sunny", review: 123),
-        Diary(title: "Royal Oak", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "asc", tag: ["British"], location: "郑州市二七区", image: ["royaloak"], avatar: "avatar-professor-white-man", weather: "sunny", review: 123),
-        Diary(title: "CASK Pub and Kitchen", content: "This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content, This is content.", author: "cc", tag: ["Thai"], location: "郑州市二七区", image: ["caskpubkitchen"], avatar: "avatar-woman-bob-girl", weather: "sunny", review: 123)
-        ]
+    var fetchResultController: NSFetchedResultsController<DiaryMO>!
+    var diarys:[DiaryMO] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +30,60 @@ class DiaryTableViewController: UITableViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         
+        // Prepare the empty view
+        tableView.backgroundView = emptyDiaryView
+        tableView.backgroundView?.isHidden = true
+        
+        // Fetch data from data store
+        let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+
+            do {
+                try fetchResultController.performFetch()
+                if let fetchedObjects = fetchResultController.fetchedObjects {
+                    diarys = fetchedObjects
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRows(at: [newIndexPath], with: .fade)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        default:
+            tableView.reloadData()
+        }
+
+        if let fetchedObjects = controller.fetchedObjects {
+            diarys = fetchedObjects as! [DiaryMO]
+        }
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,6 +95,13 @@ class DiaryTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
+        if diarys.count > 0 {
+            tableView.backgroundView?.isHidden = true
+            tableView.separatorStyle = .singleLine
+        } else {
+            tableView.backgroundView?.isHidden = false
+            tableView.separatorStyle = .none
+        }
         return 1
     }
 
@@ -73,11 +116,88 @@ class DiaryTableViewController: UITableViewController {
         // Configure the cell...
         cell.titleLabel.text = diarys[indexPath.row].title
 //        cell.contentLabel.text = diarys[indexPath.row].content
-        cell.thumbnailImageView.image = UIImage(named: diarys[indexPath.row].image[0])
+        cell.thumbnailImageView.image = UIImage(data: diarys[indexPath.row].image!)
         cell.authorLabel.text = diarys[indexPath.row].author
-        cell.reviewLabel.text = String(diarys[indexPath.row].review) + "评论"
+        cell.reviewLabel.text = diarys[indexPath.row].review ?? "无" + "评论"
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Delete the row from the data source
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, sourceView, completionHandler) in
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                let diaryToDelete = self.fetchResultController.object(at: indexPath)
+                context.delete(diaryToDelete)
+                
+                appDelegate.saveContext()
+            }
+            completionHandler(true)
+        })
+        
+        let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (action, sourceView, completionHandler) in
+            let defaultText = self.diarys[indexPath.row].title!
+            let activityController: UIActivityViewController
+            if let imageToShare = UIImage(data: self.diarys[indexPath.row].image!) {
+                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+            } else {
+                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            }
+            
+//            if let popoverController = activityController.popoverPresentationController {
+//                if let cell = tableView.cellForRow(at: indexPath) {
+//                    popoverController.sourceView = cell
+//                    popoverController.sourceRect = cell.bounds
+//                }
+//            }
+
+            
+            self.present(activityController, animated: true, completion: nil)
+
+            activityController.completionWithItemsHandler = {
+                (activity, success, items, error) in
+                if success {
+                    switch activity!._rawValue {
+                    case "com.apple.UIKit.activity.SaveToCameraRoll":
+                        let alertController = UIAlertController(title: "成功保存到相册!",
+                                                                message: nil, preferredStyle: .alert)
+                        //显示提示框
+                        self.present(alertController, animated: true, completion: nil)
+                        //两秒钟后自动消失
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                            self.presentedViewController?.dismiss(animated: false, completion: nil)
+                        }
+//                        print("成功保存到相册！")
+                    case "com.apple.UIKit.activity.CopyToPasteboard":
+//                        print("成功复制到剪贴板！")
+                        let alertController = UIAlertController(title: "成功复制到剪贴板!",
+                                                                message: nil, preferredStyle: .alert)
+                        //显示提示框
+                        self.present(alertController, animated: true, completion: nil)
+                        //两秒钟后自动消失
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                            self.presentedViewController?.dismiss(animated: false, completion: nil)
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
+            completionHandler(true)
+            
+        })
+        
+        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+        deleteAction.image = UIImage(named: "delete")
+        
+        shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 1.0)
+        shareAction.image = UIImage(named: "share")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+        
+        return swipeConfiguration
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {

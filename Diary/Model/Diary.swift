@@ -14,24 +14,22 @@ class Diary {
     var author: String
     var tag: [String]
     var location: String
-    var image: [String]
-    var avatar: String
+    var image: String
     var weather: String
     var review: Int
     
-    init(title: String, content: String, author:String, tag: [String], location: String, image: [String], avatar: String,  weather: String, review: Int) {
+    init(title: String, content: String, author:String, tag: [String], location: String, image: String, weather: String, review: Int) {
         self.title = title
         self.content = content
         self.author = author
         self.tag = tag
         self.location = location
         self.image = image
-        self.avatar = avatar
         self.weather = weather
         self.review = review
     }
     
     convenience init() {
-        self.init(title: "", content: "", author: "", tag: [], location: "", image: [], avatar: "", weather: "", review: 0)
+        self.init(title: "", content: "", author: "", tag: [], location: "", image: "", weather: "", review: 0)
     }
 }
