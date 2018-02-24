@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD12041488400EAF407 /* AboutTableViewController.swift */; };
+		CE169BD42041561000EAF407 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD32041561000EAF407 /* WebViewController.swift */; };
+		CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
 		CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CCA203D69FE008702B4 /* AppDelegate.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE169BD12041488400EAF407 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
+		CE169BD32041561000EAF407 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginTableViewController.swift; sourceTree = "<group>"; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		CE449CC7203D69FE008702B4 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +147,9 @@
 				CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */,
 				CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */,
 				CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */,
+				CE169BD12041488400EAF407 /* AboutTableViewController.swift */,
+				CE169BD32041561000EAF407 /* WebViewController.swift */,
+				CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -240,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
+				CE169BD42041561000EAF407 /* WebViewController.swift in Sources */,
 				CEEFDC0D203EA83900A5BC64 /* DetailTextTableViewCell.swift in Sources */,
 				CEEFDC0B203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift in Sources */,
 				CE449CD3203D69FE008702B4 /* Diary.xcdatamodeld in Sources */,
@@ -247,9 +257,11 @@
 				CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */,
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
+				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
 				CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */,
+				CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */,
 				CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */,
 				CEEFDC09203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift in Sources */,
 				CEF6C8622041055300FBE069 /* WalkthroughPageViewController.swift in Sources */,
