@@ -24,6 +24,10 @@
 		CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */; };
 		CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFDC12203EC60400A5BC64 /* MapKit.framework */; };
 		CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */; };
+		CEF6C85E2041000F00FBE069 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF6C85D2041000F00FBE069 /* Onboarding.storyboard */; };
+		CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */; };
+		CEF6C8622041055300FBE069 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */; };
+		CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,10 @@
 		CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CEEFDC12203EC60400A5BC64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CEF6C85D2041000F00FBE069 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
+		CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,7 @@
 			children = (
 				CE449CCE203D69FE008702B4 /* Main.storyboard */,
 				CE449CD6203D69FE008702B4 /* LaunchScreen.storyboard */,
+				CEF6C85D2041000F00FBE069 /* Onboarding.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -129,6 +138,9 @@
 				CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */,
 				CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */,
 				CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */,
+				CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */,
+				CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */,
+				CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -216,6 +228,7 @@
 				CE449CD8203D69FE008702B4 /* LaunchScreen.storyboard in Resources */,
 				CE449CD5203D69FE008702B4 /* Assets.xcassets in Resources */,
 				CE449CD0203D69FE008702B4 /* Main.storyboard in Resources */,
+				CEF6C85E2041000F00FBE069 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,8 +248,11 @@
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
+				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
+				CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */,
 				CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */,
 				CEEFDC09203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift in Sources */,
+				CEF6C8622041055300FBE069 /* WalkthroughPageViewController.swift in Sources */,
 				CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */,
 				CE449CE2203D6AAA008702B4 /* Diary.swift in Sources */,
 			);

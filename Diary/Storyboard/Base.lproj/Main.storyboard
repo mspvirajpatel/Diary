@@ -498,7 +498,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYj-B1-GeM">
-                                            <rect key="frame" x="8" y="295" width="359" height="25"/>
+                                            <rect key="frame" x="16" y="295" width="343" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="dUv-OC-LXB"/>
                                             </constraints>
@@ -511,7 +511,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="iYj-B1-GeM" firstAttribute="leading" secondItem="Xtd-yE-7EF" secondAttribute="leading" constant="8" id="AAc-1d-na5"/>
+                                        <constraint firstItem="iYj-B1-GeM" firstAttribute="leading" secondItem="Xtd-yE-7EF" secondAttribute="leading" constant="16" id="AAc-1d-na5"/>
                                         <constraint firstAttribute="bottom" secondItem="bjS-xx-Mx0" secondAttribute="bottom" constant="8" id="BC9-BQ-UMR"/>
                                         <constraint firstAttribute="bottom" secondItem="2ho-q5-hEm" secondAttribute="bottom" id="IDI-1O-gfw"/>
                                         <constraint firstItem="2ho-q5-hEm" firstAttribute="top" secondItem="Xtd-yE-7EF" secondAttribute="top" id="Iro-a2-Scp"/>
