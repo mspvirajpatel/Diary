@@ -258,6 +258,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! DetailViewController
                 destinationController.diary = (searchController?.isActive)! ? searchResults[indexPath.row] : diaries[indexPath.row]
+                destinationController.hidesBottomBarWhenPushed = true
             }
         }
     }
