@@ -50,14 +50,26 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy0-Qy-YHI">
-                                                                    <rect key="frame" x="46" y="9.5" width="175" height="16"/>
+                                                                    <rect key="frame" x="46" y="9.5" width="120" height="16"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2O-31-jeY">
+                                                                    <rect key="frame" x="171" y="9.5" width="50" height="16"/>
+                                                                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="i7P-CR-hNU"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="Gy0-Qy-YHI" firstAttribute="leading" secondItem="jjJ-iL-N6Q" secondAttribute="trailing" constant="5" id="4ze-EX-ACR"/>
+                                                                <constraint firstAttribute="trailing" secondItem="A2O-31-jeY" secondAttribute="trailing" id="6SP-Ws-GCd"/>
+                                                                <constraint firstAttribute="bottom" secondItem="A2O-31-jeY" secondAttribute="bottom" id="G6X-td-PvE"/>
                                                             </constraints>
                                                         </stackView>
                                                     </subviews>
@@ -87,6 +99,7 @@
                                 <connections>
                                     <outlet property="authorLabel" destination="jjJ-iL-N6Q" id="g1X-SC-2A2"/>
                                     <outlet property="reviewLabel" destination="Gy0-Qy-YHI" id="bdC-yn-TH7"/>
+                                    <outlet property="tagLabel" destination="A2O-31-jeY" id="922-jY-moL"/>
                                     <outlet property="thumbnailImageView" destination="Bch-xk-nzo" id="iD1-O3-6x5"/>
                                     <outlet property="titleLabel" destination="s9L-4b-tcR" id="0U0-0F-pVQ"/>
                                     <segue destination="qkr-fA-Hh6" kind="show" identifier="showDetail" id="jhU-KW-O1h"/>
@@ -191,7 +204,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="标题" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K1O-ej-xrT">
-                                                    <rect key="frame" x="168" y="14.5" width="39" height="21"/>
+                                                    <rect key="frame" x="147.5" y="14.5" width="80" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="cuN-an-cnd"/>
+                                                    </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -471,7 +487,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2ho-q5-hEm" userLabel="Header Image View">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tags" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjS-xx-Mx0">
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tags" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjS-xx-Mx0">
                                             <rect key="frame" x="8" y="324" width="80" height="18"/>
                                             <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>

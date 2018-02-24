@@ -19,6 +19,12 @@ class DiaryTableViewCell: UITableViewCell {
     }
     @IBOutlet var authorLabel: UILabel!
     @IBOutlet var reviewLabel: UILabel!
+    @IBOutlet var tagLabel: UILabel! {
+        didSet {
+            tagLabel.layer.cornerRadius = 5.0
+            tagLabel.layer.masksToBounds = true
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

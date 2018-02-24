@@ -9,7 +9,11 @@
 import UIKit
 import CoreData
 
-class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
+    
+    var searchController: UISearchController?
+    
+    var searchResults: [DiaryMO] = []
     
     @IBOutlet var emptyDiaryView: UIView!
     
@@ -18,7 +22,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
-    var diarys:[DiaryMO] = []
+    var diaries:[DiaryMO] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,18 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+        
+        // SearchBar
+        searchController = UISearchController(searchResultsController: nil)
+//        self.navigationItem.searchController = searchController
+        tableView.tableHeaderView = searchController?.searchBar
+        searchController?.searchResultsUpdater = self
+        searchController?.dimsBackgroundDuringPresentation = false
+        
+        searchController?.searchBar.placeholder = "Search diaries..."
+        searchController?.searchBar.barTintColor = .white
+        searchController?.searchBar.backgroundImage = UIImage()
+        searchController?.searchBar.tintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         
         // Prepare the empty view
         tableView.backgroundView = emptyDiaryView
@@ -47,12 +63,17 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             do {
                 try fetchResultController.performFetch()
                 if let fetchedObjects = fetchResultController.fetchedObjects {
-                    diarys = fetchedObjects
+                    diaries = fetchedObjects
                 }
             } catch {
                 print(error)
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -78,7 +99,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         }
 
         if let fetchedObjects = controller.fetchedObjects {
-            diarys = fetchedObjects as! [DiaryMO]
+            diaries = fetchedObjects as! [DiaryMO]
         }
     }
 
@@ -95,7 +116,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        if diarys.count > 0 {
+        if diaries.count > 0 {
             tableView.backgroundView?.isHidden = true
             tableView.separatorStyle = .singleLine
         } else {
@@ -107,19 +128,29 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return diarys.count
+        if (searchController?.isActive)! {
+            return searchResults.count
+        } else {
+            return diaries.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
 
+        let diary = (searchController?.isActive)! ? searchResults[indexPath.row] : diaries[indexPath.row]
+        
         // Configure the cell...
-        cell.titleLabel.text = diarys[indexPath.row].title
-//        cell.contentLabel.text = diarys[indexPath.row].content
-        cell.thumbnailImageView.image = UIImage(data: diarys[indexPath.row].image!)
-        cell.authorLabel.text = diarys[indexPath.row].author
-        cell.reviewLabel.text = diarys[indexPath.row].review ?? "无" + "评论"
-
+        cell.titleLabel.text = diary.title
+//        cell.contentLabel.text = diary.content
+        cell.thumbnailImageView.image = UIImage(data: diary.image!)
+        cell.authorLabel.text = diary.author
+        if diary.review == "" {
+            cell.reviewLabel.text = "暂无评论"
+        } else {
+            cell.reviewLabel.text = diary.review! + " 评论"
+        }
+        cell.tagLabel.text = diary.tag
         return cell
     }
     
@@ -137,9 +168,9 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         })
         
         let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (action, sourceView, completionHandler) in
-            let defaultText = self.diarys[indexPath.row].title!
+            let defaultText = self.diaries[indexPath.row].title!
             let activityController: UIActivityViewController
-            if let imageToShare = UIImage(data: self.diarys[indexPath.row].image!) {
+            if let imageToShare = UIImage(data: self.diaries[indexPath.row].image!) {
                 activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
             } else {
                 activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
@@ -151,7 +182,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 //                    popoverController.sourceRect = cell.bounds
 //                }
 //            }
-
             
             self.present(activityController, animated: true, completion: nil)
 
@@ -200,10 +230,14 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.hidesBarsOnSwipe = true
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if (searchController?.isActive)! {
+            return false
+        } else {
+            return true
+        }
     }
+
 
     // MARK: - Navigation
 
@@ -212,8 +246,27 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! DetailViewController
-                destinationController.diary = diarys[indexPath.row]
+                destinationController.diary = (searchController?.isActive)! ? searchResults[indexPath.row] : diaries[indexPath.row]
             }
+        }
+    }
+    
+    // MARK: - SearchController
+    func filterContent(for searchText: String) {
+        searchResults = diaries.filter({ (diary) -> Bool in
+            if let title = diary.title, let author = diary.author, let tag = diary.tag, let content = diary.content {
+                let isMatch = title.localizedCaseInsensitiveContains(searchText) || author.localizedCaseInsensitiveContains(searchText) || tag.localizedCaseInsensitiveContains(searchText) || content.localizedCaseInsensitiveContains(searchText)
+                return isMatch
+            }
+            
+            return false
+        })
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            filterContent(for: searchText)
+            tableView.reloadData()
         }
     }
 }
