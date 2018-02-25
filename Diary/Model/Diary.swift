@@ -17,8 +17,9 @@ class Diary {
     var image: String
     var weather: String
     var review: Int
+    var notebookid: String
     
-    init(title: String, content: String, author:String, tag: [String], location: String, image: String, weather: String, review: Int) {
+    init(title: String, content: String, author:String, tag: [String], location: String, image: String, weather: String, review: Int, notebookid: String) {
         self.title = title
         self.content = content
         self.author = author
@@ -27,9 +28,10 @@ class Diary {
         self.image = image
         self.weather = weather
         self.review = review
+        self.notebookid = notebookid
     }
     
     convenience init() {
-        self.init(title: "", content: "", author: "", tag: [], location: "", image: "", weather: "", review: 0)
+        self.init(title: "", content: "", author: "", tag: [], location: "", image: "", weather: "", review: 0, notebookid: "1")
     }
 }

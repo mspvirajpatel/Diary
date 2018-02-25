@@ -20,6 +20,11 @@
 		CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */; };
 		CE449CE2203D6AAA008702B4 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CE1203D6AAA008702B4 /* Diary.swift */; };
 		CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */; };
+		CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */; };
+		CEC9CE782042ACA8005FB426 /* NoteBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE772042ACA8005FB426 /* NoteBook.swift */; };
+		CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE792042AE62005FB426 /* NotebookViewController.swift */; };
+		CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */; };
+		CEC9CE7E2042C86A005FB426 /* RoundedTextFIeld.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */; };
 		CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */; };
 		CEEFDC09203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC08203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift */; };
 		CEEFDC0B203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC0A203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift */; };
@@ -49,6 +54,11 @@
 		CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE449CE1203D6AAA008702B4 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
+		CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEC9CE772042ACA8005FB426 /* NoteBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBook.swift; sourceTree = "<group>"; };
+		CEC9CE792042AE62005FB426 /* NotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookViewController.swift; sourceTree = "<group>"; };
+		CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotebookTableViewController.swift; sourceTree = "<group>"; };
+		CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFIeld.swift; sourceTree = "<group>"; };
 		CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CEEFDC08203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAuthorTableViewCell.swift; sourceTree = "<group>"; };
 		CEEFDC0A203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherAndLocationTableViewCell.swift; sourceTree = "<group>"; };
@@ -99,8 +109,8 @@
 				CEEFDC05203E64DB00A5BC64 /* Model */,
 				CEEFDC06203E64EC00A5BC64 /* View */,
 				CEEFDC07203E64FB00A5BC64 /* Controller */,
-				CE449CD9203D69FE008702B4 /* Info.plist */,
 				CE449CD4203D69FE008702B4 /* Assets.xcassets */,
+				CE449CD9203D69FE008702B4 /* Info.plist */,
 				CE449CCA203D69FE008702B4 /* AppDelegate.swift */,
 				CE449CD1203D69FE008702B4 /* Diary.xcdatamodeld */,
 			);
@@ -121,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				CE449CE1203D6AAA008702B4 /* Diary.swift */,
+				CEC9CE772042ACA8005FB426 /* NoteBook.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -132,6 +143,8 @@
 				CEEFDC08203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift */,
 				CEEFDC0A203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift */,
 				CEEFDC0C203EA83900A5BC64 /* DetailTextTableViewCell.swift */,
+				CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */,
+				CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,6 +163,8 @@
 				CE169BD12041488400EAF407 /* AboutTableViewController.swift */,
 				CE169BD32041561000EAF407 /* WebViewController.swift */,
 				CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */,
+				CEC9CE792042AE62005FB426 /* NotebookViewController.swift */,
+				CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -251,20 +266,25 @@
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
 				CE169BD42041561000EAF407 /* WebViewController.swift in Sources */,
 				CEEFDC0D203EA83900A5BC64 /* DetailTextTableViewCell.swift in Sources */,
+				CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */,
 				CEEFDC0B203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift in Sources */,
 				CE449CD3203D69FE008702B4 /* Diary.xcdatamodeld in Sources */,
+				CEC9CE782042ACA8005FB426 /* NoteBook.swift in Sources */,
 				CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */,
 				CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */,
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
 				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
+				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
 				CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */,
 				CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */,
 				CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */,
 				CEEFDC09203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift in Sources */,
+				CEC9CE7E2042C86A005FB426 /* RoundedTextFIeld.swift in Sources */,
 				CEF6C8622041055300FBE069 /* WalkthroughPageViewController.swift in Sources */,
+				CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */,
 				CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */,
 				CE449CE2203D6AAA008702B4 /* Diary.swift in Sources */,
 			);

@@ -14,6 +14,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var searchController: UISearchController?
     
     var searchResults: [DiaryMO] = []
+    var notebook: NotebookMO!
     
     @IBOutlet var emptyDiaryView: UIView!
     
@@ -54,6 +55,9 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+//        let firstName = "Trevor"
+//        fetchRequest.predicate = NSPredicate(format: "firstName == %@", firstName)
 
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let context = appDelegate.persistentContainer.viewContext
@@ -79,11 +83,31 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func viewDidAppear(_ animated: Bool) {
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
             return
-        }
-        
-        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
-            present(walkthroughViewController, animated: true, completion: nil)
+        } else {
+            // user first into the App, init the notebook with the "Diary" book
+            UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
+            UserDefaults.standard.set(1, forKey: "maxNoteBookId")
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
+                notebook.id = "1"
+                notebook.name = "Diary"
+                notebook.author = "匿名"
+                notebook.comment = "my diary"
+                let currentDate = Date.init()
+                notebook.create = currentDate
+                notebook.update = currentDate
+                if let notebookCoverImage = UIImage(named: "weather-background") {
+                    notebook.coverimage = UIImagePNGRepresentation(notebookCoverImage)
+                }
+
+                print("Saving data to context")
+                appDelegate.saveContext()
+            }
+            
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+                present(walkthroughViewController, animated: true, completion: nil)
+            }
         }
     }
     
