@@ -14,6 +14,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     var diary: DiaryMO!
     var choosedWeatherButtonText = ""
     var noteBookName = ""
+    var currentDate = Date()
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -23,9 +24,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             diary.author = "匿名"
             diary.weather = self.choosedWeatherButtonText
             diary.location = "郑州市二七区"
+            diary.create = currentDate
+            diary.update = currentDate
             diary.content = contentTextView.text
             diary.review = ""
-            diary.notebookid = "1"
+            diary.notebookid = String(UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
             
             if let diaryImage = photoImageView.image {
                 diary.image = UIImagePNGRepresentation(diaryImage)
@@ -44,6 +47,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     @IBOutlet var contentTextView: UITextView!
     
     @IBOutlet weak var weatherButton: UIButton!
+    
+    @IBOutlet var dateLabel: UILabel!
     
     @IBAction func chooseWeather(segue: UIStoryboardSegue) {
         if let choosedWeather = segue.identifier {
@@ -67,6 +72,13 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+        
+        currentDate = Date.init()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+        dateFormatter.timeZone = TimeZone.current
+        let dateString = dateFormatter.string(from: currentDate)
+        dateLabel.text = dateString
     }
     
     func textViewDidBeginEditing(_ textView: UITextView)

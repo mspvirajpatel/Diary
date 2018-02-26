@@ -17,13 +17,17 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var notebook: NotebookMO!
     
     @IBOutlet var emptyDiaryView: UIView!
+    @IBOutlet var navTitle: UINavigationItem!
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
+        print("unwindToHome")
         dismiss(animated: true, completion: nil)
     }
     
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
+    var fetchNoteResultController: NSFetchedResultsController<NotebookMO>!
     var diaries:[DiaryMO] = []
+    var notebooks:[NotebookMO] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,38 +55,62 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         tableView.backgroundView = emptyDiaryView
         tableView.backgroundView?.isHidden = true
         
-        // Fetch data from data store
-        let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-//        let firstName = "Trevor"
-//        fetchRequest.predicate = NSPredicate(format: "firstName == %@", firstName)
-
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchResultController.delegate = self
-
-            do {
-                try fetchResultController.performFetch()
-                if let fetchedObjects = fetchResultController.fetchedObjects {
-                    diaries = fetchedObjects
-                }
-            } catch {
-                print(error)
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnSwipe = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
-            return
+            // Fetch data from data store - Notebook
+            let fetchNoteRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
+            let sortNoteDescriptor = NSSortDescriptor(key: "id", ascending: true)
+            fetchNoteRequest.sortDescriptors = [sortNoteDescriptor]
+            
+            fetchNoteRequest.predicate = NSPredicate(format: "id == %d", UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
+            
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                fetchNoteResultController = NSFetchedResultsController(fetchRequest: fetchNoteRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+                fetchNoteResultController.delegate = self
+                
+                do {
+                    try fetchNoteResultController.performFetch()
+                    if let fetchedObjects = fetchNoteResultController.fetchedObjects {
+                        notebooks = fetchedObjects
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+            
+            if let navTitleString = notebooks[0].name {
+                navTitle.title = navTitleString
+            }
+            
+            // Fetch data from data store - Diary
+            let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            fetchRequest.predicate = NSPredicate(format: "notebookid == %d", UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
+            
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+                fetchResultController.delegate = self
+                
+                do {
+                    try fetchResultController.performFetch()
+                    if let fetchedObjects = fetchResultController.fetchedObjects {
+                        diaries = fetchedObjects
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+            
+            tableView.reloadData()
         } else {
             // user first into the App, init the notebook with the "Diary" book
             UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
@@ -99,11 +127,17 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 if let notebookCoverImage = UIImage(named: "weather-background") {
                     notebook.coverimage = UIImagePNGRepresentation(notebookCoverImage)
                 }
-
+                
                 print("Saving data to context")
                 appDelegate.saveContext()
             }
-            
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return 
+        } else {
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
                 present(walkthroughViewController, animated: true, completion: nil)
@@ -154,9 +188,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         if diaries.count > 0 {
             tableView.backgroundView?.isHidden = true
             tableView.separatorStyle = .singleLine
+            searchController?.searchBar.isHidden = false
         } else {
             tableView.backgroundView?.isHidden = false
             tableView.separatorStyle = .none
+            searchController?.searchBar.isHidden = true
         }
         return 1
     }

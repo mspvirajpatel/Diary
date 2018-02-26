@@ -18,8 +18,9 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let maxNoteBookId = UserDefaults.standard.integer(forKey: "maxNoteBookId") + 1
             notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
-            notebook.id = String(UserDefaults.standard.integer(forKey: "maxNoteBookId") + 1)
+            notebook.id = String(maxNoteBookId)
             notebook.name = nameTextField.text
             notebook.comment = descriptionTextView.text
             notebook.author = "匿名"
@@ -30,11 +31,13 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
             if let notebookImage = photoImageView.image {
                 notebook.coverimage = UIImagePNGRepresentation(notebookImage)
             }
-            
+            UserDefaults.standard.set(maxNoteBookId, forKey: "maxNoteBookId")
             print("Saving data to context")
             appDelegate.saveContext()
         }
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            print("NewNotebook.dismiss.completion")
+        })
     }
 
     override func viewDidLoad() {
@@ -48,6 +51,16 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("NewNoteBook.viewWillAppear")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("NewNoteBook.viewDidAppear")
     }
     
     func textViewDidBeginEditing(_ textView: UITextView)

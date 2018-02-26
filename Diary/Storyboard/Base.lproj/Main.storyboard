@@ -8,7 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +15,7 @@
         <!--New Notebook-->
         <scene sceneID="4iv-TC-tpa">
             <objects>
-                <tableViewController id="JQ4-0h-DKJ" customClass="NewNotebookTableViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewNotebookTableViewController" id="JQ4-0h-DKJ" customClass="NewNotebookTableViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hje-wa-2Qu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,7 +143,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTo-9p-936" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="F71-HQ-9OH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="162" y="-568"/>
+            <point key="canvasLocation" x="2" y="-568"/>
         </scene>
         <!--Notebook View Controller-->
         <scene sceneID="cZX-5a-mB6">
@@ -175,13 +174,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gZi-Xd-cgb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="311"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="380"/>
                                                 </imageView>
-                                                <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-bw-ZNp">
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlZ-2n-ds1">
                                                     <rect key="frame" x="0.0" y="311" width="250" height="69"/>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYe-Uc-iDe">
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="69" id="f99-vS-Vnq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYe-Uc-iDe">
                                                     <rect key="frame" x="86" y="52" width="79" height="39"/>
+                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -198,13 +205,12 @@
                                         </view>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="J1Z-bw-ZNp" secondAttribute="bottom" id="1Hw-vp-VbT"/>
-                                            <constraint firstItem="J1Z-bw-ZNp" firstAttribute="leading" secondItem="cGt-hK-d9N" secondAttribute="leading" id="4nz-ee-SMZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="UlZ-2n-ds1" secondAttribute="bottom" id="6ov-wx-jj6"/>
+                                            <constraint firstItem="UlZ-2n-ds1" firstAttribute="leading" secondItem="cGt-hK-d9N" secondAttribute="leading" id="Dgx-K8-pQs"/>
+                                            <constraint firstAttribute="trailing" secondItem="UlZ-2n-ds1" secondAttribute="trailing" id="HcW-XT-QH8"/>
                                             <constraint firstItem="gZi-Xd-cgb" firstAttribute="top" secondItem="cGt-hK-d9N" secondAttribute="top" id="KlT-We-O60"/>
-                                            <constraint firstAttribute="bottom" secondItem="gZi-Xd-cgb" secondAttribute="bottom" constant="69" id="R1t-li-NE7"/>
-                                            <constraint firstItem="gZi-Xd-cgb" firstAttribute="height" secondItem="J1Z-bw-ZNp" secondAttribute="height" multiplier="4.5" id="atI-AR-scZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="gZi-Xd-cgb" secondAttribute="bottom" id="R1t-li-NE7"/>
                                             <constraint firstItem="gZi-Xd-cgb" firstAttribute="leading" secondItem="cGt-hK-d9N" secondAttribute="leading" id="dBy-hF-ZDW"/>
-                                            <constraint firstAttribute="trailing" secondItem="J1Z-bw-ZNp" secondAttribute="trailing" id="glH-DP-3xs"/>
                                             <constraint firstItem="3ze-0V-fhW" firstAttribute="centerX" secondItem="gZi-Xd-cgb" secondAttribute="centerX" id="gt1-FJ-I6x"/>
                                             <constraint firstAttribute="trailing" secondItem="gZi-Xd-cgb" secondAttribute="trailing" id="jxB-cZ-vMc"/>
                                             <constraint firstItem="AYe-Uc-iDe" firstAttribute="centerX" secondItem="gZi-Xd-cgb" secondAttribute="centerX" id="lq9-gU-yzU"/>
@@ -213,9 +219,9 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="gZi-Xd-cgb" id="Vil-aq-vy0"/>
+                                            <outlet property="notebookDescriptionLabel" destination="UlZ-2n-ds1" id="7On-qR-1i6"/>
                                             <outlet property="notebookNameLabel" destination="AYe-Uc-iDe" id="awS-si-v7V"/>
                                             <outlet property="plusImageView" destination="3ze-0V-fhW" id="bab-0r-6Ie"/>
-                                            <segue destination="LvT-c2-wGn" kind="showDetail" identifier="addNotebook" id="XnE-hS-lwN"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -260,7 +266,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfc-5P-2BZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ZJX-R6-XQM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-535" y="187"/>
+            <point key="canvasLocation" x="-535.20000000000005" y="186.65667166416793"/>
         </scene>
         <!--Diary-->
         <scene sceneID="BAw-im-uUr">
@@ -366,7 +372,7 @@
                         <barButtonItem key="leftBarButtonItem" image="list" id="VN6-pG-V9Y">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <segue destination="Af6-2L-P26" kind="showDetail" id="D0o-nU-xXN"/>
+                                <segue destination="Af6-2L-P26" kind="showDetail" id="K2l-Fw-DlR"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus" id="fzD-eD-aQy">
@@ -378,6 +384,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="emptyDiaryView" destination="3lo-yw-lpj" id="E2i-Ro-JNv"/>
+                        <outlet property="navTitle" destination="T87-wg-w7V" id="9YQ-p7-zC0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rfj-2U-3eT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -549,6 +556,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contentTextView" destination="TFZ-f7-TiU" id="6HV-CB-gt2"/>
+                        <outlet property="dateLabel" destination="pBV-Gk-umd" id="faX-Sg-9Tf"/>
                         <outlet property="photoImageView" destination="VQ5-fa-FRe" id="HtL-p3-kx5"/>
                         <outlet property="titleTextField" destination="K1O-ej-xrT" id="Fan-tm-5f8"/>
                         <outlet property="weatherButton" destination="hxf-j9-PYe" id="535-FT-z80"/>
@@ -1087,8 +1095,8 @@
             <objects>
                 <navigationController id="XMS-8p-BNB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Discover" image="discover" id="I2Z-Oj-Ycd"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="taQ-YE-RdB">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="taQ-YE-RdB">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1561,7 +1569,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sv8-hT-YWn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LvT-c2-wGn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NewNotebookNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="LvT-c2-wGn" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="djr-H0-zm7">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
@@ -1574,7 +1582,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Oq-6g-krX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-535" y="-568"/>
+            <point key="canvasLocation" x="-756" y="-568"/>
         </scene>
     </scenes>
     <resources>

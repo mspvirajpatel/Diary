@@ -10,6 +10,12 @@ import UIKit
 
 class NotebookCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var notebookNameLabel: UILabel!
+    @IBOutlet var notebookNameLabel: UILabel! {
+        didSet {
+            notebookNameLabel.layer.cornerRadius = 10.0
+            notebookNameLabel.layer.masksToBounds = true
+        }
+    }
+    @IBOutlet var notebookDescriptionLabel:UILabel!
     @IBOutlet var plusImageView: UIImageView!
 }

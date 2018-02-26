@@ -31,13 +31,18 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
         backgroundImageView.addSubview(blurEffectView)
         
         collectionView.backgroundColor = UIColor.clear
+        collectionView.showsHorizontalScrollIndicator = false
         
         // Reduce the height of the collection view for 4-inch devices.
         if UIScreen.main.bounds.size.height == 568.0 {
             let flowLayout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
             flowLayout.itemSize = CGSize(width: 250.0, height: 330.0)
         }
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Do any additional setup after loading the view.
         let fetchRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
@@ -57,13 +62,7 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
                 print(error)
             }
         }
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -90,9 +89,13 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
             cell.imageView.image = UIImage()
             cell.imageView.backgroundColor = UIColor.lightGray
             cell.plusImageView.isHidden = false
+            cell.notebookDescriptionLabel.isHidden = true
         } else {
             cell.notebookNameLabel.text = notebooks[indexPath.row].name
+            cell.notebookDescriptionLabel.text = notebooks[indexPath.row].comment
             cell.plusImageView.isHidden = true
+            cell.notebookNameLabel.isHidden = false
+            cell.notebookDescriptionLabel.isHidden = false
             if let coverImageData = notebooks[indexPath.row].coverimage {
                 cell.imageView.image = UIImage(data: coverImageData)
             } else {
@@ -107,9 +110,12 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == notebooks.count {
-            // add notebook
+            if let newNotebookNavigationController = storyboard?.instantiateViewController(withIdentifier: "NewNotebookNavigationController") as? UINavigationController {
+                present(newNotebookNavigationController, animated: true, completion: nil)
+            }
         } else {
-            // choose a notebook and return
+            UserDefaults.standard.set(notebooks[indexPath.row].id, forKey: "defaultNoteBookId")
+            dismiss(animated: true, completion: nil)
         }
     }
 }
