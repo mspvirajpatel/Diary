@@ -25,10 +25,7 @@
 		CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE792042AE62005FB426 /* NotebookViewController.swift */; };
 		CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */; };
 		CEC9CE7E2042C86A005FB426 /* RoundedTextFIeld.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */; };
-		CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */; };
-		CEEFDC09203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC08203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift */; };
-		CEEFDC0B203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC0A203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift */; };
-		CEEFDC0D203EA83900A5BC64 /* DetailTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC0C203EA83900A5BC64 /* DetailTextTableViewCell.swift */; };
+		CEEFDC03203E5DC700A5BC64 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC02203E5DC700A5BC64 /* DetailTableViewController.swift */; };
 		CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */; };
 		CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFDC12203EC60400A5BC64 /* MapKit.framework */; };
 		CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */; };
@@ -59,10 +56,7 @@
 		CEC9CE792042AE62005FB426 /* NotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookViewController.swift; sourceTree = "<group>"; };
 		CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotebookTableViewController.swift; sourceTree = "<group>"; };
 		CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFIeld.swift; sourceTree = "<group>"; };
-		CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		CEEFDC08203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAuthorTableViewCell.swift; sourceTree = "<group>"; };
-		CEEFDC0A203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherAndLocationTableViewCell.swift; sourceTree = "<group>"; };
-		CEEFDC0C203EA83900A5BC64 /* DetailTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCell.swift; sourceTree = "<group>"; };
+		CEEFDC02203E5DC700A5BC64 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CEEFDC12203EC60400A5BC64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -140,9 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */,
-				CEEFDC08203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift */,
-				CEEFDC0A203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift */,
-				CEEFDC0C203EA83900A5BC64 /* DetailTextTableViewCell.swift */,
 				CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */,
 				CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */,
 			);
@@ -153,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */,
-				CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */,
+				CEEFDC02203E5DC700A5BC64 /* DetailTableViewController.swift */,
 				CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */,
 				CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */,
 				CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */,
@@ -265,9 +256,7 @@
 			files = (
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
 				CE169BD42041561000EAF407 /* WebViewController.swift in Sources */,
-				CEEFDC0D203EA83900A5BC64 /* DetailTextTableViewCell.swift in Sources */,
 				CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */,
-				CEEFDC0B203EA6A800A5BC64 /* DetailWeatherAndLocationTableViewCell.swift in Sources */,
 				CE449CD3203D69FE008702B4 /* Diary.xcdatamodeld in Sources */,
 				CEC9CE782042ACA8005FB426 /* NoteBook.swift in Sources */,
 				CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */,
@@ -276,12 +265,11 @@
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
 				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
-				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
+				CEEFDC03203E5DC700A5BC64 /* DetailTableViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
 				CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */,
 				CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */,
 				CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */,
-				CEEFDC09203EA4F300A5BC64 /* DetailAuthorTableViewCell.swift in Sources */,
 				CEC9CE7E2042C86A005FB426 /* RoundedTextFIeld.swift in Sources */,
 				CEF6C8622041055300FBE069 /* WalkthroughPageViewController.swift in Sources */,
 				CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */,

@@ -20,7 +20,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     @IBOutlet var navTitle: UINavigationItem!
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
-        print("unwindToHome")
         dismiss(animated: true, completion: nil)
     }
     
@@ -115,6 +114,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             // user first into the App, init the notebook with the "Diary" book
             UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
             UserDefaults.standard.set(1, forKey: "maxNoteBookId")
+            UserDefaults.standard.set(0, forKey: "maxDiaryId")
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
                 notebook.id = "1"
@@ -240,9 +240,10 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         
         let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (action, sourceView, completionHandler) in
             let defaultText = self.diaries[indexPath.row].title!
+            let defaultContent = self.diaries[indexPath.row].content!
             let activityController: UIActivityViewController
             if let imageToShare = UIImage(data: self.diaries[indexPath.row].image!) {
-                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare, defaultContent], applicationActivities: nil)
             } else {
                 activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
             }
@@ -316,8 +317,10 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! DetailViewController
+                let destinationController = segue.destination as! DetailTableViewController
+                //print(diaries[indexPath.row].description)
                 destinationController.diary = (searchController?.isActive)! ? searchResults[indexPath.row] : diaries[indexPath.row]
+//                destinationController.navigationController?.navigationItem = navTitle
                 destinationController.hidesBottomBarWhenPushed = true
             }
         }

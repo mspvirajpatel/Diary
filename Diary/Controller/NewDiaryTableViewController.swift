@@ -19,6 +19,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     @IBAction func saveButtonTapped(_ sender: Any) {
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             diary = DiaryMO(context: appDelegate.persistentContainer.viewContext)
+            diary.id = String(UserDefaults.standard.integer(forKey: "maxDiaryId") + 1)
             diary.title = titleTextField.text
             diary.tag = "日记"
             diary.author = "匿名"
