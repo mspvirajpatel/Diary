@@ -10,7 +10,13 @@
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Notebook" representedClassName="NotebookMO" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Diary" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Notebook" positionX="-63" positionY="45" width="128" height="90"/>
     </elements>
 </model>

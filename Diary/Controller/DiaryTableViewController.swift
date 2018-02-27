@@ -23,6 +23,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var diaries:[DiaryMO] = []
+    var firstNotebook: NotebookMO!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +75,12 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnSwipe = true
+        
+        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            return
+        } else {
+            userFirstInit()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,6 +91,18 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
             present(walkthroughViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func userFirstInit() {
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            firstNotebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
+            firstNotebook.id = "1"
+            firstNotebook.name = "日记"
+            firstNotebook.notes = "1"
+
+            print("Saving data to context")
+            appDelegate.saveContext()
         }
     }
     

@@ -7,17 +7,42 @@
 //
 
 import UIKit
+import CoreData
 
-class NotebookTableViewController: UITableViewController {
+class NotebookTableViewController: UITableViewController,NSFetchedResultsControllerDelegate {
+    
+    var fetchResultController: NSFetchedResultsController<NotebookMO>!
+    var notebooks:[NotebookMO] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.hidesBarsOnSwipe = true
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Fetch data from data store
+        let fetchRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do {
+                try fetchResultController.performFetch()
+                if let fetchedObjects = fetchResultController.fetchedObjects {
+                    notebooks = fetchedObjects
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +54,23 @@ class NotebookTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return notebooks.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "notebookCell", for: indexPath)
 
         // Configure the cell...
+        cell.textLabel?.text = notebooks[indexPath.row].name
+        cell.textLabel?.tag = Int(notebooks[indexPath.row].id!)!
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
