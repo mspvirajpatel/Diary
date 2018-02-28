@@ -45,7 +45,7 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         view.endEditing(true)
         
         if textFieldStartString != textFieldEndString || textViewStartString != textViewEndString {
-            // Fetch data from data store - Diary
+            // update data from data store - Diary
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext
                 let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
@@ -67,7 +67,7 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
                             try context.save();
                             print("Saved.....")
                     } else {
-                        print("No Audios to save")
+                        print("No results to save")
                     }
                 } catch{
                     print("There was an error")
@@ -84,6 +84,7 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.hidesBarsOnSwipe = false
+        
         doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         doneButton.setTitle("Done", for: UIControlState.normal)
         doneButton.setTitleColor(UIColor.white, for: UIControlState.normal)

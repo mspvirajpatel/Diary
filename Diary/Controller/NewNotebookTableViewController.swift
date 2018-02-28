@@ -130,7 +130,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                     let imagePicker = UIImagePickerController()
                     imagePicker.delegate = self
-                    imagePicker.allowsEditing = true
+                    imagePicker.allowsEditing = false
                     imagePicker.sourceType = .photoLibrary
                     
                     self.present(imagePicker, animated: true, completion: nil)

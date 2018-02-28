@@ -18,7 +18,9 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     var notebooks:[NotebookMO] = []
+    var diaries:[DiaryMO] = []
     var fetchResultController: NSFetchedResultsController<NotebookMO>!
+    var fetchDiaryResultController: NSFetchedResultsController<DiaryMO>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,12 +92,19 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
             cell.imageView.backgroundColor = UIColor.lightGray
             cell.plusImageView.isHidden = false
             cell.notebookDescriptionLabel.isHidden = true
+            cell.infoButton.isHidden = true
+            cell.notesLabel.isHidden = true
+            cell.alphaView.isHidden = true
         } else {
             cell.notebookNameLabel.text = notebooks[indexPath.row].name
             cell.notebookDescriptionLabel.text = notebooks[indexPath.row].comment
+            cell.notesLabel.text = ""
             cell.plusImageView.isHidden = true
             cell.notebookNameLabel.isHidden = false
             cell.notebookDescriptionLabel.isHidden = false
+            cell.infoButton.isHidden = false
+            cell.notesLabel.isHidden = false
+            cell.alphaView.isHidden = false
             if let coverImageData = notebooks[indexPath.row].coverimage {
                 cell.imageView.image = UIImage(data: coverImageData)
             } else {
@@ -104,6 +113,7 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         cell.layer.cornerRadius = 4.0
+        cell.delegate = self
         
         return cell
     }
@@ -116,6 +126,61 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
         } else {
             UserDefaults.standard.set(notebooks[indexPath.row].id, forKey: "defaultNoteBookId")
             dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension NotebookViewController: NotebookCollectionCellDelegate {
+    func didSeletInfoButton(cell: NotebookCollectionViewCell) {
+        if let indexPath = collectionView.indexPath(for: cell) {
+            print(indexPath.row)
+            let optionMenu = UIAlertController(title: nil, message: "option", preferredStyle: .actionSheet)
+
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            optionMenu.addAction(cancelAction)
+            
+            let editAction = UIAlertAction(title: "Edit", style: .default, handler: { (action:UIAlertAction!) in
+                print(indexPath.row)
+            })
+            optionMenu.addAction(editAction)
+
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action:UIAlertAction!) in
+                // Diary Counts
+                // Fetch data from data store - Diary
+                let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+                let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+                fetchRequest.sortDescriptors = [sortDescriptor]
+                
+                fetchRequest.predicate = NSPredicate(format: "notebookid == %@", self.notebooks[indexPath.row].id!)
+                
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    self.fetchDiaryResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+                    self.fetchDiaryResultController.delegate = self
+                    
+                    do {
+                        try self.fetchDiaryResultController.performFetch()
+                        if let fetchedObjects = self.fetchDiaryResultController.fetchedObjects {
+                            self.diaries = fetchedObjects
+                        }
+                    } catch {
+                        print(error)
+                    }
+                }
+                var alertMessage = UIAlertController()
+                if self.diaries.count == 0 {
+                    alertMessage = UIAlertController(title: "Warning", message: "if you really want to delete No.\(indexPath.row) item, Please tap yes", preferredStyle: .alert)
+                } else {
+                    alertMessage = UIAlertController(title: "Warning", message: "there are \(self.diaries.count) in Notebook:\(self.notebooks[indexPath.row].name!). Please ensure delete them all.", preferredStyle: .alert)
+                }
+                alertMessage.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
+                alertMessage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alertMessage, animated: true, completion: nil)
+            })
+            optionMenu.addAction(deleteAction)
+
+            present(optionMenu, animated: true, completion: nil)
+            
         }
     }
 }

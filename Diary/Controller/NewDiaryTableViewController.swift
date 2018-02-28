@@ -18,8 +18,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            diary = DiaryMO(context: appDelegate.persistentContainer.viewContext)
-            diary.id = String(UserDefaults.standard.integer(forKey: "maxDiaryId") + 1)
+            let context = appDelegate.persistentContainer.viewContext
+            diary = DiaryMO(context: context)
+            let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
+            UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
+            diary.id = String(currentMaxId + 1)
             diary.title = titleTextField.text
             diary.tag = "日记"
             diary.author = "匿名"
@@ -120,7 +123,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                     let imagePicker = UIImagePickerController()
                     imagePicker.delegate = self
-                    imagePicker.allowsEditing = true
+                    imagePicker.allowsEditing = false
                     imagePicker.sourceType = .photoLibrary
                     
                     self.present(imagePicker, animated: true, completion: nil)

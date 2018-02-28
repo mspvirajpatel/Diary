@@ -131,13 +131,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 print("Saving data to context")
                 appDelegate.saveContext()
             }
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
-            return 
-        } else {
+            
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
                 present(walkthroughViewController, animated: true, completion: nil)
