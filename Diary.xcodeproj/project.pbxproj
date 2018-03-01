@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0107192046841200485171 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0107182046841200485171 /* CloudKit.framework */; };
+		CE01071B204695C400485171 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071A204695C400485171 /* UserLocation.swift */; };
+		CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */; };
 		CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD12041488400EAF407 /* AboutTableViewController.swift */; };
 		CE169BD42041561000EAF407 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD32041561000EAF407 /* WebViewController.swift */; };
 		CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */; };
@@ -36,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE0107172046840E00485171 /* Diary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Diary.entitlements; sourceTree = "<group>"; };
+		CE0107182046841200485171 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		CE01071A204695C400485171 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD12041488400EAF407 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD32041561000EAF407 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginTableViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */,
+				CE0107192046841200485171 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +106,7 @@
 		CE449CC9203D69FE008702B4 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				CE0107172046840E00485171 /* Diary.entitlements */,
 				CEEFDC0E203EC47700A5BC64 /* Extensions */,
 				CEEFDC04203E64C900A5BC64 /* Storyboard */,
 				CEEFDC05203E64DB00A5BC64 /* Model */,
@@ -126,6 +135,7 @@
 			children = (
 				CE449CE1203D6AAA008702B4 /* Diary.swift */,
 				CEC9CE772042ACA8005FB426 /* NoteBook.swift */,
+				CE01071A204695C400485171 /* UserLocation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +166,7 @@
 				CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */,
 				CEC9CE792042AE62005FB426 /* NotebookViewController.swift */,
 				CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */,
+				CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -171,6 +182,7 @@
 		CEEFDC11203EC60400A5BC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE0107182046841200485171 /* CloudKit.framework */,
 				CEEFDC12203EC60400A5BC64 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -211,6 +223,12 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -254,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */,
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
 				CE169BD42041561000EAF407 /* WebViewController.swift in Sources */,
 				CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */,
@@ -263,6 +282,7 @@
 				CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */,
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
+				CE01071B204695C400485171 /* UserLocation.swift in Sources */,
 				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailTableViewController.swift in Sources */,
@@ -411,6 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q8HGKWTJJ5;
 				INFOPLIST_FILE = Diary/Info.plist;
@@ -426,6 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q8HGKWTJJ5;
 				INFOPLIST_FILE = Diary/Info.plist;

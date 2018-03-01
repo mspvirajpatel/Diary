@@ -63,9 +63,9 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
                         if textViewStartString != textViewEndString {
                             results[0].setValue(contentTextView.text, forKey: "content")
                         }
-                            
-                            try context.save();
-                            print("Saved.....")
+                        results[0].setValue(Date.init(), forKey: "update")
+                        try context.save();
+                        print("Saved.....")
                     } else {
                         print("No results to save")
                     }
@@ -98,6 +98,22 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
         
+        // Json Decode the location information
+        let jsonDecoder = JSONDecoder()
+        if let location = diary.location {
+            if let jsonData = location.data(using: .utf8) {
+                do {
+                    let userLocation = try jsonDecoder.decode(UserLocation.self, from: jsonData)
+                    locationButton.setTitle(userLocation.city + userLocation.subLocality + userLocation.street, for: UIControlState.normal)
+                } catch {
+                    locationButton.setTitle("无", for: UIControlState.normal)
+                    print(error)
+                }
+            }
+        } else {
+            locationButton.setTitle("无", for: UIControlState.normal)
+        }
+        
         titleTextField.text = diary.title
         titleTextField.delegate = self
         tagLabel.text = diary.tag
@@ -106,8 +122,9 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         authorLabel.text = diary.author
         weatherImageView.image = UIImage(named: diary.weather!)
         weatherLabel.text = diary.weather
+
         locationIconImageView.image = UIImage(named: "map")
-        locationButton.setTitle(diary.location, for: UIControlState.normal)
+        
         contentTextView.text = diary.content
         contentTextView.delegate = self
     }

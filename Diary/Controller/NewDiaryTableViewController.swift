@@ -8,13 +8,18 @@
 
 import UIKit
 import CoreData
+import MapKit
+import CoreLocation
+import Contacts
 
-class NewDiaryTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class NewDiaryTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate,CLLocationManagerDelegate {
     
     var diary: DiaryMO!
     var choosedWeatherButtonText = ""
     var noteBookName = ""
     var currentDate = Date()
+    let locationManager = CLLocationManager()
+    var userCurrentLocation = ""
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -27,11 +32,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             diary.tag = "日记"
             diary.author = "匿名"
             diary.weather = self.choosedWeatherButtonText
-            diary.location = "郑州市二七区"
+            diary.location = self.userCurrentLocation
             diary.create = currentDate
             diary.update = currentDate
             diary.content = contentTextView.text
-            diary.review = ""
+            diary.review = "0"
             diary.notebookid = String(UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
             
             if let diaryImage = photoImageView.image {
@@ -53,6 +58,18 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     @IBOutlet weak var weatherButton: UIButton!
     
     @IBOutlet var dateLabel: UILabel!
+    
+    @IBOutlet var locationImageView: UIImageView!
+    
+    @IBOutlet weak var locationButton: UIButton!
+    
+    @IBAction func locationButtonTapped(_ sender: Any) {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        } else {
+            locationButton.setTitle("请开启地理位置权限", for: UIControlState.normal)
+        }
+    }
     
     @IBAction func chooseWeather(segue: UIStoryboardSegue) {
         if let choosedWeather = segue.identifier {
@@ -83,6 +100,20 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         dateFormatter.timeZone = TimeZone.current
         let dateString = dateFormatter.string(from: currentDate)
         dateLabel.text = dateString
+        
+        self.choosedWeatherButtonText = "sunny"
+        
+        // Prepare to get user's location
+        locationImageView.image = UIImage(named: "map")
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startUpdatingLocation()
+        } else {
+            locationButton.setTitle("请开启地理位置权限", for: UIControlState.normal)
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView)
@@ -138,6 +169,36 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             
             present(photoSourceRequestController, animated: true, completion: nil)
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userCLLocation = locations[0]
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(userCLLocation, completionHandler: { (placemarks, error) in
+            if let error = error {
+                self.locationButton.setTitle("获取位置失败，点击重新获取", for: UIControlState.normal)
+                print(error)
+                return
+            }
+            if let placemarks = placemarks {
+                let placemarkPostalAddress = placemarks[0].postalAddress!
+                
+                let userLocation = UserLocation(latitude: userCLLocation.coordinate.latitude, longitude: userCLLocation.coordinate.longitude, altitude: userCLLocation.altitude, horizontalAccuracy: userCLLocation.horizontalAccuracy, verticalAccuracy: userCLLocation.verticalAccuracy, course: userCLLocation.course, speed: userCLLocation.speed, countryCode: placemarkPostalAddress.isoCountryCode, country: placemarkPostalAddress.country, state: placemarkPostalAddress.state, city: placemarkPostalAddress.city, subLocality: placemarkPostalAddress.subLocality, street: placemarkPostalAddress.street)
+                let jsonEncoder = JSONEncoder()
+                do {
+                    let jsonData = try jsonEncoder.encode(userLocation)
+                    self.userCurrentLocation = String(data: jsonData, encoding: .utf8)!
+                }
+                catch {
+                    print(error)
+                }
+                let locationString = placemarkPostalAddress.city + placemarkPostalAddress.subLocality + placemarkPostalAddress.street
+                //print("buttonString: \(locationString)")
+                self.locationButton.setTitle(locationString, for: UIControlState.normal)
+            }
+        })
+        manager.stopUpdatingLocation()
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

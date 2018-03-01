@@ -210,7 +210,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 //        cell.contentLabel.text = diary.content
         cell.thumbnailImageView.image = UIImage(data: diary.image!)
         cell.authorLabel.text = diary.author
-        if diary.review == "" {
+        if diary.review == "0" {
             cell.reviewLabel.text = "暂无评论"
         } else {
             cell.reviewLabel.text = diary.review! + " 评论"
