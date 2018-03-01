@@ -15,6 +15,8 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
     var photoImage = UIImage()
     var selectNotebook = 0
     var notebook: NotebookMO!
+    var historyName = ""
+    var historyCommet = ""
     var nameTextField: UITextField!
     var commentTextField: UITextField!
     
@@ -71,10 +73,6 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
                 print(error)
             }
         }
-        for notebook in notebooks {
-            print("notebooks id: \(notebook.id!), name: \(notebook.name!), content:\(notebook.comment!)")
-        }
-        
         collectionView.reloadData()
     }
     
@@ -149,17 +147,14 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
             cell.plusImageView.isHidden = false
             cell.notebookDescriptionLabel.isHidden = true
             cell.infoButton.isHidden = true
-            cell.notesLabel.isHidden = true
             cell.alphaView.isHidden = true
         } else {
             cell.notebookNameLabel.text = notebooks[indexPath.row].name
             cell.notebookDescriptionLabel.text = notebooks[indexPath.row].comment
-            cell.notesLabel.text = ""
             cell.plusImageView.isHidden = true
             cell.notebookNameLabel.isHidden = false
             cell.notebookDescriptionLabel.isHidden = false
             cell.infoButton.isHidden = false
-            cell.notesLabel.isHidden = false
             cell.alphaView.isHidden = false
             if let coverImageData = notebooks[indexPath.row].coverimage {
                 cell.imageView.image = UIImage(data: coverImageData)
@@ -233,8 +228,12 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                     editNameMessage.addTextField(configurationHandler: { (textField:UITextField!) in
                         textField.text = self.notebooks[indexPath.row].name ?? ""
                         self.nameTextField = textField
+                        self.historyName = textField.text ?? ""
                     })
                     editNameMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
+                        if self.historyName == self.nameTextField.text {
+                            return
+                        }
                         //save name
                         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                             let context = appDelegate.persistentContainer.viewContext
@@ -265,8 +264,13 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                     editCommentMessage.addTextField(configurationHandler: { (textField:UITextField!) in
                         textField.text = self.notebooks[indexPath.row].comment ?? ""
                         self.commentTextField = textField
+                        self.historyCommet = textField.text ?? ""
+                        
                     })
                     editCommentMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
+                        if self.historyCommet == self.commentTextField.text {
+                            return
+                        }
                         //save comment
                         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                             let context = appDelegate.persistentContainer.viewContext

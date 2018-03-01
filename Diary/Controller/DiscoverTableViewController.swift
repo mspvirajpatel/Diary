@@ -12,6 +12,7 @@ import CloudKit
 class DiscoverTableViewController: UITableViewController {
     
     var diaries: [CKRecord] = []
+    var spinner = UIActivityIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,13 @@ class DiscoverTableViewController: UITableViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+        
+        spinner.activityIndicatorViewStyle = .gray
+        spinner.hidesWhenStopped = true
+        view.addSubview(spinner)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([spinner.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150.0), spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        spinner.startAnimating()
         fetchRecordsFromCloud()
     }
     
@@ -32,20 +40,28 @@ class DiscoverTableViewController: UITableViewController {
         let publicDatabase = cloudContainer.publicCloudDatabase
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Diary", predicate: predicate)
-        publicDatabase.perform(query, inZoneWith: nil) { (results, error) in
+        
+        // Create the query with the query
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.desiredKeys = ["title", "author", "review"]
+        queryOperation.queuePriority = .veryHigh
+        queryOperation.resultsLimit = 50
+        queryOperation.recordFetchedBlock = { (record) in
+            self.diaries.append(record)
+        }
+        queryOperation.queryCompletionBlock = { (cursor, error) in
             if let error = error {
-                print(error)
-                return
+                print("Failed to get data from iCloud - \(error.localizedDescription)")
             }
-            if let results = results {
-                print("Completed the download of Diary data")
-                self.diaries = results
-                print(results.description)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+            print("Successfully retrieve the data from iCloud")
+            
+            DispatchQueue.main.async {
+                self.spinner.stopAnimating()
+                self.tableView.reloadData()
             }
         }
+        // Execute the query
+        publicDatabase.add(queryOperation)
     }
 
     override func didReceiveMemoryWarning() {
