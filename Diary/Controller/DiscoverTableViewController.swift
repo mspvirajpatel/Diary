@@ -13,6 +13,7 @@ class DiscoverTableViewController: UITableViewController {
     
     var diaries: [CKRecord] = []
     var spinner = UIActivityIndicatorView()
+    private var imageCache = NSCache<CKRecordID, NSURL>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,25 +91,37 @@ class DiscoverTableViewController: UITableViewController {
         cell.textLabel?.text = diary.object(forKey: "title") as? String
         
         cell.imageView?.image = UIImage(named: "photo")
-        let publicDatabase = CKContainer.default().publicCloudDatabase
-        let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [diary.recordID])
-        fetchRecordsImageOperation.desiredKeys = ["image"]
-        fetchRecordsImageOperation.queuePriority = .veryHigh
-        fetchRecordsImageOperation.perRecordCompletionBlock = { (record, recordID, error) in
-            if let error = error {
-                print("Failed to get data from iCloud - \(error.localizedDescription)")
-                return
+        
+        // Check if the image is stored in cache
+        if let imageFileURL = imageCache.object(forKey: diary.recordID) {
+            // Fetch image from cache
+            print("Get image from cache")
+            if let imageData = try? Data.init(contentsOf: imageFileURL as URL) {
+                cell.imageView?.image = UIImage(data: imageData)
             }
-            if let diaryRecord = record, let image = diaryRecord.object(forKey: "image"), let imageAsset = image as? CKAsset {
-                if let imageData = try? Data.init(contentsOf: imageAsset.fileURL) {
-                    DispatchQueue.main.async {
-                        cell.imageView?.image = UIImage(data: imageData)
-                        cell.setNeedsLayout()
+        } else {
+            let publicDatabase = CKContainer.default().publicCloudDatabase
+            let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [diary.recordID])
+            fetchRecordsImageOperation.desiredKeys = ["image"]
+            fetchRecordsImageOperation.queuePriority = .veryHigh
+            fetchRecordsImageOperation.perRecordCompletionBlock = { (record, recordID, error) in
+                if let error = error {
+                    print("Failed to get data from iCloud - \(error.localizedDescription)")
+                    return
+                }
+                if let diaryRecord = record, let image = diaryRecord.object(forKey: "image"), let imageAsset = image as? CKAsset {
+                    if let imageData = try? Data.init(contentsOf: imageAsset.fileURL) {
+                        DispatchQueue.main.async {
+                            cell.imageView?.image = UIImage(data: imageData)
+                            cell.setNeedsLayout()
+                        }
+                        // Add the image URL to cache
+                        self.imageCache.setObject(imageAsset.fileURL as NSURL, forKey: diary.recordID)
                     }
                 }
             }
+            publicDatabase.add(fetchRecordsImageOperation)
         }
-        publicDatabase.add(fetchRecordsImageOperation)
         return cell
     }
 

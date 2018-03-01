@@ -199,9 +199,9 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UlZ-2n-ds1">
-                                                    <rect key="frame" x="0.0" y="290" width="250" height="60"/>
+                                                    <rect key="frame" x="0.0" y="290" width="250" height="90"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="60" id="f99-vS-Vnq"/>
+                                                        <constraint firstAttribute="height" constant="90" id="f99-vS-Vnq"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -222,23 +222,12 @@
                                                         <constraint firstAttribute="height" constant="25" id="j7n-35-7a1"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjC-yM-lcE">
-                                                    <rect key="frame" x="4" y="361" width="50" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="0mH-dK-RJ0"/>
-                                                        <constraint firstAttribute="height" constant="15" id="yAY-Yp-gX6"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Blc-sH-iVV" firstAttribute="leading" secondItem="cGt-hK-d9N" secondAttribute="leading" id="3TI-O8-qmF"/>
-                                            <constraint firstAttribute="bottom" secondItem="gjC-yM-lcE" secondAttribute="bottom" constant="4" id="4R3-Ju-vFF"/>
-                                            <constraint firstAttribute="bottom" secondItem="UlZ-2n-ds1" secondAttribute="bottom" constant="30" id="6ov-wx-jj6"/>
+                                            <constraint firstAttribute="bottom" secondItem="UlZ-2n-ds1" secondAttribute="bottom" id="6ov-wx-jj6"/>
                                             <constraint firstAttribute="bottom" secondItem="Blc-sH-iVV" secondAttribute="bottom" id="DXk-TA-hai"/>
                                             <constraint firstItem="UlZ-2n-ds1" firstAttribute="leading" secondItem="cGt-hK-d9N" secondAttribute="leading" id="Dgx-K8-pQs"/>
                                             <constraint firstAttribute="trailing" secondItem="UlZ-2n-ds1" secondAttribute="trailing" id="HcW-XT-QH8"/>
@@ -248,9 +237,7 @@
                                             <constraint firstItem="3ze-0V-fhW" firstAttribute="centerX" secondItem="gZi-Xd-cgb" secondAttribute="centerX" id="gt1-FJ-I6x"/>
                                             <constraint firstAttribute="trailing" secondItem="gZi-Xd-cgb" secondAttribute="trailing" id="jxB-cZ-vMc"/>
                                             <constraint firstItem="AYe-Uc-iDe" firstAttribute="centerX" secondItem="gZi-Xd-cgb" secondAttribute="centerX" id="lq9-gU-yzU"/>
-                                            <constraint firstItem="gjC-yM-lcE" firstAttribute="leading" secondItem="cGt-hK-d9N" secondAttribute="leading" constant="4" id="soh-Tp-NFX"/>
                                             <constraint firstItem="3ze-0V-fhW" firstAttribute="centerY" secondItem="cGt-hK-d9N" secondAttribute="centerY" id="uhM-c7-ZYC"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gjC-yM-lcE" secondAttribute="trailing" symbolic="YES" id="vaX-UX-SyN"/>
                                             <constraint firstItem="gZi-Xd-cgb" firstAttribute="top" secondItem="AYe-Uc-iDe" secondAttribute="bottom" constant="-91" id="yGI-Hz-NfD"/>
                                             <constraint firstAttribute="trailing" secondItem="Blc-sH-iVV" secondAttribute="trailing" id="yI0-Xh-cQG"/>
                                         </constraints>
@@ -260,7 +247,6 @@
                                             <outlet property="infoButton" destination="8rw-Rb-D9y" id="83G-cY-G4B"/>
                                             <outlet property="notebookDescriptionLabel" destination="UlZ-2n-ds1" id="7On-qR-1i6"/>
                                             <outlet property="notebookNameLabel" destination="AYe-Uc-iDe" id="awS-si-v7V"/>
-                                            <outlet property="notesLabel" destination="gjC-yM-lcE" id="CP7-dr-Wp5"/>
                                             <outlet property="plusImageView" destination="3ze-0V-fhW" id="bab-0r-6Ie"/>
                                         </connections>
                                     </collectionViewCell>
