@@ -9,9 +9,14 @@
 import UIKit
 import CoreData
 
-class NotebookViewController: UIViewController, NSFetchedResultsControllerDelegate {
+class NotebookViewController: UIViewController, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var backgroundImageView: UIImageView!
+    var photoImage = UIImage()
+    var selectNotebook = 0
+    var notebook: NotebookMO!
+    var nameTextField: UITextField!
+    var commentTextField: UITextField!
     
     var blockOperations: [BlockOperation] = []
     
@@ -179,12 +184,39 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
             dismiss(animated: true, completion: nil)
         }
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            photoImage = selectedImage
+        }
+        
+        dismiss(animated: true, completion: {
+            //save image
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                let fetchRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "id == %@", self.notebooks[self.selectNotebook].id!)
+                do {
+                    let results = try context.fetch(fetchRequest)
+                    fetchRequest.returnsObjectsAsFaults = false
+                    if(results.count > 0 ){
+                        results[0].setValue(UIImagePNGRepresentation(self.photoImage), forKey: "coverimage")
+                        try context.save();
+                        print("Saved.....")
+                    } else {
+                        print("No results to save")
+                    }
+                } catch{
+                    print("There was an error")
+                }
+            }
+        })
+    }
 }
 
 extension NotebookViewController: NotebookCollectionCellDelegate {
     func didSeletInfoButton(cell: NotebookCollectionViewCell) {
         if let indexPath = collectionView.indexPath(for: cell) {
-            print(indexPath.row)
             let optionMenu = UIAlertController(title: nil, message: "option", preferredStyle: .actionSheet)
 
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -200,9 +232,28 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                     let editNameMessage = UIAlertController(title: "Edit Name", message: nil, preferredStyle: .alert)
                     editNameMessage.addTextField(configurationHandler: { (textField:UITextField!) in
                         textField.text = self.notebooks[indexPath.row].name ?? ""
+                        self.nameTextField = textField
                     })
                     editNameMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
                         //save name
+                        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                            let context = appDelegate.persistentContainer.viewContext
+                            let fetchRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
+                            fetchRequest.predicate = NSPredicate(format: "id == %@", self.notebooks[indexPath.row].id!)
+                            do {
+                                let results = try context.fetch(fetchRequest)
+                                fetchRequest.returnsObjectsAsFaults = false
+                                if(results.count > 0 ){
+                                    results[0].setValue(self.nameTextField.text, forKey: "name")
+                                    try context.save();
+                                    print("Saved.....")
+                                } else {
+                                    print("No results to save")
+                                }
+                            } catch{
+                                print("There was an error")
+                            }
+                        }
                     }))
                     editNameMessage.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
                     self.present(editNameMessage, animated: true, completion: nil)
@@ -210,12 +261,31 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                 editOptionMenu.addAction(editName)
                 
                 let editComment = UIAlertAction(title: "Comment", style: .default, handler: { (action:UIAlertAction!) in
-                    let editCommentMessage = UIAlertController(title: "Edit Name", message: nil, preferredStyle: .alert)
+                    let editCommentMessage = UIAlertController(title: "Edit Comment", message: nil, preferredStyle: .alert)
                     editCommentMessage.addTextField(configurationHandler: { (textField:UITextField!) in
                         textField.text = self.notebooks[indexPath.row].comment ?? ""
+                        self.commentTextField = textField
                     })
                     editCommentMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
                         //save comment
+                        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                            let context = appDelegate.persistentContainer.viewContext
+                            let fetchRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
+                            fetchRequest.predicate = NSPredicate(format: "id == %@", self.notebooks[indexPath.row].id!)
+                            do {
+                                let results = try context.fetch(fetchRequest)
+                                fetchRequest.returnsObjectsAsFaults = false
+                                if(results.count > 0 ){
+                                    results[0].setValue(self.commentTextField.text, forKey: "comment")
+                                    try context.save();
+                                    print("Saved.....")
+                                } else {
+                                    print("No results to save")
+                                }
+                            } catch{
+                                print("There was an error")
+                            }
+                        }
                     }))
                     editCommentMessage.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
                     self.present(editCommentMessage, animated: true, completion: nil)
@@ -223,6 +293,7 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                 editOptionMenu.addAction(editComment)
                 
                 let editImage = UIAlertAction(title: "Image", style: .default, handler: { (action:UIAlertAction!) in
+                    self.selectNotebook = indexPath.row
                     let photoSourceRequestController = UIAlertController(title: "", message: "请选择照片来源", preferredStyle: .actionSheet)
                     let cameraAction = UIAlertAction(title: "照相", style: .default, handler: { (action) in
                         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -230,7 +301,6 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                             imagePicker.delegate = self
                             imagePicker.allowsEditing = false
                             imagePicker.sourceType = .camera
-                            
                             self.present(imagePicker, animated: true, completion: nil)
                         }
                     })
@@ -252,7 +322,7 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                     photoSourceRequestController.addAction(photoLibraryAction)
                     photoSourceRequestController.addAction(cancelAction)
                     
-                    present(photoSourceRequestController, animated: true, completion: nil)
+                    self.present(photoSourceRequestController, animated: true, completion: nil)
                 })
                 editOptionMenu.addAction(editImage)
                 self.present(editOptionMenu, animated: true, completion: nil)
