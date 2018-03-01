@@ -13,6 +13,8 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var backgroundImageView: UIImageView!
     
+    var blockOperations: [BlockOperation] = []
+    
     @IBAction func closeToNotebook(segue: UIStoryboardSegue) {
         
     }
@@ -64,11 +66,60 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
                 print(error)
             }
         }
+        for notebook in notebooks {
+            print("notebooks id: \(notebook.id!), name: \(notebook.name!), content:\(notebook.comment!)")
+        }
+        
         collectionView.reloadData()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        blockOperations.removeAll()
+    }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        collectionView.performBatchUpdates({
+            for operation: BlockOperation in self.blockOperations {
+                operation.start()
+            }
+        }) { (true) in
+            self.blockOperations.removeAll()
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            if let newIndexPath = newIndexPath {
+                print("Insert Object: \(newIndexPath)")
+                blockOperations.append(BlockOperation(block: {
+                    self.collectionView.insertItems(at: [newIndexPath])
+                }))
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                print("Delete Object: \(indexPath)")
+                blockOperations.append(BlockOperation(block: {
+                    self.collectionView.deleteItems(at: [indexPath])
+                }))
+            }
+        case .update:
+            if let indexPath = indexPath {
+                print("Update Object: \(indexPath)")
+                blockOperations.append(BlockOperation(block: {
+                    self.collectionView.reloadItems(at: [indexPath])
+                }))
+            }
+        default:
+            collectionView.reloadData()
+        }
+        
+        if let fetchedObjects = controller.fetchedObjects {
+            notebooks = fetchedObjects as! [NotebookMO]
+        }
     }
 }
 
@@ -140,11 +191,76 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
             optionMenu.addAction(cancelAction)
             
             let editAction = UIAlertAction(title: "Edit", style: .default, handler: { (action:UIAlertAction!) in
-                print(indexPath.row)
+                let editOptionMenu = UIAlertController(title: nil, message: "choose the item to edit", preferredStyle: .actionSheet)
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                editOptionMenu.addAction(cancelAction)
+                
+                let editName = UIAlertAction(title: "Title", style: .default, handler: { (action:UIAlertAction!) in
+                    let editNameMessage = UIAlertController(title: "Edit Name", message: nil, preferredStyle: .alert)
+                    editNameMessage.addTextField(configurationHandler: { (textField:UITextField!) in
+                        textField.text = self.notebooks[indexPath.row].name ?? ""
+                    })
+                    editNameMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
+                        //save name
+                    }))
+                    editNameMessage.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(editNameMessage, animated: true, completion: nil)
+                })
+                editOptionMenu.addAction(editName)
+                
+                let editComment = UIAlertAction(title: "Comment", style: .default, handler: { (action:UIAlertAction!) in
+                    let editCommentMessage = UIAlertController(title: "Edit Name", message: nil, preferredStyle: .alert)
+                    editCommentMessage.addTextField(configurationHandler: { (textField:UITextField!) in
+                        textField.text = self.notebooks[indexPath.row].comment ?? ""
+                    })
+                    editCommentMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
+                        //save comment
+                    }))
+                    editCommentMessage.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(editCommentMessage, animated: true, completion: nil)
+                })
+                editOptionMenu.addAction(editComment)
+                
+                let editImage = UIAlertAction(title: "Image", style: .default, handler: { (action:UIAlertAction!) in
+                    let photoSourceRequestController = UIAlertController(title: "", message: "请选择照片来源", preferredStyle: .actionSheet)
+                    let cameraAction = UIAlertAction(title: "照相", style: .default, handler: { (action) in
+                        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                            let imagePicker = UIImagePickerController()
+                            imagePicker.delegate = self
+                            imagePicker.allowsEditing = false
+                            imagePicker.sourceType = .camera
+                            
+                            self.present(imagePicker, animated: true, completion: nil)
+                        }
+                    })
+                    
+                    let photoLibraryAction = UIAlertAction(title: "相册", style: .default, handler: { (action) in
+                        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                            let imagePicker = UIImagePickerController()
+                            imagePicker.delegate = self
+                            imagePicker.allowsEditing = false
+                            imagePicker.sourceType = .photoLibrary
+                            
+                            self.present(imagePicker, animated: true, completion: nil)
+                        }
+                    })
+                    
+                    let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                    
+                    photoSourceRequestController.addAction(cameraAction)
+                    photoSourceRequestController.addAction(photoLibraryAction)
+                    photoSourceRequestController.addAction(cancelAction)
+                    
+                    present(photoSourceRequestController, animated: true, completion: nil)
+                })
+                editOptionMenu.addAction(editImage)
+                self.present(editOptionMenu, animated: true, completion: nil)
             })
             optionMenu.addAction(editAction)
 
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action:UIAlertAction!) in
+                
                 // Diary Counts
                 // Fetch data from data store - Diary
                 let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
@@ -167,14 +283,24 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                         print(error)
                     }
                 }
+                
                 var alertMessage = UIAlertController()
                 if self.diaries.count == 0 {
-                    alertMessage = UIAlertController(title: "Warning", message: "if you really want to delete No.\(indexPath.row) item, Please tap yes", preferredStyle: .alert)
+                    alertMessage = UIAlertController(title: "Warning", message: "if you really want to delete Notebook \(self.notebooks[indexPath.row].name!), Please tap yes", preferredStyle: .alert)
+                    alertMessage.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (alertAction) in
+                        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                            let context = appDelegate.persistentContainer.viewContext
+                            let notebookToDelete = self.fetchResultController.object(at: indexPath)
+                            context.delete(notebookToDelete)
+                            appDelegate.saveContext()
+                        }
+                        UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
+                    }))
+                    alertMessage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 } else {
-                    alertMessage = UIAlertController(title: "Warning", message: "there are \(self.diaries.count) in Notebook:\(self.notebooks[indexPath.row].name!). Please ensure delete them all.", preferredStyle: .alert)
+                    alertMessage = UIAlertController(title: "Warning", message: "there are \(self.diaries.count) notes in Notebook:\(self.notebooks[indexPath.row].name!). Please delete them first!", preferredStyle: .alert)
+                    alertMessage.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
                 }
-                alertMessage.addAction(UIAlertAction(title: "Yes", style: .default, handler: nil))
-                alertMessage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 self.present(alertMessage, animated: true, completion: nil)
             })
             optionMenu.addAction(deleteAction)

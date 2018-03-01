@@ -26,11 +26,7 @@ class NotebookCollectionViewCell: UICollectionViewCell {
     var delegate: NotebookCollectionCellDelegate?
     @IBOutlet var alphaView: UIView!
     @IBOutlet var notesLabel: UILabel!
-    @IBOutlet var infoButton: UIButton! {
-        didSet {
-            infoButton.tintColor = UIColor.white
-        }
-    }
+    @IBOutlet var infoButton: UIButton!
     @IBAction func infoButtonTapped(sender: AnyObject) {
         delegate?.didSeletInfoButton(cell: self)
     }

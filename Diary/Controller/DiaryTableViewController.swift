@@ -53,7 +53,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         // Prepare the empty view
         tableView.backgroundView = emptyDiaryView
         tableView.backgroundView?.isHidden = true
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,6 +143,27 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        // Fetch data from data store - Notebook
+        let fetchNoteRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
+        let sortNoteDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        fetchNoteRequest.sortDescriptors = [sortNoteDescriptor]
+        
+        fetchNoteRequest.predicate = NSPredicate(format: "id == %d", UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchNoteResultController = NSFetchedResultsController(fetchRequest: fetchNoteRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchNoteResultController.delegate = self
+            
+            do {
+                try fetchNoteResultController.performFetch()
+                if let fetchedObjects = fetchNoteResultController.fetchedObjects {
+                    notebooks = fetchedObjects
+                }
+            } catch {
+                print(error)
+            }
+        }
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath {
