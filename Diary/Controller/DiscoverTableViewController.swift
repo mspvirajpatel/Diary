@@ -52,6 +52,7 @@ class DiscoverTableViewController: UITableViewController {
         queryOperation.queryCompletionBlock = { (cursor, error) in
             if let error = error {
                 print("Failed to get data from iCloud - \(error.localizedDescription)")
+                return
             }
             print("Successfully retrieve the data from iCloud")
             
@@ -88,11 +89,26 @@ class DiscoverTableViewController: UITableViewController {
         let diary = diaries[indexPath.row]
         cell.textLabel?.text = diary.object(forKey: "title") as? String
         
-        if let image = diary.object(forKey: "image"), let imageAsset = image as? CKAsset {
-            if let imageData = try? Data.init(contentsOf: imageAsset.fileURL) {
-                cell.imageView?.image = UIImage(data: imageData)
+        cell.imageView?.image = UIImage(named: "photo")
+        let publicDatabase = CKContainer.default().publicCloudDatabase
+        let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [diary.recordID])
+        fetchRecordsImageOperation.desiredKeys = ["image"]
+        fetchRecordsImageOperation.queuePriority = .veryHigh
+        fetchRecordsImageOperation.perRecordCompletionBlock = { (record, recordID, error) in
+            if let error = error {
+                print("Failed to get data from iCloud - \(error.localizedDescription)")
+                return
+            }
+            if let diaryRecord = record, let image = diaryRecord.object(forKey: "image"), let imageAsset = image as? CKAsset {
+                if let imageData = try? Data.init(contentsOf: imageAsset.fileURL) {
+                    DispatchQueue.main.async {
+                        cell.imageView?.image = UIImage(data: imageData)
+                        cell.setNeedsLayout()
+                    }
+                }
             }
         }
+        publicDatabase.add(fetchRecordsImageOperation)
         return cell
     }
 
