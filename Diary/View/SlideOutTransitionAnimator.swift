@@ -9,7 +9,7 @@
 import UIKit
 
 class SlideOutTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
-    let duration = 0.15
+    let duration = 0.25
     var isPresenting = false
     
     // MARK: - UIViewControllerAnimatedTransitioning
@@ -49,7 +49,7 @@ class SlideOutTransitionAnimator: NSObject, UIViewControllerAnimatedTransitionin
         
         
         // Perform the animation
-        UIView.animate(withDuration: duration, animations: {
+        UIView.animate(withDuration: duration,  delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: [], animations: {
             if self.isPresenting {
                 toView.transform = CGAffineTransform.identity
             } else {
