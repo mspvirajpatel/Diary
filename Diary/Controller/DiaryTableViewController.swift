@@ -16,6 +16,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var searchResults: [DiaryMO] = []
     var notebook: NotebookMO!
     
+    var slideOutTransition = SlideOutTransitionAnimator()
+    
     @IBOutlet var emptyDiaryView: UIView!
     @IBOutlet var navTitle: UINavigationItem!
     
@@ -337,6 +339,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 //                destinationController.navigationController?.navigationItem = navTitle
                 destinationController.hidesBottomBarWhenPushed = true
             }
+        }
+        
+        if segue.identifier == "showNotebook" {
+            let toViewController = segue.destination
+            toViewController.transitioningDelegate = slideOutTransition
         }
     }
     

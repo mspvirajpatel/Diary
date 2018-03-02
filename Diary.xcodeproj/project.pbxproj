@@ -36,6 +36,7 @@
 		CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */; };
 		CEF6C8622041055300FBE069 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */; };
 		CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */; };
+		CEF77E0A204965A400C6C1A7 /* SlideOutTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF77E09204965A400C6C1A7 /* SlideOutTransitionAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
 		CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
+		CEF77E09204965A400C6C1A7 /* SlideOutTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOutTransitionAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */,
 				CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */,
 				CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */,
+				CEF77E09204965A400C6C1A7 /* SlideOutTransitionAnimator.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
 				CE169BD42041561000EAF407 /* WebViewController.swift in Sources */,
 				CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */,
+				CEF77E0A204965A400C6C1A7 /* SlideOutTransitionAnimator.swift in Sources */,
 				CE449CD3203D69FE008702B4 /* Diary.xcdatamodeld in Sources */,
 				CEC9CE782042ACA8005FB426 /* NoteBook.swift in Sources */,
 				CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */,
