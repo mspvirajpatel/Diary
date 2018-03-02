@@ -24,7 +24,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
             notebook.name = nameTextField.text
             notebook.comment = descriptionTextView.text
             notebook.author = "匿名"
-            let currentDate = Date.init()
+            let currentDate = Date.init().timeIntervalSince1970
             notebook.create = currentDate
             notebook.update = currentDate
             

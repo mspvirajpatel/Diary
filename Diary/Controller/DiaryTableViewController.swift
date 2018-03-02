@@ -64,7 +64,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
             // Fetch data from data store - Notebook
             let fetchNoteRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
-            let sortNoteDescriptor = NSSortDescriptor(key: "id", ascending: true)
+            let sortNoteDescriptor = NSSortDescriptor(key: "update", ascending: false)
             fetchNoteRequest.sortDescriptors = [sortNoteDescriptor]
             
             fetchNoteRequest.predicate = NSPredicate(format: "id == %d", UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
@@ -90,7 +90,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             
             // Fetch data from data store - Diary
             let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
-            let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: "update", ascending: false)
             fetchRequest.sortDescriptors = [sortDescriptor]
             
             fetchRequest.predicate = NSPredicate(format: "notebookid == %d", UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
@@ -122,7 +122,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 notebook.name = "Diary"
                 notebook.author = "匿名"
                 notebook.comment = "my diary"
-                let currentDate = Date.init()
+                let currentDate = Date.init().timeIntervalSince1970
                 notebook.create = currentDate
                 notebook.update = currentDate
                 if let notebookCoverImage = UIImage(named: "weather-background") {
@@ -233,11 +233,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         cell.thumbnailImageView.image = UIImage(data: diary.image!)
         cell.weatherLabel.text = diary.weather
 
-        if let createDate = diary.create {
-            cell.dateLabel.text = getFriendlyTime(date: createDate)
-        } else {
-            cell.dateLabel.text = ""
-        }
+        cell.dateLabel.text = getFriendlyTime(date: Date.init(timeIntervalSince1970: diary.update))
 //        if diary.review == "0" {
 //            cell.reviewLabel.text = "暂无评论"
 //        } else {

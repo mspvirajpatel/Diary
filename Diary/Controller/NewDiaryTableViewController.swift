@@ -33,8 +33,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             diary.author = "匿名"
             diary.weather = self.choosedWeatherButtonText
             diary.location = self.userCurrentLocation
-            diary.create = currentDate
-            diary.update = currentDate
+            diary.create = currentDate.timeIntervalSince1970
+            diary.update = currentDate.timeIntervalSince1970
             diary.content = contentTextView.text
             diary.review = "0"
             diary.notebookid = String(UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
