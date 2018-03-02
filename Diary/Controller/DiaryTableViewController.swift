@@ -231,12 +231,18 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         cell.titleLabel.text = diary.title
 //        cell.contentLabel.text = diary.content
         cell.thumbnailImageView.image = UIImage(data: diary.image!)
-        cell.authorLabel.text = diary.author
-        if diary.review == "0" {
-            cell.reviewLabel.text = "暂无评论"
+        cell.weatherLabel.text = diary.weather
+
+        if let createDate = diary.create {
+            cell.dateLabel.text = getFriendlyTime(date: createDate)
         } else {
-            cell.reviewLabel.text = diary.review! + " 评论"
+            cell.dateLabel.text = ""
         }
+//        if diary.review == "0" {
+//            cell.reviewLabel.text = "暂无评论"
+//        } else {
+//            cell.reviewLabel.text = diary.review! + " 评论"
+//        }
         cell.tagLabel.text = diary.tag
         return cell
     }
@@ -255,13 +261,13 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         })
         
         let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (action, sourceView, completionHandler) in
-            let defaultText = self.diaries[indexPath.row].title!
+            let defaultTitle = self.diaries[indexPath.row].title!
             let defaultContent = self.diaries[indexPath.row].content!
             let activityController: UIActivityViewController
             if let imageToShare = UIImage(data: self.diaries[indexPath.row].image!) {
-                activityController = UIActivityViewController(activityItems: [defaultText, imageToShare, defaultContent], applicationActivities: nil)
+                activityController = UIActivityViewController(activityItems: [defaultTitle, imageToShare, defaultContent], applicationActivities: nil)
             } else {
-                activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+                activityController = UIActivityViewController(activityItems: [defaultTitle, defaultContent], applicationActivities: nil)
             }
             
 //            if let popoverController = activityController.popoverPresentationController {
@@ -364,6 +370,41 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             filterContent(for: searchText)
             tableView.reloadData()
         }
+    }
+    
+    func getFriendlyTime(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        var dateFormatString = ""
+        
+        let timeInterval = Int(round(date.timeIntervalSince1970))
+        let currentInterval = Int(round(Date.init().timeIntervalSince1970))
+        let diff = currentInterval - timeInterval
+        if diff / (3600 * 24 * 365) >= 1 {
+            dateFormatString = "yyyy年MM月dd日"
+        } else {
+            if diff / (3600 * 24) >= 7 {
+                dateFormatString = "MM月dd日"
+            } else {
+                if diff / 3600 >= 24 {
+                    return String(diff / (3600 * 24)) + "天前"
+                } else {
+                    if diff / 3600 >= 1 {
+                        return String(diff / (3600)) + "小时前"
+                    } else {
+                        if diff / 60 >= 1 {
+                            return String(diff / (60)) + "分钟前"
+                        } else {
+                            return "刚刚"
+                        }
+                        
+                    }
+                }
+            }
+        }
+        dateFormatter.dateFormat = dateFormatString
+        dateFormatter.timeZone = TimeZone.current
+        let dateString = dateFormatter.string(from: date)
+        return dateString
     }
 }
 

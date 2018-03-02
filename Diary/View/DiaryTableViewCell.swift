@@ -17,8 +17,8 @@ class DiaryTableViewCell: UITableViewCell {
             thumbnailImageView.clipsToBounds = true
         }
     }
-    @IBOutlet var authorLabel: UILabel!
-    @IBOutlet var reviewLabel: UILabel!
+    @IBOutlet var weatherLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     @IBOutlet var tagLabel: UILabel! {
         didSet {
             tagLabel.layer.cornerRadius = 5.0

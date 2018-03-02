@@ -35,6 +35,9 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
     @IBOutlet var locationIconImageView: UIImageView!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet var contentTextView: UITextView!
+    @IBOutlet var creatDateLabel: UILabel!
+    @IBOutlet var updateDateLabel: UILabel!
+    
     var doneButton = UIButton()
     var textViewStartString = ""
     var textViewEndString = ""
@@ -45,6 +48,7 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         view.endEditing(true)
         
         if textFieldStartString != textFieldEndString || textViewStartString != textViewEndString {
+            let currentDate = Date.init()
             // update data from data store - Diary
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext
@@ -63,7 +67,7 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
                         if textViewStartString != textViewEndString {
                             results[0].setValue(contentTextView.text, forKey: "content")
                         }
-                        results[0].setValue(Date.init(), forKey: "update")
+                        results[0].setValue(currentDate, forKey: "update")
                         try context.save();
                         print("Saved.....")
                     } else {
@@ -73,7 +77,12 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
                     print("There was an error")
                 }
             }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+            dateFormatter.timeZone = TimeZone.current
+            self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
         }
+        
         doneButton.isHidden = true
     }
     
@@ -122,7 +131,23 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         authorLabel.text = diary.author
         weatherImageView.image = UIImage(named: diary.weather!)
         weatherLabel.text = diary.weather
-
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+        dateFormatter.timeZone = TimeZone.current
+        
+        if let createDate = diary.create {
+            creatDateLabel.text = "创建于" + dateFormatter.string(from: createDate)
+        } else {
+            creatDateLabel.text = ""
+        }
+        
+        if let updateDate = diary.update {
+            updateDateLabel.text = "修改于" + dateFormatter.string(from: updateDate)
+        } else {
+            updateDateLabel.text = ""
+        }
+        
         locationIconImageView.image = UIImage(named: "map")
         
         contentTextView.text = diary.content
