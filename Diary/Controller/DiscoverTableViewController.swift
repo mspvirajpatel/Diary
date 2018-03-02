@@ -33,9 +33,19 @@ class DiscoverTableViewController: UITableViewController {
         NSLayoutConstraint.activate([spinner.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150.0), spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
         spinner.startAnimating()
         fetchRecordsFromCloud()
+        
+        // Pull to refresh control
+        refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = UIColor.white
+        refreshControl?.tintColor = UIColor.gray
+        refreshControl?.addTarget(self, action: #selector(fetchRecordsFromCloud), for: UIControlEvents.valueChanged)
     }
     
-    func fetchRecordsFromCloud() {
+    @objc func fetchRecordsFromCloud() {
+        // Remove existing records before refreshing
+        diaries.removeAll()
+        tableView.reloadData()
+        
         // Fetch Data using Convenience API
         let cloudContainer = CKContainer.default()
         let publicDatabase = cloudContainer.publicCloudDatabase
@@ -60,6 +70,11 @@ class DiscoverTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.spinner.stopAnimating()
                 self.tableView.reloadData()
+                if let refreshControl = self.refreshControl {
+                    if refreshControl.isRefreshing {
+                        refreshControl.endRefreshing()
+                    }
+                }
             }
         }
         // Execute the query
