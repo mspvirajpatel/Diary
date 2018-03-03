@@ -335,7 +335,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! DetailTableViewController
+                let destinationController = segue.destination as! DetailViewController
                 //print(diaries[indexPath.row].description)
                 destinationController.diary = (searchController?.isActive)! ? searchResults[indexPath.row] : diaries[indexPath.row]
 //                destinationController.navigationController?.navigationItem = navTitle

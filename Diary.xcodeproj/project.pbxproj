@@ -28,7 +28,7 @@
 		CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE792042AE62005FB426 /* NotebookViewController.swift */; };
 		CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */; };
 		CEC9CE7E2042C86A005FB426 /* RoundedTextFIeld.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */; };
-		CEEFDC03203E5DC700A5BC64 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC02203E5DC700A5BC64 /* DetailTableViewController.swift */; };
+		CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */; };
 		CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */; };
 		CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFDC12203EC60400A5BC64 /* MapKit.framework */; };
 		CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */; };
@@ -64,7 +64,7 @@
 		CEC9CE792042AE62005FB426 /* NotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookViewController.swift; sourceTree = "<group>"; };
 		CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotebookTableViewController.swift; sourceTree = "<group>"; };
 		CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFIeld.swift; sourceTree = "<group>"; };
-		CEEFDC02203E5DC700A5BC64 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CEEFDC12203EC60400A5BC64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */,
-				CEEFDC02203E5DC700A5BC64 /* DetailTableViewController.swift */,
+				CEEFDC02203E5DC700A5BC64 /* DetailViewController.swift */,
 				CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */,
 				CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */,
 				CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */,
@@ -289,7 +289,7 @@
 				CE01071B204695C400485171 /* UserLocation.swift in Sources */,
 				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
-				CEEFDC03203E5DC700A5BC64 /* DetailTableViewController.swift in Sources */,
+				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
 				CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */,
 				CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */,

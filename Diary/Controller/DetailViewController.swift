@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
+class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
     
     var diary: DiaryMO!
     var fetchDiary: DiaryMO!
@@ -37,6 +37,9 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
     @IBOutlet var contentTextView: UITextView!
     @IBOutlet var creatDateLabel: UILabel!
     @IBOutlet var updateDateLabel: UILabel!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var inputKeyboardView: UIView!
+    @IBOutlet weak var inputKeyboardImageView: UIImageView!
     
     var doneButton = UIButton()
     var textViewStartString = ""
@@ -103,8 +106,6 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         doneButton.layer.cornerRadius = 8.0
         doneButton.isHidden = true
         
-        tableView.separatorStyle = .none
-        tableView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
         
         // Json Decode the location information
@@ -140,9 +141,12 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
         updateDateLabel.text = "修改于" + dateFormatter.string(from: Date.init(timeIntervalSince1970: diary.update))
         
         locationIconImageView.image = UIImage(named: "map")
+        scrollView.contentInsetAdjustmentBehavior = .never
         
         contentTextView.text = diary.content
         contentTextView.delegate = self
+        contentTextView.sizeToFit()
+        contentTextView.isScrollEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,6 +169,7 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
     func textViewDidBeginEditing(_ textView: UITextView)
     {
         doneButton.isHidden = false
+        animateViewMoving(up: true, moveValue: 300)
         textViewStartString = contentTextView.text
 //        print(textViewStartString)
         textView.becomeFirstResponder() //Optional
@@ -172,19 +177,24 @@ class DetailTableViewController: UITableViewController, NSFetchedResultsControll
     
     func textViewDidEndEditing(_ textView: UITextView)
     {
+        animateViewMoving(up: false, moveValue: 300)
         textViewEndString = contentTextView.text
 //        print(textViewEndString)
         textView.resignFirstResponder()
     }
+    
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        
+        UIView.beginAnimations("animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration)
+        
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)//CGRectOffset(self.view.frame, 0, movement)
+        UIView.commitAnimations()
+    }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
             let destinationController = segue.destination as! MapViewController
