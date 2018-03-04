@@ -97,21 +97,21 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
         switch type {
         case .insert:
             if let newIndexPath = newIndexPath {
-                print("Insert Object: \(newIndexPath)")
+                print("Notebook Insert Object: \(newIndexPath)")
                 blockOperations.append(BlockOperation(block: {
                     self.collectionView.insertItems(at: [newIndexPath])
                 }))
             }
         case .delete:
             if let indexPath = indexPath {
-                print("Delete Object: \(indexPath)")
+                print("Notebook Delete Object: \(indexPath)")
                 blockOperations.append(BlockOperation(block: {
                     self.collectionView.deleteItems(at: [indexPath])
                 }))
             }
         case .update:
             if let indexPath = indexPath {
-                print("Update Object: \(indexPath)")
+                print("Notebook Update Object: \(indexPath)")
                 blockOperations.append(BlockOperation(block: {
                     self.collectionView.reloadItems(at: [indexPath])
                 }))
