@@ -117,6 +117,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
             UserDefaults.standard.set(1, forKey: "maxNoteBookId")
             UserDefaults.standard.set(0, forKey: "maxDiaryId")
+            UserDefaults.standard.set(false, forKey: "hasLogin")
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
                 notebook.id = "1"

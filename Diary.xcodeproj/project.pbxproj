@@ -13,6 +13,7 @@
 		CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD12041488400EAF407 /* AboutTableViewController.swift */; };
 		CE169BD42041561000EAF407 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD32041561000EAF407 /* WebViewController.swift */; };
 		CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */; };
+		CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
 		CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CCA203D69FE008702B4 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		CE169BD12041488400EAF407 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD32041561000EAF407 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginTableViewController.swift; sourceTree = "<group>"; };
+		CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		CE449CC7203D69FE008702B4 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 				CEC9CE792042AE62005FB426 /* NotebookViewController.swift */,
 				CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */,
 				CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */,
+				CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
 				CE01071B204695C400485171 /* UserLocation.swift in Sources */,
+				CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */,
 				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
 				CE7EE0EB204CDE3F006A5BDD /* DiscoverTableViewCell.swift in Sources */,
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,

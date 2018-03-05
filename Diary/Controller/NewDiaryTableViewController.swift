@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 import CoreData
 import MapKit
 import CoreLocation
@@ -16,21 +17,31 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     var diary: DiaryMO!
     var choosedWeatherButtonText = ""
+    var choosedTags = ""
     var noteBookName = ""
     var currentDate = Date()
     let locationManager = CLLocationManager()
     var userCurrentLocation = ""
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        // Prepare data
+        let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
+        UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
+        let dataId = String(currentMaxId + 1)
+        let dataAuthor = "匿名"
+//        if UserDefaults.standard.bool(forKey: "hasLogin") {
+//
+//        }
+        
+        // Save to CoreData
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let context = appDelegate.persistentContainer.viewContext
             diary = DiaryMO(context: context)
-            let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
-            UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
-            diary.id = String(currentMaxId + 1)
+            
+            diary.id = dataId
             diary.title = titleTextField.text
-            diary.tag = "日记"
-            diary.author = "匿名"
+            diary.tag = tagButton.titleLabel?.text
+            diary.author = dataAuthor
             diary.weather = self.choosedWeatherButtonText
             diary.location = self.userCurrentLocation
             diary.create = currentDate.timeIntervalSince1970
@@ -46,7 +57,47 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             print("Saving data to context")
             appDelegate.saveContext()
         }
+        
+        saveRecordToCloud(diary: diary, id: dataId, author: dataAuthor)
+        
         dismiss(animated: true, completion: nil)
+    }
+
+    func saveRecordToCloud(diary:DiaryMO!, id: String, author: String) {
+        // Save to iCloud
+        let record = CKRecord(recordType: "Diary")
+        record.setValue(id, forKey: "id")
+        record.setValue(titleTextField.text, forKey: "title")
+        record.setValue(tagButton.titleLabel?.text, forKey: "tag")
+        record.setValue(author, forKey: "author")
+        record.setValue(self.choosedWeatherButtonText, forKey: "weather")
+        record.setValue(self.userCurrentLocation, forKey: "location")
+        record.setValue(currentDate, forKey: "createdAt")
+        record.setValue(currentDate, forKey: "modifiedAt")
+        record.setValue(contentTextView.text, forKey: "content")
+        record.setValue("0", forKey: "review")
+        record.setValue(String(UserDefaults.standard.integer(forKey: "defaultNoteBookId")), forKey: "notebookid")
+        
+        let imageData = diary.image! as Data
+        
+        // Resize the image
+        let originalImage = UIImage(data: imageData)!
+        let scalingFator = (originalImage.size.width > 1024) ? 1024 / originalImage.size.width : 1.0
+        let scaledImage = UIImage(data: imageData, scale: scalingFator)!
+        
+        // Write the image to the local file for temporary use
+        let imageFilePath = NSTemporaryDirectory() + titleTextField.text!
+        let imageFileURL = URL(fileURLWithPath: imageFilePath)
+        try? UIImageJPEGRepresentation(scaledImage, 0.8)?.write(to: imageFileURL)
+        
+        // Create image asset for upload
+        let imageAsset = CKAsset(fileURL: imageFileURL)
+        record.setValue(imageAsset, forKey: "image")
+        
+        let privateDatabase = CKContainer.default().privateCloudDatabase
+        privateDatabase.save(record, completionHandler: { (record, error) in
+            try? FileManager.default.removeItem(at: imageFileURL)
+        })
     }
     
     @IBOutlet var titleTextField: UITextField!
@@ -58,6 +109,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     @IBOutlet weak var weatherButton: UIButton!
     
     @IBOutlet var dateLabel: UILabel!
+    
+    @IBOutlet weak var tagButton: UIButton!
     
     @IBOutlet var locationImageView: UIImageView!
     
@@ -80,6 +133,26 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     @IBAction func closeWeather(segue: UIStoryboardSegue) {
         //self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func closeTags(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func chooseTag(segue: UIStoryboardSegue) {
+        if let source = segue.source as? TagsTableViewController {
+            if source.choosedTags.count > 0 {
+                var tagString = ""
+                for tag in source.choosedTags {
+                    tagString = tagString + tag + " "
+                }
+                tagString.remove(at: tagString.index(before: tagString.endIndex))
+                tagButton.setTitle(tagString, for: UIControlState.normal)
+            } else {
+                tagButton.setTitle("tag", for: UIControlState.normal)
+            }
+            
+        }
     }
 
     override func viewDidLoad() {
@@ -221,5 +294,22 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         bottomConstraint.isActive = true
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTags" {
+            let destination = segue.destination as! TagsTableViewController
+            print(self.tagButton.titleLabel?.text ?? "nil tag")
+            let tagButtonString = self.tagButton.titleLabel?.text ?? "tag"
+            if tagButtonString != "tag" {
+                let tagArray = tagButtonString.components(separatedBy: " ")
+                destination.chooseTagsInit = tagArray
+                print("not first")
+                print(tagButtonString.components(separatedBy: " ").description)
+            } else {
+                print("first")
+            }
+            
+        }
     }
 }
