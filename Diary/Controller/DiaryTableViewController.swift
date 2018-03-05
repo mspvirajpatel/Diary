@@ -63,7 +63,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnSwipe = true
-        print("viewWillAppear")
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
             // Fetch data from data store - Notebook
             let fetchNoteRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
@@ -146,50 +145,28 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         tableView.beginUpdates()
     }
 
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        // Fetch data from data store - Notebook
-        let fetchNoteRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
-        let sortNoteDescriptor = NSSortDescriptor(key: "id", ascending: true)
-        fetchNoteRequest.sortDescriptors = [sortNoteDescriptor]
-        
-        fetchNoteRequest.predicate = NSPredicate(format: "id == %d", UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
-        
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            fetchNoteResultController = NSFetchedResultsController(fetchRequest: fetchNoteRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchNoteResultController.delegate = self
-            
-            do {
-                try fetchNoteResultController.performFetch()
-                if let fetchedObjects = fetchNoteResultController.fetchedObjects {
-                    notebooks = fetchedObjects
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for changeType: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        if type(of: (anObject as! NSObject)) == type(of: DiaryMO()) {
+            switch changeType {
+            case .insert:
+                if let newIndexPath = newIndexPath {
+                    tableView.insertRows(at: [newIndexPath], with: .fade)
                 }
-            } catch {
-                print(error)
+            case .delete:
+                if let indexPath = indexPath {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            case .update:
+                if let indexPath = indexPath {
+                    tableView.reloadRows(at: [indexPath], with: .fade)
+                }
+            default:
+                tableView.reloadData()
             }
-        }
-        switch type {
-        case .insert:
-            if let newIndexPath = newIndexPath {
-                print("diary Insert rows: \(newIndexPath)")
-                tableView.insertRows(at: [newIndexPath], with: .fade)
+            
+            if let fetchedObjects = controller.fetchedObjects {
+                diaries = fetchedObjects as! [DiaryMO]
             }
-        case .delete:
-            if let indexPath = indexPath {
-                print("diary delete rows: \(indexPath)")
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-        case .update:
-            if let indexPath = indexPath {
-                print("diary update rows: \(indexPath)")
-                tableView.reloadRows(at: [indexPath], with: .fade)
-            }
-        default:
-            tableView.reloadData()
-        }
-
-        if let fetchedObjects = controller.fetchedObjects {
-            diaries = fetchedObjects as! [DiaryMO]
         }
     }
 
@@ -206,7 +183,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        print("numberOfSections diaries.count :\(diaries.count)")
         if diaries.count > 0 {
             tableView.backgroundView?.isHidden = true
             tableView.separatorStyle = .singleLine
@@ -220,7 +196,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("tableView numberOfSections diaries.count :\(diaries.count)")
         // #warning Incomplete implementation, return the number of rows
         if (searchController?.isActive)! {
             return searchResults.count
