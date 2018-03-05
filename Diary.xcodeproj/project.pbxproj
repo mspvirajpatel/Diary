@@ -35,6 +35,7 @@
 		CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */; };
 		CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFDC12203EC60400A5BC64 /* MapKit.framework */; };
 		CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */; };
+		CEF61F9A204D46C500AD96F9 /* UpdateTagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF61F99204D46C500AD96F9 /* UpdateTagsTableViewController.swift */; };
 		CEF6C85E2041000F00FBE069 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF6C85D2041000F00FBE069 /* Onboarding.storyboard */; };
 		CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */; };
 		CEF6C8622041055300FBE069 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */; };
@@ -74,6 +75,7 @@
 		CEEFDC0F203EC49400A5BC64 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CEEFDC12203EC60400A5BC64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CEF61F99204D46C500AD96F9 /* UpdateTagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTagsTableViewController.swift; sourceTree = "<group>"; };
 		CEF6C85D2041000F00FBE069 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
 		CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */,
 				CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */,
 				CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */,
+				CEF61F99204D46C500AD96F9 /* UpdateTagsTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */,
 				CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */,
 				CE449CE2203D6AAA008702B4 /* Diary.swift in Sources */,
+				CEF61F9A204D46C500AD96F9 /* UpdateTagsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

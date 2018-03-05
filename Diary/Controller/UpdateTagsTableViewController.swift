@@ -1,5 +1,5 @@
 //
-//  TagsTableViewController.swift
+//  UpdateTagsTableViewController.swift
 //  Diary
 //
 //  Created by 牛苒 on 2018/3/5.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class TagsTableViewController: UITableViewController {
+class UpdateTagsTableViewController: UITableViewController {
     var tags:[String] = ["日记", "微信", "jQuery", "Linux", "Mac", "PHP", "会议"]
     
     var choosedTags: [String] = []
     var chooseTagsInit: [String] = []
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -24,27 +24,27 @@ class TagsTableViewController: UITableViewController {
         
         tags = tags.sorted()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return tags.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TagsCell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UpdateTagsCell", for: indexPath)
+        
         // Configure the cell...
         cell.textLabel?.text = tags[indexPath.row]
         cell.selectionStyle = .none
@@ -59,7 +59,7 @@ class TagsTableViewController: UITableViewController {
         
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.none {
             if self.choosedTags.count >= 3 {
@@ -76,5 +76,6 @@ class TagsTableViewController: UITableViewController {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }
     }
-
+    
 }
+

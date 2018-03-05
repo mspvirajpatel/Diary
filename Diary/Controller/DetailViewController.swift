@@ -14,15 +14,18 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     var diary: DiaryMO!
     var fetchDiary: DiaryMO!
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
+    var choosedTags = ""
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var fullImageView: UIImageView!
-    @IBOutlet var tagLabel: UILabel! {
+
+    @IBOutlet weak var tagButton: UIButton! {
         didSet {
-            tagLabel.layer.cornerRadius = 5.0
-            tagLabel.layer.masksToBounds = true
+            tagButton.layer.cornerRadius = 5.0
+            tagButton.layer.masksToBounds = true
         }
     }
+    
     @IBOutlet var avatarImageView: UIImageView! {
         didSet {
             avatarImageView.layer.cornerRadius = 30.0
@@ -41,11 +44,69 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     @IBOutlet var inputKeyboardView: UIView!
     @IBOutlet weak var inputKeyboardImageView: UIImageView!
     
+    @IBAction func tagButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func closeUpdateTags(segue: UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func chooseUpdateTag(segue: UIStoryboardSegue) {
+        var tagString = ""
+        if let source = segue.source as? UpdateTagsTableViewController {
+            if source.choosedTags.count > 0 {
+                for tag in source.choosedTags {
+                    tagString = tagString + tag + " "
+                }
+                tagString.remove(at: tagString.index(before: tagString.endIndex))
+                tagButton.setTitle(tagString, for: UIControlState.normal)
+            } else {
+                tagButton.setTitle("tag", for: UIControlState.normal)
+            }
+            
+            print("tagStartString:\(tagStartString)")
+            print("tagchange:\(tagString)")
+            
+            // Save Tag
+            if tagStartString != tagString {
+                let currentDate = Date.init()
+                // update data from data store - Diary
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "id == %@", diary.id!)
+                    
+                    do {
+                        let results = try context.fetch(fetchRequest)
+                        fetchRequest.returnsObjectsAsFaults = false
+                        
+                        if(results.count > 0 ){
+                            results[0].setValue(tagString, forKey: "tag")
+                            results[0].setValue(currentDate, forKey: "update")
+                            try context.save();
+                            print("Saved.....")
+                        } else {
+                            print("No results to save")
+                        }
+                    } catch{
+                        print("There was an error")
+                    }
+                }
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+                dateFormatter.timeZone = TimeZone.current
+                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+            }
+        }
+    }
+    
     var doneButton = UIButton()
     var textViewStartString = ""
     var textViewEndString = ""
     var textFieldStartString = ""
     var textFieldEndString = ""
+    var tagStartString = ""
     
     @objc func buttonClick(_ sender: UIButton) {
         view.endEditing(true)
@@ -125,7 +186,8 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         
         titleTextField.text = diary.title
         titleTextField.delegate = self
-        tagLabel.text = diary.tag
+        tagButton.setTitle(diary.tag, for: UIControlState.normal)
+        tagStartString = diary.tag!
         fullImageView.image = UIImage(data: diary.image!)
         avatarImageView.image = UIImage(named: "avatar-man-stubble")
         authorLabel.text = diary.author
@@ -198,6 +260,14 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         if segue.identifier == "showMap" {
             let destinationController = segue.destination as! MapViewController
             destinationController.diary = diary
+        }
+        if segue.identifier == "showUpdateTags" {
+            let destination = segue.destination as! UpdateTagsTableViewController
+            let tagButtonString = self.tagButton.titleLabel?.text ?? "tag"
+            if tagButtonString != "tag" {
+                let tagArray = tagButtonString.components(separatedBy: " ")
+                destination.chooseTagsInit = tagArray
+            }
         }
     }
 
