@@ -93,32 +93,34 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
         }
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            if let newIndexPath = newIndexPath {
-                blockOperations.append(BlockOperation(block: {
-                    self.collectionView.insertItems(at: [newIndexPath])
-                }))
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for changeType: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        if type(of: (anObject as! NSObject)) == type(of: NotebookMO()) {
+            switch changeType {
+            case .insert:
+                if let newIndexPath = newIndexPath {
+                    blockOperations.append(BlockOperation(block: {
+                        self.collectionView.insertItems(at: [newIndexPath])
+                    }))
+                }
+            case .delete:
+                if let indexPath = indexPath {
+                    blockOperations.append(BlockOperation(block: {
+                        self.collectionView.deleteItems(at: [indexPath])
+                    }))
+                }
+            case .update:
+                if let indexPath = indexPath {
+                    blockOperations.append(BlockOperation(block: {
+                        self.collectionView.reloadItems(at: [indexPath])
+                    }))
+                }
+            default:
+                collectionView.reloadData()
             }
-        case .delete:
-            if let indexPath = indexPath {
-                blockOperations.append(BlockOperation(block: {
-                    self.collectionView.deleteItems(at: [indexPath])
-                }))
+            
+            if let fetchedObjects = controller.fetchedObjects {
+                notebooks = fetchedObjects as! [NotebookMO]
             }
-        case .update:
-            if let indexPath = indexPath {
-                blockOperations.append(BlockOperation(block: {
-                    self.collectionView.reloadItems(at: [indexPath])
-                }))
-            }
-        default:
-            collectionView.reloadData()
-        }
-        
-        if let fetchedObjects = controller.fetchedObjects {
-            notebooks = fetchedObjects as! [NotebookMO]
         }
     }
 }
