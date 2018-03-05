@@ -17,12 +17,6 @@ class TagsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if chooseTagsInit.count > 0 {
-            for tagString in chooseTagsInit {
-                print(tagString)
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {

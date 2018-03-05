@@ -124,7 +124,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 notebook.name = "Diary"
                 notebook.author = "匿名"
                 notebook.comment = "my diary"
-                let currentDate = Date.init().timeIntervalSince1970
+                let currentDate = Date.init()
                 notebook.create = currentDate
                 notebook.update = currentDate
                 if let notebookCoverImage = UIImage(named: "weather-background") {
@@ -216,7 +216,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         cell.thumbnailImageView.image = UIImage(data: diary.image!)
         cell.weatherLabel.text = diary.weather
 
-        cell.dateLabel.text = getFriendlyTime(date: Date.init(timeIntervalSince1970: diary.update))
+        cell.dateLabel.text = getFriendlyTime(date: diary.update!)
 //        if diary.review == "0" {
 //            cell.reviewLabel.text = "暂无评论"
 //        } else {

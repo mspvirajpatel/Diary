@@ -44,8 +44,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             diary.author = dataAuthor
             diary.weather = self.choosedWeatherButtonText
             diary.location = self.userCurrentLocation
-            diary.create = currentDate.timeIntervalSince1970
-            diary.update = currentDate.timeIntervalSince1970
+            diary.create = currentDate
+            diary.update = currentDate
             diary.content = contentTextView.text
             diary.review = "0"
             diary.notebookid = String(UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
@@ -299,17 +299,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTags" {
             let destination = segue.destination as! TagsTableViewController
-            print(self.tagButton.titleLabel?.text ?? "nil tag")
             let tagButtonString = self.tagButton.titleLabel?.text ?? "tag"
             if tagButtonString != "tag" {
                 let tagArray = tagButtonString.components(separatedBy: " ")
                 destination.chooseTagsInit = tagArray
-                print("not first")
-                print(tagButtonString.components(separatedBy: " ").description)
-            } else {
-                print("first")
             }
-            
         }
     }
 }

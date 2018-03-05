@@ -24,7 +24,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
             notebook.name = nameTextField.text
             notebook.comment = descriptionTextView.text
             notebook.author = "匿名"
-            let currentDate = Date.init().timeIntervalSince1970
+            let currentDate = Date.init()
             notebook.create = currentDate
             notebook.update = currentDate
             
@@ -35,9 +35,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
             print("Saving data to context")
             appDelegate.saveContext()
         }
-        dismiss(animated: true, completion: {
-            print("NewNotebook.dismiss.completion")
-        })
+        dismiss(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
@@ -55,12 +53,10 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("NewNoteBook.viewWillAppear")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("NewNoteBook.viewDidAppear")
     }
     
     func textViewDidBeginEditing(_ textView: UITextView)

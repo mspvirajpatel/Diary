@@ -61,7 +61,6 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                 do {
                     let results = try context.fetch(fetchRequest)
                     fetchRequest.returnsObjectsAsFaults = false
-                    print("Results Count :", results.count)
                     
                     if(results.count > 0 ){
                         if textFieldStartString != textFieldEndString {
@@ -70,7 +69,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                         if textViewStartString != textViewEndString {
                             results[0].setValue(contentTextView.text, forKey: "content")
                         }
-                        results[0].setValue(currentDate.timeIntervalSince1970, forKey: "update")
+                        results[0].setValue(currentDate, forKey: "update")
                         try context.save();
                         print("Saved.....")
                     } else {
@@ -137,8 +136,8 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
         dateFormatter.timeZone = TimeZone.current
         
-        creatDateLabel.text = "创建于" + dateFormatter.string(from: Date.init(timeIntervalSince1970: diary.create))
-        updateDateLabel.text = "修改于" + dateFormatter.string(from: Date.init(timeIntervalSince1970: diary.update))
+        creatDateLabel.text = "创建于" + dateFormatter.string(from: diary.create!)
+        updateDateLabel.text = "修改于" + dateFormatter.string(from: diary.update!)
         
         locationIconImageView.image = UIImage(named: "map")
         scrollView.contentInsetAdjustmentBehavior = .never
