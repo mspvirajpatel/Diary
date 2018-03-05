@@ -55,7 +55,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         // Prepare the empty view
         tableView.backgroundView = emptyDiaryView
         tableView.backgroundView?.isHidden = true
-        
+        tableView.tableFooterView = UIView()
         // Pull to refresh control
 
     }

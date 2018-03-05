@@ -54,7 +54,7 @@ class DiscoverTableViewController: UITableViewController {
         
         // Create the query with the query
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["title", "author", "review"]
+        queryOperation.desiredKeys = ["title", "author", "review", "location", "createdAt"]
         queryOperation.queuePriority = .veryHigh
         queryOperation.resultsLimit = 50
         queryOperation.recordFetchedBlock = { (record) in
@@ -99,20 +99,23 @@ class DiscoverTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverCell", for: indexPath) as! DiscoverTableViewCell
         
         // Configure the Cell...
         let diary = diaries[indexPath.row]
-        cell.textLabel?.text = diary.object(forKey: "title") as? String
-        
-        cell.imageView?.image = UIImage(named: "photo")
+        cell.titleLabel.text = diary.object(forKey: "title") as? String
+        cell.fullImageView.image = UIImage(named: "photo")
+        cell.authorLabel.text = diary.object(forKey: "author") as? String
+        cell.LocationButton.setTitle(diary.object(forKey: "location") as? String, for: UIControlState.normal)
+        cell.dateLabel.text = diary.object(forKey: "createdAt") as? String
+        cell.reviewButton.setTitle(diary.object(forKey: "review") as? String, for: UIControlState.normal)
         
         // Check if the image is stored in cache
         if let imageFileURL = imageCache.object(forKey: diary.recordID) {
             // Fetch image from cache
             print("Get image from cache")
             if let imageData = try? Data.init(contentsOf: imageFileURL as URL) {
-                cell.imageView?.image = UIImage(data: imageData)
+                cell.fullImageView.image = UIImage(data: imageData)
             }
         } else {
             let publicDatabase = CKContainer.default().publicCloudDatabase
@@ -127,7 +130,7 @@ class DiscoverTableViewController: UITableViewController {
                 if let diaryRecord = record, let image = diaryRecord.object(forKey: "image"), let imageAsset = image as? CKAsset {
                     if let imageData = try? Data.init(contentsOf: imageAsset.fileURL) {
                         DispatchQueue.main.async {
-                            cell.imageView?.image = UIImage(data: imageData)
+                            cell.fullImageView.image = UIImage(data: imageData)
                             cell.setNeedsLayout()
                         }
                         // Add the image URL to cache

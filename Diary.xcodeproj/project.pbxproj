@@ -23,6 +23,8 @@
 		CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */; };
 		CE449CE2203D6AAA008702B4 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CE1203D6AAA008702B4 /* Diary.swift */; };
 		CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */; };
+		CE7EE0E9204CD9BC006A5BDD /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */; };
+		CE7EE0EB204CDE3F006A5BDD /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */; };
 		CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */; };
 		CEC9CE782042ACA8005FB426 /* NoteBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE772042ACA8005FB426 /* NoteBook.swift */; };
 		CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE792042AE62005FB426 /* NotebookViewController.swift */; };
@@ -59,6 +61,8 @@
 		CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE449CE1203D6AAA008702B4 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
+		CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEC9CE772042ACA8005FB426 /* NoteBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteBook.swift; sourceTree = "<group>"; };
 		CEC9CE792042AE62005FB426 /* NotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 				CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */,
 				CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */,
 				CEF77E09204965A400C6C1A7 /* SlideOutTransitionAnimator.swift */,
+				CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -164,12 +169,13 @@
 				CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */,
 				CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */,
 				CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */,
+				CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */,
 				CE169BD12041488400EAF407 /* AboutTableViewController.swift */,
 				CE169BD32041561000EAF407 /* WebViewController.swift */,
 				CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */,
 				CEC9CE792042AE62005FB426 /* NotebookViewController.swift */,
 				CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */,
-				CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */,
+				CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -284,10 +290,12 @@
 				CEC9CE782042ACA8005FB426 /* NoteBook.swift in Sources */,
 				CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */,
 				CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */,
+				CE7EE0E9204CD9BC006A5BDD /* SettingTableViewController.swift in Sources */,
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
 				CE01071B204695C400485171 /* UserLocation.swift in Sources */,
 				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
+				CE7EE0EB204CDE3F006A5BDD /* DiscoverTableViewCell.swift in Sources */,
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,

@@ -15,6 +15,8 @@ class UserLoginTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        tableView.separatorStyle = .none
+        tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {

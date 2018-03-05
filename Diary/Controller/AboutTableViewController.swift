@@ -41,6 +41,14 @@ class AboutTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Configure navigation bar appearance
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+        tableView.tableFooterView = UIView()
+        
         // Load user info
         if UserDefaults.standard.bool(forKey: "hasLogin") {
             avatarImageView.image = UIImage(named: "avatar-man-stubble")
@@ -63,7 +71,7 @@ class AboutTableViewController: UITableViewController {
                     performSegue(withIdentifier: "showLoginPage", sender: self)
                 }
             }
-        case 1:
+        case 2:
             if indexPath.row == 0 {
                 if let url = URL(string: "https://www.apple.com/itues/charts/paid-apps/") {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -71,7 +79,7 @@ class AboutTableViewController: UITableViewController {
             } else if indexPath.row == 1 {
                 performSegue(withIdentifier: "showWebView", sender: self)
             }
-        case 2:
+        case 3:
             if indexPath.row == 0 {
                 if let url = URL(string: "https://niuran.cn") {
                     let safariController = SFSafariViewController(url: url)
