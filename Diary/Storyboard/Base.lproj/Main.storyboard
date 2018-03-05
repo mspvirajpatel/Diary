@@ -1759,7 +1759,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="tagButtonTapped:" destination="JUi-EA-6he" eventType="touchUpInside" id="Xal-Ys-xIu"/>
-                                                    <segue destination="C1V-yd-OeD" kind="showDetail" identifier="showUpdateTags" action="showViewController:sender:" id="zAm-Rt-xST"/>
+                                                    <segue destination="C1V-yd-OeD" kind="presentation" identifier="showUpdateTags" id="zAm-Rt-xST"/>
                                                 </connections>
                                             </button>
                                         </subviews>
