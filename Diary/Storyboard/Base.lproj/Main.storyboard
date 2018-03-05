@@ -393,8 +393,10 @@
                             <outlet property="delegate" destination="OeS-St-zm9" id="n8j-Ye-sbr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Diary" id="T87-wg-w7V">
-                        <barButtonItem key="backBarButtonItem" title=" " id="cOq-T0-b4B"/>
+                    <navigationItem key="navigationItem" title="Diary" leftItemsSupplementBackButton="YES" id="T87-wg-w7V">
+                        <barButtonItem key="backBarButtonItem" title=" " id="cOq-T0-b4B">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                         <barButtonItem key="leftBarButtonItem" image="list" id="VN6-pG-V9Y">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>

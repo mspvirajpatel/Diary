@@ -18,6 +18,7 @@ class SettingTableViewController: UITableViewController {
         navigationController?.hidesBarsOnSwipe = false
         // Configure navigation bar appearance
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.tintColor = UIColor.black
         navigationController?.navigationBar.shadowImage = nil
         tableView.tableFooterView = UIView()
     }

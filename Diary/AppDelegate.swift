@@ -16,10 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        let backButtonImage = UIImage(named: "back")
-        UINavigationBar.appearance().backIndicatorImage = backButtonImage
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+//        // Override point for customization after application launch.
+//        let backButtonImage = UIImage(named: "back")
+//        UINavigationBar.appearance().backIndicatorImage = backButtonImage
+//        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+//        UINavigationBar.appearance().tintColor = UIColor.black
         
         UIApplication.shared.statusBarStyle = .default
         
