@@ -118,6 +118,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(1, forKey: "maxNoteBookId")
             UserDefaults.standard.set(0, forKey: "maxDiaryId")
             UserDefaults.standard.set(false, forKey: "hasLogin")
+            let initTags:[String] = ["日记", "工作", "学习", "旅游", "生活", "备忘", "美食"]
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
                 notebook.id = "1"
@@ -129,6 +130,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 notebook.update = currentDate
                 if let notebookCoverImage = UIImage(named: "weather-background") {
                     notebook.coverimage = UIImagePNGRepresentation(notebookCoverImage)
+                }
+                
+                for index in 0..<initTags.count {
+                    let tagMO = TagMO(context: appDelegate.persistentContainer.viewContext)
+                    tagMO.name = initTags[index]
                 }
                 
                 print("Saving data to context")

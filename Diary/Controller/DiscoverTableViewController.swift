@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import MapKit
 
 class DiscoverTableViewController: UITableViewController {
     

@@ -730,7 +730,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="j1M-L5-4oP">
-                                                    <rect key="frame" x="8" y="250" width="85" height="69.5"/>
+                                                    <rect key="frame" x="8" y="250" width="300" height="69.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZ8-38-3Jv">
                                                             <rect key="frame" x="0.0" y="0.0" width="35.5" height="20.5"/>
@@ -745,7 +745,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4K-7z-XOX">
-                                                            <rect key="frame" x="0.0" y="44.5" width="59" height="25"/>
+                                                            <rect key="frame" x="0.0" y="44.5" width="300" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="dz9-H0-Ydi"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <state key="normal" title="Location">
                                                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -786,7 +789,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="TPe-uN-NeJ" secondAttribute="trailing" constant="8" id="ZC0-OG-LVX"/>
                                                 <constraint firstItem="j1M-L5-4oP" firstAttribute="top" secondItem="GzA-l6-sWA" secondAttribute="bottom" constant="10" id="ZHA-es-7J4"/>
                                                 <constraint firstItem="85S-Yg-Jj7" firstAttribute="top" secondItem="GzA-l6-sWA" secondAttribute="bottom" constant="8" id="cC2-6d-nz4"/>
-                                                <constraint firstItem="85S-Yg-Jj7" firstAttribute="leading" secondItem="j1M-L5-4oP" secondAttribute="trailing" constant="180" id="i2X-dm-tTd"/>
                                                 <constraint firstItem="TPe-uN-NeJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pZj-9M-n7t" secondAttribute="leading" constant="20" symbolic="YES" id="jb7-Te-jZU"/>
                                                 <constraint firstItem="GzA-l6-sWA" firstAttribute="top" secondItem="pZj-9M-n7t" secondAttribute="top" id="mEc-V2-Vjd"/>
                                                 <constraint firstAttribute="bottom" secondItem="j1M-L5-4oP" secondAttribute="bottom" constant="20" id="odz-MC-Nrn"/>
@@ -1098,6 +1100,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="SHn-T8-vPL" kind="show" identifier="showTagManage" id="6H9-Jb-2Q2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1171,7 +1176,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="System" id="5qO-I9-7c5">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hsa-X3-e2i">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Hsa-X3-e2i">
                                         <rect key="frame" x="0.0" y="260" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hsa-X3-e2i" id="SAt-pr-nWN">
@@ -1226,6 +1231,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkP-rJ-fIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="457" y="2580"/>
+        </scene>
+        <!--Tag Manage Table View Controller-->
+        <scene sceneID="0mw-L9-hMW">
+            <objects>
+                <tableViewController id="SHn-T8-vPL" customClass="TagManageTableViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3Vg-xE-1wC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="TagManageCell" id="uUY-Cz-iWy">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uUY-Cz-iWy" id="7Tt-fK-9IU">
+                                    <rect key="frame" x="0.0" y="0.0" width="327" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SHn-T8-vPL" id="n0E-lG-pLK"/>
+                            <outlet property="delegate" destination="SHn-T8-vPL" id="kSM-nY-beA"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gPv-2e-cqz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1196" y="2579"/>
         </scene>
         <!--User Login Table View Controller-->
         <scene sceneID="lIa-EE-oT9">

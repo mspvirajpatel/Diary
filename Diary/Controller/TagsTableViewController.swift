@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
-class TagsTableViewController: UITableViewController {
-    var tags:[String] = ["日记", "微信", "jQuery", "Linux", "Mac", "PHP", "会议"]
+class TagsTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UINavigationControllerDelegate {
+    var tags:[String] = []
+    var fetchResultController: NSFetchedResultsController<TagMO>!
+    var tagsData:[TagMO] = []
     
     var choosedTags: [String] = []
     var chooseTagsInit: [String] = []
@@ -17,6 +20,32 @@ class TagsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+        
+        // Fetch tags from CoreData.
+        let fetchRequest: NSFetchRequest<TagMO> = TagMO.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do {
+                try fetchResultController.performFetch()
+                if let fetchedObjects = fetchResultController.fetchedObjects {
+                    tagsData = fetchedObjects
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        for tag in tagsData {
+            tags.append(tag.name!)
+        }
+        tags = tags.sorted()
     }
     
     override func viewWillAppear(_ animated: Bool) {

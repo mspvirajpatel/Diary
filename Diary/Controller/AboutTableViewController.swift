@@ -43,6 +43,7 @@ class AboutTableViewController: UITableViewController {
         
         // Configure navigation bar appearance
         tableView.cellLayoutMarginsFollowReadableWidth = true
+        self.tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
