@@ -465,7 +465,7 @@
                                                 <constraint firstItem="VQ5-fa-FRe" firstAttribute="centerY" secondItem="3Se-Fv-8qr" secondAttribute="centerY" id="dIU-2m-814"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="30" id="J9z-q2-h22">
                                         <rect key="frame" x="0.0" y="250" width="375" height="30"/>

@@ -14,57 +14,37 @@ class MapViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     
     var diary: DiaryMO!
-
+    var cllocation = CLLocation()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.tintColor = UIColor.black
         
         mapView.showsCompass = true
         mapView.showsScale = true
         mapView.showsTraffic = true
-
-        // Do any additional setup after loading the view.
-        let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(diary.location ?? "", completionHandler: { placemarks, error in
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            if let placemarks = placemarks {
-                // Get the first placemark
-                let placemark = placemarks[0]
-                
-                // Add annotation
-                let annotation = MKPointAnnotation()
-                annotation.title = self.diary.title
-                annotation.subtitle = self.diary.author
-                
-                if let location = placemark.location {
-                    annotation.coordinate = location.coordinate
-                    
-                    // Display the annotation
-                    self.mapView.showAnnotations([annotation], animated: true)
-                    self.mapView.selectAnnotation(annotation, animated: true)
+        
+        // Json Decode the location information
+        let jsonDecoder = JSONDecoder()
+        if let location = diary.location {
+            if let jsonData = location.data(using: .utf8) {
+                do {
+                    let userLocation = try jsonDecoder.decode(UserLocation.self, from: jsonData)
+                    cllocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude), altitude: userLocation.altitude, horizontalAccuracy: userLocation.horizontalAccuracy, verticalAccuracy: userLocation.verticalAccuracy, course: userLocation.course, speed: userLocation.speed, timestamp: diary.create!)
+                } catch {
+                    print(error)
                 }
-                
             }
-        })
+        }
+        // Add annotation
+        let annotation = MKPointAnnotation()
+        annotation.title = self.diary.title
+        annotation.subtitle = self.diary.author
+        annotation.coordinate = cllocation.coordinate
+        // Display the annotation
+        self.mapView.showAnnotations([annotation], animated: true)
+        self.mapView.selectAnnotation(annotation, animated: true)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
