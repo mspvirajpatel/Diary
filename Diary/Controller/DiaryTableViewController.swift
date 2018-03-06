@@ -32,6 +32,10 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self as UIViewControllerPreviewingDelegate, sourceView: view)
+        }
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.hidesBarsOnSwipe = true
@@ -118,6 +122,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(1, forKey: "maxNoteBookId")
             UserDefaults.standard.set(0, forKey: "maxDiaryId")
             UserDefaults.standard.set(false, forKey: "hasLogin")
+            UserDefaults.standard.set(Date.init(), forKey: "iCloudSync")
             let initTags:[String] = ["日记", "工作", "学习", "旅游", "生活", "备忘", "美食"]
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
@@ -356,6 +361,18 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             tableView.reloadData()
         }
     }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     func getFriendlyTime(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -393,14 +410,46 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     }
 }
 
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+extension DiaryTableViewController: UIViewControllerPreviewingDelegate {
+
+    override var previewActionItems: [UIPreviewActionItem] {
+        let action1 = UIPreviewAction(title: "Action1", style: .default) { (action, previewViewController) in
+            print("action1")
+        }
+        let action2 = UIPreviewAction(title: "Action1", style: .default) { (action, previewViewController) in
+            print("action2")
+        }
+        let action3 = UIPreviewAction(title: "Action1", style: .default) { (action, previewViewController) in
+            print("action3")
+        }
+        
+        // add them to an arrary
+        return [action1, action2, action3]
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return nil
+        }
+        
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+            return nil
+        }
+        
+        let selectedDiary = diaries[indexPath.row]
+        detailViewController.diary = selectedDiary
+        detailViewController.preferredContentSize = CGSize(width: 0.0, height: 460.0)
+        previewingContext.sourceRect = cell.frame
+        return detailViewController
     }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
+    
+    
 }

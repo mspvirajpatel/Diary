@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
     
@@ -144,9 +145,15 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
             dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
             dateFormatter.timeZone = TimeZone.current
             self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+            
+            
         }
         
         doneButton.isHidden = true
+    }
+    
+    func updateRecordToCloud() {
+        
     }
     
     override func viewDidLoad() {

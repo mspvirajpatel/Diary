@@ -22,6 +22,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     var currentDate = Date()
     let locationManager = CLLocationManager()
     var userCurrentLocation = ""
+    var recordID = ""
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         // Prepare data
@@ -32,13 +33,13 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
 //        if UserDefaults.standard.bool(forKey: "hasLogin") {
 //
 //        }
-        
         // Save to CoreData
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let context = appDelegate.persistentContainer.viewContext
             diary = DiaryMO(context: context)
             
             diary.id = dataId
+            diary.recordid = self.recordID
             diary.title = titleTextField.text
             diary.tag = tagButton.titleLabel?.text
             diary.author = dataAuthor
@@ -66,6 +67,9 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     func saveRecordToCloud(diary:DiaryMO!, id: String, author: String) {
         // Save to iCloud
         let record = CKRecord(recordType: "Diary")
+//        self.recordID = record.recordID
+        print("recordName:\(record.recordID.recordName)")
+        print("zoneID:\(record.recordID.zoneID)")
         record.setValue(id, forKey: "id")
         record.setValue(titleTextField.text, forKey: "title")
         record.setValue(tagButton.titleLabel?.text, forKey: "tag")
@@ -74,6 +78,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         record.setValue(self.userCurrentLocation, forKey: "location")
         record.setValue(currentDate, forKey: "createdAt")
         record.setValue(currentDate, forKey: "modifiedAt")
+        UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
         record.setValue(contentTextView.text, forKey: "content")
         record.setValue("0", forKey: "review")
         record.setValue(String(UserDefaults.standard.integer(forKey: "defaultNoteBookId")), forKey: "notebookid")

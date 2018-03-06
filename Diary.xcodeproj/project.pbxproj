@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE0107192046841200485171 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0107182046841200485171 /* CloudKit.framework */; };
 		CE01071B204695C400485171 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071A204695C400485171 /* UserLocation.swift */; };
 		CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */; };
 		CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD12041488400EAF407 /* AboutTableViewController.swift */; };
@@ -15,6 +14,7 @@
 		CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */; };
 		CE169F61204E42EF009DB8E3 /* TagManageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */; };
 		CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */; };
+		CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19EBE4204E926E00B7AF6A /* CloudKit.framework */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
 		CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CCA203D69FE008702B4 /* AppDelegate.swift */; };
@@ -46,7 +46,6 @@
 
 /* Begin PBXFileReference section */
 		CE0107172046840E00485171 /* Diary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Diary.entitlements; sourceTree = "<group>"; };
-		CE0107182046841200485171 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CE01071A204695C400485171 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD12041488400EAF407 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginTableViewController.swift; sourceTree = "<group>"; };
 		CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManageTableViewController.swift; sourceTree = "<group>"; };
 		CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
+		CE19EBE4204E926E00B7AF6A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		CE449CC7203D69FE008702B4 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */,
-				CE0107192046841200485171 /* CloudKit.framework in Frameworks */,
+				CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +200,7 @@
 		CEEFDC11203EC60400A5BC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CE0107182046841200485171 /* CloudKit.framework */,
+				CE19EBE4204E926E00B7AF6A /* CloudKit.framework */,
 				CEEFDC12203EC60400A5BC64 /* MapKit.framework */,
 			);
 			name = Frameworks;

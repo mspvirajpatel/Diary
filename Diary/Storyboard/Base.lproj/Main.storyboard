@@ -1227,6 +1227,9 @@
                             <outlet property="delegate" destination="cDV-QC-xPh" id="eiR-TT-icQ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="syncDate" destination="v8n-Q0-yM1" id="YNU-dq-UJG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkP-rJ-fIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1747,7 +1750,7 @@
         <!--Detail View Controller-->
         <scene sceneID="eTW-Bb-iwX">
             <objects>
-                <viewController id="JUi-EA-6he" customClass="DetailViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="JUi-EA-6he" customClass="DetailViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ati-s7-CNa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

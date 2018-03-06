@@ -32,6 +32,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        completionHandler(handleQuickAction(shortcutItem: shortcutItem))
+    }
+    
+    private func handleQuickAction(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        let shortcutType = shortcutItem.type
+        guard let shortcutIdentifier = QuickAction(fullIdentifier: shortcutType) else {
+            return false
+        }
+        guard let tabBarController = window?.rootViewController as? UITabBarController else {
+            return false
+        }
+        switch shortcutIdentifier {
+        case .OpenDiaries:
+            tabBarController.selectedIndex = 0
+        case .OpenDiscover:
+            tabBarController.selectedIndex = 1
+        case .NewDiary:
+            if let navController = tabBarController.viewControllers?[0] {
+                let diaryTableViewController = navController.childViewControllers[0]
+                diaryTableViewController.performSegue(withIdentifier: "showNewDiary", sender: diaryTableViewController)
+            } else {
+                return false
+            }
+        }
+        return true
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -102,5 +130,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+}
+
+enum QuickAction: String {
+    case OpenDiaries = "OpenDiary"
+    case OpenDiscover = "OpenDiscover"
+    case NewDiary = "NewDiary"
+    init?(fullIdentifier: String) {
+        guard let shortcutIdentifier = fullIdentifier.components(separatedBy: ".").last else {
+            return nil
+        }
+        self.init(rawValue: shortcutIdentifier)
+    }
 }
 

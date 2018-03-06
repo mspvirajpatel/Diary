@@ -9,7 +9,9 @@
 import UIKit
 
 class SettingTableViewController: UITableViewController {
-
+    
+    @IBOutlet weak var syncDate: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,5 +25,8 @@ class SettingTableViewController: UITableViewController {
         navigationController?.navigationBar.tintColor = UIColor.black
         navigationController?.navigationBar.shadowImage = nil
         tableView.tableFooterView = UIView()
+        
+        let userDefaultsSyncDate = UserDefaults.standard.object(forKey: "iCloudSync") as! Date
+        syncDate.text = getFriendlyTime(date: userDefaultsSyncDate)
     }
 }

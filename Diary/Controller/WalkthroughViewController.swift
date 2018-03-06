@@ -19,6 +19,7 @@ class WalkthroughViewController: UIViewController, WalkthroughViewControllerDele
     @IBOutlet var skipButton: UIButton!
     @IBAction func skipButtonTapped(sender: UIButton) {
         UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+        createQuickActions()
         dismiss(animated: true, completion: nil)
     }
     @IBAction func nextButtonTapped(sender: UIButton) {
@@ -28,6 +29,7 @@ class WalkthroughViewController: UIViewController, WalkthroughViewControllerDele
                 walkthroughPageViewController?.forwardPage()
             case 2:
                 UserDefaults.standard.set(true, forKey: "hasViewedWalkthrough")
+                createQuickActions()
                 dismiss(animated: true, completion: nil)
             default:
                 break
@@ -63,6 +65,18 @@ class WalkthroughViewController: UIViewController, WalkthroughViewControllerDele
     
     func didUpdatePageIndex(currentIndex: Int) {
         updateUI()
+    }
+    
+    func createQuickActions() {
+        // Add Quick Actions
+        if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
+            if let bundleIdentifier = Bundle.main.bundleIdentifier {
+                let shortcutItem1 = UIApplicationShortcutItem(type: "\(bundleIdentifier).OpenDiaries", localizedTitle: "Show Diaries", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
+                let shortcutItem2 = UIApplicationShortcutItem(type: "\(bundleIdentifier).OpenDiscover", localizedTitle: "Discover Diaries", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .favorite), userInfo: nil)
+                let shortcutItem3 = UIApplicationShortcutItem(type: "\(bundleIdentifier).NewDiary", localizedTitle: "New Diary", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .add), userInfo: nil)
+                UIApplication.shared.shortcutItems = [shortcutItem1, shortcutItem2, shortcutItem3]
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
