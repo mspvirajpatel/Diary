@@ -17,6 +17,16 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var choosedTags = ""
     
+    override var previewActionItems: [UIPreviewActionItem] {
+//        let notificationAction = UIPreviewAction.init(title: "Share", style: .default) { (action, viewController) in
+
+        let cancelAction = UIPreviewAction.init(title: "Cancel", style: .destructive) { (action, viewController) in
+            
+        }
+        
+        return [cancelAction]
+    }
+    
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var fullImageView: UIImageView!
 
@@ -178,13 +188,16 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         // Json Decode the location information
         let jsonDecoder = JSONDecoder()
         if let location = diary.location {
-            if let jsonData = location.data(using: .utf8) {
-                do {
-                    let userLocation = try jsonDecoder.decode(UserLocation.self, from: jsonData)
-                    locationButton.setTitle(userLocation.city + userLocation.subLocality + userLocation.street, for: UIControlState.normal)
-                } catch {
-                    locationButton.setTitle("无", for: UIControlState.normal)
-                    print(error)
+            if location == "" {
+                locationButton.setTitle("无", for: UIControlState.normal)
+            } else {
+                if let jsonData = location.data(using: .utf8) {
+                    do {
+                        let userLocation = try jsonDecoder.decode(UserLocation.self, from: jsonData)
+                        locationButton.setTitle(userLocation.city + userLocation.subLocality + userLocation.street, for: UIControlState.normal)
+                    } catch {
+                        print("DetailViewController ViewDidLoad JSONDecoder error:\(error)")
+                    }
                 }
             }
         } else {

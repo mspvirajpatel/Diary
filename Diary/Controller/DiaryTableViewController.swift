@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
+class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate {
     
     var searchController: UISearchController?
     
@@ -17,6 +17,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var notebook: NotebookMO!
     
     var slideOutTransition = SlideOutTransitionAnimator()
+    var activityController: UIActivityViewController? = nil
     
     @IBOutlet var emptyDiaryView: UIView!
     @IBOutlet var navTitle: UINavigationItem!
@@ -29,12 +30,17 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var fetchNoteResultController: NSFetchedResultsController<NotebookMO>!
     var diaries:[DiaryMO] = []
     var notebooks:[NotebookMO] = []
+    
+    // Screen height.
+    public var screenHeight: CGFloat {
+        return UIScreen.main.bounds.height
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self as UIViewControllerPreviewingDelegate, sourceView: view)
+            registerForPreviewing(with: self, sourceView: view)
         }
 
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -66,6 +72,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print("viewWillAppear")
         navigationController?.hidesBarsOnSwipe = true
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
             // Fetch data from data store - Notebook
@@ -151,6 +159,12 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 present(walkthroughViewController, animated: true, completion: nil)
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("viewDidAppear")
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -253,11 +267,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (action, sourceView, completionHandler) in
             let defaultTitle = self.diaries[indexPath.row].title!
             let defaultContent = self.diaries[indexPath.row].content!
-            let activityController: UIActivityViewController
+            
             if let imageToShare = UIImage(data: self.diaries[indexPath.row].image!) {
-                activityController = UIActivityViewController(activityItems: [defaultTitle, imageToShare, defaultContent], applicationActivities: nil)
+                self.activityController = UIActivityViewController(activityItems: [defaultTitle, imageToShare, defaultContent], applicationActivities: nil)
             } else {
-                activityController = UIActivityViewController(activityItems: [defaultTitle, defaultContent], applicationActivities: nil)
+                self.activityController = UIActivityViewController(activityItems: [defaultTitle, defaultContent], applicationActivities: nil)
             }
             
 //            if let popoverController = activityController.popoverPresentationController {
@@ -267,9 +281,9 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 //                }
 //            }
             
-            self.present(activityController, animated: true, completion: nil)
+            self.present(self.activityController!, animated: true, completion: nil)
 
-            activityController.completionWithItemsHandler = {
+            self.activityController?.completionWithItemsHandler = {
                 (activity, success, items, error) in
                 if success {
                     switch activity!._rawValue {
@@ -302,13 +316,23 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             
         })
         
+        let notificationAction = UIContextualAction(style: .normal, title: "Notify") { (action, sourceView, completionHandler) in
+            if let newNotebookNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "NotifyNavigationControler") as? UINavigationController {
+                self.present(newNotebookNavigationController, animated: true, completion: nil)
+            }
+            completionHandler(true)
+        }
+        
         deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         deleteAction.image = UIImage(named: "delete")
         
         shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 1.0)
         shareAction.image = UIImage(named: "share")
         
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+        notificationAction.backgroundColor = UIColor(red: 34.0/255.0, green: 167.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+        notificationAction.image = UIImage(named: "alarm")
+        
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction, notificationAction])
         
         return swipeConfiguration
         
@@ -361,6 +385,31 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             tableView.reloadData()
         }
     }
+    
+    // MARK: - 3D Touch
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return nil
+        }
+        
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+            return nil
+        }
+        
+        let selectedDiary = diaries[indexPath.row]
+        detailViewController.diary = selectedDiary
+        detailViewController.preferredContentSize = CGSize(width: 0.0, height: screenHeight - 200)
+        previewingContext.sourceRect = cell.frame
+        return detailViewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
 }
 
 extension UIViewController {
@@ -408,48 +457,4 @@ extension UIViewController {
         let dateString = dateFormatter.string(from: date)
         return dateString
     }
-}
-
-extension DiaryTableViewController: UIViewControllerPreviewingDelegate {
-
-    override var previewActionItems: [UIPreviewActionItem] {
-        let action1 = UIPreviewAction(title: "Action1", style: .default) { (action, previewViewController) in
-            print("action1")
-        }
-        let action2 = UIPreviewAction(title: "Action1", style: .default) { (action, previewViewController) in
-            print("action2")
-        }
-        let action3 = UIPreviewAction(title: "Action1", style: .default) { (action, previewViewController) in
-            print("action3")
-        }
-        
-        // add them to an arrary
-        return [action1, action2, action3]
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRow(at: location) else {
-            return nil
-        }
-        
-        guard let cell = tableView.cellForRow(at: indexPath) else {
-            return nil
-        }
-        
-        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
-            return nil
-        }
-        
-        let selectedDiary = diaries[indexPath.row]
-        detailViewController.diary = selectedDiary
-        detailViewController.preferredContentSize = CGSize(width: 0.0, height: 460.0)
-        previewingContext.sourceRect = cell.frame
-        return detailViewController
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        show(viewControllerToCommit, sender: self)
-    }
-    
-    
 }

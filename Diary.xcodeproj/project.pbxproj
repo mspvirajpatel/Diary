@@ -14,6 +14,7 @@
 		CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */; };
 		CE169F61204E42EF009DB8E3 /* TagManageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */; };
 		CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */; };
+		CE186481204F96FB00892BFF /* NotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186480204F96FB00892BFF /* NotifyViewController.swift */; };
 		CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19EBE4204E926E00B7AF6A /* CloudKit.framework */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
@@ -53,6 +54,7 @@
 		CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginTableViewController.swift; sourceTree = "<group>"; };
 		CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManageTableViewController.swift; sourceTree = "<group>"; };
 		CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
+		CE186480204F96FB00892BFF /* NotifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyViewController.swift; sourceTree = "<group>"; };
 		CE19EBE4204E926E00B7AF6A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */,
 				CEF61F99204D46C500AD96F9 /* UpdateTagsTableViewController.swift */,
 				CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */,
+				CE186480204F96FB00892BFF /* NotifyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */,
+				CE186481204F96FB00892BFF /* NotifyViewController.swift in Sources */,
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
 				CE169BD42041561000EAF407 /* WebViewController.swift in Sources */,
 				CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */,
