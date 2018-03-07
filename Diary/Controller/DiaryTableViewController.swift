@@ -73,7 +73,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("viewWillAppear")
         navigationController?.hidesBarsOnSwipe = true
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
             // Fetch data from data store - Notebook
@@ -131,6 +130,14 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(0, forKey: "maxDiaryId")
             UserDefaults.standard.set(false, forKey: "hasLogin")
             UserDefaults.standard.set(Date.init(), forKey: "iCloudSync")
+            UserDefaults.standard.set(false, forKey: "isOpenNotify")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat =  "HH:mm"
+            dateFormatter.timeZone = TimeZone.current
+            if let date = dateFormatter.date(from: "19:30") {
+                print("date1:\(date)")
+                UserDefaults.standard.set(date, forKey: "notifyEverydayTime")
+            }
             let initTags:[String] = ["日记", "工作", "学习", "旅游", "生活", "备忘", "美食"]
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
@@ -161,10 +168,9 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        print("viewDidAppear")
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -316,23 +322,13 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             
         })
         
-        let notificationAction = UIContextualAction(style: .normal, title: "Notify") { (action, sourceView, completionHandler) in
-            if let newNotebookNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "NotifyNavigationControler") as? UINavigationController {
-                self.present(newNotebookNavigationController, animated: true, completion: nil)
-            }
-            completionHandler(true)
-        }
-        
         deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         deleteAction.image = UIImage(named: "delete")
         
         shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 1.0)
         shareAction.image = UIImage(named: "share")
         
-        notificationAction.backgroundColor = UIColor(red: 34.0/255.0, green: 167.0/255.0, blue: 240.0/255.0, alpha: 1.0)
-        notificationAction.image = UIImage(named: "alarm")
-        
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction, notificationAction])
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
         
         return swipeConfiguration
         

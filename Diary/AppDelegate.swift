@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("User notifications are not allowed.")
             }
         }
+        UNUserNotificationCenter.current().delegate = self
 //        // Override point for customization after application launch.
 //        let backButtonImage = UIImage(named: "back")
 //        UINavigationBar.appearance().backIndicatorImage = backButtonImage
@@ -152,3 +153,18 @@ enum QuickAction: String {
     }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == "diary.newDiaryAction" {
+            guard let tabBarController = window?.rootViewController as? UITabBarController else {
+                return
+            }
+            print("New a Diary from notify")
+            if let navController = tabBarController.viewControllers?[0] {
+                let diaryTableViewController = navController.childViewControllers[0]
+                diaryTableViewController.performSegue(withIdentifier: "showNewDiary", sender: diaryTableViewController)
+            }
+        }
+        completionHandler()
+    }
+}
