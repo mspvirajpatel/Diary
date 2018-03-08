@@ -17,6 +17,8 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var choosedTags = ""
     
+    var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
+    
     override var previewActionItems: [UIPreviewActionItem] {
 //        let notificationAction = UIPreviewAction.init(title: "Share", style: .default) { (action, viewController) in
 
@@ -156,7 +158,8 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
             dateFormatter.timeZone = TimeZone.current
             self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
             
-            
+            defaults.setValue(titleTextField.text, forKey: "title")
+            defaults.setValue(contentTextView.text, forKey: "content")
         }
         
         doneButton.isHidden = true

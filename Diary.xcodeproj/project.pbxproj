@@ -26,6 +26,10 @@
 		CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */; };
 		CE449CE2203D6AAA008702B4 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CE1203D6AAA008702B4 /* Diary.swift */; };
 		CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */; };
+		CE7694E320513972006D611B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7694E220513972006D611B /* NotificationCenter.framework */; };
+		CE7694E620513972006D611B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7694E520513972006D611B /* TodayViewController.swift */; };
+		CE7694E920513972006D611B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7694E720513972006D611B /* MainInterface.storyboard */; };
+		CE7694ED20513972006D611B /* Diary Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE7694E120513972006D611B /* Diary Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE7EE0E9204CD9BC006A5BDD /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */; };
 		CE7EE0EB204CDE3F006A5BDD /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */; };
 		CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */; };
@@ -44,6 +48,30 @@
 		CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */; };
 		CEF77E0A204965A400C6C1A7 /* SlideOutTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF77E09204965A400C6C1A7 /* SlideOutTransitionAnimator.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE7694EB20513972006D611B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE449CBF203D69FE008702B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE7694E020513972006D611B;
+			remoteInfo = "Diary Widget";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE7694F120513972006D611B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CE7694ED20513972006D611B /* Diary Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE0107172046840E00485171 /* Diary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Diary.entitlements; sourceTree = "<group>"; };
@@ -68,6 +96,12 @@
 		CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE449CE1203D6AAA008702B4 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
+		CE7694E120513972006D611B /* Diary Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Diary Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE7694E220513972006D611B /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		CE7694E520513972006D611B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		CE7694E820513972006D611B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		CE7694EA20513972006D611B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE7694F220513CE2006D611B /* Diary Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Diary Widget.entitlements"; sourceTree = "<group>"; };
 		CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -97,6 +131,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE7694DE20513972006D611B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE7694E320513972006D611B /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -104,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				CE449CC9203D69FE008702B4 /* Diary */,
+				CE7694E420513972006D611B /* Diary Widget */,
 				CE449CC8203D69FE008702B4 /* Products */,
 				CEEFDC11203EC60400A5BC64 /* Frameworks */,
 			);
@@ -113,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				CE449CC7203D69FE008702B4 /* Diary.app */,
+				CE7694E120513972006D611B /* Diary Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,6 +176,17 @@
 				CE449CD1203D69FE008702B4 /* Diary.xcdatamodeld */,
 			);
 			path = Diary;
+			sourceTree = "<group>";
+		};
+		CE7694E420513972006D611B /* Diary Widget */ = {
+			isa = PBXGroup;
+			children = (
+				CE7694F220513CE2006D611B /* Diary Widget.entitlements */,
+				CE7694E520513972006D611B /* TodayViewController.swift */,
+				CE7694E720513972006D611B /* MainInterface.storyboard */,
+				CE7694EA20513972006D611B /* Info.plist */,
+			);
+			path = "Diary Widget";
 			sourceTree = "<group>";
 		};
 		CEEFDC04203E64C900A5BC64 /* Storyboard */ = {
@@ -205,6 +260,7 @@
 			children = (
 				CE19EBE4204E926E00B7AF6A /* CloudKit.framework */,
 				CEEFDC12203EC60400A5BC64 /* MapKit.framework */,
+				CE7694E220513972006D611B /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,15 +275,34 @@
 				CE449CC3203D69FE008702B4 /* Sources */,
 				CE449CC4203D69FE008702B4 /* Frameworks */,
 				CE449CC5203D69FE008702B4 /* Resources */,
+				CE7694F120513972006D611B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CE7694EC20513972006D611B /* PBXTargetDependency */,
 			);
 			name = Diary;
 			productName = Diary;
 			productReference = CE449CC7203D69FE008702B4 /* Diary.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CE7694E020513972006D611B /* Diary Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE7694F020513972006D611B /* Build configuration list for PBXNativeTarget "Diary Widget" */;
+			buildPhases = (
+				CE7694DD20513972006D611B /* Sources */,
+				CE7694DE20513972006D611B /* Frameworks */,
+				CE7694DF20513972006D611B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Diary Widget";
+			productName = "Diary Widget";
+			productReference = CE7694E120513972006D611B /* Diary Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -243,6 +318,9 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -250,6 +328,15 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					CE7694E020513972006D611B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
 						};
@@ -270,6 +357,7 @@
 			projectRoot = "";
 			targets = (
 				CE449CC6203D69FE008702B4 /* Diary */,
+				CE7694E020513972006D611B /* Diary Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -283,6 +371,14 @@
 				CE449CD5203D69FE008702B4 /* Assets.xcassets in Resources */,
 				CE449CD0203D69FE008702B4 /* Main.storyboard in Resources */,
 				CEF6C85E2041000F00FBE069 /* Onboarding.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE7694DF20513972006D611B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE7694E920513972006D611B /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +422,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE7694DD20513972006D611B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE7694E620513972006D611B /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE7694EC20513972006D611B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE7694E020513972006D611B /* Diary Widget */;
+			targetProxy = CE7694EB20513972006D611B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CE449CCE203D69FE008702B4 /* Main.storyboard */ = {
@@ -343,6 +455,14 @@
 				CE449CD7203D69FE008702B4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CE7694E720513972006D611B /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE7694E820513972006D611B /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -458,6 +578,7 @@
 		CE449CDD203D69FE008702B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -474,6 +595,7 @@
 		CE449CDE203D69FE008702B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Diary/Diary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -482,6 +604,38 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.niuran.Diary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE7694EE20513972006D611B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Diary Widget/Diary Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q8HGKWTJJ5;
+				INFOPLIST_FILE = "Diary Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.niuran.Diary.Diary-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE7694EF20513972006D611B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Diary Widget/Diary Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q8HGKWTJJ5;
+				INFOPLIST_FILE = "Diary Widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.niuran.Diary.Diary-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -504,6 +658,15 @@
 			buildConfigurations = (
 				CE449CDD203D69FE008702B4 /* Debug */,
 				CE449CDE203D69FE008702B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE7694F020513972006D611B /* Build configuration list for PBXNativeTarget "Diary Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE7694EE20513972006D611B /* Debug */,
+				CE7694EF20513972006D611B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

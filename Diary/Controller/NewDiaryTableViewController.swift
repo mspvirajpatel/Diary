@@ -24,6 +24,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     var userCurrentLocation = ""
     var recordID = ""
     
+    var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
         // Prepare data
         let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
@@ -54,6 +56,9 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             if let diaryImage = photoImageView.image {
                 diary.image = UIImagePNGRepresentation(diaryImage)
             }
+            
+            defaults.setValue(diary.title, forKey: "title")
+            defaults.setValue(diary.content, forKey: "content")
             
             print("Saving data to context")
             appDelegate.saveContext()
