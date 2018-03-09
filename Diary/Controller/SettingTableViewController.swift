@@ -27,6 +27,6 @@ class SettingTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         let userDefaultsSyncDate = UserDefaults.standard.object(forKey: "iCloudSync") as! Date
-        syncDate.text = getFriendlyTime(date: userDefaultsSyncDate)
+        syncDate.text = getFriendlyDate(date: userDefaultsSyncDate)
     }
 }

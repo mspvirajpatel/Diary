@@ -17,7 +17,7 @@ class DiaryTableViewCell: UITableViewCell {
             thumbnailImageView.clipsToBounds = true
         }
     }
-    @IBOutlet var weatherLabel: UILabel!
+    @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var tagLabel: UILabel! {
         didSet {
@@ -25,7 +25,9 @@ class DiaryTableViewCell: UITableViewCell {
             tagLabel.layer.masksToBounds = true
         }
     }
-
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var weekLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

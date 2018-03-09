@@ -245,14 +245,16 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         cell.titleLabel.text = diary.title
 //        cell.contentLabel.text = diary.content
         cell.thumbnailImageView.image = UIImage(data: diary.image!)
-        cell.weatherLabel.text = diary.weather
-
+        cell.weatherImageView.image = UIImage(named: diary.weather!)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        let monthString = DateFormatter().shortMonthSymbols[Calendar.current.component(.month, from: diary.create!) - 1]
+        cell.weekLabel.text = DateFormatter().shortWeekdaySymbols[Calendar.current.component(.weekday, from: diary.create!) - 1]
+        
+        dateFormatter.dateFormat = "d日"
+        cell.monthLabel.text = monthString + dateFormatter.string(from: diary.create!)
         cell.dateLabel.text = getFriendlyTime(date: diary.update!)
-//        if diary.review == "0" {
-//            cell.reviewLabel.text = "暂无评论"
-//        } else {
-//            cell.reviewLabel.text = diary.review! + " 评论"
-//        }
         cell.tagLabel.text = diary.tag
         return cell
     }
@@ -420,6 +422,41 @@ extension UIViewController {
     }
     
     func getFriendlyTime(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        var dateFormatString = ""
+        
+        let timeInterval = Int(round(date.timeIntervalSince1970))
+        let currentInterval = Int(round(Date.init().timeIntervalSince1970))
+        let diff = currentInterval - timeInterval
+        if diff / (3600 * 24 * 365) >= 1 {
+            dateFormatString = "yyyy年"
+        } else {
+            if diff / (3600 * 24) >= 7 {
+                dateFormatString = "HH:mm"
+            } else {
+                if diff / 3600 >= 24 {
+                    dateFormatString = "HH:mm"
+                } else {
+                    if diff / 3600 >= 1 {
+                        return String(diff / (3600)) + "小时前"
+                    } else {
+                        if diff / 60 >= 1 {
+                            return String(diff / (60)) + "分钟前"
+                        } else {
+                            return "刚刚"
+                        }
+                        
+                    }
+                }
+            }
+        }
+        dateFormatter.dateFormat = dateFormatString
+        dateFormatter.timeZone = TimeZone.current
+        let dateString = dateFormatter.string(from: date)
+        return dateString
+    }
+    
+    func getFriendlyDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         var dateFormatString = ""
         
