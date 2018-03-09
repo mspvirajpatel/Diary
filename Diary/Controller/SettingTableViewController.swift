@@ -7,10 +7,56 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class SettingTableViewController: UITableViewController {
     
     @IBOutlet weak var syncDate: UILabel!
+    @IBOutlet weak var FaceIDSwitch: UISwitch!
+    @IBAction func changedFaceIDSwitch(_ sender: UISwitch) {
+        // Get the local authentication context.
+        let localAuthContext = LAContext()
+        let resonText = "Authentication is required"
+        var authError: NSError?
+        if !localAuthContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            if let error = authError {
+                print(error.localizedDescription)
+            }
+            // if TouchID is not available
+            return
+        }
+        
+        // Perform the Biometric authentication
+        localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: resonText) { (success, error) in
+            // Failure workflow
+            if !success {
+                if let error = error {
+                    switch error {
+                    case LAError.authenticationFailed:
+                        print("Authentication failed")
+                    case LAError.passcodeNotSet:
+                        print("Passcode not set")
+                    case LAError.systemCancel:
+                        print("Authentication was canceled by system")
+                    case LAError.userCancel:
+                        print("Authentication was canceled by the user")
+                    case LAError.userFallback:
+                        print("User tapped the fallback button (Enter Password).")
+                    default:
+                        print(error.localizedDescription)
+                    }
+                }
+            } else {
+                // Success workflow
+                print("Successfully authenticated")
+                let faceIDLastInputTime = Double(Date.init().timeIntervalSince1970)
+                UserDefaults.standard.set(faceIDLastInputTime, forKey: "FaceIDLastInputTime")
+                return
+            }
+        }
+        
+        UserDefaults.standard.set(sender.isOn, forKey: "isOpenFaceID")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,5 +74,7 @@ class SettingTableViewController: UITableViewController {
         
         let userDefaultsSyncDate = UserDefaults.standard.object(forKey: "iCloudSync") as! Date
         syncDate.text = getFriendlyDate(date: userDefaultsSyncDate)
+
+        FaceIDSwitch.isOn = UserDefaults.standard.bool(forKey: "isOpenFaceID")
     }
 }

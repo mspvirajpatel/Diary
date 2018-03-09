@@ -16,6 +16,9 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var searchResults: [DiaryMO] = []
     var notebook: NotebookMO!
     
+    let monthArray = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "June.", "July.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
+    let weekArray = ["Mon.", "Tues.", "Wed.", "Thur.", "Fri.", "Sat.", "Sun."]
+    
     var slideOutTransition = SlideOutTransitionAnimator()
     var activityController: UIActivityViewController? = nil
     
@@ -57,7 +60,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         searchController?.searchResultsUpdater = self
         searchController?.dimsBackgroundDuringPresentation = false
         
-        searchController?.searchBar.placeholder = "Search diaries..."
+        searchController?.searchBar.placeholder = "Search from tags, title, content..."
         searchController?.searchBar.barTintColor = .white
         searchController?.searchBar.backgroundImage = UIImage()
         searchController?.searchBar.tintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
@@ -131,6 +134,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(false, forKey: "hasLogin")
             UserDefaults.standard.set(Date.init(), forKey: "iCloudSync")
             UserDefaults.standard.set(false, forKey: "isOpenNotify")
+            UserDefaults.standard.set(false, forKey: "isOpenFaceID")
+            UserDefaults.standard.set(0.0, forKey: "FaceIDLastInputTime")
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat =  "HH:mm"
             dateFormatter.timeZone = TimeZone.current
@@ -217,11 +222,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         // #warning Incomplete implementation, return the number of sections
         if diaries.count > 0 {
             tableView.backgroundView?.isHidden = true
-            tableView.separatorStyle = .singleLine
+//            tableView.separatorStyle = .singleLine
             searchController?.searchBar.isHidden = false
         } else {
             tableView.backgroundView?.isHidden = false
-            tableView.separatorStyle = .none
+//            tableView.separatorStyle = .none
             searchController?.searchBar.isHidden = true
         }
         return 1
@@ -249,11 +254,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone.current
-        let monthString = DateFormatter().shortMonthSymbols[Calendar.current.component(.month, from: diary.create!) - 1]
-        cell.weekLabel.text = DateFormatter().shortWeekdaySymbols[Calendar.current.component(.weekday, from: diary.create!) - 1]
+        cell.weekLabel.text = weekArray[Calendar.current.component(.weekday, from: diary.create!) - 1]
         
-        dateFormatter.dateFormat = "d日"
-        cell.monthLabel.text = monthString + dateFormatter.string(from: diary.create!)
+        cell.monthLabel.text = monthArray[Calendar.current.component(.month, from: diary.create!) - 1]
+        dateFormatter.dateFormat = "d"
+        cell.dayLabel.text = dateFormatter.string(from: diary.create!)
         cell.dateLabel.text = getFriendlyTime(date: diary.update!)
         cell.tagLabel.text = diary.tag
         return cell

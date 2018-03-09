@@ -15,6 +15,10 @@
 		CE169F61204E42EF009DB8E3 /* TagManageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */; };
 		CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */; };
 		CE186481204F96FB00892BFF /* NotifyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186480204F96FB00892BFF /* NotifyTableViewController.swift */; };
+		CE191E562052648000878B5D /* Tangerine-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE191E532052647F00878B5D /* Tangerine-Regular.ttf */; };
+		CE191E572052648000878B5D /* Tangerine-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE191E542052647F00878B5D /* Tangerine-Bold.ttf */; };
+		CE191E582052648000878B5D /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE191E552052648000878B5D /* OFL.txt */; };
+		CE191E5A205269E200878B5D /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE191E59205269E200878B5D /* LocalAuthentication.framework */; };
 		CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19EBE4204E926E00B7AF6A /* CloudKit.framework */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
@@ -83,6 +87,10 @@
 		CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManageTableViewController.swift; sourceTree = "<group>"; };
 		CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		CE186480204F96FB00892BFF /* NotifyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableViewController.swift; sourceTree = "<group>"; };
+		CE191E532052647F00878B5D /* Tangerine-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tangerine-Regular.ttf"; sourceTree = "<group>"; };
+		CE191E542052647F00878B5D /* Tangerine-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tangerine-Bold.ttf"; sourceTree = "<group>"; };
+		CE191E552052648000878B5D /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		CE191E59205269E200878B5D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		CE19EBE4204E926E00B7AF6A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE191E5A205269E200878B5D /* LocalAuthentication.framework in Frameworks */,
 				CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */,
 				CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */,
 			);
@@ -142,6 +151,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE191E512052644A00878B5D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CE191E552052648000878B5D /* OFL.txt */,
+				CE191E542052647F00878B5D /* Tangerine-Bold.ttf */,
+				CE191E532052647F00878B5D /* Tangerine-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		CE191E522052645900878B5D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE191E512052644A00878B5D /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		CE449CBE203D69FE008702B4 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +191,7 @@
 		CE449CC9203D69FE008702B4 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				CE191E522052645900878B5D /* Resources */,
 				CE0107172046840E00485171 /* Diary.entitlements */,
 				CEEFDC0E203EC47700A5BC64 /* Extensions */,
 				CEEFDC04203E64C900A5BC64 /* Storyboard */,
@@ -258,6 +286,7 @@
 		CEEFDC11203EC60400A5BC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE191E59205269E200878B5D /* LocalAuthentication.framework */,
 				CE19EBE4204E926E00B7AF6A /* CloudKit.framework */,
 				CEEFDC12203EC60400A5BC64 /* MapKit.framework */,
 				CE7694E220513972006D611B /* NotificationCenter.framework */,
@@ -367,10 +396,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE191E582052648000878B5D /* OFL.txt in Resources */,
 				CE449CD8203D69FE008702B4 /* LaunchScreen.storyboard in Resources */,
 				CE449CD5203D69FE008702B4 /* Assets.xcassets in Resources */,
 				CE449CD0203D69FE008702B4 /* Main.storyboard in Resources */,
 				CEF6C85E2041000F00FBE069 /* Onboarding.storyboard in Resources */,
+				CE191E562052648000878B5D /* Tangerine-Regular.ttf in Resources */,
+				CE191E572052648000878B5D /* Tangerine-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

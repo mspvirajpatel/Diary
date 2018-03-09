@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import UserNotifications
+import LocalAuthentication
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,13 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         print("didFinishLaunchingWithOptions")
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            if granted {
-                print("User notifications are allowed.")
-            } else {
-                print("User notifications are not allowed.")
-            }
-        }
         UNUserNotificationCenter.current().delegate = self
 //        // Override point for customization after application launch.
 //        let backButtonImage = UIImage(named: "back")
@@ -90,6 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("----------- applicationDidBecomeActive -----------")
+        if UserDefaults.standard.bool(forKey: "isOpenFaceID"){
+            let faceIDLastInputTime = UserDefaults.standard.double(forKey: "FaceIDLastInputTime")
+            let currentTime = Date.init().timeIntervalSince1970
+            if (currentTime - faceIDLastInputTime) > 900.0 {
+                authenticateWithBiometric()
+            }
+        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
@@ -141,6 +142,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
+    // MARK: - Touch ID / Face ID
+    func authenticateWithBiometric() {
+        let localAuthContext = LAContext()
+        let resonText = "Authentication is required"
+        
+        // Perform the Biometric authentication
+        localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: resonText) { (success, error) in
+            // Failure workflow
+            if !success {
+                if let error = error {
+                    switch error {
+                    case LAError.authenticationFailed:
+                        print("Authentication failed")
+                    case LAError.passcodeNotSet:
+                        print("Passcode not set")
+                    case LAError.systemCancel:
+                        print("Authentication was canceled by system")
+                    case LAError.userCancel:
+                        print("Authentication was canceled by the user")
+                    case LAError.userFallback:
+                        print("User tapped the fallback button (Enter Password).")
+                    default:
+                        print(error.localizedDescription)
+                    }
+                }
+            } else {
+                // Success workflow
+                print("Successfully authenticated")
+                let faceIDLastInputTime = Double(Date.init().timeIntervalSince1970)
+                UserDefaults.standard.set(faceIDLastInputTime, forKey: "FaceIDLastInputTime")
+                return
             }
         }
     }

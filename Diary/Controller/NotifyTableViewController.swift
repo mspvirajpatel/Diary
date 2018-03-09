@@ -14,6 +14,14 @@ class NotifyTableViewController: UITableViewController {
     @IBOutlet weak var isOpenNotifySwitch: UISwitch!
     
     @IBAction func tapToNotifySwitch(_ sender: UISwitch) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if granted {
+                print("User notifications are allowed.")
+            } else {
+                print("User notifications are not allowed.")
+            }
+        }
+        
         UserDefaults.standard.set(sender.isOn, forKey: "isOpenNotify")
         if sender.isOn == false {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["diary.diaryNotifyEveryday"])
