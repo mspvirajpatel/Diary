@@ -49,7 +49,7 @@ class DiscoverTableViewController: UITableViewController {
         
         // Fetch Data using Convenience API
         let cloudContainer = CKContainer.default()
-        let publicDatabase = cloudContainer.publicCloudDatabase
+        let publicDatabase = cloudContainer.privateCloudDatabase
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Diary", predicate: predicate)
         
@@ -119,7 +119,7 @@ class DiscoverTableViewController: UITableViewController {
                 cell.fullImageView.image = UIImage(data: imageData)
             }
         } else {
-            let publicDatabase = CKContainer.default().publicCloudDatabase
+            let publicDatabase = CKContainer.default().privateCloudDatabase
             let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [diary.recordID])
             fetchRecordsImageOperation.desiredKeys = ["image"]
             fetchRecordsImageOperation.queuePriority = .veryHigh
