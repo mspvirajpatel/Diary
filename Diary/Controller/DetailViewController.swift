@@ -16,6 +16,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     var fetchDiary: DiaryMO!
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var choosedTags = ""
+    var recordName = ""
     
     var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
     
@@ -126,6 +127,34 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         
         if textFieldStartString != textFieldEndString || textViewStartString != textViewEndString {
             let currentDate = Date.init()
+            
+            // Fetch and save the record from the database
+            let privateDatabase = CKContainer.default().privateCloudDatabase
+            print("recordName: \(diary.recordName!)")
+            if let recordName = diary.recordName {
+                let recordID = CKRecordID(recordName: recordName)
+                privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
+                    if let error = error {
+                        // Error handling for failed fetch from public database
+                        print("DetailView updateRecordToCloud():\(error.localizedDescription)")
+                    } else {
+                        // Modify the record and save it to the database
+                        if let record = record {
+                            if self.textFieldStartString != self.textFieldEndString {
+                                record.setValue(self.textFieldEndString, forKey: "title")
+                            }
+                            if self.textViewStartString != self.textViewEndString {
+                                record.setValue(self.textViewEndString, forKey: "content")
+                            }
+                            record.setValue(Date.init(), forKey: "modifiedAt")
+                            privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
+                                // Error handling for failed save to public database
+                            })
+                        }
+                    }
+                })
+            }
+            
             // update data from data store - Diary
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext
@@ -143,6 +172,10 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                         if textViewStartString != textViewEndString {
                             results[0].setValue(contentTextView.text, forKey: "content")
                         }
+                        if self.recordName != "" {
+                            results[0].setValue(self.recordName, forKey: "recordName")
+                            results[0].setValue(true, forKey: "isUpToCloud")
+                        }
                         results[0].setValue(currentDate, forKey: "update")
                         try context.save();
                         print("Saved.....")
@@ -153,6 +186,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                     print("There was an error")
                 }
             }
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
             dateFormatter.timeZone = TimeZone.current
@@ -163,10 +197,6 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
         
         doneButton.isHidden = true
-    }
-    
-    func updateRecordToCloud() {
-        
     }
     
     override func viewDidLoad() {
