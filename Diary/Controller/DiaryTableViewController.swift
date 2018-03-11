@@ -11,6 +11,7 @@ import CoreData
 
 class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate {
     
+    var authView = UIView()
     var searchController: UISearchController?
     
     var searchResults: [DiaryMO] = []
@@ -70,11 +71,16 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         tableView.backgroundView?.isHidden = true
         tableView.tableFooterView = UIView()
         // Pull to refresh control
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if UserDefaults.standard.bool(forKey: "isOpenFaceID"){
+            if UserDefaults.standard.bool(forKey: "isShouldAuth") {
+                performSegue(withIdentifier: "showAuth", sender: self)
+            }
+        }
         
         navigationController?.hidesBarsOnSwipe = true
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
@@ -135,7 +141,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(Date.init(), forKey: "iCloudSync")
             UserDefaults.standard.set(false, forKey: "isOpenNotify")
             UserDefaults.standard.set(false, forKey: "isOpenFaceID")
-            UserDefaults.standard.set(0.0, forKey: "FaceIDLastInputTime")
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat =  "HH:mm"
             dateFormatter.timeZone = TimeZone.current
@@ -494,5 +499,11 @@ extension UIViewController {
         dateFormatter.timeZone = TimeZone.current
         let dateString = dateFormatter.string(from: date)
         return dateString
+    }
+}
+
+extension UIDevice {
+    var iPhoneX: Bool {
+        return UIScreen.main.nativeBounds.height == 2436
     }
 }

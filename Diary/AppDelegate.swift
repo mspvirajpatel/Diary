@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import UserNotifications
-import LocalAuthentication
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -84,18 +83,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("----------- applicationDidBecomeActive -----------")
-        if UserDefaults.standard.bool(forKey: "isOpenFaceID"){
-            let faceIDLastInputTime = UserDefaults.standard.double(forKey: "FaceIDLastInputTime")
-            let currentTime = Date.init().timeIntervalSince1970
-            if (currentTime - faceIDLastInputTime) > 900.0 {
-                authenticateWithBiometric()
-            }
-        }
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         print("----------- applicationWillTerminate -----------")
+        if UserDefaults.standard.bool(forKey: "isOpenFaceID"){
+            UserDefaults.standard.set(true, forKey: "isShouldAuth")
+        }
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
@@ -145,42 +140,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
-    // MARK: - Touch ID / Face ID
-    func authenticateWithBiometric() {
-        let localAuthContext = LAContext()
-        let resonText = "Authentication is required"
-        
-        // Perform the Biometric authentication
-        localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: resonText) { (success, error) in
-            // Failure workflow
-            if !success {
-                if let error = error {
-                    switch error {
-                    case LAError.authenticationFailed:
-                        print("Authentication failed")
-                    case LAError.passcodeNotSet:
-                        print("Passcode not set")
-                    case LAError.systemCancel:
-                        print("Authentication was canceled by system")
-                    case LAError.userCancel:
-                        print("Authentication was canceled by the user")
-                    case LAError.userFallback:
-                        print("User tapped the fallback button (Enter Password).")
-                    default:
-                        print(error.localizedDescription)
-                    }
-                }
-            } else {
-                // Success workflow
-                print("Successfully authenticated")
-                let faceIDLastInputTime = Double(Date.init().timeIntervalSince1970)
-                UserDefaults.standard.set(faceIDLastInputTime, forKey: "FaceIDLastInputTime")
-                return
-            }
-        }
-    }
-
 }
 
 enum QuickAction: String {

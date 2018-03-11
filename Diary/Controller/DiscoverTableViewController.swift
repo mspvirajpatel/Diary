@@ -15,7 +15,7 @@ class DiscoverTableViewController: UITableViewController {
     var diaries: [CKRecord] = []
     var spinner = UIActivityIndicatorView()
     private var imageCache = NSCache<CKRecordID, NSURL>()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

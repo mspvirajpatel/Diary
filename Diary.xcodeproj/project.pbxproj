@@ -19,6 +19,7 @@
 		CE191E572052648000878B5D /* Tangerine-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE191E542052647F00878B5D /* Tangerine-Bold.ttf */; };
 		CE191E582052648000878B5D /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE191E552052648000878B5D /* OFL.txt */; };
 		CE191E5A205269E200878B5D /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE191E59205269E200878B5D /* LocalAuthentication.framework */; };
+		CE197BE72054EA5100C63670 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE197BE62054EA5100C63670 /* AuthViewController.swift */; };
 		CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19EBE4204E926E00B7AF6A /* CloudKit.framework */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
@@ -91,6 +92,7 @@
 		CE191E542052647F00878B5D /* Tangerine-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tangerine-Bold.ttf"; sourceTree = "<group>"; };
 		CE191E552052648000878B5D /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		CE191E59205269E200878B5D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		CE197BE62054EA5100C63670 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CE19EBE4204E926E00B7AF6A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				CEF61F99204D46C500AD96F9 /* UpdateTagsTableViewController.swift */,
 				CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */,
 				CE186480204F96FB00892BFF /* NotifyTableViewController.swift */,
+				CE197BE62054EA5100C63670 /* AuthViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */,
 				CE449CE2203D6AAA008702B4 /* Diary.swift in Sources */,
 				CEF61F9A204D46C500AD96F9 /* UpdateTagsTableViewController.swift in Sources */,
+				CE197BE72054EA5100C63670 /* AuthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

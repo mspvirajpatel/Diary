@@ -23,6 +23,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     let locationManager = CLLocationManager()
     var userCurrentLocation = ""
     var recordName = ""
+    var userCLLocation = CLLocation()
     
     var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
     
@@ -42,7 +43,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         record.setValue(tagButton.titleLabel?.text, forKey: "tag")
         record.setValue(dataAuthor, forKey: "author")
         record.setValue(self.choosedWeatherButtonText, forKey: "weather")
-        record.setValue(self.userCurrentLocation, forKey: "location")
+        record.setValue(self.userCLLocation, forKey: "location")
         record.setValue(currentDate, forKey: "createdAt")
         record.setValue(currentDate, forKey: "modifiedAt")
         UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
@@ -273,7 +274,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userCLLocation = locations[0]
+        userCLLocation = locations[0]
         
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(userCLLocation, completionHandler: { (placemarks, error) in
@@ -285,7 +286,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             if let placemarks = placemarks {
                 let placemarkPostalAddress = placemarks[0].postalAddress!
                 
-                let userLocation = UserLocation(latitude: userCLLocation.coordinate.latitude, longitude: userCLLocation.coordinate.longitude, altitude: userCLLocation.altitude, horizontalAccuracy: userCLLocation.horizontalAccuracy, verticalAccuracy: userCLLocation.verticalAccuracy, course: userCLLocation.course, speed: userCLLocation.speed, countryCode: placemarkPostalAddress.isoCountryCode, country: placemarkPostalAddress.country, state: placemarkPostalAddress.state, city: placemarkPostalAddress.city, subLocality: placemarkPostalAddress.subLocality, street: placemarkPostalAddress.street)
+                let userLocation = UserLocation(latitude: self.userCLLocation.coordinate.latitude, longitude: self.userCLLocation.coordinate.longitude, altitude: self.userCLLocation.altitude, horizontalAccuracy: self.userCLLocation.horizontalAccuracy, verticalAccuracy: self.userCLLocation.verticalAccuracy, course: self.userCLLocation.course, speed: self.userCLLocation.speed, countryCode: placemarkPostalAddress.isoCountryCode, country: placemarkPostalAddress.country, state: placemarkPostalAddress.state, city: placemarkPostalAddress.city, subLocality: placemarkPostalAddress.subLocality, street: placemarkPostalAddress.street)
                 let jsonEncoder = JSONEncoder()
                 do {
                     let jsonData = try jsonEncoder.encode(userLocation)

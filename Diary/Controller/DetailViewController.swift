@@ -108,7 +108,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                     }
                 }
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
                 dateFormatter.timeZone = TimeZone.current
                 self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
             }
@@ -188,7 +188,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
             }
             
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+            dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
             dateFormatter.timeZone = TimeZone.current
             self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
             
@@ -248,7 +248,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         weatherLabel.text = diary.weather
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
         dateFormatter.timeZone = TimeZone.current
         
         creatDateLabel.text = "创建于" + dateFormatter.string(from: diary.create!)

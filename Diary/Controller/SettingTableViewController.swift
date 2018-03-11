@@ -11,6 +11,7 @@ import LocalAuthentication
 
 class SettingTableViewController: UITableViewController {
     
+    @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var syncDate: UILabel!
     @IBOutlet weak var FaceIDSwitch: UISwitch!
     @IBAction func changedFaceIDSwitch(_ sender: UISwitch) {
@@ -30,6 +31,14 @@ class SettingTableViewController: UITableViewController {
         localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: resonText) { (success, error) in
             // Failure workflow
             if !success {
+                let alertController = UIAlertController(title: error?.localizedDescription,
+                                                        message: nil, preferredStyle: .alert)
+                //显示提示框
+                self.present(alertController, animated: true, completion: nil)
+                //两秒钟后自动消失
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                    self.presentedViewController?.dismiss(animated: false, completion: nil)
+                }
                 if let error = error {
                     switch error {
                     case LAError.authenticationFailed:
@@ -49,8 +58,6 @@ class SettingTableViewController: UITableViewController {
             } else {
                 // Success workflow
                 print("Successfully authenticated")
-                let faceIDLastInputTime = Double(Date.init().timeIntervalSince1970)
-                UserDefaults.standard.set(faceIDLastInputTime, forKey: "FaceIDLastInputTime")
                 return
             }
         }
@@ -71,6 +78,12 @@ class SettingTableViewController: UITableViewController {
         navigationController?.navigationBar.tintColor = UIColor.black
         navigationController?.navigationBar.shadowImage = nil
         tableView.tableFooterView = UIView()
+        
+        if UIDevice.current.iPhoneX {
+            idLabel.text = "Face ID"
+        } else {
+            idLabel.text = "Touch ID"
+        }
         
         let userDefaultsSyncDate = UserDefaults.standard.object(forKey: "iCloudSync") as! Date
         syncDate.text = getFriendlyDate(date: userDefaultsSyncDate)
