@@ -810,14 +810,8 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bV5-8B-MRo">
-                                                            <rect key="frame" x="0.0" y="23.5" width="46.5" height="18"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4K-7z-XOX">
-                                                            <rect key="frame" x="0.0" y="44.5" width="300" height="25"/>
+                                                            <rect key="frame" x="0.0" y="23.5" width="300" height="46"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="dz9-H0-Ydi"/>
                                                             </constraints>
@@ -876,7 +870,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="LocationButton" destination="T4K-7z-XOX" id="rLQ-3N-dOL"/>
-                                    <outlet property="authorLabel" destination="bV5-8B-MRo" id="8rj-Ka-ckW"/>
                                     <outlet property="dateLabel" destination="85S-Yg-Jj7" id="mNN-Aa-nPW"/>
                                     <outlet property="fullImageView" destination="GzA-l6-sWA" id="ERL-e9-5z6"/>
                                     <outlet property="reviewButton" destination="TPe-uN-NeJ" id="bLZ-FR-LhH"/>
@@ -912,41 +905,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fFN-60-P3E" id="7fL-aR-Uh5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="96.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="S3R-Jl-XxY">
-                                                    <rect key="frame" x="16" y="8" width="163" height="80"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eIW-bo-yIS">
-                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="80" id="U5h-5g-mzh"/>
-                                                                <constraint firstAttribute="width" constant="80" id="oOG-X8-Xfv"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="L5V-IA-r7U">
-                                                            <rect key="frame" x="95" y="17" width="68" height="46.5"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWG-3D-xqY">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="68" height="20.5"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserLevel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGj-gB-FVJ">
-                                                                    <rect key="frame" x="0.0" y="28.5" width="68" height="18"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                        </stackView>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="S3R-Jl-XxY" firstAttribute="top" secondItem="7fL-aR-Uh5" secondAttribute="top" constant="8" id="3pI-fo-zEu"/>
-                                                <constraint firstItem="S3R-Jl-XxY" firstAttribute="leading" secondItem="7fL-aR-Uh5" secondAttribute="leading" constant="16" id="ryx-UA-Sa0"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="60" id="kU5-C2-Vn0">
@@ -1131,12 +1089,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="About" id="Qju-nG-SZU"/>
                     <connections>
-                        <outlet property="autherLabel" destination="fWG-3D-xqY" id="sn9-bu-d4g"/>
-                        <outlet property="avatarImageView" destination="eIW-bo-yIS" id="v0D-GW-4Qa"/>
                         <outlet property="diaryNum" destination="sfU-o4-W2H" id="WUV-CA-Vdd"/>
                         <outlet property="favoriteNum" destination="hhI-OO-IbN" id="avD-FD-Zfu"/>
                         <outlet property="followNum" destination="3c5-GL-Iy7" id="bCo-is-Ixu"/>
-                        <outlet property="userLevelLabel" destination="TGj-gB-FVJ" id="7cT-xv-Wcg"/>
                         <segue destination="ifz-50-jgL" kind="show" identifier="showWebView" id="Jpm-BY-jwA"/>
                         <segue destination="WI9-He-Oj4" kind="showDetail" identifier="showLoginPage" id="eug-w2-X5c"/>
                     </connections>

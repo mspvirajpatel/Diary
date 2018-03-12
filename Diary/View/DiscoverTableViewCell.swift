@@ -12,7 +12,6 @@ class DiscoverTableViewCell: UITableViewCell {
 
     @IBOutlet var fullImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var authorLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet weak var LocationButton: UIButton!
     @IBOutlet weak var reviewButton: UIButton!

@@ -44,7 +44,6 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
             UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
             let dataId = String(currentMaxId + 1)
-            let dataAuthor = "匿名"
             var isUpToCloud = false
             
             // Save to iCloud
@@ -57,7 +56,6 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             } else {
                 record.setValue(tagButton.titleLabel?.text, forKey: "tag")
             }
-            record.setValue(dataAuthor, forKey: "author")
             record.setValue(self.choosedWeatherButtonText, forKey: "weather")
             record.setValue(self.userCLLocation, forKey: "location")
             record.setValue(currentDate, forKey: "createdAt")
@@ -125,7 +123,6 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 diary.isUpToCloud = isUpToCloud
                 diary.title = titleTextField.text
                 diary.tag = tagButton.titleLabel?.text
-                diary.author = dataAuthor
                 diary.weather = self.choosedWeatherButtonText
                 diary.location = self.userCurrentLocation
                 diary.create = currentDate

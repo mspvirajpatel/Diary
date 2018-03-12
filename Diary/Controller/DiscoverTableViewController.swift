@@ -55,7 +55,7 @@ class DiscoverTableViewController: UITableViewController {
         
         // Create the query with the query
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["title", "author", "review", "location", "createdAt"]
+        queryOperation.desiredKeys = ["title", "review", "location", "createdAt"]
         queryOperation.queuePriority = .veryHigh
         queryOperation.resultsLimit = 50
         queryOperation.recordFetchedBlock = { (record) in
@@ -106,7 +106,6 @@ class DiscoverTableViewController: UITableViewController {
         let diary = diaries[indexPath.row]
         cell.titleLabel.text = diary.object(forKey: "title") as? String
         cell.fullImageView.image = UIImage(named: "photo")
-        cell.authorLabel.text = diary.object(forKey: "author") as? String
         cell.LocationButton.setTitle(diary.object(forKey: "location") as? String, for: UIControlState.normal)
         cell.dateLabel.text = diary.object(forKey: "createdAt") as? String
         cell.reviewButton.setTitle(diary.object(forKey: "review") as? String, for: UIControlState.normal)

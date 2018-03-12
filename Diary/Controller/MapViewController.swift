@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
         // Add annotation
         let annotation = MKPointAnnotation()
         annotation.title = self.diary.title
-        annotation.subtitle = self.diary.author
+        annotation.subtitle = self.diary.tag
         annotation.coordinate = cllocation.coordinate
         // Display the annotation
         self.mapView.showAnnotations([annotation], animated: true)

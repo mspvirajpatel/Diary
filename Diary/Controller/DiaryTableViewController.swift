@@ -154,7 +154,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
                 notebook.id = "1"
                 notebook.name = "Diary"
-                notebook.author = "匿名"
                 notebook.comment = "my diary"
                 let currentDate = Date.init()
                 notebook.create = currentDate
@@ -417,8 +416,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     // MARK: - SearchController
     func filterContent(for searchText: String) {
         searchResults = diaries.filter({ (diary) -> Bool in
-            if let title = diary.title, let author = diary.author, let tag = diary.tag, let content = diary.content {
-                let isMatch = title.localizedCaseInsensitiveContains(searchText) || author.localizedCaseInsensitiveContains(searchText) || tag.localizedCaseInsensitiveContains(searchText) || content.localizedCaseInsensitiveContains(searchText)
+            if let title = diary.title, let tag = diary.tag, let content = diary.content {
+                let isMatch = title.localizedCaseInsensitiveContains(searchText) || tag.localizedCaseInsensitiveContains(searchText) || content.localizedCaseInsensitiveContains(searchText)
                 return isMatch
             }
             

@@ -23,7 +23,6 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
             notebook.id = String(maxNoteBookId)
             notebook.name = nameTextField.text
             notebook.comment = descriptionTextView.text
-            notebook.author = "匿名"
             let currentDate = Date.init()
             notebook.create = currentDate
             notebook.update = currentDate
