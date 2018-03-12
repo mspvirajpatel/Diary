@@ -42,6 +42,24 @@ class DiscoverTableViewController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(fetchRecordsFromCloud), for: UIControlEvents.valueChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Configure navigation bar appearance
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+        tableView.tableFooterView = UIView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     @objc func fetchRecordsFromCloud() {
         // Remove existing records before refreshing
         diaries.removeAll()
@@ -55,7 +73,7 @@ class DiscoverTableViewController: UITableViewController {
         
         // Create the query with the query
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["title", "review", "location", "createdAt"]
+        queryOperation.desiredKeys = ["title", "tag", "content", "modifiedAt"]
         queryOperation.queuePriority = .veryHigh
         queryOperation.resultsLimit = 50
         queryOperation.recordFetchedBlock = { (record) in
@@ -104,11 +122,13 @@ class DiscoverTableViewController: UITableViewController {
         
         // Configure the Cell...
         let diary = diaries[indexPath.row]
+        
         cell.titleLabel.text = diary.object(forKey: "title") as? String
         cell.fullImageView.image = UIImage(named: "photo")
-        cell.LocationButton.setTitle(diary.object(forKey: "location") as? String, for: UIControlState.normal)
-        cell.dateLabel.text = diary.object(forKey: "createdAt") as? String
-        cell.reviewButton.setTitle(diary.object(forKey: "review") as? String, for: UIControlState.normal)
+        let updateDate = diary.object(forKey: "modifiedAt") as? Date
+        cell.updateDateLabel.text = self.getFriendlyDate(date: updateDate!) + " 已同步"
+        cell.tagLabel.text = diary.object(forKey: "tag") as? String
+        cell.contentTextView.text = diary.object(forKey: "content") as? String
         
         // Check if the image is stored in cache
         if let imageFileURL = imageCache.object(forKey: diary.recordID) {

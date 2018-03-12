@@ -60,7 +60,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             record.setValue(currentDate, forKey: "createdAt")
             record.setValue(currentDate, forKey: "modifiedAt")
             UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
-            record.setValue(contentTextView.text, forKey: "content")
+            if contentTextView.text == "write some thing today..." {
+                record.setValue("", forKey: "content")
+            } else {
+                record.setValue(contentTextView.text, forKey: "content")
+            }
             record.setValue("0", forKey: "review")
             record.setValue(String(UserDefaults.standard.integer(forKey: "defaultNoteBookId")), forKey: "notebookid")
             
@@ -121,7 +125,12 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 diary.location = self.userCurrentLocation
                 diary.create = currentDate
                 diary.update = currentDate
-                diary.content = contentTextView.text
+                if contentTextView.text == "write some thing today..." {
+                    diary.content = ""
+                } else {
+                    diary.content = contentTextView.text
+                }
+                
                 diary.review = "0"
                 diary.notebookid = String(UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
                 

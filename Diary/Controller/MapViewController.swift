@@ -19,8 +19,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.tintColor = UIColor.black
-        
         mapView.showsCompass = true
         mapView.showsScale = true
         mapView.showsTraffic = true

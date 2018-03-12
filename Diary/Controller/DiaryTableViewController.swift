@@ -17,7 +17,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     var searchResults: [DiaryMO] = []
     var notebook: NotebookMO!
-    var notSyncID: [String] = []
     
     let monthArray = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "June.", "July.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
     let weekArray = ["Sun.", "Mon.", "Tues.", "Wed.", "Thur.", "Fri.", "Sat."]
@@ -35,7 +34,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var fetchNoteResultController: NSFetchedResultsController<NotebookMO>!
     var diaries:[DiaryMO] = []
-    var iCloudDiaries: [CKRecord] = []
     var notebooks:[NotebookMO] = []
     
     // Screen height.

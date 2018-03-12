@@ -64,7 +64,6 @@ class TagManageTableViewController: UITableViewController, NSFetchedResultsContr
         
         saveButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         saveButton.setImage(UIImage(named: "plus"), for: UIControlState.normal)
-        saveButton.tintColor = UIColor.black
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
         saveButton.addTarget(self, action: #selector(buttonClick(_:)), for: .touchUpInside)
         

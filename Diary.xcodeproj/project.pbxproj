@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CE01071B204695C400485171 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071A204695C400485171 /* UserLocation.swift */; };
 		CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */; };
+		CE0EC7DE20567232004885E8 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EC7DD20567232004885E8 /* DiscoverTableViewCell.swift */; };
+		CE0EC7E020567EF1004885E8 /* SyncTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EC7DF20567EF1004885E8 /* SyncTableViewController.swift */; };
 		CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD12041488400EAF407 /* AboutTableViewController.swift */; };
 		CE169BD42041561000EAF407 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD32041561000EAF407 /* WebViewController.swift */; };
 		CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */; };
@@ -23,6 +25,7 @@
 		CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19EBE4204E926E00B7AF6A /* CloudKit.framework */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
+		CE424E8A2056889A0003BE68 /* SyncDownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE424E892056889A0003BE68 /* SyncDownloadViewController.swift */; };
 		CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CCA203D69FE008702B4 /* AppDelegate.swift */; };
 		CE449CD0203D69FE008702B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE449CCE203D69FE008702B4 /* Main.storyboard */; };
 		CE449CD3203D69FE008702B4 /* Diary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE449CD1203D69FE008702B4 /* Diary.xcdatamodeld */; };
@@ -35,7 +38,6 @@
 		CE7694E920513972006D611B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7694E720513972006D611B /* MainInterface.storyboard */; };
 		CE7694ED20513972006D611B /* Diary Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE7694E120513972006D611B /* Diary Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE7EE0E9204CD9BC006A5BDD /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */; };
-		CE7EE0EB204CDE3F006A5BDD /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */; };
 		CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */; };
 		CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE792042AE62005FB426 /* NotebookViewController.swift */; };
 		CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */; };
@@ -80,6 +82,8 @@
 		CE0107172046840E00485171 /* Diary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Diary.entitlements; sourceTree = "<group>"; };
 		CE01071A204695C400485171 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
+		CE0EC7DD20567232004885E8 /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
+		CE0EC7DF20567EF1004885E8 /* SyncTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD12041488400EAF407 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD32041561000EAF407 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CE169BD520416E6C00EAF407 /* UserLoginTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginTableViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		CE19EBE4204E926E00B7AF6A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		CE424E892056889A0003BE68 /* SyncDownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDownloadViewController.swift; sourceTree = "<group>"; };
 		CE449CC7203D69FE008702B4 /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE449CCA203D69FE008702B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE449CCF203D69FE008702B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,7 +115,6 @@
 		CE7694EA20513972006D611B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7694F220513CE2006D611B /* Diary Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Diary Widget.entitlements"; sourceTree = "<group>"; };
 		CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
-		CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEC9CE792042AE62005FB426 /* NotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookViewController.swift; sourceTree = "<group>"; };
 		CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotebookTableViewController.swift; sourceTree = "<group>"; };
@@ -240,7 +244,7 @@
 				CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */,
 				CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */,
 				CEF77E09204965A400C6C1A7 /* SlideOutTransitionAnimator.swift */,
-				CE7EE0EA204CDE3F006A5BDD /* DiscoverTableViewCell.swift */,
+				CE0EC7DD20567232004885E8 /* DiscoverTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +272,8 @@
 				CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */,
 				CE186480204F96FB00892BFF /* NotifyTableViewController.swift */,
 				CE197BE62054EA5100C63670 /* AuthViewController.swift */,
+				CE0EC7DF20567EF1004885E8 /* SyncTableViewController.swift */,
+				CE424E892056889A0003BE68 /* SyncDownloadViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0EC7E020567EF1004885E8 /* SyncTableViewController.swift in Sources */,
 				CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */,
 				CE186481204F96FB00892BFF /* NotifyTableViewController.swift in Sources */,
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
@@ -431,9 +438,10 @@
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
 				CE01071B204695C400485171 /* UserLocation.swift in Sources */,
+				CE0EC7DE20567232004885E8 /* DiscoverTableViewCell.swift in Sources */,
 				CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */,
+				CE424E8A2056889A0003BE68 /* SyncDownloadViewController.swift in Sources */,
 				CE169BD620416E6C00EAF407 /* UserLoginTableViewController.swift in Sources */,
-				CE7EE0EB204CDE3F006A5BDD /* DiscoverTableViewCell.swift in Sources */,
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
