@@ -88,8 +88,10 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                         } else {
                             // Modify the record and save it to the database
                             if let record = record {
+                                let currentDate = Date.init()
                                 record.setValue(tagString, forKey: "tag")
-                                record.setValue(Date.init(), forKey: "modifiedAt")
+                                record.setValue(currentDate, forKey: "modifiedAt")
+                                UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
                                 privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
                                     // Error handling for failed save to public database
                                     if let saveError = saveError {
@@ -174,7 +176,9 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                                 if self.textViewStartString != self.textViewEndString {
                                     record.setValue(self.textViewEndString, forKey: "content")
                                 }
-                                record.setValue(Date.init(), forKey: "modifiedAt")
+                                let currentDate = Date.init()
+                                record.setValue(currentDate, forKey: "modifiedAt")
+                                UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
                                 privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
                                     // Error handling for failed save to public database
                                     if let saveError = saveError {
