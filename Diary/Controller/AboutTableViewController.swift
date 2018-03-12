@@ -13,17 +13,6 @@ class AboutTableViewController: UITableViewController {
     @IBAction func closeReturnToAboutPage(segue: UIStoryboardSegue) {
         
     }
-    @IBOutlet var avatarImageView: UIImageView! {
-        didSet {
-            avatarImageView.layer.cornerRadius = 40.0
-            avatarImageView.layer.masksToBounds = true
-        }
-    }
-    @IBOutlet var autherLabel: UILabel!
-    @IBOutlet var userLevelLabel: UILabel!
-    @IBOutlet weak var diaryNum: UIButton!
-    @IBOutlet weak var favoriteNum: UIButton!
-    @IBOutlet weak var followNum: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,15 +37,6 @@ class AboutTableViewController: UITableViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         tableView.tableFooterView = UIView()
-        
-        // Load user info
-        if UserDefaults.standard.bool(forKey: "hasLogin") {
-            avatarImageView.image = UIImage(named: "avatar-man-stubble")
-        } else {
-            avatarImageView.image = UIImage(named: "avatar-man-stubble")
-            autherLabel.text = "未登录.."
-            userLevelLabel.text = "匿名"
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,14 +49,6 @@ class AboutTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            if indexPath.row == 0 {
-                if UserDefaults.standard.bool(forKey: "hasLogin") {
-                    performSegue(withIdentifier: "showUserCenter", sender: self)
-                } else {
-                    performSegue(withIdentifier: "showLoginPage", sender: self)
-                }
-            }
         case 2:
             if indexPath.row == 0 {
                 if let url = URL(string: "https://www.apple.com/itues/charts/paid-apps/") {

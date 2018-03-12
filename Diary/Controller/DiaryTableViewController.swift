@@ -17,9 +17,10 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     var searchResults: [DiaryMO] = []
     var notebook: NotebookMO!
+    var notSyncID: [String] = []
     
     let monthArray = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "June.", "July.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
-    let weekArray = ["Mon.", "Tues.", "Wed.", "Thur.", "Fri.", "Sat.", "Sun."]
+    let weekArray = ["Sun.", "Mon.", "Tues.", "Wed.", "Thur.", "Fri.", "Sat."]
     
     var slideOutTransition = SlideOutTransitionAnimator()
     var activityController: UIActivityViewController? = nil
@@ -34,6 +35,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var fetchNoteResultController: NSFetchedResultsController<NotebookMO>!
     var diaries:[DiaryMO] = []
+    var iCloudDiaries: [CKRecord] = []
     var notebooks:[NotebookMO] = []
     
     // Screen height.
@@ -43,6 +45,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("diary viewdidload")
         
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: view)
@@ -76,7 +79,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("diary viewwillappear")
         if UserDefaults.standard.bool(forKey: "isOpenFaceID"){
             if UserDefaults.standard.bool(forKey: "isShouldAuth") {
                 performSegue(withIdentifier: "showAuth", sender: self)
@@ -138,7 +141,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
             UserDefaults.standard.set(1, forKey: "maxNoteBookId")
             UserDefaults.standard.set(0, forKey: "maxDiaryId")
-            UserDefaults.standard.set(false, forKey: "hasLogin")
             UserDefaults.standard.set(Date.init(), forKey: "iCloudSync")
             UserDefaults.standard.set(false, forKey: "isOpenNotify")
             UserDefaults.standard.set(false, forKey: "isOpenFaceID")
@@ -176,11 +178,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 present(walkthroughViewController, animated: true, completion: nil)
             }
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("viewWillDisappear")
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

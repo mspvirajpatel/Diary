@@ -5,7 +5,6 @@
         <attribute name="create" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="isUpToCloud" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notebookid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,7 +26,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Diary" positionX="-63" positionY="-18" width="128" height="240"/>
+        <element name="Diary" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="Notebook" positionX="-63" positionY="54" width="128" height="135"/>
         <element name="Tag" positionX="-54" positionY="81" width="128" height="60"/>
     </elements>

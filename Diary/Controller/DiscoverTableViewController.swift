@@ -49,7 +49,7 @@ class DiscoverTableViewController: UITableViewController {
         
         // Fetch Data using Convenience API
         let cloudContainer = CKContainer.default()
-        let publicDatabase = cloudContainer.privateCloudDatabase
+        let privateDatabase = cloudContainer.privateCloudDatabase
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Diary", predicate: predicate)
         
@@ -79,7 +79,7 @@ class DiscoverTableViewController: UITableViewController {
             }
         }
         // Execute the query
-        publicDatabase.add(queryOperation)
+        privateDatabase.add(queryOperation)
     }
 
     override func didReceiveMemoryWarning() {

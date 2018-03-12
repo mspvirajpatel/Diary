@@ -44,7 +44,6 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
             UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
             let dataId = String(currentMaxId + 1)
-            var isUpToCloud = false
             
             // Save to iCloud
             let record = CKRecord(recordType: "Diary")
@@ -87,13 +86,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 privateDatabase.save(record, completionHandler: { (record, error) in
                     if let error = error {
                         // Insert error handling
-                        isUpToCloud = false
                         self.recordName = ""
                         print("NewDiary SaveToCloudError: \(error.localizedDescription)")
                         return
                     }
                     // Insert successfully saved record code
-                    isUpToCloud = true
                     print("Saving data to iCloud")
                     try? FileManager.default.removeItem(at: imageFileURL)
                 })
@@ -102,13 +99,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 privateDatabase.save(record, completionHandler: { (record, error) in
                     if let error = error {
                         // Insert error handling
-                        isUpToCloud = false
                         print("NewDiary SaveToCloudError: \(error.localizedDescription)")
                         self.recordName = ""
                         return
                     }
                     // Insert successfully saved record code
-                    isUpToCloud = true
                     print("Saving data to iCloud")
                 })
             }
@@ -120,7 +115,6 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 
                 diary.id = dataId
                 diary.recordName = self.recordName
-                diary.isUpToCloud = isUpToCloud
                 diary.title = titleTextField.text
                 diary.tag = tagButton.titleLabel?.text
                 diary.weather = self.choosedWeatherButtonText
@@ -323,7 +317,16 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let selectedUIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            var selectedImage = selectedUIImage
+            // This fixes the image orientation <<<---
+            if selectedImage.imageOrientation != UIImageOrientation.up {
+                UIGraphicsBeginImageContextWithOptions(selectedImage.size, false, selectedImage.scale)
+                selectedImage.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: selectedImage.size))
+                selectedImage = UIGraphicsGetImageFromCurrentImageContext()!
+                UIGraphicsEndImageContext()
+            }
+            
             photoImageView.image = selectedImage
             self.isSetPhoto = true
             photoImageView.contentMode = .scaleToFill

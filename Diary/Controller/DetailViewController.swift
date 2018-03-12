@@ -84,7 +84,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                         if let error = error {
                             // Error handling for failed fetch from public database
                             print("DetailView updateRecordToCloud():\(error.localizedDescription)")
-                            self.isUpToCloud = false
+                            
                         } else {
                             // Modify the record and save it to the database
                             if let record = record {
@@ -93,10 +93,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                                 privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
                                     // Error handling for failed save to public database
                                     if let saveError = saveError {
-                                        self.isUpToCloud = false
                                         print(saveError.localizedDescription)
-                                    } else {
-                                        self.isUpToCloud = true
                                     }
                                 })
                             }
@@ -116,7 +113,6 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                         
                         if(results.count > 0 ){
                             results[0].setValue(tagString, forKey: "tag")
-                            results[0].setValue(self.isUpToCloud, forKey: "isUpToCloud")
                             results[0].setValue(currentDate, forKey: "update")
                             try context.save();
                             print("Saved.....")
@@ -141,7 +137,6 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     var textFieldStartString = ""
     var textFieldEndString = ""
     var tagStartString = ""
-    var isUpToCloud = false
     
     @objc func buttonClick(_ sender: UIButton) {
         view.endEditing(true)
@@ -170,7 +165,6 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                         if let error = error {
                             // Error handling for failed fetch from public database
                             print("DetailView updateRecordToCloud():\(error.localizedDescription)")
-                            self.isUpToCloud = false
                         } else {
                             // Modify the record and save it to the database
                             if let record = record {
@@ -184,10 +178,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                                 privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
                                     // Error handling for failed save to public database
                                     if let saveError = saveError {
-                                        self.isUpToCloud = false
                                         print(saveError.localizedDescription)
-                                    } else {
-                                        self.isUpToCloud = true
                                     }
                                 })
                             }
@@ -214,7 +205,6 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                             }
                             if self.recordName != "" {
                                 results[0].setValue(self.recordName, forKey: "recordName")
-                                results[0].setValue(self.isUpToCloud, forKey: "isUpToCloud")
                             }
                             results[0].setValue(currentDate, forKey: "update")
                             try context.save();
@@ -287,7 +277,9 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
         
         tagStartString = diary.tag!
-        fullImageView.image = UIImage(data: diary.image!)
+        if let diaryImage = diary.image {
+            fullImageView.image = UIImage(data: diaryImage)
+        }
         weatherImageView.image = UIImage(named: diary.weather!)
         
         let dateFormatter = DateFormatter()
