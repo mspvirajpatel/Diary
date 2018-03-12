@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate {
     
@@ -252,9 +253,22 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         let diary = (searchController?.isActive)! ? searchResults[indexPath.row] : diaries[indexPath.row]
         
         // Configure the cell...
-        cell.titleLabel.text = diary.title
-//        cell.contentLabel.text = diary.content
-        cell.thumbnailImageView.image = UIImage(data: diary.image!)
+        
+        
+        if let diaryImage = diary.image {
+            if diary.title == "" {
+                cell.titleLabel.text = diary.content
+            } else {
+                cell.titleLabel.text = diary.title
+            }
+            cell.thumbnailImageView.image = UIImage(data: diaryImage)
+            cell.thumbnailImageView.isHidden = false
+            cell.contentTextView.isHidden = true
+        } else {
+            cell.thumbnailImageView.isHidden = true
+            cell.contentTextView.isHidden = false
+            cell.contentTextView.text = diary.content
+        }
         cell.weatherImageView.image = UIImage(named: diary.weather!)
         
         let dateFormatter = DateFormatter()
@@ -272,6 +286,30 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Delete the row from the data source
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, sourceView, completionHandler) in
+            // Fetch and delete the record from the iCloud
+            let diary = self.diaries[indexPath.row]
+            let privateDatabase = CKContainer.default().privateCloudDatabase
+            print("recordName: \(diary.recordName!)")
+            if let recordName = diary.recordName {
+                let recordID = CKRecordID(recordName: recordName)
+                privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
+                    if let error = error {
+                        // Error handling for failed fetch from public database
+                        print("DetailView updateRecordToCloud():\(error.localizedDescription)")
+                    }
+                    if let record = record {
+                        privateDatabase.delete(withRecordID: record.recordID, completionHandler: { (recordID, error) in
+                            // Error handling for failed delete to private database
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        })
+                    }
+                })
+                
+            }
+            
+            // delete in database
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext
                 let diaryToDelete = self.fetchResultController.object(at: indexPath)
@@ -279,6 +317,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 
                 appDelegate.saveContext()
             }
+            
             completionHandler(true)
         })
         

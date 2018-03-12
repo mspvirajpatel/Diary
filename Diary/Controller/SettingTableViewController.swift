@@ -8,12 +8,15 @@
 
 import UIKit
 import LocalAuthentication
+import NotificationCenter
 
 class SettingTableViewController: UITableViewController {
     
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var syncDate: UILabel!
     @IBOutlet weak var FaceIDSwitch: UISwitch!
+    
+    
     @IBAction func changedFaceIDSwitch(_ sender: UISwitch) {
         // Get the local authentication context.
         let localAuthContext = LAContext()
@@ -31,13 +34,15 @@ class SettingTableViewController: UITableViewController {
         localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: resonText) { (success, error) in
             // Failure workflow
             if !success {
-                let alertController = UIAlertController(title: error?.localizedDescription,
+                let alertController = UIAlertController(title: "设置失败",
                                                         message: nil, preferredStyle: .alert)
                 //显示提示框
-                self.present(alertController, animated: true, completion: nil)
+                self.present(alertController, animated: true, completion: {
+                    self.FaceIDSwitch.isOn = !self.FaceIDSwitch.isOn
+                })
                 //两秒钟后自动消失
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-                    self.presentedViewController?.dismiss(animated: false, completion: nil)
+                    self.presentedViewController?.dismiss(animated: false, completion: nil )
                 }
                 if let error = error {
                     switch error {
@@ -58,11 +63,10 @@ class SettingTableViewController: UITableViewController {
             } else {
                 // Success workflow
                 print("Successfully authenticated")
+                UserDefaults.standard.set(sender.isOn, forKey: "isOpenFaceID")
                 return
             }
         }
-        
-        UserDefaults.standard.set(sender.isOn, forKey: "isOpenFaceID")
     }
     
     override func viewDidLoad() {
@@ -89,5 +93,10 @@ class SettingTableViewController: UITableViewController {
         syncDate.text = getFriendlyDate(date: userDefaultsSyncDate)
 
         FaceIDSwitch.isOn = UserDefaults.standard.bool(forKey: "isOpenFaceID")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
     }
 }

@@ -39,17 +39,8 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
             tagButton.layer.masksToBounds = true
         }
     }
-    
-    @IBOutlet var avatarImageView: UIImageView! {
-        didSet {
-            avatarImageView.layer.cornerRadius = 30.0
-            avatarImageView.layer.masksToBounds = true
-        }
-    }
-    @IBOutlet var authorLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet var weatherImageView: UIImageView!
-    @IBOutlet var weatherLabel: UILabel!
-    @IBOutlet var locationIconImageView: UIImageView!
     @IBOutlet weak var locationButton: UIButton!
     @IBOutlet var contentTextView: UITextView!
     @IBOutlet var creatDateLabel: UILabel!
@@ -76,15 +67,43 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                 tagString.remove(at: tagString.index(before: tagString.endIndex))
                 tagButton.setTitle(tagString, for: UIControlState.normal)
             } else {
+                tagString = ""
                 tagButton.setTitle("tag", for: UIControlState.normal)
             }
-            
-            print("tagStartString:\(tagStartString)")
-            print("tagchange:\(tagString)")
             
             // Save Tag
             if tagStartString != tagString {
                 let currentDate = Date.init()
+                
+                // Fetch and save the record from the iCloud
+                let privateDatabase = CKContainer.default().privateCloudDatabase
+                print("recordName: \(diary.recordName!)")
+                if let recordName = diary.recordName {
+                    let recordID = CKRecordID(recordName: recordName)
+                    privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
+                        if let error = error {
+                            // Error handling for failed fetch from public database
+                            print("DetailView updateRecordToCloud():\(error.localizedDescription)")
+                            self.isUpToCloud = false
+                        } else {
+                            // Modify the record and save it to the database
+                            if let record = record {
+                                record.setValue(tagString, forKey: "tag")
+                                record.setValue(Date.init(), forKey: "modifiedAt")
+                                privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
+                                    // Error handling for failed save to public database
+                                    if let saveError = saveError {
+                                        self.isUpToCloud = false
+                                        print(saveError.localizedDescription)
+                                    } else {
+                                        self.isUpToCloud = true
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+                
                 // update data from data store - Diary
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                     let context = appDelegate.persistentContainer.viewContext
@@ -97,6 +116,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                         
                         if(results.count > 0 ){
                             results[0].setValue(tagString, forKey: "tag")
+                            results[0].setValue(self.isUpToCloud, forKey: "isUpToCloud")
                             results[0].setValue(currentDate, forKey: "update")
                             try context.save();
                             print("Saved.....")
@@ -121,79 +141,100 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     var textFieldStartString = ""
     var textFieldEndString = ""
     var tagStartString = ""
+    var isUpToCloud = false
     
     @objc func buttonClick(_ sender: UIButton) {
         view.endEditing(true)
         
-        if textFieldStartString != textFieldEndString || textViewStartString != textViewEndString {
-            let currentDate = Date.init()
-            
-            // Fetch and save the record from the database
-            let privateDatabase = CKContainer.default().privateCloudDatabase
-            print("recordName: \(diary.recordName!)")
-            if let recordName = diary.recordName {
-                let recordID = CKRecordID(recordName: recordName)
-                privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
-                    if let error = error {
-                        // Error handling for failed fetch from public database
-                        print("DetailView updateRecordToCloud():\(error.localizedDescription)")
-                    } else {
-                        // Modify the record and save it to the database
-                        if let record = record {
-                            if self.textFieldStartString != self.textFieldEndString {
-                                record.setValue(self.textFieldEndString, forKey: "title")
-                            }
-                            if self.textViewStartString != self.textViewEndString {
-                                record.setValue(self.textViewEndString, forKey: "content")
-                            }
-                            record.setValue(Date.init(), forKey: "modifiedAt")
-                            privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
-                                // Error handling for failed save to public database
-                            })
-                        }
-                    }
-                })
+        if textFieldEndString == "" && textViewEndString == "" {
+            let alertController = UIAlertController(title: "标题或内容不能都为空",
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            titleTextField.text = textFieldStartString
+            contentTextView.text = textViewStartString
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
             }
-            
-            // update data from data store - Diary
-            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                let context = appDelegate.persistentContainer.viewContext
-                let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
-                fetchRequest.predicate = NSPredicate(format: "id == %@", diary.id!)
+        } else {
+            if textFieldStartString != textFieldEndString || textViewStartString != textViewEndString {
+                let currentDate = Date.init()
                 
-                do {
-                    let results = try context.fetch(fetchRequest)
-                    fetchRequest.returnsObjectsAsFaults = false
-                    
-                    if(results.count > 0 ){
-                        if textFieldStartString != textFieldEndString {
-                            results[0].setValue(titleTextField.text, forKey: "title")
+                // Fetch and save the record from the iCloud
+                let privateDatabase = CKContainer.default().privateCloudDatabase
+                print("recordName: \(diary.recordName!)")
+                if let recordName = diary.recordName {
+                    let recordID = CKRecordID(recordName: recordName)
+                    privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
+                        if let error = error {
+                            // Error handling for failed fetch from public database
+                            print("DetailView updateRecordToCloud():\(error.localizedDescription)")
+                            self.isUpToCloud = false
+                        } else {
+                            // Modify the record and save it to the database
+                            if let record = record {
+                                if self.textFieldStartString != self.textFieldEndString {
+                                    record.setValue(self.textFieldEndString, forKey: "title")
+                                }
+                                if self.textViewStartString != self.textViewEndString {
+                                    record.setValue(self.textViewEndString, forKey: "content")
+                                }
+                                record.setValue(Date.init(), forKey: "modifiedAt")
+                                privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
+                                    // Error handling for failed save to public database
+                                    if let saveError = saveError {
+                                        self.isUpToCloud = false
+                                        print(saveError.localizedDescription)
+                                    } else {
+                                        self.isUpToCloud = true
+                                    }
+                                })
+                            }
                         }
-                        if textViewStartString != textViewEndString {
-                            results[0].setValue(contentTextView.text, forKey: "content")
-                        }
-                        if self.recordName != "" {
-                            results[0].setValue(self.recordName, forKey: "recordName")
-                            results[0].setValue(true, forKey: "isUpToCloud")
-                        }
-                        results[0].setValue(currentDate, forKey: "update")
-                        try context.save();
-                        print("Saved.....")
-                    } else {
-                        print("No results to save")
-                    }
-                } catch{
-                    print("There was an error")
+                    })
                 }
+                
+                // update data from data store - Diary
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "id == %@", diary.id!)
+                    
+                    do {
+                        let results = try context.fetch(fetchRequest)
+                        fetchRequest.returnsObjectsAsFaults = false
+                        
+                        if(results.count > 0 ){
+                            if textFieldStartString != textFieldEndString {
+                                results[0].setValue(titleTextField.text, forKey: "title")
+                            }
+                            if textViewStartString != textViewEndString {
+                                results[0].setValue(contentTextView.text, forKey: "content")
+                            }
+                            if self.recordName != "" {
+                                results[0].setValue(self.recordName, forKey: "recordName")
+                                results[0].setValue(self.isUpToCloud, forKey: "isUpToCloud")
+                            }
+                            results[0].setValue(currentDate, forKey: "update")
+                            try context.save();
+                            print("Saved.....")
+                        } else {
+                            print("No results to save")
+                        }
+                    } catch{
+                        print("There was an error")
+                    }
+                }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                dateFormatter.timeZone = TimeZone.current
+                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+                
+                defaults.setValue(titleTextField.text, forKey: "title")
+                defaults.setValue(contentTextView.text, forKey: "content")
             }
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
-            dateFormatter.timeZone = TimeZone.current
-            self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
-            
-            defaults.setValue(titleTextField.text, forKey: "title")
-            defaults.setValue(contentTextView.text, forKey: "content")
         }
         
         doneButton.isHidden = true
@@ -239,28 +280,32 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         
         titleTextField.text = diary.title
         titleTextField.delegate = self
-        tagButton.setTitle(diary.tag, for: UIControlState.normal)
+        if diary.tag == "" {
+            tagButton.setTitle("tag", for: UIControlState.normal)
+        } else {
+            tagButton.setTitle(diary.tag, for: UIControlState.normal)
+        }
+        
         tagStartString = diary.tag!
         fullImageView.image = UIImage(data: diary.image!)
-        avatarImageView.image = UIImage(named: "avatar-man-stubble")
-        authorLabel.text = diary.author
         weatherImageView.image = UIImage(named: diary.weather!)
-        weatherLabel.text = diary.weather
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
         dateFormatter.timeZone = TimeZone.current
         
+        dateLabel.text = dateFormatter.string(from: diary.create!)
         creatDateLabel.text = "创建于" + dateFormatter.string(from: diary.create!)
         updateDateLabel.text = "修改于" + dateFormatter.string(from: diary.update!)
         
-        locationIconImageView.image = UIImage(named: "map")
         scrollView.contentInsetAdjustmentBehavior = .never
         
         contentTextView.text = diary.content
         contentTextView.delegate = self
         contentTextView.sizeToFit()
         contentTextView.isScrollEnabled = false
+        textFieldEndString = diary.title!
+        textViewEndString = diary.content!
     }
     
     override func viewWillAppear(_ animated: Bool) {

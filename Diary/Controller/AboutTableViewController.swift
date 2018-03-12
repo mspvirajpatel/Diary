@@ -43,7 +43,6 @@ class AboutTableViewController: UITableViewController {
         
         // Configure navigation bar appearance
         tableView.cellLayoutMarginsFollowReadableWidth = true
-        self.tabBarController?.tabBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -58,6 +57,12 @@ class AboutTableViewController: UITableViewController {
             autherLabel.text = "未登录.."
             userLevelLabel.text = "匿名"
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Table view data source

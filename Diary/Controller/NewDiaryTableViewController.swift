@@ -24,109 +24,131 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     var userCurrentLocation = ""
     var recordName = ""
     var userCLLocation = CLLocation()
+    var isSetPhoto = false
     
     var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        // Prepare data
-        let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
-        UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
-        let dataId = String(currentMaxId + 1)
-        let dataAuthor = "匿名"
-        var isUpToCloud = false
-        
-        // Save to iCloud
-        let record = CKRecord(recordType: "Diary")
-        self.recordName = record.recordID.recordName
-        record.setValue(dataId, forKey: "id")
-        record.setValue(titleTextField.text, forKey: "title")
-        record.setValue(tagButton.titleLabel?.text, forKey: "tag")
-        record.setValue(dataAuthor, forKey: "author")
-        record.setValue(self.choosedWeatherButtonText, forKey: "weather")
-        record.setValue(self.userCLLocation, forKey: "location")
-        record.setValue(currentDate, forKey: "createdAt")
-        record.setValue(currentDate, forKey: "modifiedAt")
-        UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
-        record.setValue(contentTextView.text, forKey: "content")
-        record.setValue("0", forKey: "review")
-        record.setValue(String(UserDefaults.standard.integer(forKey: "defaultNoteBookId")), forKey: "notebookid")
-        
-        if let diaryImage = photoImageView.image {
-            // Resize the image
-            let imageData = UIImagePNGRepresentation(diaryImage)!
-            let originalImage = UIImage(data: imageData)!
-            let scalingFator = (originalImage.size.width > 1024) ? 1024 / originalImage.size.width : 1.0
-            let scaledImage = UIImage(data: imageData, scale: scalingFator)!
-            
-            // Write the image to the local file for temporary use
-            let imageFilePath = NSTemporaryDirectory() + titleTextField.text!
-            let imageFileURL = URL(fileURLWithPath: imageFilePath)
-            try? UIImageJPEGRepresentation(scaledImage, 0.8)?.write(to: imageFileURL)
-            
-            // Create image asset for upload
-            let imageAsset = CKAsset(fileURL: imageFileURL)
-            record.setValue(imageAsset, forKey: "image")
-            
-            let privateDatabase = CKContainer.default().privateCloudDatabase
-            privateDatabase.save(record, completionHandler: { (record, error) in
-                if let error = error {
-                    // Insert error handling
-                    isUpToCloud = false
-                    self.recordName = ""
-                    print("NewDiary SaveToCloudError: \(error.localizedDescription)")
-                    return
-                }
-                // Insert successfully saved record code
-                isUpToCloud = true
-                print("Saving data to iCloud")
-                try? FileManager.default.removeItem(at: imageFileURL)
-            })
+        if !isSetPhoto && titleTextField.text == "" && (contentTextView.text == "" || contentTextView.text == "write some thing today...") {
+            let alertController = UIAlertController(title: "不能创建一片空的日记",
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
+            }
         } else {
-            let privateDatabase = CKContainer.default().privateCloudDatabase
-            privateDatabase.save(record, completionHandler: { (record, error) in
-                if let error = error {
-                    // Insert error handling
-                    isUpToCloud = false
-                    print("NewDiary SaveToCloudError: \(error.localizedDescription)")
-                    self.recordName = ""
-                    return
-                }
-                // Insert successfully saved record code
-                isUpToCloud = true
-                print("Saving data to iCloud")
-            })
-        }
         
-        // Save to CoreData
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            diary = DiaryMO(context: context)
+            // Prepare data
+            let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
+            UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
+            let dataId = String(currentMaxId + 1)
+            let dataAuthor = "匿名"
+            var isUpToCloud = false
             
-            diary.id = dataId
-            diary.recordName = self.recordName
-            diary.isUpToCloud = isUpToCloud
-            diary.title = titleTextField.text
-            diary.tag = tagButton.titleLabel?.text
-            diary.author = dataAuthor
-            diary.weather = self.choosedWeatherButtonText
-            diary.location = self.userCurrentLocation
-            diary.create = currentDate
-            diary.update = currentDate
-            diary.content = contentTextView.text
-            diary.review = "0"
-            diary.notebookid = String(UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
+            // Save to iCloud
+            let record = CKRecord(recordType: "Diary")
+            self.recordName = record.recordID.recordName
+            record.setValue(dataId, forKey: "id")
+            record.setValue(titleTextField.text, forKey: "title")
+            if tagButton.titleLabel?.text == "tag" {
+                record.setValue("", forKey: "tag")
+            } else {
+                record.setValue(tagButton.titleLabel?.text, forKey: "tag")
+            }
+            record.setValue(dataAuthor, forKey: "author")
+            record.setValue(self.choosedWeatherButtonText, forKey: "weather")
+            record.setValue(self.userCLLocation, forKey: "location")
+            record.setValue(currentDate, forKey: "createdAt")
+            record.setValue(currentDate, forKey: "modifiedAt")
+            UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
+            record.setValue(contentTextView.text, forKey: "content")
+            record.setValue("0", forKey: "review")
+            record.setValue(String(UserDefaults.standard.integer(forKey: "defaultNoteBookId")), forKey: "notebookid")
             
-            if let diaryImage = photoImageView.image {
-                diary.image = UIImagePNGRepresentation(diaryImage)
+            if isSetPhoto {
+                let diaryImage = photoImageView.image!
+                // Resize the image
+                let imageData = UIImagePNGRepresentation(diaryImage)!
+                let originalImage = UIImage(data: imageData)!
+                let scalingFator = (originalImage.size.width > 1024) ? 1024 / originalImage.size.width : 1.0
+                let scaledImage = UIImage(data: imageData, scale: scalingFator)!
+                
+                // Write the image to the local file for temporary use
+                let imageFilePath = NSTemporaryDirectory() + titleTextField.text!
+                let imageFileURL = URL(fileURLWithPath: imageFilePath)
+                try? UIImageJPEGRepresentation(scaledImage, 0.8)?.write(to: imageFileURL)
+                
+                // Create image asset for upload
+                let imageAsset = CKAsset(fileURL: imageFileURL)
+                
+                record.setValue(imageAsset, forKey: "image")
+                
+                let privateDatabase = CKContainer.default().privateCloudDatabase
+                privateDatabase.save(record, completionHandler: { (record, error) in
+                    if let error = error {
+                        // Insert error handling
+                        isUpToCloud = false
+                        self.recordName = ""
+                        print("NewDiary SaveToCloudError: \(error.localizedDescription)")
+                        return
+                    }
+                    // Insert successfully saved record code
+                    isUpToCloud = true
+                    print("Saving data to iCloud")
+                    try? FileManager.default.removeItem(at: imageFileURL)
+                })
+            } else {
+                let privateDatabase = CKContainer.default().privateCloudDatabase
+                privateDatabase.save(record, completionHandler: { (record, error) in
+                    if let error = error {
+                        // Insert error handling
+                        isUpToCloud = false
+                        print("NewDiary SaveToCloudError: \(error.localizedDescription)")
+                        self.recordName = ""
+                        return
+                    }
+                    // Insert successfully saved record code
+                    isUpToCloud = true
+                    print("Saving data to iCloud")
+                })
             }
             
-            defaults.setValue(diary.title, forKey: "title")
-            defaults.setValue(diary.content, forKey: "content")
+            // Save to CoreData
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                diary = DiaryMO(context: context)
+                
+                diary.id = dataId
+                diary.recordName = self.recordName
+                diary.isUpToCloud = isUpToCloud
+                diary.title = titleTextField.text
+                diary.tag = tagButton.titleLabel?.text
+                diary.author = dataAuthor
+                diary.weather = self.choosedWeatherButtonText
+                diary.location = self.userCurrentLocation
+                diary.create = currentDate
+                diary.update = currentDate
+                diary.content = contentTextView.text
+                diary.review = "0"
+                diary.notebookid = String(UserDefaults.standard.integer(forKey: "defaultNoteBookId"))
+                
+                if isSetPhoto {
+                    if let diaryImage = photoImageView.image {
+                        diary.image = UIImagePNGRepresentation(diaryImage)
+                    }
+                }
+                
+                defaults.setValue(diary.title, forKey: "title")
+                defaults.setValue(diary.content, forKey: "content")
+                
+                print("Saving data to context")
+                appDelegate.saveContext()
+            }
             
-            print("Saving data to context")
-            appDelegate.saveContext()
+            dismiss(animated: true, completion: nil)
         }
-        dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet var titleTextField: UITextField!
@@ -198,7 +220,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         
         currentDate = Date.init()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年MM月dd日 H:m:s"
+        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
         dateFormatter.timeZone = TimeZone.current
         let dateString = dateFormatter.string(from: currentDate)
         dateLabel.text = dateString
@@ -306,6 +328,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             photoImageView.image = selectedImage
+            self.isSetPhoto = true
             photoImageView.contentMode = .scaleToFill
             photoImageView.clipsToBounds = true
         }
