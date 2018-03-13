@@ -14,7 +14,6 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     var authView = UIView()
     var searchController: UISearchController?
-    private var imageCache = NSCache<NSString, NSData>()
     
     var searchResults: [DiaryMO] = []
     var notebook: NotebookMO!
@@ -250,18 +249,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         // Configure the cell...
         
         cell.titleLabel.text = diary.title
-        cell.thumbnailImageView.image = UIImage(named: "photo")
         if let diaryImage = diary.image {
-            if let cachedImageData = imageCache.object(forKey: diary.id! as NSString) {
-                // Fetch image from cache
-                print("Get image from cache")
-                cell.thumbnailImageView.image = UIImage(data: cachedImageData as Data)
-            } else {
-                DispatchQueue.main.async {
-                    cell.thumbnailImageView.image = UIImage(data: diaryImage)
-                    self.imageCache.setObject(diaryImage as NSData, forKey: diary.id! as NSString)
-                }
-            }
+            cell.thumbnailImageView.image = UIImage(data: diaryImage)
             cell.contentLabel.isHidden = true
             if cell.contentLargeUILabel.frame.width > 100 {
                 cell.contentLargeUILabel.isHidden = false
