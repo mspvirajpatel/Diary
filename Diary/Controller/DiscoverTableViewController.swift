@@ -70,7 +70,7 @@ class DiscoverTableViewController: UITableViewController {
         let privateDatabase = cloudContainer.privateCloudDatabase
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Diary", predicate: predicate)
-        
+        query.sortDescriptors = [NSSortDescriptor(key: "modifiedAt", ascending: false)]
         // Create the query with the query
         let queryOperation = CKQueryOperation(query: query)
         queryOperation.desiredKeys = ["title", "tag", "content", "modifiedAt"]

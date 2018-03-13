@@ -11,15 +11,5 @@ import Foundation
 struct UserLocation: Codable {
     var latitude: Double
     var longitude: Double
-    var altitude: Double
-    var horizontalAccuracy: Double
-    var verticalAccuracy: Double
-    var course: Double
-    var speed: Double
-    var countryCode: String
-    var country: String
-    var state: String
-    var city: String
-    var subLocality: String
-    var street: String
+    var postalAddress: String
 }

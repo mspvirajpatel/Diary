@@ -870,7 +870,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUn-Ns-kdz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-442.39999999999998" y="1709.5952023988007"/>
+            <point key="canvasLocation" x="-604" y="1710"/>
         </scene>
         <!--Sync Table View Controller-->
         <scene sceneID="Oc2-QS-0bm">
@@ -924,7 +924,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="zlq-gr-0lm" kind="show" id="egw-Ta-fmM"/>
+                                            <segue destination="zlq-gr-0lm" kind="show" identifier="showSyncUpload" id="egw-Ta-fmM"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -938,7 +938,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nJs-J2-kn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-21" y="1710"/>
+            <point key="canvasLocation" x="90" y="1710"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="u1X-Ab-bOl">
@@ -953,7 +953,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mWT-lC-e9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="468" y="1710"/>
+            <point key="canvasLocation" x="738" y="1710"/>
         </scene>
         <!--Sync Download View Controller-->
         <scene sceneID="ppm-WU-CUH">

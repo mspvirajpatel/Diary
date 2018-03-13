@@ -29,7 +29,7 @@ class MapViewController: UIViewController {
             if let jsonData = location.data(using: .utf8) {
                 do {
                     let userLocation = try jsonDecoder.decode(UserLocation.self, from: jsonData)
-                    cllocation = CLLocation(coordinate: CLLocationCoordinate2D(latitude: userLocation.latitude, longitude: userLocation.longitude), altitude: userLocation.altitude, horizontalAccuracy: userLocation.horizontalAccuracy, verticalAccuracy: userLocation.verticalAccuracy, course: userLocation.course, speed: userLocation.speed, timestamp: diary.create!)
+                    cllocation = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
                 } catch {
                     print(error)
                 }

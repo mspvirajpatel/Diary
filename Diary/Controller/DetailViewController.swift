@@ -262,7 +262,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
                 if let jsonData = location.data(using: .utf8) {
                     do {
                         let userLocation = try jsonDecoder.decode(UserLocation.self, from: jsonData)
-                        locationButton.setTitle(userLocation.city + userLocation.subLocality + userLocation.street, for: UIControlState.normal)
+                        locationButton.setTitle(userLocation.postalAddress, for: UIControlState.normal)
                     } catch {
                         print("DetailViewController ViewDidLoad JSONDecoder error:\(error)")
                     }

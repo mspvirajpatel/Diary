@@ -307,8 +307,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             }
             if let placemarks = placemarks {
                 let placemarkPostalAddress = placemarks[0].postalAddress!
-                
-                let userLocation = UserLocation(latitude: self.userCLLocation.coordinate.latitude, longitude: self.userCLLocation.coordinate.longitude, altitude: self.userCLLocation.altitude, horizontalAccuracy: self.userCLLocation.horizontalAccuracy, verticalAccuracy: self.userCLLocation.verticalAccuracy, course: self.userCLLocation.course, speed: self.userCLLocation.speed, countryCode: placemarkPostalAddress.isoCountryCode, country: placemarkPostalAddress.country, state: placemarkPostalAddress.state, city: placemarkPostalAddress.city, subLocality: placemarkPostalAddress.subLocality, street: placemarkPostalAddress.street)
+                let postalAddress = placemarkPostalAddress.city + placemarkPostalAddress.subLocality + placemarkPostalAddress.street
+                let userLocation = UserLocation(latitude: self.userCLLocation.coordinate.latitude, longitude: self.userCLLocation.coordinate.longitude, postalAddress: postalAddress)
                 let jsonEncoder = JSONEncoder()
                 do {
                     let jsonData = try jsonEncoder.encode(userLocation)
@@ -317,8 +317,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 catch {
                     print(error)
                 }
-                let locationString = placemarkPostalAddress.city + placemarkPostalAddress.subLocality + placemarkPostalAddress.street
-                //print("buttonString: \(locationString)")
+                let locationString = postalAddress
                 self.locationButton.setTitle(locationString, for: UIControlState.normal)
             }
         })
