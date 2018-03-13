@@ -258,10 +258,23 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             cell.thumbnailImageView.image = UIImage(data: diaryImage)
             cell.thumbnailImageView.isHidden = false
             cell.contentTextView.isHidden = true
+            if cell.contentLargeTextView.frame.width > 100 {
+                cell.contentLargeTextView.isHidden = false
+                cell.contentLargeTextView.text = diary.content
+            } else {
+                cell.contentLargeTextView.isHidden = true
+            }
         } else {
             cell.thumbnailImageView.isHidden = true
-            cell.contentTextView.isHidden = false
-            cell.contentTextView.text = diary.content
+            if cell.contentLargeTextView.frame.width > 100 {
+                cell.contentTextView.isHidden = true
+                cell.contentLargeTextView.isHidden = false
+                cell.contentLargeTextView.text = diary.content
+            } else {
+                cell.contentLargeTextView.isHidden = true
+                cell.contentTextView.isHidden = false
+                cell.contentTextView.text = diary.content
+            }
         }
         cell.weatherImageView.image = UIImage(named: diary.weather!)
         

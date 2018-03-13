@@ -55,6 +55,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             } else {
                 record.setValue(tagButton.titleLabel?.text, forKey: "tag")
             }
+            record.setValue(UIDevice.current.name, forKey: "deviceName")
             record.setValue(self.choosedWeatherButtonText, forKey: "weather")
             record.setValue(self.userCLLocation, forKey: "location")
             record.setValue(currentDate, forKey: "createdAt")
@@ -214,7 +215,6 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         contentTextView.delegate = self
 
         // Configure navigation bar appearance
-        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         
@@ -290,6 +290,12 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibraryAction)
             photoSourceRequestController.addAction(cancelAction)
+            
+            
+            if let popoverController = photoSourceRequestController.popoverPresentationController {
+                popoverController.sourceView = photoImageView
+                popoverController.sourceRect = photoImageView.bounds
+            }
             
             present(photoSourceRequestController, animated: true, completion: nil)
         }

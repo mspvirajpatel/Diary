@@ -239,7 +239,6 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.hidesBarsOnSwipe = false
         
         doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))

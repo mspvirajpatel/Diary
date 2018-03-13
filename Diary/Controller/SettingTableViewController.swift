@@ -63,7 +63,7 @@ class SettingTableViewController: UITableViewController {
             } else {
                 // Success workflow
                 print("Successfully authenticated")
-                UserDefaults.standard.set(sender.isOn, forKey: "isOpenFaceID")
+                UserDefaults.standard.set(self.FaceIDSwitch.isOn, forKey: "isOpenFaceID")
                 return
             }
         }

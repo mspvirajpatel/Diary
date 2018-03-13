@@ -73,7 +73,7 @@ class DiscoverTableViewController: UITableViewController {
         query.sortDescriptors = [NSSortDescriptor(key: "modifiedAt", ascending: false)]
         // Create the query with the query
         let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["title", "tag", "content", "modifiedAt"]
+        queryOperation.desiredKeys = ["title", "tag", "content", "modifiedAt", "deviceName"]
         queryOperation.queuePriority = .veryHigh
         queryOperation.resultsLimit = 50
         queryOperation.recordFetchedBlock = { (record) in
@@ -128,8 +128,13 @@ class DiscoverTableViewController: UITableViewController {
         let updateDate = diary.object(forKey: "modifiedAt") as? Date
         cell.updateDateLabel.text = self.getFriendlyDate(date: updateDate!) + " 已同步"
         cell.tagLabel.text = diary.object(forKey: "tag") as? String
-        cell.contentTextView.text = diary.object(forKey: "content") as? String
-        
+        let deviceName = diary.object(forKey: "content") as? String
+        if let deviceName = deviceName {
+            cell.contentTextView.text = deviceName
+        } else {
+            cell.contentTextView.text = "未知设备"
+        }
+        cell.deviceNameLabel.text = diary.object(forKey: "deviceName") as? String
         // Check if the image is stored in cache
         if let imageFileURL = imageCache.object(forKey: diary.recordID) {
             // Fetch image from cache
