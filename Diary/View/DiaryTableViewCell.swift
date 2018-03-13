@@ -17,8 +17,8 @@ class DiaryTableViewCell: UITableViewCell {
             thumbnailImageView.clipsToBounds = true
         }
     }
-    @IBOutlet var contentLargeTextView: UITextView!
-    @IBOutlet var contentTextView: UITextView!
+    @IBOutlet var contentLargeUILabel: UILabel!
+    @IBOutlet var contentLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var tagLabel: UILabel! {

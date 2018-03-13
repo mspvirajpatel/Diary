@@ -14,6 +14,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     var authView = UIView()
     var searchController: UISearchController?
+    private var imageCache = NSCache<NSString, NSData>()
     
     var searchResults: [DiaryMO] = []
     var notebook: NotebookMO!
@@ -248,32 +249,34 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         
         // Configure the cell...
         
-        
+        cell.titleLabel.text = diary.title
+        cell.thumbnailImageView.image = UIImage(named: "photo")
         if let diaryImage = diary.image {
-            if diary.title == "" {
-                cell.titleLabel.text = diary.content
+            if let cachedImageData = imageCache.object(forKey: diary.id! as NSString) {
+                // Fetch image from cache
+                print("Get image from cache")
+                cell.thumbnailImageView.image = UIImage(data: cachedImageData as Data)
             } else {
-                cell.titleLabel.text = diary.title
+                DispatchQueue.main.async {
+                    cell.thumbnailImageView.image = UIImage(data: diaryImage)
+                    self.imageCache.setObject(diaryImage as NSData, forKey: diary.id! as NSString)
+                }
             }
-            cell.thumbnailImageView.image = UIImage(data: diaryImage)
-            cell.thumbnailImageView.isHidden = false
-            cell.contentTextView.isHidden = true
-            if cell.contentLargeTextView.frame.width > 100 {
-                cell.contentLargeTextView.isHidden = false
-                cell.contentLargeTextView.text = diary.content
-            } else {
-                cell.contentLargeTextView.isHidden = true
+            cell.contentLabel.isHidden = true
+            if cell.contentLargeUILabel.frame.width > 100 {
+                cell.contentLargeUILabel.isHidden = false
+                cell.contentLargeUILabel.text = diary.content!
             }
         } else {
-            cell.thumbnailImageView.isHidden = true
-            if cell.contentLargeTextView.frame.width > 100 {
-                cell.contentTextView.isHidden = true
-                cell.contentLargeTextView.isHidden = false
-                cell.contentLargeTextView.text = diary.content
+            cell.thumbnailImageView.image = UIImage()
+            if cell.contentLargeUILabel.frame.width > 100 {
+                cell.contentLabel.isHidden = true
+                cell.contentLargeUILabel.isHidden = false
+                cell.contentLargeUILabel.text = diary.content!
             } else {
-                cell.contentLargeTextView.isHidden = true
-                cell.contentTextView.isHidden = false
-                cell.contentTextView.text = diary.content
+                cell.contentLargeUILabel.isHidden = true
+                cell.contentLabel.isHidden = false
+                cell.contentLabel.text = diary.content!
             }
         }
         cell.weatherImageView.image = UIImage(named: diary.weather!)
