@@ -33,6 +33,7 @@
 		CE449CD8203D69FE008702B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE449CD6203D69FE008702B4 /* LaunchScreen.storyboard */; };
 		CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */; };
 		CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */; };
+		CE4AA68D2058CB7600CC509C /* CloudDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AA68C2058CB7600CC509C /* CloudDetailViewController.swift */; };
 		CE7694E320513972006D611B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7694E220513972006D611B /* NotificationCenter.framework */; };
 		CE7694E620513972006D611B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7694E520513972006D611B /* TodayViewController.swift */; };
 		CE7694E920513972006D611B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7694E720513972006D611B /* MainInterface.storyboard */; };
@@ -108,6 +109,7 @@
 		CE449CD9203D69FE008702B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE449CDF203D6A36008702B4 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE449CE3203DBA9D008702B4 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
+		CE4AA68C2058CB7600CC509C /* CloudDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDetailViewController.swift; sourceTree = "<group>"; };
 		CE7694E120513972006D611B /* Diary Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Diary Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7694E220513972006D611B /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		CE7694E520513972006D611B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				CE197BE62054EA5100C63670 /* AuthViewController.swift */,
 				CE0EC7DF20567EF1004885E8 /* SyncTableViewController.swift */,
 				CE424E892056889A0003BE68 /* SyncDownloadViewController.swift */,
+				CE4AA68C2058CB7600CC509C /* CloudDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				CE0EC7E020567EF1004885E8 /* SyncTableViewController.swift in Sources */,
 				CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */,
 				CE186481204F96FB00892BFF /* NotifyTableViewController.swift in Sources */,
+				CE4AA68D2058CB7600CC509C /* CloudDetailViewController.swift in Sources */,
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
 				CE169BD42041561000EAF407 /* WebViewController.swift in Sources */,
 				CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */,

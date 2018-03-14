@@ -13,32 +13,37 @@ import MapKit
 
 class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDelegate {
 
-    @IBOutlet weak var downloadProgress: UIProgressView! {
-        didSet {
-            downloadProgress.progress = 0.0
-        }
-    }
+    @IBOutlet weak var downloadProgress: UIProgressView!
+    @IBOutlet var percentLabel: UILabel!
+    @IBOutlet weak var outputTextView: UITextView!
     var iCloudDiaries: [CKRecord] = []
     var diaries:[DiaryMO] = []
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var notSyncID: [String] = []
     var diary: DiaryMO!
-    var progressIndex: Float = 0.0
+    var progressIndex: Float = 1.0
+    var createNum = 0
+    var updateNum = 0
+    var coredataNum = 0
+    var cloudNum = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fetchDataFromCoredata()
+        
+        outputTextView.text = ""
+        downloadProgress.progress = 0.0
+        percentLabel.text = "0%"
         let alertController = UIAlertController(title: nil, message: "下载过程中遇到同一笔记会替换为最新", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (alertAction) in
-            
-            self.fetchDataFromCloud()
+            self.fetchDataFromCoredata()
         }))
         present(alertController, animated: true, completion: nil)
     }
     
     func fetchDataFromCoredata() {
         // Fetch data from data store - Diary
+        outputTextView.text = outputTextView.text + "开始加载本地数据...\r\n"
         let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "update", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -54,7 +59,8 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                 try fetchResultController.performFetch()
                 if let fetchedObjects = fetchResultController.fetchedObjects {
                     self.diaries = fetchedObjects
-                    print("Completed the download of Core data")
+                    self.outputTextView.text = self.outputTextView.text + "成功加载本地数据...\r\n"
+                    fetchDataFromCloud()
                 }
             } catch {
                 print(error)
@@ -64,6 +70,7 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
     
     func fetchDataFromCloud() {
         // Fetch Data using Convenience API
+        outputTextView.text = outputTextView.text + "开始下载iCloud数据...\r\n"
         let cloudContainer = CKContainer.default()
         let privateDatabase = cloudContainer.privateCloudDatabase
         let predicate = NSPredicate(value: true)
@@ -74,28 +81,55 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
             }
             if let results = results {
                 self.iCloudDiaries = results
-                print("Completed the download of iCloud data")
-                self.compareCoredataFromCloud()
+                
+                DispatchQueue.main.async {
+                    self.outputTextView.text = self.outputTextView.text + "成功下载iCloud数据...\r\n"
+                    self.compareCoredataFromCloud()
+                    var resultMessage = ""
+                    if (self.updateNum + self.createNum) == 0 {
+                        resultMessage = "检查完毕，无需更新"
+                    } else {
+                        if self.updateNum == 0 {
+                            resultMessage = "已创建" + String(self.createNum) + "条记录至本地，请返回主页查看"
+                        } else {
+                            if self.createNum == 0 {
+                                resultMessage = "已更新" + String(self.updateNum) + "条记录至本地，请返回主页查看"
+                            } else {
+                                resultMessage = "已创建" + String(self.createNum) + "条，并更新" + String(self.updateNum) + "条记录至本地，请返回主页查看"
+                            }
+                        }
+                    }
+                    let alertController = UIAlertController(title: "执行结果", message: resultMessage, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Done", style: .default, handler: { (alertAction) in
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+                }
             }
         }
     }
     
     func compareCoredataFromCloud() {
-        print("--- 开始查找 ---")
+        self.outputTextView.text = self.outputTextView.text + "开始比对本地数据与iCloud数据...\r\n"
+        self.coredataNum = diaries.count
+        self.cloudNum = iCloudDiaries.count
         for cloudDiary in iCloudDiaries {
+            let cloudDiaryId = cloudDiary.object(forKey: "id") as! String
             self.downloadProgress.progress = self.progressIndex / Float(iCloudDiaries.count)
+            self.percentLabel.text = String(self.downloadProgress.progress * 100) + "0%"
             self.progressIndex = self.progressIndex + 1
-            print("iCloud id:\(cloudDiary.object(forKey: "id") as! String) 开始查找 ---")
+            self.outputTextView.text = self.outputTextView.text + "开始查找iCloud id:" + cloudDiaryId + "...\r\n"
             var isInCoredata = false
             for coredataDiary in diaries {
-                print("iCloud id:\(cloudDiary.object(forKey: "id") as! String) 开始查找 --- coredata id:\(coredataDiary.id!)")
+                self.outputTextView.text = self.outputTextView.text + "对比 iCloud id:" + cloudDiaryId + " coredata id:" + coredataDiary.id! + "...\r\n"
                 if coredataDiary.id! == cloudDiary.object(forKey: "id") as? String {
-                    print("iCloud id:\(cloudDiary.object(forKey: "id") as! String) 找到与coredata中相同的 ---")
+                    self.outputTextView.text = self.outputTextView.text + "找到相同iCloud id:" + cloudDiaryId + " coredata id:" + coredataDiary.id! + "...\r\n"
                     isInCoredata = true
                     let cloudUpdate = cloudDiary.object(forKey: "modifiedAt") as? Date
                     if cloudUpdate! > coredataDiary.update! {
-                        print("iCloud id:\(cloudDiary.object(forKey: "id") as! String) 上的内容较新，执行更新 ---")
-                        //执行更新 下载 cloudDiaries.recordID
+                        self.outputTextView.text = self.outputTextView.text + "iCloud id: " + cloudDiaryId + "上的内容较新，执行更新...\r\n"
+                        self.updateNum = self.updateNum + 1
+                        // 执行更新 下载 cloudDiaries.recordID
                         // update data from data store - Diary
                         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                             let context = appDelegate.persistentContainer.viewContext
@@ -110,7 +144,7 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                                     results[0].setValue(cloudDiary.object(forKey: "tag") as? String, forKey: "tag")
                                     results[0].setValue(cloudDiary.object(forKey: "modifiedAt") as! Date, forKey: "update")
                                     try context.save();
-                                    print("更新成功.....")
+                                    self.outputTextView.text = self.outputTextView.text + "iCloud id: " + cloudDiaryId + "更新成功...\r\n"
                                 } else {
                                     print("No results to save")
                                 }
@@ -118,13 +152,18 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                                 print("There was an error")
                             }
                         }
+                    } else {
+                        self.outputTextView.text = self.outputTextView.text + "iCloud id: " + cloudDiaryId + "上的内容与本地文件相同，无需更新...\r\n"
                     }
+                    diaries.remove(at: diaries.index(of: coredataDiary)!)
+                    break
                 }
             }
             if !isInCoredata {
                 // 执行新建
                 // Save to CoreData
-                print("iCloud id:\(cloudDiary.object(forKey: "id") as! String) 没有在coredata中找到，执行新建 ---")
+                self.outputTextView.text = self.outputTextView.text + "iCloud id: " + cloudDiaryId + "没有在coredata中找到，执行新建...\r\n"
+                self.createNum = self.createNum + 1
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                     let context = appDelegate.persistentContainer.viewContext
                     diary = DiaryMO(context: context)
@@ -168,8 +207,7 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                             diary.image = imageData
                         }
                     }
-                    
-                    print("新建成功")
+                    self.outputTextView.text = self.outputTextView.text + "iCloud id: " + cloudDiaryId + "新建到本地成功...\r\n"
                     appDelegate.saveContext()
                 }
             }

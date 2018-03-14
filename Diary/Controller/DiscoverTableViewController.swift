@@ -23,8 +23,8 @@ class DiscoverTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         // Configure navigation bar appearance
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         
         spinner.activityIndicatorViewStyle = .gray
@@ -37,7 +37,7 @@ class DiscoverTableViewController: UITableViewController {
         
         // Pull to refresh control
         refreshControl = UIRefreshControl()
-        refreshControl?.backgroundColor = UIColor.white
+//        refreshControl?.backgroundColor = UIColor.white
         refreshControl?.tintColor = UIColor.gray
         refreshControl?.addTarget(self, action: #selector(fetchRecordsFromCloud), for: UIControlEvents.valueChanged)
     }
@@ -71,33 +71,25 @@ class DiscoverTableViewController: UITableViewController {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Diary", predicate: predicate)
         query.sortDescriptors = [NSSortDescriptor(key: "modifiedAt", ascending: false)]
-        // Create the query with the query
-        let queryOperation = CKQueryOperation(query: query)
-        queryOperation.desiredKeys = ["title", "tag", "content", "modifiedAt", "deviceName"]
-        queryOperation.queuePriority = .veryHigh
-        queryOperation.resultsLimit = 50
-        queryOperation.recordFetchedBlock = { (record) in
-            self.diaries.append(record)
-        }
-        queryOperation.queryCompletionBlock = { (cursor, error) in
+        privateDatabase.perform(query, inZoneWith: nil) { (results, error) in
             if let error = error {
-                print("Failed to get data from iCloud - \(error.localizedDescription)")
-                return
+                print(error.localizedDescription)
             }
-            print("Successfully retrieve the data from iCloud")
-            
-            DispatchQueue.main.async {
-                self.spinner.stopAnimating()
-                self.tableView.reloadData()
-                if let refreshControl = self.refreshControl {
-                    if refreshControl.isRefreshing {
-                        refreshControl.endRefreshing()
+            if let results = results {
+                self.diaries = results
+                print("Successfully retrieve the data from iCloud")
+                
+                DispatchQueue.main.async {
+                    self.spinner.stopAnimating()
+                    self.tableView.reloadData()
+                    if let refreshControl = self.refreshControl {
+                        if refreshControl.isRefreshing {
+                            refreshControl.endRefreshing()
+                        }
                     }
                 }
             }
         }
-        // Execute the query
-        privateDatabase.add(queryOperation)
     }
 
     override func didReceiveMemoryWarning() {
@@ -167,5 +159,21 @@ class DiscoverTableViewController: UITableViewController {
         }
         return cell
     }
-
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "showCloudDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! CloudDetailViewController
+                //print(diaries[indexPath.row].description)
+                destinationController.diary = diaries[indexPath.row]
+                destinationController.hidesBottomBarWhenPushed = true
+            }
+        }
+    }
 }

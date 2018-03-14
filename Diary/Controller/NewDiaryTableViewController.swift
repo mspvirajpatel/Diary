@@ -24,6 +24,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     var userCurrentLocation = ""
     var recordName = ""
     var userCLLocation = CLLocation()
+    var isGetUserLocation = false
     var isSetPhoto = false
     
     var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
@@ -57,7 +58,12 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             }
             record.setValue(UIDevice.current.name, forKey: "deviceName")
             record.setValue(self.choosedWeatherButtonText, forKey: "weather")
-            record.setValue(self.userCLLocation, forKey: "location")
+            if isGetUserLocation {
+                record.setValue(self.userCLLocation, forKey: "location")
+            } else {
+                record.setValue(CLLocation(latitude: 0.0, longitude: 0.0), forKey: "location")
+            }
+            
             record.setValue(currentDate, forKey: "createdAt")
             record.setValue(currentDate, forKey: "modifiedAt")
             UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
@@ -123,7 +129,12 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 diary.title = titleTextField.text
                 diary.tag = tagButton.titleLabel?.text
                 diary.weather = self.choosedWeatherButtonText
-                diary.location = self.userCurrentLocation
+                if isGetUserLocation {
+                    diary.location = self.userCurrentLocation
+                } else {
+                    diary.location = ""
+                }
+                
                 diary.create = currentDate
                 diary.update = currentDate
                 if contentTextView.text == "write some thing today..." {
@@ -308,6 +319,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         geoCoder.reverseGeocodeLocation(userCLLocation, completionHandler: { (placemarks, error) in
             if let error = error {
                 self.locationButton.setTitle("获取位置失败，点击重新获取", for: UIControlState.normal)
+                self.isGetUserLocation = false
                 print(error)
                 return
             }
@@ -319,6 +331,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 do {
                     let jsonData = try jsonEncoder.encode(userLocation)
                     self.userCurrentLocation = String(data: jsonData, encoding: .utf8)!
+                    self.isGetUserLocation = true
                 }
                 catch {
                     print(error)
