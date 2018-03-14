@@ -10,15 +10,23 @@ import UIKit
 import CloudKit
 import MapKit
 
-class DiscoverTableViewController: UITableViewController {
+class DiscoverTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     var diaries: [CKRecord] = []
     var spinner = UIActivityIndicatorView()
     private var imageCache = NSCache<CKRecordID, NSURL>()
     
+    // Screen height.
+    public var screenHeight: CGFloat {
+        return UIScreen.main.bounds.height
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: view)
+        }
         tableView.cellLayoutMarginsFollowReadableWidth = true
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -183,5 +191,30 @@ class DiscoverTableViewController: UITableViewController {
                 destinationController.hidesBottomBarWhenPushed = true
             }
         }
+    }
+    
+    // MARK: - 3D Touch
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return nil
+        }
+        
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "CloudDetailViewController") as? CloudDetailViewController else {
+            return nil
+        }
+        
+        let selectedDiary = diaries[indexPath.row]
+        detailViewController.diary = selectedDiary
+        detailViewController.preferredContentSize = CGSize(width: 0.0, height: screenHeight - 200)
+        previewingContext.sourceRect = cell.frame
+        return detailViewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
     }
 }

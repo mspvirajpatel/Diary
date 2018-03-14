@@ -21,12 +21,9 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
     
     override var previewActionItems: [UIPreviewActionItem] {
-//        let notificationAction = UIPreviewAction.init(title: "Share", style: .default) { (action, viewController) in
-
         let cancelAction = UIPreviewAction.init(title: "Cancel", style: .destructive) { (action, viewController) in
             
         }
-        
         return [cancelAction]
     }
     

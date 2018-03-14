@@ -11,7 +11,7 @@ import UIKit
 import CloudKit
 import MapKit
 
-class CloudDetailViewController: UIViewController, UITextViewDelegate {
+class CloudDetailViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     var diary: CKRecord!
     private var imageCache = NSCache<CKRecordID, NSURL>()
     @IBOutlet var titleTextField: UITextField!
@@ -29,10 +29,18 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var contentTextView: UITextView!
     @IBOutlet var creatDateLabel: UILabel!
     @IBOutlet var updateDateLabel: UILabel!
+    
+    override var previewActionItems: [UIPreviewActionItem] {
+        let cancelAction = UIPreviewAction.init(title: "Cancel", style: .destructive) { (action, viewController) in
+            
+        }
+        return [cancelAction]
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        titleTextField.delegate = self
         navigationItem.largeTitleDisplayMode = .never
         fullImageView.image = UIImage(named: "photo")
         titleTextField.text = diary.object(forKey: "title") as? String
@@ -116,9 +124,8 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate {
         contentTextView.isScrollEnabled = false
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
     }
 
 }
