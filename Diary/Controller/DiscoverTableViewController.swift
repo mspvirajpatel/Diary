@@ -71,25 +71,34 @@ class DiscoverTableViewController: UITableViewController {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "Diary", predicate: predicate)
         query.sortDescriptors = [NSSortDescriptor(key: "modifiedAt", ascending: false)]
-        privateDatabase.perform(query, inZoneWith: nil) { (results, error) in
+        
+        // Create the query operation with the query
+        let queryOperation = CKQueryOperation(query: query)
+        queryOperation.desiredKeys = ["title", "content", "tag", "weather", "location", "deviceName", "createdAt", "modifiedAt"]
+        queryOperation.queuePriority = .veryHigh
+        queryOperation.resultsLimit = 100
+        queryOperation.recordFetchedBlock = { (record) -> Void in
+            self.diaries.append(record)
+        }
+        queryOperation.queryCompletionBlock = { (cursor, error) -> Void in
             if let error = error {
-                print(error.localizedDescription)
+                print("Failed to get data from iCloud - \(error.localizedDescription)")
+                return
             }
-            if let results = results {
-                self.diaries = results
-                print("Successfully retrieve the data from iCloud")
-                
-                DispatchQueue.main.async {
-                    self.spinner.stopAnimating()
-                    self.tableView.reloadData()
-                    if let refreshControl = self.refreshControl {
-                        if refreshControl.isRefreshing {
-                            refreshControl.endRefreshing()
-                        }
+            print("Successfully retrieve the data from iCloud")
+            
+            DispatchQueue.main.async {
+                self.spinner.stopAnimating()
+                self.tableView.reloadData()
+                if let refreshControl = self.refreshControl {
+                    if refreshControl.isRefreshing {
+                        refreshControl.endRefreshing()
                     }
                 }
             }
         }
+        // Execute the query
+        privateDatabase.add(queryOperation)
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,19 +123,24 @@ class DiscoverTableViewController: UITableViewController {
         
         // Configure the Cell...
         let diary = diaries[indexPath.row]
-        
-        cell.titleLabel.text = diary.object(forKey: "title") as? String
+        let diaryId = diary.object(forKey: "id") as? String
+        let diaryTitle = diary.object(forKey: "title") as? String
+        if let diaryId = diaryId {
+            if let diaryTitle = diaryTitle {
+                cell.titleLabel.text = diaryId + diaryTitle
+            }
+        }
         cell.fullImageView.image = UIImage(named: "photo")
         let updateDate = diary.object(forKey: "modifiedAt") as? Date
         cell.updateDateLabel.text = self.getFriendlyDate(date: updateDate!) + " 已同步"
         cell.tagLabel.text = diary.object(forKey: "tag") as? String
-        let deviceName = diary.object(forKey: "content") as? String
+        let deviceName = diary.object(forKey: "deviceName") as? String
         if let deviceName = deviceName {
-            cell.contentTextView.text = deviceName
+            cell.deviceNameLabel.text = deviceName
         } else {
-            cell.contentTextView.text = "未知设备"
+            cell.deviceNameLabel.text = "未知设备"
         }
-        cell.deviceNameLabel.text = diary.object(forKey: "deviceName") as? String
+        cell.contentLabel.text = diary.object(forKey: "content") as? String
         // Check if the image is stored in cache
         if let imageFileURL = imageCache.object(forKey: diary.recordID) {
             // Fetch image from cache
@@ -135,7 +149,7 @@ class DiscoverTableViewController: UITableViewController {
                 cell.fullImageView.image = UIImage(data: imageData)
             }
         } else {
-            let publicDatabase = CKContainer.default().privateCloudDatabase
+            let privateDatabase = CKContainer.default().privateCloudDatabase
             let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [diary.recordID])
             fetchRecordsImageOperation.desiredKeys = ["image"]
             fetchRecordsImageOperation.queuePriority = .veryHigh
@@ -155,7 +169,7 @@ class DiscoverTableViewController: UITableViewController {
                     }
                 }
             }
-            publicDatabase.add(fetchRecordsImageOperation)
+            privateDatabase.add(fetchRecordsImageOperation)
         }
         return cell
     }

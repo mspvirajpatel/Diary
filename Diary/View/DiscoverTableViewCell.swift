@@ -12,7 +12,7 @@ class DiscoverTableViewCell: UITableViewCell {
 
     @IBOutlet var fullImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var contentTextView: UITextView!
+    @IBOutlet var contentLabel: UILabel!
     @IBOutlet var updateDateLabel: UILabel!
     @IBOutlet var deviceNameLabel: UILabel! {
         didSet {

@@ -180,6 +180,24 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     @IBOutlet weak var locationButton: UIButton!
     
     @IBAction func locationButtonTapped(_ sender: Any) {
+        if CLLocationManager.authorizationStatus().rawValue < 3 {
+            let alertController = UIAlertController (title: nil, message: "前往设置地理位置权限", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: "设置", style: .default) { (alertAction) in
+                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    return
+                }
+                
+                if UIApplication.shared.canOpenURL(settingsUrl) {
+                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                        print("Settings opened: \(success)") // Prints true
+                    })
+                }
+            })
+            
+            present(alertController, animated: true, completion: nil)
+        }
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         } else {
@@ -240,15 +258,20 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         
         // Prepare to get user's location
         locationImageView.image = UIImage(named: "map")
+        
+        if CLLocationManager.authorizationStatus().rawValue < 3 {
+            locationButton.setTitle("请点击开启地理位置权限", for: UIControlState.normal)
+        }
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
-            locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         } else {
             locationButton.setTitle("请开启地理位置权限", for: UIControlState.normal)
         }
+        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView)

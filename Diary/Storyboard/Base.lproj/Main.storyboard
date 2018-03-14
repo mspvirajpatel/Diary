@@ -649,7 +649,7 @@
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="QD6-xZ-jF0"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <state key="normal" title="Button">
+                                                    <state key="normal" title="Location">
                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
@@ -816,12 +816,6 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLG-v1-IQu">
-                                            <rect key="frame" x="163" y="21" width="212" height="77"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85S-Yg-Jj7">
                                             <rect key="frame" x="346" y="0.0" width="28.5" height="16"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
@@ -842,22 +836,28 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0M0-qg-tKZ">
+                                            <rect key="frame" x="163" y="21" width="212" height="77"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="dIV-oF-cdG" firstAttribute="leading" secondItem="GzA-l6-sWA" secondAttribute="leading" id="118-Ty-i1l"/>
+                                        <constraint firstItem="GwW-UP-fJg" firstAttribute="top" secondItem="0M0-qg-tKZ" secondAttribute="bottom" constant="5" id="1Zx-nq-xsl"/>
                                         <constraint firstItem="IZ8-38-3Jv" firstAttribute="leading" secondItem="GzA-l6-sWA" secondAttribute="leading" constant="3" id="37t-cc-E5N"/>
                                         <constraint firstAttribute="trailing" secondItem="85S-Yg-Jj7" secondAttribute="trailing" id="6kI-TW-zzf"/>
                                         <constraint firstItem="GzA-l6-sWA" firstAttribute="leading" secondItem="ADd-47-DGn" secondAttribute="leading" id="70f-ml-cdX"/>
-                                        <constraint firstItem="dLG-v1-IQu" firstAttribute="leading" secondItem="GzA-l6-sWA" secondAttribute="trailing" constant="3" id="96H-bK-NZg"/>
-                                        <constraint firstItem="GwW-UP-fJg" firstAttribute="top" secondItem="dLG-v1-IQu" secondAttribute="bottom" constant="5" id="9uD-Jo-wSU"/>
                                         <constraint firstItem="GzA-l6-sWA" firstAttribute="trailing" secondItem="dIV-oF-cdG" secondAttribute="trailing" id="9vY-Nw-UK0"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IZ8-38-3Jv" secondAttribute="trailing" constant="20" symbolic="YES" id="AGK-X3-XlA"/>
+                                        <constraint firstItem="0M0-qg-tKZ" firstAttribute="top" secondItem="85S-Yg-Jj7" secondAttribute="bottom" constant="5" id="AfO-ER-6GA"/>
+                                        <constraint firstItem="0M0-qg-tKZ" firstAttribute="leading" secondItem="GzA-l6-sWA" secondAttribute="trailing" constant="3" id="BVf-ar-w3E"/>
                                         <constraint firstAttribute="trailing" secondItem="GwW-UP-fJg" secondAttribute="trailing" constant="3" id="ECc-Yq-cj1"/>
+                                        <constraint firstAttribute="trailing" secondItem="0M0-qg-tKZ" secondAttribute="trailing" id="FdD-p2-QsB"/>
                                         <constraint firstItem="85S-Yg-Jj7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ADd-47-DGn" secondAttribute="leading" constant="20" symbolic="YES" id="JMM-QK-G1x"/>
-                                        <constraint firstItem="dLG-v1-IQu" firstAttribute="top" secondItem="85S-Yg-Jj7" secondAttribute="bottom" constant="5" id="Jim-fd-Hjq"/>
                                         <constraint firstItem="85S-Yg-Jj7" firstAttribute="top" secondItem="ADd-47-DGn" secondAttribute="top" id="Khv-eD-rzL"/>
                                         <constraint firstAttribute="bottom" secondItem="GzA-l6-sWA" secondAttribute="bottom" id="OkS-gS-HRz"/>
-                                        <constraint firstAttribute="trailing" secondItem="dLG-v1-IQu" secondAttribute="trailing" id="YbH-Pq-1Ed"/>
                                         <constraint firstItem="h1T-Tw-8e7" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ADd-47-DGn" secondAttribute="leading" constant="142.5" id="hzf-uU-IDj"/>
                                         <constraint firstItem="GzA-l6-sWA" firstAttribute="top" secondItem="ADd-47-DGn" secondAttribute="top" id="i14-Hn-O4G"/>
                                         <constraint firstItem="GzA-l6-sWA" firstAttribute="bottom" secondItem="dIV-oF-cdG" secondAttribute="bottom" id="j7V-ss-e9r"/>
@@ -869,7 +869,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="contentTextView" destination="dLG-v1-IQu" id="3VY-fZ-yex"/>
+                                    <outlet property="contentLabel" destination="0M0-qg-tKZ" id="jNj-Qw-8Hb"/>
                                     <outlet property="deviceNameLabel" destination="GwW-UP-fJg" id="uRZ-pc-6ti"/>
                                     <outlet property="fullImageView" destination="GzA-l6-sWA" id="XSg-W2-2YO"/>
                                     <outlet property="tagLabel" destination="h1T-Tw-8e7" id="naZ-o7-aGe"/>
@@ -1563,7 +1563,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJt-Fo-oKH">
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="149"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal" title="foggy">
+                                                <state key="normal" title="Foggy">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -1588,7 +1588,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cb-DT-gOH">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="149"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal" title="sand storm">
+                                                <state key="normal" title="SandStorm">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -1598,7 +1598,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcE-Bd-SV3">
                                                 <rect key="frame" x="114.5" y="0.0" width="114" height="149"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal" title="tornado">
+                                                <state key="normal" title="Tornado">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -2147,7 +2147,7 @@
                         <outlet property="contentTextView" destination="vCr-Po-5UR" id="FZf-Tk-bTi"/>
                         <outlet property="creatDateLabel" destination="yRy-co-9pH" id="her-4j-cml"/>
                         <outlet property="dateLabel" destination="BDj-AD-5b6" id="ZVC-yM-1az"/>
-                        <outlet property="fullImageView" destination="f5D-DO-1fh" id="rWU-ev-2QM"/>
+                        <outlet property="fullImageView" destination="f5D-DO-1fh" id="tIi-Ab-SHa"/>
                         <outlet property="locationButton" destination="NSx-0H-f8l" id="7u1-nz-hMk"/>
                         <outlet property="tagButton" destination="dWc-YQ-aGj" id="Yie-Hl-6oi"/>
                         <outlet property="titleTextField" destination="y8J-gk-5ED" id="lF1-TT-Vdf"/>

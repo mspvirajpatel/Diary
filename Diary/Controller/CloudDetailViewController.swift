@@ -13,6 +13,7 @@ import MapKit
 
 class CloudDetailViewController: UIViewController, UITextViewDelegate {
     var diary: CKRecord!
+    private var imageCache = NSCache<CKRecordID, NSURL>()
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var fullImageView: UIImageView!
     
@@ -33,7 +34,51 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
 
         navigationItem.largeTitleDisplayMode = .never
-
+        fullImageView.image = UIImage(named: "photo")
+        titleTextField.text = diary.object(forKey: "title") as? String
+        let diaryTag = diary.object(forKey: "tag") as? String
+        if let diaryTag = diaryTag {
+            if diaryTag == "" {
+                tagButton.setTitle("tag", for: UIControlState.normal)
+            } else {
+                tagButton.setTitle(diaryTag, for: UIControlState.normal)
+            }
+        } else {
+            tagButton.setTitle("tag", for: UIControlState.normal)
+        }
+        
+        // Check if the image is stored in cache
+        if let imageFileURL = imageCache.object(forKey: diary.recordID) {
+            // Fetch image from cache
+            print("Get image from cache")
+            if let imageData = try? Data.init(contentsOf: imageFileURL as URL) {
+                fullImageView.image = UIImage(data: imageData)
+            }
+        } else {
+            let privateDatabase = CKContainer.default().privateCloudDatabase
+            let fetchRecordsImageOperation = CKFetchRecordsOperation(recordIDs: [diary.recordID])
+            fetchRecordsImageOperation.desiredKeys = ["image"]
+            fetchRecordsImageOperation.queuePriority = .veryHigh
+            fetchRecordsImageOperation.perRecordCompletionBlock = { (record, recordID, error) in
+                if let error = error {
+                    print("Failed to get data from iCloud - \(error.localizedDescription)")
+                    return
+                }
+                if let diaryRecord = record, let image = diaryRecord.object(forKey: "image"), let imageAsset = image as? CKAsset {
+                    if let imageData = try? Data.init(contentsOf: imageAsset.fileURL) {
+                        DispatchQueue.main.async {
+                            self.fullImageView.image = UIImage(data: imageData)
+                        }
+                    }
+                }
+            }
+            privateDatabase.add(fetchRecordsImageOperation)
+        }
+        
+        if let diaryWeather = diary.object(forKey: "weather") as? String {
+            weatherImageView.image = UIImage(named: diaryWeather)
+        }
+        
         if let location = diary.object(forKey: "location") as? CLLocation {
             if location.coordinate.latitude == 0.0 && location.coordinate.longitude == 0.0 {
                 locationButton.setTitle("无", for: UIControlState.normal)
