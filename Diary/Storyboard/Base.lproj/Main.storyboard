@@ -454,6 +454,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="bgView" destination="mb5-Qw-lqc" id="dcR-G5-csL"/>
+                                    <outlet property="blurView" destination="m88-ui-yWJ" id="blq-sV-uKR"/>
                                     <outlet property="contentLabel" destination="Gtc-Yl-auk" id="65y-Ub-EJZ"/>
                                     <outlet property="contentLargeUILabel" destination="lEK-Dv-KJR" id="NC9-2B-H1P"/>
                                     <outlet property="dateLabel" destination="Gy0-Qy-YHI" id="bdC-yn-TH7"/>

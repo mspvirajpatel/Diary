@@ -149,7 +149,9 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
             //显示提示框
             self.present(alertController, animated: true, completion: nil)
             titleTextField.text = textFieldStartString
+            textFieldEndString = textFieldStartString
             contentTextView.text = textViewStartString
+            textViewEndString = textViewStartString
             //两秒钟后自动消失
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                 self.presentedViewController?.dismiss(animated: false, completion: nil)
@@ -234,12 +236,113 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         doneButton.isHidden = true
     }
     
+    @objc func back(_ sender: UIBarButtonItem) {
+        // Perform your custom actions
+        print("updateDiary")
+        view.endEditing(true)
+        if textFieldEndString == "" && textViewEndString == "" {
+            let alertController = UIAlertController(title: "标题或内容不能都为空",
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            titleTextField.text = textFieldStartString
+            textFieldEndString = textFieldStartString
+            contentTextView.text = textViewStartString
+            textViewEndString = textViewStartString
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
+            }
+        } else {
+            if textFieldStartString != textFieldEndString || textViewStartString != textViewEndString {
+                let currentDate = Date.init()
+                
+                // Fetch and save the record from the iCloud
+                let privateDatabase = CKContainer.default().privateCloudDatabase
+                print("recordName: \(diary.recordName!)")
+                if let recordName = diary.recordName {
+                    let recordID = CKRecordID(recordName: recordName)
+                    privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
+                        if let error = error {
+                            // Error handling for failed fetch from public database
+                            print("DetailView updateRecordToCloud():\(error.localizedDescription)")
+                        } else {
+                            // Modify the record and save it to the database
+                            if let record = record {
+                                if self.textFieldStartString != self.textFieldEndString {
+                                    record.setValue(self.textFieldEndString, forKey: "title")
+                                }
+                                if self.textViewStartString != self.textViewEndString {
+                                    record.setValue(self.textViewEndString, forKey: "content")
+                                }
+                                let currentDate = Date.init()
+                                record.setValue(currentDate, forKey: "modifiedAt")
+                                UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
+                                privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
+                                    // Error handling for failed save to public database
+                                    if let saveError = saveError {
+                                        print(saveError.localizedDescription)
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+                
+                // update data from data store - Diary
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "id == %@", diary.id!)
+                    
+                    do {
+                        let results = try context.fetch(fetchRequest)
+                        fetchRequest.returnsObjectsAsFaults = false
+                        
+                        if(results.count > 0 ){
+                            if textFieldStartString != textFieldEndString {
+                                results[0].setValue(titleTextField.text, forKey: "title")
+                            }
+                            if textViewStartString != textViewEndString {
+                                results[0].setValue(contentTextView.text, forKey: "content")
+                            }
+                            if self.recordName != "" {
+                                results[0].setValue(self.recordName, forKey: "recordName")
+                            }
+                            results[0].setValue(currentDate, forKey: "update")
+                            try context.save();
+                            print("Saved.....")
+                        } else {
+                            print("No results to save")
+                        }
+                    } catch{
+                        print("There was an error")
+                    }
+                }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                dateFormatter.timeZone = TimeZone.current
+                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+                
+                defaults.setValue(titleTextField.text, forKey: "title")
+                defaults.setValue(contentTextView.text, forKey: "content")
+            }
+        }
+        // Go back to the previous ViewController
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.hidesBarsOnSwipe = false
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage(named: "arrow-left"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(back(_:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
         
         doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         doneButton.setTitle("Done", for: UIControlState.normal)

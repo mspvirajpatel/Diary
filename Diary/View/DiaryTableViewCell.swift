@@ -31,6 +31,12 @@ class DiaryTableViewCell: UITableViewCell {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var weekLabel: UILabel!
     @IBOutlet var bgView: UIView!
+    @IBOutlet weak var blurView: UIView! {
+        didSet {
+            blurView.layer.cornerRadius = 5.0
+            blurView.layer.masksToBounds = true
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

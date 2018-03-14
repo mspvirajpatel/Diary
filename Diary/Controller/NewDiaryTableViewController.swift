@@ -44,7 +44,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             // Prepare data
             let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
             UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
-            let dataId = String(currentMaxId + 1)
+            let dataId = String(Int(currentDate.timeIntervalSince1970.rounded())) + randomString(length: 6) + String(currentMaxId + 1)
             
             // Save to iCloud
             let record = CKRecord(recordType: "Diary")

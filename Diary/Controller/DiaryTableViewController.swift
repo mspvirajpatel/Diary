@@ -28,6 +28,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     @IBOutlet var navTitle: UINavigationItem!
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -466,6 +467,22 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func randomString(length: Int) -> String {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return randomString
     }
     
     func getFriendlyTime(date: Date) -> String {

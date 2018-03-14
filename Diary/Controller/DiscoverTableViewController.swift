@@ -123,13 +123,7 @@ class DiscoverTableViewController: UITableViewController {
         
         // Configure the Cell...
         let diary = diaries[indexPath.row]
-        let diaryId = diary.object(forKey: "id") as? String
-        let diaryTitle = diary.object(forKey: "title") as? String
-        if let diaryId = diaryId {
-            if let diaryTitle = diaryTitle {
-                cell.titleLabel.text = diaryId + diaryTitle
-            }
-        }
+        cell.titleLabel.text = diary.object(forKey: "title") as? String
         cell.fullImageView.image = UIImage(named: "photo")
         let updateDate = diary.object(forKey: "modifiedAt") as? Date
         cell.updateDateLabel.text = self.getFriendlyDate(date: updateDate!) + " 已同步"
