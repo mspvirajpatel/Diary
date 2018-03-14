@@ -43,17 +43,16 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("diary viewdidload")
         
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: view)
         }
 
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.hidesBarsOnSwipe = true
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.hidesBarsOnSwipe = false
+//
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         
         // SearchBar
@@ -84,7 +83,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             }
         }
         
-        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnSwipe = false
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
             // Fetch data from data store - Notebook
             let fetchNoteRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()

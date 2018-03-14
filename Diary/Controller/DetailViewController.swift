@@ -237,18 +237,18 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.hidesBarsOnSwipe = false
         
         doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         doneButton.setTitle("Done", for: UIControlState.normal)
         doneButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         doneButton.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneButton)
         doneButton.addTarget(self, action: #selector(buttonClick(_:)), for: .touchUpInside)
         doneButton.layer.cornerRadius = 8.0
         doneButton.isHidden = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: doneButton)
         
         navigationItem.largeTitleDisplayMode = .never
         
@@ -293,7 +293,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         creatDateLabel.text = "创建于" + dateFormatter.string(from: diary.create!)
         updateDateLabel.text = "修改于" + dateFormatter.string(from: diary.update!)
         
-        scrollView.contentInsetAdjustmentBehavior = .never
+//        scrollView.contentInsetAdjustmentBehavior = .never
         
         contentTextView.text = diary.content
         contentTextView.delegate = self
