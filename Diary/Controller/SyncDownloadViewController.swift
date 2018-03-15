@@ -34,7 +34,9 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
         downloadProgress.progress = 0.0
         percentLabel.text = "0%"
         let alertController = UIAlertController(title: nil, message: "下载过程中遇到同一笔记会替换为最新", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction) in
+            self.navigationController?.popToRootViewController(animated: true)
+        }))
         alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (alertAction) in
             self.fetchDataFromCoredata()
         }))
@@ -221,5 +223,5 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
             }
         }
     }
-
+    
 }
