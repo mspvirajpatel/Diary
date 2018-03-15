@@ -27,8 +27,12 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
             notebook.create = currentDate
             notebook.update = currentDate
             
-            if let notebookImage = photoImageView.image {
-                notebook.coverimage = UIImagePNGRepresentation(notebookImage)
+            if let notebookCoverImage = photoImageView.image {
+                let imageName = String(Int(round(Date.init().timeIntervalSince1970))) + randomString(length: 6) + "-image.jpg"
+                let imageStore = ImageStore(name: imageName)
+                if imageStore.storeImage(image: notebookCoverImage) {
+                    notebook.coverimage = imageName
+                }
             }
             UserDefaults.standard.set(maxNoteBookId, forKey: "maxNoteBookId")
             print("Saving data to context")

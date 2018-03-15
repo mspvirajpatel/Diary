@@ -155,8 +155,8 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
             cell.notebookDescriptionLabel.isHidden = false
             cell.infoButton.isHidden = false
             cell.alphaView.isHidden = false
-            if let coverImageData = notebooks[indexPath.row].coverimage {
-                cell.imageView.image = UIImage(data: coverImageData)
+            if let coverImageName = notebooks[indexPath.row].coverimage, let coverImage = ImageStore(name: coverImageName).loadImage() {
+                cell.imageView.image = coverImage
             } else {
                 cell.imageView.image = UIImage()
             }
@@ -185,24 +185,31 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         dismiss(animated: true, completion: {
-            //save image
-            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                let context = appDelegate.persistentContainer.viewContext
-                let fetchRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
-                fetchRequest.predicate = NSPredicate(format: "id == %@", self.notebooks[self.selectNotebook].id!)
-                do {
-                    let results = try context.fetch(fetchRequest)
-                    fetchRequest.returnsObjectsAsFaults = false
-                    if(results.count > 0 ){
-                        results[0].setValue(UIImagePNGRepresentation(self.photoImage), forKey: "coverimage")
-                        try context.save();
-                        print("Saved.....")
-                    } else {
-                        print("No results to save")
+            // save image to file
+            let imageName = String(Int(round(Date.init().timeIntervalSince1970))) + self.randomString(length: 6) + "-image.jpg"
+            let imageStore = ImageStore(name: imageName)
+            if imageStore.storeImage(image: self.photoImage) {
+                //save image to coredata
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    let fetchRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "id == %@", self.notebooks[self.selectNotebook].id!)
+                    do {
+                        let results = try context.fetch(fetchRequest)
+                        fetchRequest.returnsObjectsAsFaults = false
+                        if(results.count > 0 ){
+                            results[0].setValue(imageName, forKey: "coverimage")
+                            try context.save();
+                            print("Saved.....")
+                        } else {
+                            print("No results to save")
+                        }
+                    } catch{
+                        print("There was an error")
                     }
-                } catch{
-                    print("There was an error")
                 }
+            } else {
+                print("修改图片失败")
             }
         })
     }
@@ -366,10 +373,21 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                 if self.diaries.count == 0 {
                     alertMessage = UIAlertController(title: "Warning", message: "if you really want to delete Notebook \(self.notebooks[indexPath.row].name!), Please tap yes", preferredStyle: .alert)
                     alertMessage.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (alertAction) in
+                        // delete image from filemanager
+                        if let coverImageName = self.notebooks[indexPath.row].coverimage {
+                            if ImageStore(name: coverImageName).deleteImage() {
+                                print("删除照片文件成功")
+                            } else {
+                                print("删除照片文件失败")
+                            }
+                        }
+                        
+                        // delete notebook from coredata
                         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                             let context = appDelegate.persistentContainer.viewContext
                             let notebookToDelete = self.fetchResultController.object(at: indexPath)
                             context.delete(notebookToDelete)
+                            print("成功删除笔记本")
                             appDelegate.saveContext()
                         }
                         UserDefaults.standard.set(1, forKey: "defaultNoteBookId")

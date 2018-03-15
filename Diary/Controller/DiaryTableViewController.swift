@@ -159,7 +159,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 notebook.create = currentDate
                 notebook.update = currentDate
                 if let notebookCoverImage = UIImage(named: "weather-background") {
-                    notebook.coverimage = UIImagePNGRepresentation(notebookCoverImage)
+                    let imageName = String(Int(round(Date.init().timeIntervalSince1970))) + randomString(length: 6) + "-image.jpg"
+                    let imageStore = ImageStore(name: imageName)
+                    if imageStore.storeImage(image: notebookCoverImage) {
+                        notebook.coverimage = imageName
+                    }
                 }
                 
                 for index in 0..<initTags.count {

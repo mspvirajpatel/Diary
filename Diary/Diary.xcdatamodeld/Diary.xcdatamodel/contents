@@ -16,7 +16,7 @@
     </entity>
     <entity name="Notebook" representedClassName="NotebookMO" syncable="YES" codeGenerationType="class">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="coverimage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="coverimage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="create" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
