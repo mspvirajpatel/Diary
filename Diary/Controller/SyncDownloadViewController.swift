@@ -204,7 +204,15 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                     diary.notebookid = "1"
                     if let image = cloudDiary.object(forKey: "image"), let imageAsset = image as? CKAsset {
                         if let imageData = try? Data.init(contentsOf: imageAsset.fileURL) {
-                            diary.image = imageData
+                            let imageName = String(Int(round(Date.init().timeIntervalSince1970))) + randomString(length: 6) + "-image.jpg"
+                            let imageStore = ImageStore(name: imageName)
+                            if let savedImage = UIImage(data: imageData) {
+                                if imageStore.storeImage(image: savedImage) {
+                                    diary.image = imageName
+                                } else {
+                                    diary.image = ""
+                                }
+                            }
                         }
                     }
                     self.outputTextView.text = self.outputTextView.text + "iCloud id: " + cloudDiaryId + "新建到本地成功...\r\n"

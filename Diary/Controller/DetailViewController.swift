@@ -380,8 +380,8 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
         
         tagStartString = diary.tag!
-        if let diaryImage = diary.image {
-            fullImageView.image = UIImage(data: diaryImage)
+        if let imageName = diary.image, let diaryImage = ImageStore(name: imageName).loadImage() {
+                fullImageView.image = diaryImage
         }
         weatherImageView.image = UIImage(named: diary.weather!)
         

@@ -148,7 +148,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 
                 if isSetPhoto {
                     if let diaryImage = photoImageView.image {
-                        diary.image = UIImagePNGRepresentation(diaryImage)
+                        let imageName = String(Int(round(Date.init().timeIntervalSince1970))) + randomString(length: 6) + "-image.jpg"
+                        let imageStore = ImageStore(name: imageName)
+                        if imageStore.storeImage(image: diaryImage) {
+                            diary.image = imageName
+                        }
                     }
                 }
                 

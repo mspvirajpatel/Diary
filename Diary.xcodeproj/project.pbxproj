@@ -39,6 +39,7 @@
 		CE7694E920513972006D611B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7694E720513972006D611B /* MainInterface.storyboard */; };
 		CE7694ED20513972006D611B /* Diary Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CE7694E120513972006D611B /* Diary Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE7EE0E9204CD9BC006A5BDD /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */; };
+		CE9045DA205A0BCD00276E3E /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9045D9205A0BCD00276E3E /* ImageStore.swift */; };
 		CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */; };
 		CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE792042AE62005FB426 /* NotebookViewController.swift */; };
 		CEC9CE7C2042C4C3005FB426 /* NewNotebookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */; };
@@ -117,6 +118,7 @@
 		CE7694EA20513972006D611B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7694F220513CE2006D611B /* Diary Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Diary Widget.entitlements"; sourceTree = "<group>"; };
 		CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		CE9045D9205A0BCD00276E3E /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		CEC9CE752042AC41005FB426 /* NotebookCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEC9CE792042AE62005FB426 /* NotebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookViewController.swift; sourceTree = "<group>"; };
 		CEC9CE7B2042C4C3005FB426 /* NewNotebookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNotebookTableViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				CE01071A204695C400485171 /* UserLocation.swift */,
+				CE9045D9205A0BCD00276E3E /* ImageStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				CEC9CE7A2042AE62005FB426 /* NotebookViewController.swift in Sources */,
 				CE449CCB203D69FE008702B4 /* AppDelegate.swift in Sources */,
 				CEF61F9A204D46C500AD96F9 /* UpdateTagsTableViewController.swift in Sources */,
+				CE9045DA205A0BCD00276E3E /* ImageStore.swift in Sources */,
 				CE197BE72054EA5100C63670 /* AuthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

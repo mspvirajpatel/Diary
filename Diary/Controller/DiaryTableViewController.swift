@@ -249,8 +249,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         // Configure the cell...
         
         cell.titleLabel.text = diary.title
-        if let diaryImage = diary.image {
-            cell.thumbnailImageView.image = UIImage(data: diaryImage)
+        if let imageName = diary.image, let diaryImage = ImageStore(name: imageName).loadImage() {
+            cell.thumbnailImageView.image = diaryImage
             cell.contentLabel.isHidden = true
             if cell.contentLargeUILabel.frame.width > 100 {
                 cell.contentLargeUILabel.isHidden = false
@@ -302,10 +302,20 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                             if let error = error {
                                 print(error.localizedDescription)
                             }
+                            print("delete from icloud success")
                         })
                     }
                 })
                 
+            }
+            
+            // delete in fileManager
+            if let diaryName = diary.image {
+                if ImageStore(name: diaryName).deleteImage() {
+                    print("删除照片文件成功")
+                } else {
+                    print("删除照片文件失败")
+                }
             }
             
             // delete in database
@@ -313,7 +323,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 let context = appDelegate.persistentContainer.viewContext
                 let diaryToDelete = self.fetchResultController.object(at: indexPath)
                 context.delete(diaryToDelete)
-                
+                print("delete from coredata success")
                 appDelegate.saveContext()
             }
             
@@ -324,7 +334,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             let defaultTitle = self.diaries[indexPath.row].title!
             let defaultContent = self.diaries[indexPath.row].content!
             
-            if let imageToShare = UIImage(data: self.diaries[indexPath.row].image!) {
+            if let imageName = self.diaries[indexPath.row].image, let imageToShare = UIImage(named: imageName) {
                 self.activityController = UIActivityViewController(activityItems: [defaultTitle, imageToShare, defaultContent], applicationActivities: nil)
             } else {
                 self.activityController = UIActivityViewController(activityItems: [defaultTitle, defaultContent], applicationActivities: nil)
