@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let backButtonImage = UIImage(named: "back")
 //        UINavigationBar.appearance().backIndicatorImage = backButtonImage
 //        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
-//        UINavigationBar.appearance().tintColor = UIColor.black
+        UINavigationBar.appearance().tintColor = UIColor(red: 108.0/255.0, green: 122.0/255.0, blue: 137.0/255.0, alpha: 1.0)
         
         UIApplication.shared.statusBarStyle = .default
         

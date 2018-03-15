@@ -399,8 +399,15 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         contentTextView.delegate = self
         contentTextView.sizeToFit()
         contentTextView.isScrollEnabled = false
-        textFieldEndString = diary.title!
-        textViewEndString = diary.content!
+        if let diaryTitle = diary.title {
+            textFieldStartString = diaryTitle
+            textFieldEndString = diaryTitle
+        }
+        
+        if let diaryContent = diary.content {
+            textViewStartString = diaryContent
+            textViewEndString = diaryContent
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -12,11 +12,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Tangerine-Bold.ttf">
-            <string>Tangerine-Bold</string>
+        <array key="ArialRoundedMTBold.ttf">
+            <string>ArialRoundedMTBold</string>
         </array>
-        <array key="Tangerine-Regular.ttf">
-            <string>Tangerine-Regular</string>
+        <array key="ChalkboardSE.ttc">
+            <string>ChalkboardSE-Bold</string>
         </array>
     </customFonts>
     <scenes>
@@ -336,27 +336,27 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zok-I2-mnk">
-                                                            <rect key="frame" x="29" y="73" width="20" height="20"/>
+                                                            <rect key="frame" x="29" y="74" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20" id="oio-bc-TPC"/>
                                                                 <constraint firstAttribute="height" constant="20" id="xyk-6b-dJt"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Mar." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9Z-rk-QyK">
-                                                            <rect key="frame" x="0.0" y="35" width="44" height="24"/>
-                                                            <fontDescription key="fontDescription" name="Tangerine-Regular" family="Tangerine" pointSize="24"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1A5-Bn-zi7">
-                                                            <rect key="frame" x="44" y="17" width="24" height="48"/>
-                                                            <fontDescription key="fontDescription" name="Tangerine-Bold" family="Tangerine" pointSize="48"/>
+                                                            <rect key="frame" x="47" y="30" width="29" height="28"/>
+                                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sat." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hrf-wJ-szB">
-                                                            <rect key="frame" x="30.5" y="108" width="17.5" height="15"/>
-                                                            <fontDescription key="fontDescription" name="Tangerine-Bold" family="Tangerine" pointSize="15"/>
+                                                            <rect key="frame" x="28" y="109" width="23" height="14"/>
+                                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Mar." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S9Z-rk-QyK">
+                                                            <rect key="frame" x="2" y="36" width="43" height="21"/>
+                                                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -364,27 +364,18 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="78" id="2dw-vr-xEi"/>
+                                                        <constraint firstItem="S9Z-rk-QyK" firstAttribute="leading" secondItem="XoU-mr-TjZ" secondAttribute="leading" constant="2" id="2fn-Gn-pnU"/>
                                                         <constraint firstAttribute="bottom" secondItem="hrf-wJ-szB" secondAttribute="bottom" constant="15" id="LpU-vn-6fH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1A5-Bn-zi7" secondAttribute="trailing" constant="2" id="RzW-eg-0E2"/>
                                                         <constraint firstItem="Zok-I2-mnk" firstAttribute="centerX" secondItem="XoU-mr-TjZ" secondAttribute="centerX" id="SPF-zz-4oT"/>
                                                         <constraint firstItem="hrf-wJ-szB" firstAttribute="top" secondItem="Zok-I2-mnk" secondAttribute="bottom" constant="15" id="VJs-jA-FFb"/>
-                                                        <constraint firstItem="S9Z-rk-QyK" firstAttribute="top" secondItem="Gy0-Qy-YHI" secondAttribute="bottom" constant="20" id="Vxq-oX-ge3"/>
-                                                        <constraint firstItem="Zok-I2-mnk" firstAttribute="top" secondItem="1A5-Bn-zi7" secondAttribute="bottom" constant="8" id="XA5-aB-mYM"/>
+                                                        <constraint firstItem="1A5-Bn-zi7" firstAttribute="leading" secondItem="S9Z-rk-QyK" secondAttribute="trailing" constant="2" id="XTT-Lf-oaC"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gy0-Qy-YHI" secondAttribute="trailing" constant="20" symbolic="YES" id="XVq-st-1Js"/>
                                                         <constraint firstItem="hrf-wJ-szB" firstAttribute="centerX" secondItem="XoU-mr-TjZ" secondAttribute="centerX" id="ZvZ-KW-YLe"/>
-                                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="1A5-Bn-zi7" secondAttribute="trailing" constant="10" id="bhF-NN-3fl"/>
+                                                        <constraint firstItem="S9Z-rk-QyK" firstAttribute="top" secondItem="Gy0-Qy-YHI" secondAttribute="bottom" constant="21" id="ak4-pE-57G"/>
                                                         <constraint firstItem="Gy0-Qy-YHI" firstAttribute="leading" secondItem="XoU-mr-TjZ" secondAttribute="leading" constant="3" id="dOA-iy-Ktq"/>
                                                         <constraint firstItem="Gy0-Qy-YHI" firstAttribute="top" secondItem="XoU-mr-TjZ" secondAttribute="top" constant="3" id="dof-RU-nvk"/>
-                                                        <constraint firstItem="1A5-Bn-zi7" firstAttribute="top" secondItem="XoU-mr-TjZ" secondAttribute="top" constant="17" id="j7A-10-9iz"/>
-                                                        <constraint firstItem="1A5-Bn-zi7" firstAttribute="leading" secondItem="S9Z-rk-QyK" secondAttribute="trailing" id="nV1-7t-rtq"/>
-                                                        <constraint firstItem="S9Z-rk-QyK" firstAttribute="leading" secondItem="XoU-mr-TjZ" secondAttribute="leading" id="q2t-2V-pwk"/>
-                                                    </constraints>
-                                                </view>
-                                                <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m88-ui-yWJ" userLabel="blur View">
-                                                    <rect key="frame" x="86" y="106" width="241" height="32"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="32" id="AHB-8j-RlX"/>
-                                                        <constraint firstAttribute="width" constant="241" id="T2F-pU-s3j"/>
+                                                        <constraint firstItem="1A5-Bn-zi7" firstAttribute="top" secondItem="XoU-mr-TjZ" secondAttribute="top" constant="30" id="vDF-SY-EO2"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEK-Dv-KJR">
@@ -393,6 +384,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m88-ui-yWJ" userLabel="blur View">
+                                                    <rect key="frame" x="86" y="106" width="241" height="32"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="AHB-8j-RlX"/>
+                                                        <constraint firstAttribute="width" constant="241" id="T2F-pU-s3j"/>
+                                                    </constraints>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9L-4b-tcR">
                                                     <rect key="frame" x="94" y="115" width="30" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -683,7 +682,7 @@
                                                         <constraint firstAttribute="height" constant="262" id="Krb-JD-SgH"/>
                                                     </constraints>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
@@ -886,7 +885,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="iCloud上的内容" id="68m-Jm-BQK">
-                        <barButtonItem key="rightBarButtonItem" title="同步" style="plain" id="AWi-ta-aYv">
+                        <barButtonItem key="rightBarButtonItem" image="sync" style="plain" id="AWi-ta-aYv">
                             <connections>
                                 <segue destination="W57-PD-JyO" kind="show" id="jBO-q1-wA7"/>
                             </connections>
@@ -1855,7 +1854,7 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="270" id="ik5-cH-xL1"/>
                                         </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="L1H-wl-gcI">
@@ -2048,7 +2047,7 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="270" id="0U7-Vp-Dj5"/>
                                         </constraints>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="vSS-aN-yqc">
@@ -2282,6 +2281,7 @@
         <image name="setting" width="24" height="24"/>
         <image name="store" width="22" height="21"/>
         <image name="sunny" width="96" height="96"/>
+        <image name="sync" width="24" height="24"/>
         <image name="website" width="24" height="24"/>
     </resources>
 </document>

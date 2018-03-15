@@ -23,7 +23,7 @@
                                 <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diary-cover" translatesAutoresizingMaskIntoConstraints="NO" id="Y6h-LG-sap">
-                                <rect key="frame" x="67" y="150" width="240" height="240"/>
+                                <rect key="frame" x="67.5" y="163.5" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="mk9-ut-Kx2"/>
                                     <constraint firstAttribute="width" constant="240" id="th4-xh-eV4"/>
@@ -36,8 +36,8 @@
                             <constraint firstItem="Y6h-LG-sap" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="E2b-1o-hW3"/>
                             <constraint firstItem="bCX-ag-NOb" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="L3j-St-pfQ"/>
                             <constraint firstItem="bCX-ag-NOb" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="edT-eM-aMt"/>
-                            <constraint firstItem="Y6h-LG-sap" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="130" id="pM5-ln-9YL"/>
                             <constraint firstItem="bCX-ag-NOb" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="sbO-Xz-4Sd"/>
+                            <constraint firstAttribute="centerY" secondItem="Y6h-LG-sap" secondAttribute="centerY" constant="50" id="sq6-id-V6T"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
