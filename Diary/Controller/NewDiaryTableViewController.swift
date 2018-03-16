@@ -280,6 +280,17 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             locationButton.setTitle("请开启地理位置权限", for: UIControlState.normal)
         }
         
+        if UserDefaults.standard.bool(forKey: "isNewPhoto") {
+            UserDefaults.standard.set(false, forKey: "isNewPhoto")
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = false
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView)

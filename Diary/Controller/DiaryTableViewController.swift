@@ -146,6 +146,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(Date.init(), forKey: "iCloudSync")
             UserDefaults.standard.set(false, forKey: "isOpenNotify")
             UserDefaults.standard.set(false, forKey: "isOpenFaceID")
+            UserDefaults.standard.set(false, forKey: "isNewPhoto")
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat =  "HH:mm"
             dateFormatter.timeZone = TimeZone.current

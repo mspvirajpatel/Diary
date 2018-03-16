@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import CloudKit
 
-class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
     
     var diary: DiaryMO!
     var fetchDiary: DiaryMO!
@@ -45,6 +45,46 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var inputKeyboardView: UIView!
     @IBOutlet weak var inputKeyboardImageView: UIImageView!
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let photoSourceRequestController = UIAlertController(title: "", message: "请选择照片来源", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "照相", style: .default, handler: { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = false
+                imagePicker.sourceType = .camera
+                
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        })
+        
+        let photoLibraryAction = UIAlertAction(title: "相册", style: .default, handler: { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.allowsEditing = false
+                imagePicker.sourceType = .photoLibrary
+                
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        photoSourceRequestController.addAction(cameraAction)
+        photoSourceRequestController.addAction(photoLibraryAction)
+        photoSourceRequestController.addAction(cancelAction)
+        
+        
+        if let popoverController = photoSourceRequestController.popoverPresentationController {
+            popoverController.sourceView = fullImageView
+            popoverController.sourceRect = fullImageView.bounds
+        }
+        
+        present(photoSourceRequestController, animated: true, completion: nil)
+    }
     
     @IBAction func tagButtonTapped(_ sender: UIButton) {
         
@@ -408,6 +448,10 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
             textViewStartString = diaryContent
             textViewEndString = diaryContent
         }
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        fullImageView.isUserInteractionEnabled = true
+        fullImageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -468,6 +512,116 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
             if tagButtonString != "tag" {
                 let tagArray = tagButtonString.components(separatedBy: " ")
                 destination.chooseTagsInit = tagArray
+            }
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let selectedUIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            var selectedImage = selectedUIImage
+            // This fixes the image orientation <<<---
+            if selectedImage.imageOrientation != UIImageOrientation.up {
+                UIGraphicsBeginImageContextWithOptions(selectedImage.size, false, selectedImage.scale)
+                selectedImage.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: selectedImage.size))
+                selectedImage = UIGraphicsGetImageFromCurrentImageContext()!
+                UIGraphicsEndImageContext()
+            }
+            
+            fullImageView.image = selectedImage
+            updateImage()
+            fullImageView.contentMode = .scaleToFill
+            fullImageView.clipsToBounds = true
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func updateImage() {
+        let currentDate = Date.init()
+        let imageName = String(Int(round(Date.init().timeIntervalSince1970))) + self.randomString(length: 6) + "-image.jpg"
+        let imageStore = ImageStore(name: imageName)
+        if let diaryImage = self.fullImageView.image {
+            if imageStore.storeImage(image: diaryImage) {
+            
+                // Fetch and save the record from the iCloud
+                let privateDatabase = CKContainer.default().privateCloudDatabase
+                print("recordName: \(diary.recordName!)")
+                if let recordName = diary.recordName {
+                    let recordID = CKRecordID(recordName: recordName)
+                    privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
+                        if let error = error {
+                            // Error handling for failed fetch from public database
+                            print("DetailView updateRecordToCloud():\(error.localizedDescription)")
+                        } else {
+                            // Modify the record and save it to the database
+                            if let record = record {
+                                let diaryImage = diaryImage
+                                // Resize the image
+                                let imageData = UIImagePNGRepresentation(diaryImage)!
+                                let originalImage = UIImage(data: imageData)!
+                                let scalingFator = (originalImage.size.width > 1024) ? 1024 / originalImage.size.width : 1.0
+                                let scaledImage = UIImage(data: imageData, scale: scalingFator)!
+                                
+                                // Write the image to the local file for temporary use
+                                let imageFilePath = NSTemporaryDirectory() + imageName
+                                let imageFileURL = URL(fileURLWithPath: imageFilePath)
+                                try? UIImageJPEGRepresentation(scaledImage, 0.8)?.write(to: imageFileURL)
+                                
+                                // Create image asset for upload
+                                let imageAsset = CKAsset(fileURL: imageFileURL)
+                                
+                                record.setValue(imageAsset, forKey: "image")
+                                record.setValue(currentDate, forKey: "modifiedAt")
+                                UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
+                                privateDatabase.save(record, completionHandler: { (savedRecord, saveError) in
+                                    // Error handling for failed save to public database
+                                    if let saveError = saveError {
+                                        print(saveError.localizedDescription)
+                                    }
+                                })
+                            }
+                        }
+                    })
+                }
+                
+                // Delete the image before
+                // delete in fileManager
+                if let diaryName = diary.image {
+                    if ImageStore(name: diaryName).deleteImage() {
+                        print("删除照片文件成功")
+                    } else {
+                        print("删除照片文件失败")
+                    }
+                } else {
+                    print("原来没有照片，无需删除")
+                }
+            
+                // update data from data store - Diary
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+                    fetchRequest.predicate = NSPredicate(format: "id == %@", diary.id!)
+                    
+                    do {
+                        let results = try context.fetch(fetchRequest)
+                        fetchRequest.returnsObjectsAsFaults = false
+                        
+                        if(results.count > 0 ){
+                            results[0].setValue(imageName, forKey: "image")
+                            results[0].setValue(currentDate, forKey: "update")
+                            try context.save();
+                            print("Saved.....")
+                        } else {
+                            print("No results to save")
+                        }
+                    } catch{
+                        print("There was an error")
+                    }
+                }
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                dateFormatter.timeZone = TimeZone.current
+                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
             }
         }
     }

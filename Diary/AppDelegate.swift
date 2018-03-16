@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let backButtonImage = UIImage(named: "back")
 //        UINavigationBar.appearance().backIndicatorImage = backButtonImage
 //        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
-        UINavigationBar.appearance().tintColor = UIColor(red: 108.0/255.0, green: 122.0/255.0, blue: 137.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor(red: 1.0/255.0, green: 50.0/255.0, blue: 67.0/255.0, alpha: 1.0)
         
         UIApplication.shared.statusBarStyle = .default
         
@@ -53,9 +53,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBarController.selectedIndex = 0
         case .OpenDiscover:
             tabBarController.selectedIndex = 1
+        case .NewPhoto:
+            if let navController = tabBarController.viewControllers?[0] {
+                let diaryTableViewController = navController.childViewControllers[0]
+                UserDefaults.standard.set(true, forKey: "isNewPhoto")
+                diaryTableViewController.performSegue(withIdentifier: "showNewDiary", sender: diaryTableViewController)
+            } else {
+                return false
+            }
         case .NewDiary:
             if let navController = tabBarController.viewControllers?[0] {
                 let diaryTableViewController = navController.childViewControllers[0]
+                UserDefaults.standard.set(false, forKey: "isNewPhoto")
                 diaryTableViewController.performSegue(withIdentifier: "showNewDiary", sender: diaryTableViewController)
             } else {
                 return false
@@ -145,6 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 enum QuickAction: String {
     case OpenDiaries = "OpenDiary"
     case OpenDiscover = "OpenDiscover"
+    case NewPhoto = "NewPhoto"
     case NewDiary = "NewDiary"
     init?(fullIdentifier: String) {
         guard let shortcutIdentifier = fullIdentifier.components(separatedBy: ".").last else {
