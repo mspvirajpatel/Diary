@@ -86,6 +86,10 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         
         navigationController?.hidesBarsOnSwipe = false
         if UserDefaults.standard.bool(forKey: "hasViewedWalkthrough") {
+            if UserDefaults.standard.bool(forKey: "isCreateDairyFromCloud") {
+                addEmptyDiaryAndDelete()
+            }
+            
             // Fetch data from data store - Notebook
             let fetchNoteRequest: NSFetchRequest<NotebookMO> = NotebookMO.fetchRequest()
             let sortNoteDescriptor = NSSortDescriptor(key: "update", ascending: false)
@@ -179,6 +183,19 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
                 present(walkthroughViewController, animated: true, completion: nil)
             }
+        }
+    }
+    
+    func addEmptyDiaryAndDelete() {
+        // Save to CoreData
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            let diary = DiaryMO(context: context)
+            diary.id = "123123"
+            diary.notebookid = "1"
+            print("Saving data to context")
+            appDelegate.saveContext()
+            context.delete(diary)
         }
     }
     

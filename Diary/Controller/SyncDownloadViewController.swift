@@ -87,6 +87,9 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                     self.outputTextView.text = self.outputTextView.text + "成功下载iCloud数据...\r\n"
                     self.compareCoredataFromCloud()
                     var resultMessage = ""
+                    if self.createNum > 0 {
+                        UserDefaults.standard.set(true, forKey: "isCreateDairyFromCloud")
+                    }
                     if (self.updateNum + self.createNum) == 0 {
                         resultMessage = "检查完毕，无需更新"
                     } else {
