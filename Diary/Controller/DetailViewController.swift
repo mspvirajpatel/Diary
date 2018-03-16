@@ -414,6 +414,7 @@ class DetailViewController: UIViewController, NSFetchedResultsControllerDelegate
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+        self.hidesBottomBarWhenPushed = true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

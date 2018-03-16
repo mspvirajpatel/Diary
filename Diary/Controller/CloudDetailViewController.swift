@@ -123,6 +123,12 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate, UITextFie
         contentTextView.sizeToFit()
         contentTextView.isScrollEnabled = false
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.hidesBottomBarWhenPushed = true
+    }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
