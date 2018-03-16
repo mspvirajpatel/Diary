@@ -73,7 +73,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 record.setValue(contentTextView.text, forKey: "content")
             }
             record.setValue("0", forKey: "review")
-            record.setValue(String(UserDefaults.standard.integer(forKey: "defaultNoteBookId")), forKey: "notebookid")
+            record.setValue("1", forKey: "notebookid")
             
             if isSetPhoto {
                 let diaryImage = photoImageView.image!
