@@ -127,5 +127,12 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate, UITextFie
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showCloudMap" {
+            let destinationController = segue.destination as! CloudMapViewController
+            destinationController.diary = diary
+        }
+    }
 
 }

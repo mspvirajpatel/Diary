@@ -354,6 +354,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 let placemarkPostalAddress = placemarks[0].postalAddress!
                 let postalAddress = placemarkPostalAddress.city + placemarkPostalAddress.subLocality + placemarkPostalAddress.street
                 let userLocation = UserLocation(latitude: self.userCLLocation.coordinate.latitude, longitude: self.userCLLocation.coordinate.longitude, postalAddress: postalAddress)
+                print("{\(self.userCLLocation.coordinate.latitude), \(self.userCLLocation.coordinate.longitude)}")
                 let jsonEncoder = JSONEncoder()
                 do {
                     let jsonData = try jsonEncoder.encode(userLocation)
