@@ -79,6 +79,7 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
         privateDatabase.perform(query, inZoneWith: nil) { (results, error) in
             if let error = error {
                 print(error.localizedDescription)
+                self.outputTextView.text = self.outputTextView.text + "下载iCloud数据出错，提示：\(error.localizedDescription)...\r\n"
             }
             if let results = results {
                 self.iCloudDiaries = results

@@ -191,12 +191,25 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             let context = appDelegate.persistentContainer.viewContext
             let diary = DiaryMO(context: context)
+            let currentDate = Date.init()
             diary.id = "123123"
-            diary.notebookid = "1"
+            diary.notebookid = "0"
+            diary.id = "1"
+            diary.recordName = "1"
+            diary.title = "1"
+            diary.tag = "1"
+            diary.weather = "1"
+            diary.location = "1"
+            diary.create = currentDate
+            diary.update = currentDate
+            diary.content = ""
+            diary.review = "0"
+            diary.image = "1"
             print("Saving data to context")
             appDelegate.saveContext()
             context.delete(diary)
         }
+        UserDefaults.standard.set(false, forKey: "isCreateDairyFromCloud")
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
