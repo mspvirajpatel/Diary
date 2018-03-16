@@ -20,7 +20,6 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
     var diaries:[DiaryMO] = []
     var fetchResultController: NSFetchedResultsController<DiaryMO>!
     var notSyncID: [String] = []
-    var diary: DiaryMO!
     var progressIndex: Float = 1.0
     var createNum = 0
     var updateNum = 0
@@ -168,7 +167,7 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                 self.createNum = self.createNum + 1
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                     let context = appDelegate.persistentContainer.viewContext
-                    diary = DiaryMO(context: context)
+                    let diary = DiaryMO(context: context)
                     
                     diary.id = cloudDiary.object(forKey: "id") as? String
                     diary.recordName = cloudDiary.recordID.recordName
@@ -191,7 +190,7 @@ class SyncDownloadViewController: UIViewController, NSFetchedResultsControllerDe
                             let jsonEncoder = JSONEncoder()
                             do {
                                 let jsonData = try jsonEncoder.encode(userLocation)
-                                self.diary.location = String(data: jsonData, encoding: .utf8)!
+                                diary.location = String(data: jsonData, encoding: .utf8)!
                             }
                             catch {
                                 print(error)

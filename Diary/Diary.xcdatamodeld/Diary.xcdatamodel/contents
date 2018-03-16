@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Diary" representedClassName="DiaryMO" syncable="YES" codeGenerationType="class">
-        <attribute name="content" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="create" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
@@ -10,7 +10,7 @@
         <attribute name="recordName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="review" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="update" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
