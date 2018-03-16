@@ -48,6 +48,9 @@
 		CEEFDC13203EC60400A5BC64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFDC12203EC60400A5BC64 /* MapKit.framework */; };
 		CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */; };
 		CEF554CB205B6EF2008167BF /* CloudMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF554CA205B6EF2008167BF /* CloudMapViewController.swift */; };
+		CEF554D3205BC5F3008167BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEF554D5205BC5F3008167BF /* InfoPlist.strings */; };
+		CEF554D9205BC5F4008167BF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEF554DB205BC5F4008167BF /* InfoPlist.strings */; };
+		CEF554E1205BC823008167BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEF554E3205BC823008167BF /* Localizable.strings */; };
 		CEF61F9A204D46C500AD96F9 /* UpdateTagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF61F99204D46C500AD96F9 /* UpdateTagsTableViewController.swift */; };
 		CEF6C85E2041000F00FBE069 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF6C85D2041000F00FBE069 /* Onboarding.storyboard */; };
 		CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */; };
@@ -127,6 +130,19 @@
 		CEEFDC12203EC60400A5BC64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEEFDC14203EC85D00A5BC64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CEF554CA205B6EF2008167BF /* CloudMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudMapViewController.swift; sourceTree = "<group>"; };
+		CEF554D0205BC5F2008167BF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		CEF554D4205BC5F3008167BF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEF554D6205BC5F3008167BF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		CEF554DA205BC5F4008167BF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEF554DC205BC5F4008167BF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		CEF554DE205BC619008167BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		CEF554E2205BC823008167BF /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CEF554E4205BC9DC008167BF /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Main.strings"; sourceTree = "<group>"; };
+		CEF554E5205BC9DC008167BF /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEF554E6205BC9DD008167BF /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		CEF554E7205BC9DD008167BF /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEF554E8205BC9DE008167BF /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/MainInterface.strings"; sourceTree = "<group>"; };
+		CEF554E9205BC9DE008167BF /* zh-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-CN"; path = "zh-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CEF61F99204D46C500AD96F9 /* UpdateTagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTagsTableViewController.swift; sourceTree = "<group>"; };
 		CEF6C85D2041000F00FBE069 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +213,8 @@
 		CE449CC9203D69FE008702B4 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				CEF554E3205BC823008167BF /* Localizable.strings */,
+				CEF554D5205BC5F3008167BF /* InfoPlist.strings */,
 				CE191E522052645900878B5D /* Resources */,
 				CE0107172046840E00485171 /* Diary.entitlements */,
 				CEEFDC0E203EC47700A5BC64 /* Extensions */,
@@ -215,6 +233,7 @@
 		CE7694E420513972006D611B /* Diary Widget */ = {
 			isa = PBXGroup;
 			children = (
+				CEF554DB205BC5F4008167BF /* InfoPlist.strings */,
 				CE7694F220513CE2006D611B /* Diary Widget.entitlements */,
 				CE7694E520513972006D611B /* TodayViewController.swift */,
 				CE7694E720513972006D611B /* MainInterface.storyboard */,
@@ -406,8 +425,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE191E582052648000878B5D /* OFL.txt in Resources */,
+				CEF554D3205BC5F3008167BF /* InfoPlist.strings in Resources */,
 				CE449CD8203D69FE008702B4 /* LaunchScreen.storyboard in Resources */,
 				CE449CD5203D69FE008702B4 /* Assets.xcassets in Resources */,
+				CEF554E1205BC823008167BF /* Localizable.strings in Resources */,
 				CE449CD0203D69FE008702B4 /* Main.storyboard in Resources */,
 				CEF6C85E2041000F00FBE069 /* Onboarding.storyboard in Resources */,
 				CE191E562052648000878B5D /* Tangerine-Regular.ttf in Resources */,
@@ -420,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7694E920513972006D611B /* MainInterface.storyboard in Resources */,
+				CEF554D9205BC5F4008167BF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +511,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE449CCF203D69FE008702B4 /* Base */,
+				CEF554D0205BC5F2008167BF /* zh-Hant */,
+				CEF554DE205BC619008167BF /* en */,
+				CEF554E4205BC9DC008167BF /* zh-CN */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -497,6 +522,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE449CD7203D69FE008702B4 /* Base */,
+				CEF554D6205BC5F3008167BF /* zh-Hant */,
+				CEF554E6205BC9DD008167BF /* zh-CN */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -505,8 +532,37 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE7694E820513972006D611B /* Base */,
+				CEF554DC205BC5F4008167BF /* zh-Hant */,
+				CEF554E8205BC9DE008167BF /* zh-CN */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		CEF554D5205BC5F3008167BF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEF554D4205BC5F3008167BF /* zh-Hant */,
+				CEF554E5205BC9DC008167BF /* zh-CN */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CEF554DB205BC5F4008167BF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEF554DA205BC5F4008167BF /* zh-Hant */,
+				CEF554E7205BC9DD008167BF /* zh-CN */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CEF554E3205BC823008167BF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEF554E2205BC823008167BF /* zh-Hant */,
+				CEF554E9205BC9DE008167BF /* zh-CN */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

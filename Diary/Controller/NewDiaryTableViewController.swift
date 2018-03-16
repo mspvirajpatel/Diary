@@ -26,11 +26,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     var userCLLocation = CLLocation()
     var isGetUserLocation = false
     var isSetPhoto = false
-    
+    let placeholderString = NSLocalizedString("write some thing today...", comment: "write some thing today...")
     var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        if !isSetPhoto && titleTextField.text == "" && (contentTextView.text == "" || contentTextView.text == "write some thing today...") {
+        if !isSetPhoto && titleTextField.text == "" && (contentTextView.text == "" || contentTextView.text == placeholderString) {
             let alertController = UIAlertController(title: "不能创建一片空的日记",
                                                     message: nil, preferredStyle: .alert)
             //显示提示框
@@ -67,7 +67,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             record.setValue(currentDate, forKey: "createdAt")
             record.setValue(currentDate, forKey: "modifiedAt")
             UserDefaults.standard.set(currentDate, forKey: "iCloudSync")
-            if contentTextView.text == "write some thing today..." {
+            if contentTextView.text == placeholderString {
                 record.setValue("", forKey: "content")
             } else {
                 record.setValue(contentTextView.text, forKey: "content")
@@ -141,7 +141,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 
                 diary.create = currentDate
                 diary.update = currentDate
-                if contentTextView.text == "write some thing today..." {
+                if contentTextView.text == placeholderString {
                     diary.content = ""
                 } else {
                     diary.content = contentTextView.text
@@ -254,7 +254,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         // Configure navigation bar appearance
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
-        
+        contentTextView.text = placeholderString
+        contentTextView.textColor = .lightGray
         currentDate = Date.init()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
@@ -295,7 +296,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     func textViewDidBeginEditing(_ textView: UITextView)
     {
-        if (textView.text == "write some thing today...")
+        if (textView.text == placeholderString)
         {
             textView.text = ""
             textView.textColor = .black
@@ -307,7 +308,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     {
         if textView.text == ""
         {
-            textView.text = "write some thing today..."
+            textView.text = placeholderString
             textView.textColor = .lightGray
         }
         textView.resignFirstResponder()

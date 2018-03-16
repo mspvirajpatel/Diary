@@ -1,0 +1,17 @@
+/* (No Comment) */
+"CFBundleName" = "日记";
+
+/* (No Comment) */
+"NSCameraUsageDescription" = "需要为应用开启照相权限";
+
+/* (No Comment) */
+"NSFaceIDUsageDescription" = "需要为应用开启Face ID / Touch ID来保护你的笔记";
+
+/* (No Comment) */
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "需要为应用开启地理位置权限来获取位置信息";
+
+/* (No Comment) */
+"NSLocationWhenInUseUsageDescription" = "需要为应用开启地理位置权限来获取位置信息";
+
+/* (No Comment) */
+"NSPhotoLibraryUsageDescription" = "需要为应用开启相册权限来选择喜爱的照片";

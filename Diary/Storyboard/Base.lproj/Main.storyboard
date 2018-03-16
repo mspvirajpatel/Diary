@@ -729,7 +729,7 @@
             </objects>
             <point key="canvasLocation" x="1357.5999999999999" y="966.56671664167925"/>
         </scene>
-        <!--选择标签-->
+        <!--Choose the Tag-->
         <scene sceneID="Nx5-Ie-vWz">
             <objects>
                 <tableViewController id="jfE-zB-xMY" customClass="TagsTableViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
@@ -761,13 +761,13 @@
                             <outlet property="delegate" destination="jfE-zB-xMY" id="8Vt-pc-Fum"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="选择标签" id="Zi8-Bl-Uje">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="o96-K0-7JB">
+                    <navigationItem key="navigationItem" title="Choose the Tag" id="Zi8-Bl-Uje">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="o96-K0-7JB">
                             <connections>
                                 <segue destination="xa9-1w-zl1" kind="unwind" unwindAction="closeTagsWithSegue:" id="6ho-tP-7hG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="Usq-fG-nY3">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Usq-fG-nY3">
                             <connections>
                                 <segue destination="xa9-1w-zl1" kind="unwind" unwindAction="chooseTagWithSegue:" id="qM7-C0-PN2"/>
                             </connections>
@@ -779,7 +779,7 @@
             </objects>
             <point key="canvasLocation" x="2358" y="967"/>
         </scene>
-        <!--iCloud上的内容-->
+        <!--Records in iCloud-->
         <scene sceneID="jAY-Ng-sC8">
             <objects>
                 <tableViewController storyboardIdentifier="DiscoverTableViewController" id="QrL-rY-n1n" customClass="DiscoverTableViewController" customModule="Diary" customModuleProvider="target" sceneMemberID="viewController">
@@ -884,7 +884,7 @@
                             <outlet property="delegate" destination="QrL-rY-n1n" id="hbE-TU-wuW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="iCloud上的内容" id="68m-Jm-BQK">
+                    <navigationItem key="navigationItem" title="Records in iCloud" id="68m-Jm-BQK">
                         <barButtonItem key="rightBarButtonItem" image="sync" style="plain" id="AWi-ta-aYv">
                             <connections>
                                 <segue destination="W57-PD-JyO" kind="show" id="jBO-q1-wA7"/>
@@ -905,7 +905,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
-                            <tableViewSection headerTitle="下载" id="Xw3-xG-7AO">
+                            <tableViewSection headerTitle="Download" id="Xw3-xG-7AO">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="WOZ-8Q-Kot" style="IBUITableViewCellStyleDefault" id="PlI-qE-1o7">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -914,7 +914,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="将iCloud上的内容下载至此设备" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WOZ-8Q-Kot">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="download records from iCloud." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WOZ-8Q-Kot">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -948,8 +948,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将iCloud上的内容下载至此设备中..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1f-Ja-z1G">
-                                <rect key="frame" x="52" y="128" width="271" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="download records from iCloud..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1f-Ja-z1G">
+                                <rect key="frame" x="65" y="128" width="245" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1165,7 +1165,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="标签管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A1e-7W-gl3">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Tags Management" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A1e-7W-gl3">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1185,7 +1185,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="通知设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l3r-x3-g4G">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Notification Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l3r-x3-g4G">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1209,14 +1209,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iCloud 自动备份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXl-Pf-GDC">
-                                                    <rect key="frame" x="16" y="12" width="123" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iCloud Sync" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXl-Pf-GDC">
+                                                    <rect key="frame" x="16" y="12" width="91.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="刚刚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8n-Q0-yM1">
-                                                    <rect key="frame" x="328" y="13.5" width="31" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recently" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8n-Q0-yM1">
+                                                    <rect key="frame" x="303.5" y="13.5" width="55.5" height="18"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1329,8 +1329,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4J-rR-86a">
-                                                    <rect key="frame" x="16" y="12" width="35" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4J-rR-86a">
+                                                    <rect key="frame" x="16" y="12" width="88" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1365,14 +1365,14 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9C-25-Bwn">
                                                     <rect key="frame" x="216" y="12" width="143" height="20.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="每天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu6-SM-xmN">
-                                                            <rect key="frame" x="0.0" y="0.0" width="73.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="everydat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu6-SM-xmN">
+                                                            <rect key="frame" x="0.0" y="0.0" width="79" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下午2:24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dc-QI-jnB">
-                                                            <rect key="frame" x="73.5" y="0.0" width="69.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pm 2:24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dc-QI-jnB">
+                                                            <rect key="frame" x="79" y="0.0" width="64" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1680,9 +1680,9 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vl8-BX-JUy">
-                                <rect key="frame" x="123" y="470" width="130" height="51"/>
+                                <rect key="frame" x="105" y="470" width="165" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <state key="normal" title="点击验证">
+                                <state key="normal" title="click to auth">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -1717,12 +1717,12 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ne2-Yz-ajS">
-                                    <rect key="frame" x="8" y="8" width="40" height="30"/>
+                                    <rect key="frame" x="8" y="8" width="48" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="7nP-4N-onx"/>
                                         <constraint firstAttribute="height" constant="30" id="q0h-n4-YFe"/>
                                     </constraints>
-                                    <state key="normal" title="取消"/>
+                                    <state key="normal" title="Cancel"/>
                                     <connections>
                                         <segue destination="X0V-3J-1bh" kind="unwind" unwindAction="closeUpdateTagsWithSegue:" id="UQy-lY-3bS"/>
                                     </connections>
@@ -1733,13 +1733,13 @@
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Gp5-bJ-TdB"/>
                                         <constraint firstAttribute="height" constant="30" id="lsu-i4-hIn"/>
                                     </constraints>
-                                    <state key="normal" title="保存"/>
+                                    <state key="normal" title="Save"/>
                                     <connections>
                                         <segue destination="X0V-3J-1bh" kind="unwind" unwindAction="chooseUpdateTagWithSegue:" id="U70-R9-UjF"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更改标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esx-kJ-geV">
-                                    <rect key="frame" x="143" y="9" width="89.5" height="26.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esx-kJ-geV">
+                                    <rect key="frame" x="121" y="9" width="134" height="26.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>

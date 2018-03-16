@@ -1,0 +1,117 @@
+/* Class = "UINavigationItem"; title = "New Diary"; ObjectID = "0y7-2e-YJs"; */
+"0y7-2e-YJs.title" = "新建日記";
+
+/* Class = "UILabel"; text = "Rate us on App Store"; ObjectID = "2jf-vz-hym"; */
+"2jf-vz-hym.text" = "在App Store上評論Diary";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "4c1-tL-SId"; */
+"4c1-tL-SId.text" = "名字";
+
+/* Class = "UITableViewSection"; headerTitle = "System"; ObjectID = "5qO-I9-7c5"; */
+"5qO-I9-7c5.headerTitle" = "系統";
+
+/* Class = "UITableViewSection"; headerTitle = "Feedback"; ObjectID = "9VX-DD-RTT"; */
+"9VX-DD-RTT.headerTitle" = "反饋";
+
+/* Class = "UIButton"; normalTitle = "Location"; ObjectID = "9gz-PQ-QG5"; */
+"9gz-PQ-QG5.normalTitle" = "位置";
+
+/* Class = "UITableViewSection"; headerTitle = "System"; ObjectID = "47W-MF-K4p"; */
+"47W-MF-K4p.headerTitle" = "系統";
+
+/* Class = "UINavigationItem"; title = "Records in iCloud"; ObjectID = "68m-Jm-BQK"; */
+"68m-Jm-BQK.title" = "iCloud上的內容";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "85S-Yg-Jj7"; */
+"85S-Yg-Jj7.text" = "日期";
+
+/* Class = "UILabel"; text = "Tags Management"; ObjectID = "A1e-7W-gl3"; */
+"A1e-7W-gl3.text" = "標簽管理";
+
+/* Class = "UILabel"; text = "Diary"; ObjectID = "AYe-Uc-iDe"; */
+"AYe-Uc-iDe.text" = "日記";
+
+/* Class = "UITabBarItem"; title = "Diary"; ObjectID = "Eci-e3-dhn"; */
+"Eci-e3-dhn.title" = "日記";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "Ftb-9x-hhl"; */
+"Ftb-9x-hhl.text" = "設置";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "IZ8-38-3Jv"; */
+"IZ8-38-3Jv.text" = "標題";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Izz-uJ-Peo"; */
+"Izz-uJ-Peo.text" = "標題";
+
+/* Class = "UIButton"; normalTitle = "Location"; ObjectID = "NSx-0H-f8l"; */
+"NSx-0H-f8l.normalTitle" = "位置";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Ne2-Yz-ajS"; */
+"Ne2-Yz-ajS.normalTitle" = "取消";
+
+/* Class = "UILabel"; text = "everydat"; ObjectID = "Pu6-SM-xmN"; */
+"Pu6-SM-xmN.text" = "每天";
+
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "Qju-nG-SZU"; */
+"Qju-nG-SZU.title" = "關於";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "Usq-fG-nY3"; */
+"Usq-fG-nY3.title" = "保存";
+
+/* Class = "UIButton"; normalTitle = "click to auth"; ObjectID = "Vl8-BX-JUy"; */
+"Vl8-BX-JUy.normalTitle" = "點擊驗證";
+
+/* Class = "UILabel"; text = "Tell us your feedback"; ObjectID = "WHl-oE-X5Z"; */
+"WHl-oE-X5Z.text" = "寫下反饋";
+
+/* Class = "UILabel"; text = "download records from iCloud."; ObjectID = "WOZ-8Q-Kot"; */
+"WOZ-8Q-Kot.text" = "從iCloud上下載內容";
+
+/* Class = "UINavigationItem"; title = "New Notebook"; ObjectID = "XR2-Aq-ldE"; */
+"XR2-Aq-ldE.title" = "新建筆記本";
+
+/* Class = "UITableViewSection"; headerTitle = "Download"; ObjectID = "Xw3-xG-7AO"; */
+"Xw3-xG-7AO.headerTitle" = "下載";
+
+/* Class = "UINavigationItem"; title = "Choose the Tag"; ObjectID = "Zi8-Bl-Uje"; */
+"Zi8-Bl-Uje.title" = "選擇標簽";
+
+/* Class = "UITableViewSection"; headerTitle = "Follow us"; ObjectID = "ahe-9v-yTj"; */
+"ahe-9v-yTj.headerTitle" = "關註";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "bSA-Bt-rO5"; */
+"bSA-Bt-rO5.normalTitle" = "保存";
+
+/* Class = "UILabel"; text = "iCloud Sync"; ObjectID = "bXl-Pf-GDC"; */
+"bXl-Pf-GDC.text" = "iCloud同步";
+
+/* Class = "UITextField"; placeholder = "Fill in the notebook name"; ObjectID = "cou-ou-i3Z"; */
+"cou-ou-i3Z.placeholder" = "為筆記本起壹個名字";
+
+/* Class = "UILabel"; text = "download records from iCloud..."; ObjectID = "d1f-Ja-z1G"; */
+"d1f-Ja-z1G.text" = "從iCloud上下載內容";
+
+/* Class = "UITableViewSection"; headerTitle = "Sync"; ObjectID = "dJE-1T-PVK"; */
+"dJE-1T-PVK.headerTitle" = "同步";
+
+/* Class = "UILabel"; text = "Change Tags"; ObjectID = "esx-kJ-geV"; */
+"esx-kJ-geV.text" = "更改標簽";
+
+/* Class = "UILabel"; text = "Notification Settings"; ObjectID = "l3r-x3-g4G"; */
+"l3r-x3-g4G.text" = "通知設置";
+
+/* Class = "UILabel"; text = "Notification"; ObjectID = "m4J-rR-86a"; */
+"m4J-rR-86a.text" = "通知";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "o96-K0-7JB"; */
+"o96-K0-7JB.title" = "取消";
+
+/* Class = "UITabBarItem"; title = "About"; ObjectID = "tKX-1G-fQA"; */
+"tKX-1G-fQA.title" = "關於";
+
+/* Class = "UILabel"; text = "recently"; ObjectID = "v8n-Q0-yM1"; */
+"v8n-Q0-yM1.text" = "最近";
+
+/* Class = "UILabel"; text = "Our website"; ObjectID = "y5Z-E7-d8W"; */
+"y5Z-E7-d8W.text" = "主頁";
+
