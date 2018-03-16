@@ -127,7 +127,11 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 diary.id = dataId
                 diary.recordName = self.recordName
                 diary.title = titleTextField.text
-                diary.tag = tagButton.titleLabel?.text
+                if tagButton.titleLabel?.text == "tag" {
+                    diary.tag = ""
+                } else {
+                    diary.tag = tagButton.titleLabel?.text
+                }
                 diary.weather = self.choosedWeatherButtonText
                 if isGetUserLocation {
                     diary.location = self.userCurrentLocation
