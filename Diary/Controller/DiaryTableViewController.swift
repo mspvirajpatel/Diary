@@ -388,12 +388,12 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 self.activityController = UIActivityViewController(activityItems: [defaultTitle, defaultContent], applicationActivities: nil)
             }
             
-//            if let popoverController = activityController.popoverPresentationController {
-//                if let cell = tableView.cellForRow(at: indexPath) {
-//                    popoverController.sourceView = cell
-//                    popoverController.sourceRect = cell.bounds
-//                }
-//            }
+            if let popoverController = self.activityController?.popoverPresentationController {
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    popoverController.sourceView = cell
+                    popoverController.sourceRect = cell.bounds
+                }
+            }
             
             self.present(self.activityController!, animated: true, completion: nil)
 
