@@ -39,10 +39,10 @@ class AuthViewController: UIViewController {
     // MARK: - Touch ID / Face ID
     func authenticateWithBiometric() {
         let localAuthContext = LAContext()
-        let resonText = "Authentication is required"
+        let reasonText = "Authentication is required"
         
         // Perform the Biometric authentication
-        localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: resonText) { (success, error) in
+        localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonText) { (success, error) in
             // Failure workflow
             if !success {
                 let alertController = UIAlertController(title: error?.localizedDescription,

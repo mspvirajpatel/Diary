@@ -13,6 +13,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
     @IBOutlet var nameTextField: RoundedTextFIeld!
     @IBOutlet var descriptionTextView: UITextView!
     @IBOutlet var photoImageView: UIImageView!
+    var descriptionPlaceholder: String = ""
     
     var notebook: NotebookMO!
     
@@ -47,6 +48,9 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
         self.hideKeyboardWhenTappedAround()
         tableView.separatorStyle = .none
         descriptionTextView.delegate = self
+        descriptionPlaceholder = NSLocalizedString("write the description of notebook...", comment: "write the description of notebook...")
+        descriptionTextView.text = descriptionPlaceholder
+        descriptionTextView.textColor = .lightGray
         
         // Configure navigation bar appearance
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -63,7 +67,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
     
     func textViewDidBeginEditing(_ textView: UITextView)
     {
-        if (textView.text == "write the description of notebook...")
+        if (textView.text == descriptionPlaceholder)
         {
             textView.text = ""
             textView.textColor = .black
@@ -75,7 +79,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
     {
         if textView.text == ""
         {
-            textView.text = "write the description of notebook..."
+            textView.text = descriptionPlaceholder
             textView.textColor = .lightGray
         }
         textView.resignFirstResponder()
@@ -112,8 +116,8 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let photoSourceRequestController = UIAlertController(title: "", message: "请选择照片来源", preferredStyle: .actionSheet)
-            let cameraAction = UIAlertAction(title: "照相", style: .default, handler: { (action) in
+            let photoSourceRequestController = UIAlertController(title: "", message: NSLocalizedString("Please select the photo source", comment: "Please select the photo source"), preferredStyle: .actionSheet)
+            let cameraAction = UIAlertAction(title: NSLocalizedString("Camera", comment: "Camera"), style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
                     let imagePicker = UIImagePickerController()
                     imagePicker.delegate = self
@@ -124,7 +128,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
                 }
             })
             
-            let photoLibraryAction = UIAlertAction(title: "相册", style: .default, handler: { (action) in
+            let photoLibraryAction = UIAlertAction(title: NSLocalizedString("Photos", comment: "Photos"), style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                     let imagePicker = UIImagePickerController()
                     imagePicker.delegate = self
@@ -135,7 +139,7 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
                 }
             })
             
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
             
             photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibraryAction)

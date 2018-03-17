@@ -48,8 +48,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        let photoSourceRequestController = UIAlertController(title: "", message: "请选择照片来源", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "照相", style: .default, handler: { (action) in
+        let photoSourceRequestController = UIAlertController(title: "", message: NSLocalizedString("Please select the photo source", comment: "Please select the photo source"), preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: NSLocalizedString("Camera", comment: "Camera"), style: .default, handler: { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
@@ -60,7 +60,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         })
         
-        let photoLibraryAction = UIAlertAction(title: "相册", style: .default, handler: { (action) in
+        let photoLibraryAction = UIAlertAction(title: NSLocalizedString("Photos", comment: "Photos"), style: .default, handler: { (action) in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
@@ -71,7 +71,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         })
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
         
         photoSourceRequestController.addAction(cameraAction)
         photoSourceRequestController.addAction(photoLibraryAction)
@@ -163,9 +163,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                     }
                 }
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                dateFormatter.dateFormat = NSLocalizedString("yyyy-MM-dd HH:mm:ss", comment: "yyyy-MM-dd HH:mm:ss")
                 dateFormatter.timeZone = TimeZone.current
-                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+                self.updateDateLabel.text = NSLocalizedString("modifiedAt", comment: "modifiedAt") + dateFormatter.string(from: currentDate)
             }
         }
     }
@@ -181,7 +181,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         view.endEditing(true)
         
         if textFieldEndString == "" && textViewEndString == "" {
-            let alertController = UIAlertController(title: "标题或内容不能都为空",
+            let alertController = UIAlertController(title: NSLocalizedString("The title or content should not be empty", comment: "The title or content should not be empty"),
                                                     message: nil, preferredStyle: .alert)
             //显示提示框
             self.present(alertController, animated: true, completion: nil)
@@ -261,9 +261,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                dateFormatter.dateFormat = NSLocalizedString("yyyy-MM-dd HH:mm:ss", comment: "yyyy-MM-dd HH:mm:ss")
                 dateFormatter.timeZone = TimeZone.current
-                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+                self.updateDateLabel.text = NSLocalizedString("modifiedAt", comment: "modifiedAt") + dateFormatter.string(from: currentDate)
                 
                 defaults.setValue(titleTextField.text, forKey: "title")
                 defaults.setValue(contentTextView.text, forKey: "content")
@@ -278,7 +278,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         print("updateDiary")
         view.endEditing(true)
         if textFieldEndString == "" && textViewEndString == "" {
-            let alertController = UIAlertController(title: "标题或内容不能都为空",
+            let alertController = UIAlertController(title: NSLocalizedString("The title or content should not be empty", comment: "The title or content should not be empty"),
                                                     message: nil, preferredStyle: .alert)
             //显示提示框
             self.present(alertController, animated: true, completion: nil)
@@ -358,9 +358,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                dateFormatter.dateFormat = NSLocalizedString("yyyy-MM-dd HH:mm:ss", comment: "yyyy-MM-dd HH:mm:ss")
                 dateFormatter.timeZone = TimeZone.current
-                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+                self.updateDateLabel.text = NSLocalizedString("modifiedAt", comment: "modifiedAt") + dateFormatter.string(from: currentDate)
                 
                 defaults.setValue(titleTextField.text, forKey: "title")
                 defaults.setValue(contentTextView.text, forKey: "content")
@@ -382,7 +382,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.navigationItem.leftBarButtonItem = newBackButton
         
         doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-        doneButton.setTitle("Done", for: UIControlState.normal)
+        doneButton.setTitle(NSLocalizedString("Done", comment: "Done"), for: UIControlState.normal)
         doneButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         doneButton.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
         doneButton.addTarget(self, action: #selector(buttonClick(_:)), for: .touchUpInside)
@@ -396,7 +396,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         let jsonDecoder = JSONDecoder()
         if let location = diary.location {
             if location == "" {
-                locationButton.setTitle("无", for: UIControlState.normal)
+                locationButton.setTitle(NSLocalizedString("Locate failed", comment: "Locate failed"), for: UIControlState.normal)
             } else {
                 if let jsonData = location.data(using: .utf8) {
                     do {
@@ -408,7 +408,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
             }
         } else {
-            locationButton.setTitle("无", for: UIControlState.normal)
+            locationButton.setTitle(NSLocalizedString("Locate failed", comment: "Locate failed"), for: UIControlState.normal)
         }
         
         titleTextField.text = diary.title
@@ -426,12 +426,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         weatherImageView.image = UIImage(named: diary.weather!)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        dateFormatter.dateFormat = NSLocalizedString("yyyy-MM-dd HH:mm:ss", comment: "yyyy-MM-dd HH:mm:ss")
         dateFormatter.timeZone = TimeZone.current
         
         dateLabel.text = dateFormatter.string(from: diary.create!)
-        creatDateLabel.text = "创建于" + dateFormatter.string(from: diary.create!)
-        updateDateLabel.text = "修改于" + dateFormatter.string(from: diary.update!)
+        creatDateLabel.text = NSLocalizedString("createdAt", comment: "createdAt") + dateFormatter.string(from: diary.create!)
+        updateDateLabel.text = NSLocalizedString("modifiedAt", comment: "modifiedAt") + dateFormatter.string(from: diary.update!)
         
 //        scrollView.contentInsetAdjustmentBehavior = .never
         
@@ -619,9 +619,9 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                     }
                 }
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                dateFormatter.dateFormat = NSLocalizedString("yyyy-MM-dd HH:mm:ss", comment: "yyyy-MM-dd HH:mm:ss")
                 dateFormatter.timeZone = TimeZone.current
-                self.updateDateLabel.text = "修改于" + dateFormatter.string(from: currentDate)
+                self.updateDateLabel.text = NSLocalizedString("modifiedAt", comment: "modifiedAt") + dateFormatter.string(from: currentDate)
             }
         }
     }

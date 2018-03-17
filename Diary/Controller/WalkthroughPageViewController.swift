@@ -14,18 +14,25 @@ protocol WalkthroughViewControllerDelegate: class {
 
 class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     weak var walkthroughDelegate: WalkthroughViewControllerDelegate?
-    
-    var pageHeadings = ["CREATE YOUR OWN DIARY BOOK", "SHOW YOU THE LOCATION", "DISCOVER GREATE DIARIES"]
+    var pageHeadings:[String] = []
     var pageImages = ["onboarding-1", "onboarding-2", "onboarding-3"]
-    var pageSubheadings = ["Write your favorite things and create your own diary book", "search and locate your favorite people's Diary on Maps", "Find diaries shared by your friends and other peoples"]
+    var pageSubheadings: [String] = []
     var currentIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Set the data source to itself
         dataSource = self
         delegate = self
+        
+        pageHeadings.append(NSLocalizedString("CREATE YOUR OWN DIARY OR NOTE", comment: "CREATE YOUR OWN DIARY OR NOTE"))
+        pageHeadings.append(NSLocalizedString("SYNC YOUR NOTES TO iCloud", comment: "SYNC YOUR NOTES TO iCloud"))
+        pageHeadings.append(NSLocalizedString("DISCOVER NOTES ON DIFFERENT DEVICES", comment: "DISCOVER NOTES ON DIFFERENT DEVICES"))
+        
+        pageSubheadings.append(NSLocalizedString("Write your favorite things and create your own diary or notebook", comment: "Write your favorite things and create your own diary or notebook"))
+        pageSubheadings.append(NSLocalizedString("Sync your notes to iCloud automatically", comment: "Sync your notes to iCloud automatically"))
+        pageSubheadings.append(NSLocalizedString("Find notes created on different devices", comment: "Find notes created on different devices"))
         
         // Create the first walkthrough screen
         if let startingViewController = contentViewController(at: 0) {

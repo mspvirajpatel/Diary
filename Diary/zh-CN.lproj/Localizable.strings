@@ -1,3 +1,246 @@
 /* write some thing today... */
 "write some thing today..." = "记录今天的所见所闻...";
 
+/* write the description of notebook... */
+"write the description of notebook..." = "写下笔记本的描述";
+
+/* CREATE YOUR OWN DIARY OR NOTE */
+"CREATE YOUR OWN DIARY OR NOTE" = "创建你的日记或笔记";
+
+/* SYNC YOUR NOTES TO iCloud */
+"SYNC YOUR NOTES TO iCloud" = "同步笔记到iCloud上";
+
+/* DISCOVER NOTES ON DIFFERENT DEVICES */
+"DISCOVER NOTES ON DIFFERENT DEVICES" = "查看不同设备上的笔记";
+
+/* Write your favorite things and create your own diary or notebook */
+"Write your favorite things and create your own diary or notebook" = "记下喜爱的事情，创建你的日记或笔记";
+
+/* Sync your notes to iCloud automatically */
+"Sync your notes to iCloud automatically" = "自动同步笔记至iCloud";
+
+/* Find notes created on different devices */
+"Find notes created on different devices" = "查看在不同设备上创建的笔记";
+
+/* Search from tags, title, content... */
+"Search from tags, title, content..." = "搜索标签，标题，内容...";
+
+/* Diary */
+"Diary" = "日记";
+
+/* my diary */
+"my diary" = "我的日记";
+
+/* diary */
+"diary" = "日记";
+
+/* work */
+"work" = "工作";
+
+/* learn */
+"learn" = "学习";
+
+/* travel */
+"travel" = "旅行";
+
+/* life */
+"life" = "生活";
+
+/* notes */
+"notes" = "备忘";
+
+/* food */
+"food" = "美食";
+
+/* Please select the photo source */
+"Please select the photo source" = "请选择照片来源";
+
+/* Camera */
+"Camera" = "照相";
+
+/* Photos */
+"Photos" = "照片";
+
+/* Cancel */
+"Cancel" = "取消";
+
+/* yyyy-MM-dd HH:mm:ss */
+"yyyy-MM-dd HH:mm:ss" = "yyyy年MM月dd日 HH:mm:ss";
+
+/* createdAt */
+"createdAt" = "创建于";
+
+/* modifiedAt */
+"modifiedAt" = "修改于";
+
+/* The title or content should not be empty */
+"The title or content should not be empty" = "标题或内容不能都为空";
+
+/* Done */
+"Done" = "完成";
+
+/* Locate failed */
+"Locate failed" = "定位失败";
+
+/* Can't not create an empty note */
+"Can't not create an empty note" = "不能创建一片空的日记";
+
+/* Location Settings */
+"Location Settings" = "前往设置地理位置权限";
+
+/* Setting */
+"Setting" = "设置";
+
+/* click to grant the access for location */
+"click to grant the access for location" = "前往设置地理位置权限";
+
+/* Failed to get location, click to retrieve */
+"Failed to get location, click to retrieve" = "获取位置失败，点击重新获取";
+
+/*  Synchronized */
+" Synchronized" = " 已同步";
+
+/* Unknown device */
+"Unknown device" = "未知设备";
+
+/* Setting failed */
+"Setting failed" = "设置失败";
+
+/* Duplicate with other tags */
+"Duplicate with other tags" = "与其他标签重复";
+
+/* Diary Reminder */
+"Diary Reminder" = "日记提醒";
+
+/* Write a Diary Today! */
+"Write a Diary Today!" = "记一篇日记吧！";
+
+/* Record what happend today. */
+"Record what happend today." = "记录今天发生的事。";
+
+/* Edit */
+"Edit" = "编辑";
+
+/* Choose an item to edit */
+"Choose an item to edit" = "选择一项来编辑";
+
+/* Title */
+"Title" = "标题";
+
+/* Edit Name */
+"Edit Name" = "编辑名称";
+
+/* Comment */
+"Comment" = "注释";
+
+/* Edit Comment */
+"Edit Comment" = "编辑注释";
+
+/* Cover Image */
+"Cover Image" = "封面图";
+
+/* Delete */
+"Delete" = "删除";
+
+/* Yes */
+"Yes" = "是";
+
+/* Warning */
+"Warning" = "警告";
+
+/* Are really want to delete Notebook: */
+"Are really want to delete Notebook:" = "确定删除笔记本：";
+
+/* There are */
+"There are" = "有";
+
+/* notes in Notebook: */
+"notes in Notebook:" = "个笔记在笔记本：";
+
+/* . Please delete them first! */
+". Please delete them first!" = "中。请先删除这些笔记！";
+
+/* Can't set more than 3 tags */
+"Can't set more than 3 tags" = "不能設置超過3條標簽";
+
+/* Share */
+"Share" = "分享";
+
+/* Successfully saved to Photos! */
+"Successfully saved to Photos!" = "成功保存到相册";
+
+/* Successfully copied to clipboard! */
+"Successfully copied to clipboard!" = "成功复制到剪切板";
+
+/* yyyy */
+"yyyy" = "yyyy年";
+
+/* hours ago */
+"hours ago" = "小时前";
+
+/* minutes ago */
+"minutes ago" = "分钟前";
+
+/* recently */
+"recently" = "刚刚";
+
+/* yyyy-mm-dd */
+"yyyy-mm-dd" = "yyyy年MM月dd日";
+
+/* mm-dd */
+"mm-dd" = "MM月dd日";
+
+/* days ago */
+"days ago" = "天前";
+
+/* The same note will be replaced with the latest during the download process */
+"The same note will be replaced with the latest during the download process" = "下载过程中遇到同一笔记会替换为最新";
+
+/* "After checking, no updates required */
+"After checking, no updates required" = "检查完毕，无需更新";
+
+/* The result of the execution */
+"The result of the execution" = "执行结果";
+
+"created" = "已创建";
+
+"updated" = "已更新";
+
+/*  records to the local, please return to the home page to view */
+" records to the local, please return to the home page to view" = "条记录至本地，请返回主页查看";
+
+/*  records, and updated */
+" records, and updated " = "条，并更新";
+
+/* NEXT */
+"NEXT" = "下一步";
+
+/* GET STARTED */
+"GET STARTED" = "开始";
+
+/* Skip */
+"Skip" = "跳过";
+
+/* Nothing here */
+"Nothing here" = "无内容";
+
+/* Tap to create a notes */
+"Tap to create a notes" = "点击创建一篇笔记";
+
+/* Start loading local data...\r\n */
+"Start loading local data...\r\n" = "开始加载本地数据...\r\n";
+
+/* Successfully loading local data...\r\n */
+"Successfully loading local data...\r\n" = "成功加载本地数据...\r\n";
+
+/* Start downloading iCloud data...\r\n */
+"Start downloading iCloud data...\r\n" = "开始下载iCloud数据...\r\n";
+
+/* Error downloading iCloud data, reason: */
+"Error downloading iCloud data, reason:" = "下载iCloud数据出错，原因：";
+
+/* Successfully download iCloud data...\r\n */
+"Successfully download iCloud data...\r\n" = "成功下载iCloud数据...\r\n";
+
+/* Starting to compare local data with iCloud data...\r\n */
+"Starting to compare local data with iCloud data...\r\n" = "开始比对本地数据与iCloud数据...\r\n";

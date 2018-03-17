@@ -134,13 +134,13 @@ class DiscoverTableViewController: UITableViewController, UIViewControllerPrevie
         cell.titleLabel.text = diary.object(forKey: "title") as? String
         cell.fullImageView.image = UIImage(named: "photo")
         let updateDate = diary.object(forKey: "modifiedAt") as? Date
-        cell.updateDateLabel.text = self.getFriendlyDate(date: updateDate!) + " 已同步"
+        cell.updateDateLabel.text = self.getFriendlyDate(date: updateDate!) + NSLocalizedString(" Synchronized", comment: " Synchronized")
         cell.tagLabel.text = diary.object(forKey: "tag") as? String
         let deviceName = diary.object(forKey: "deviceName") as? String
         if let deviceName = deviceName {
             cell.deviceNameLabel.text = deviceName
         } else {
-            cell.deviceNameLabel.text = "未知设备"
+            cell.deviceNameLabel.text = NSLocalizedString("Unknown device", comment: "Unknown device")
         }
         cell.contentLabel.text = diary.object(forKey: "content") as? String
         // Check if the image is stored in cache

@@ -43,6 +43,8 @@ class WalkthroughViewController: UIViewController, WalkthroughViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        skipButton.setTitle(NSLocalizedString("Skip", comment: "Skip"), for: .normal)
+        nextButton.setTitle(NSLocalizedString("NEXT", comment: "NEXT"), for: .normal)
         // Do any additional setup after loading the view.
     }
     
@@ -50,10 +52,10 @@ class WalkthroughViewController: UIViewController, WalkthroughViewControllerDele
         if let index = walkthroughPageViewController?.currentIndex {
             switch index {
             case 0...1:
-                nextButton.setTitle("NEXT", for: .normal)
+                nextButton.setTitle(NSLocalizedString("NEXT", comment: "NEXT"), for: .normal)
                 skipButton.isHidden = false
             case 2:
-                nextButton.setTitle("GET STARTED", for: .normal)
+                nextButton.setTitle(NSLocalizedString("GET STARTED", comment: "GET STARTED"), for: .normal)
                 skipButton.isHidden = true
             default:
                 break

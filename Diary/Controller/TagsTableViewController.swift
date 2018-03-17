@@ -92,8 +92,8 @@ class TagsTableViewController: UITableViewController, NSFetchedResultsController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.none {
             if self.choosedTags.count >= 3 {
-                let alertController = UIAlertController(title: nil, message: "标签不能超过三条", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: nil, message: NSLocalizedString("Can't set more than 3 tags", comment: "Can't set more than 3 tags"), preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
                 alertController.addAction(cancelAction)
                 present(alertController, animated: true, completion: nil)
             } else {

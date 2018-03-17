@@ -36,8 +36,8 @@ class TagManageTableViewController: UITableViewController, NSFetchedResultsContr
                         let results = try? context.fetch(fetchRequest)
                         fetchRequest.returnsObjectsAsFaults = false
                         if results!.count > 0 {
-                            let alertWarning = UIAlertController(title: "错误", message: "与其他标签重复", preferredStyle: .alert)
-                            alertWarning.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
+                            let alertWarning = UIAlertController(title: NSLocalizedString("Setting failed", comment: "Setting failed"), message: NSLocalizedString("Duplicate with other tags", comment: "Duplicate with other tags"), preferredStyle: .alert)
+                            alertWarning.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "Done"), style: .cancel, handler: nil))
                             self.present(alertWarning, animated: true, completion: nil)
                         } else {
                             let tagMO = TagMO(context: appDelegate.persistentContainer.viewContext)
@@ -170,13 +170,13 @@ class TagManageTableViewController: UITableViewController, NSFetchedResultsContr
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let alertController = UIAlertController(title: nil, message: "edit the tag", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
         alertController.addTextField { (textField:UITextField!) in
             textField.text = self.tagsData[indexPath.row].name!
             self.newTagTextField = textField
             self.historyName = textField.text ?? ""
         }
-        alertController.addAction(UIAlertAction(title: "Done", style: .default) { (action:UIAlertAction!) in
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "Done"), style: .default) { (action:UIAlertAction!) in
             if self.historyName == self.newTagTextField.text {
                 return
             }
@@ -202,8 +202,8 @@ class TagManageTableViewController: UITableViewController, NSFetchedResultsContr
                                     print("No results to save")
                                 }
                             } else {
-                                let alertWarning = UIAlertController(title: "错误", message: "与其他标签重复", preferredStyle: .alert)
-                                alertWarning.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
+                                let alertWarning = UIAlertController(title: NSLocalizedString("Setting failed", comment: "Setting failed"), message: "与其他标签重复", preferredStyle: .alert)
+                                alertWarning.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "Done"), style: .cancel, handler: nil))
                                 self.present(alertWarning, animated: true, completion: nil)
                             }
                         } catch{

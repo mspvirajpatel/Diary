@@ -220,23 +220,23 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
         if let indexPath = collectionView.indexPath(for: cell) {
             let optionMenu = UIAlertController(title: nil, message: "option", preferredStyle: .actionSheet)
 
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
             optionMenu.addAction(cancelAction)
             
-            let editAction = UIAlertAction(title: "Edit", style: .default, handler: { (action:UIAlertAction!) in
-                let editOptionMenu = UIAlertController(title: nil, message: "choose the item to edit", preferredStyle: .actionSheet)
+            let editAction = UIAlertAction(title: NSLocalizedString("Edit", comment: "Edit"), style: .default, handler: { (action:UIAlertAction!) in
+                let editOptionMenu = UIAlertController(title: nil, message: NSLocalizedString("Choose an item to edit", comment: "Choose an item to edit"), preferredStyle: .actionSheet)
                 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
                 editOptionMenu.addAction(cancelAction)
                 
-                let editName = UIAlertAction(title: "Title", style: .default, handler: { (action:UIAlertAction!) in
-                    let editNameMessage = UIAlertController(title: "Edit Name", message: nil, preferredStyle: .alert)
+                let editName = UIAlertAction(title: NSLocalizedString("Title", comment: "Title"), style: .default, handler: { (action:UIAlertAction!) in
+                    let editNameMessage = UIAlertController(title: NSLocalizedString("Edit Name", comment: "Edit Name"), message: nil, preferredStyle: .alert)
                     editNameMessage.addTextField(configurationHandler: { (textField:UITextField!) in
                         textField.text = self.notebooks[indexPath.row].name ?? ""
                         self.nameTextField = textField
                         self.historyName = textField.text ?? ""
                     })
-                    editNameMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
+                    editNameMessage.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "Done"), style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
                         if self.historyName == self.nameTextField.text {
                             return
                         }
@@ -260,20 +260,20 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                             }
                         }
                     }))
-                    editNameMessage.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+                    editNameMessage.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertActionStyle.default, handler: nil))
                     self.present(editNameMessage, animated: true, completion: nil)
                 })
                 editOptionMenu.addAction(editName)
                 
-                let editComment = UIAlertAction(title: "Comment", style: .default, handler: { (action:UIAlertAction!) in
-                    let editCommentMessage = UIAlertController(title: "Edit Comment", message: nil, preferredStyle: .alert)
+                let editComment = UIAlertAction(title: NSLocalizedString("Comment", comment: "Comment"), style: .default, handler: { (action:UIAlertAction!) in
+                    let editCommentMessage = UIAlertController(title: NSLocalizedString("Edit Comment", comment: "Edit Comment"), message: nil, preferredStyle: .alert)
                     editCommentMessage.addTextField(configurationHandler: { (textField:UITextField!) in
                         textField.text = self.notebooks[indexPath.row].comment ?? ""
                         self.commentTextField = textField
                         self.historyCommet = textField.text ?? ""
                         
                     })
-                    editCommentMessage.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
+                    editCommentMessage.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "Done"), style: UIAlertActionStyle.default, handler: { (action:UIAlertAction!) in
                         if self.historyCommet == self.commentTextField.text {
                             return
                         }
@@ -302,10 +302,10 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                 })
                 editOptionMenu.addAction(editComment)
                 
-                let editImage = UIAlertAction(title: "Image", style: .default, handler: { (action:UIAlertAction!) in
+                let editImage = UIAlertAction(title: NSLocalizedString("Cover Image", comment: "Cover Image"), style: .default, handler: { (action:UIAlertAction!) in
                     self.selectNotebook = indexPath.row
-                    let photoSourceRequestController = UIAlertController(title: "", message: "请选择照片来源", preferredStyle: .actionSheet)
-                    let cameraAction = UIAlertAction(title: "照相", style: .default, handler: { (action) in
+                    let photoSourceRequestController = UIAlertController(title: "", message: NSLocalizedString("Please select the photo source", comment: "Please select the photo source"), preferredStyle: .actionSheet)
+                    let cameraAction = UIAlertAction(title: NSLocalizedString("Camera", comment: "Camera"), style: .default, handler: { (action) in
                         if UIImagePickerController.isSourceTypeAvailable(.camera) {
                             let imagePicker = UIImagePickerController()
                             imagePicker.delegate = self
@@ -315,7 +315,7 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                         }
                     })
                     
-                    let photoLibraryAction = UIAlertAction(title: "相册", style: .default, handler: { (action) in
+                    let photoLibraryAction = UIAlertAction(title: NSLocalizedString("Photos", comment: "Photos"), style: .default, handler: { (action) in
                         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                             let imagePicker = UIImagePickerController()
                             imagePicker.delegate = self
@@ -326,7 +326,7 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                         }
                     })
                     
-                    let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                    let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
                     
                     photoSourceRequestController.addAction(cameraAction)
                     photoSourceRequestController.addAction(photoLibraryAction)
@@ -344,62 +344,65 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
             })
             optionMenu.addAction(editAction)
 
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action:UIAlertAction!) in
-                
-                // Diary Counts
-                // Fetch data from data store - Diary
-                let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
-                let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
-                fetchRequest.sortDescriptors = [sortDescriptor]
-                
-                fetchRequest.predicate = NSPredicate(format: "notebookid == %@", self.notebooks[indexPath.row].id!)
-                
-                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                    let context = appDelegate.persistentContainer.viewContext
-                    self.fetchDiaryResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-                    self.fetchDiaryResultController.delegate = self
+            if self.notebooks[indexPath.row].id! != "1" {
+                let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: "Delete"), style: .destructive, handler: { (action:UIAlertAction!) in
                     
-                    do {
-                        try self.fetchDiaryResultController.performFetch()
-                        if let fetchedObjects = self.fetchDiaryResultController.fetchedObjects {
-                            self.diaries = fetchedObjects
-                        }
-                    } catch {
-                        print(error)
-                    }
-                }
-                
-                var alertMessage = UIAlertController()
-                if self.diaries.count == 0 {
-                    alertMessage = UIAlertController(title: "Warning", message: "if you really want to delete Notebook \(self.notebooks[indexPath.row].name!), Please tap yes", preferredStyle: .alert)
-                    alertMessage.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (alertAction) in
-                        // delete image from filemanager
-                        if let coverImageName = self.notebooks[indexPath.row].coverimage {
-                            if ImageStore(name: coverImageName).deleteImage() {
-                                print("删除照片文件成功")
-                            } else {
-                                print("删除照片文件失败")
-                            }
-                        }
+                    // Diary Counts
+                    // Fetch data from data store - Diary
+                    let fetchRequest: NSFetchRequest<DiaryMO> = DiaryMO.fetchRequest()
+                    let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+                    fetchRequest.sortDescriptors = [sortDescriptor]
+                    
+                    fetchRequest.predicate = NSPredicate(format: "notebookid == %@", self.notebooks[indexPath.row].id!)
+                    
+                    if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                        let context = appDelegate.persistentContainer.viewContext
+                        self.fetchDiaryResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+                        self.fetchDiaryResultController.delegate = self
                         
-                        // delete notebook from coredata
-                        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                            let context = appDelegate.persistentContainer.viewContext
-                            let notebookToDelete = self.fetchResultController.object(at: indexPath)
-                            context.delete(notebookToDelete)
-                            print("成功删除笔记本")
-                            appDelegate.saveContext()
+                        do {
+                            try self.fetchDiaryResultController.performFetch()
+                            if let fetchedObjects = self.fetchDiaryResultController.fetchedObjects {
+                                self.diaries = fetchedObjects
+                            }
+                        } catch {
+                            print(error)
                         }
-                        UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
-                    }))
-                    alertMessage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                } else {
-                    alertMessage = UIAlertController(title: "Warning", message: "there are \(self.diaries.count) notes in Notebook:\(self.notebooks[indexPath.row].name!). Please delete them first!", preferredStyle: .alert)
-                    alertMessage.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
-                }
-                self.present(alertMessage, animated: true, completion: nil)
-            })
-            optionMenu.addAction(deleteAction)
+                    }
+                    
+                    var alertMessage = UIAlertController()
+                    if self.diaries.count == 0 {
+                        alertMessage = UIAlertController(title: NSLocalizedString("Warning", comment: "Warning"), message: (NSLocalizedString("Are really want to delete Notebook:", comment: "Are really want to delete Notebook:") + self.notebooks[indexPath.row].name!), preferredStyle: .alert)
+                        alertMessage.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Yes"), style: .default, handler: { (alertAction) in
+                            // delete image from filemanager
+                            if let coverImageName = self.notebooks[indexPath.row].coverimage {
+                                if ImageStore(name: coverImageName).deleteImage() {
+                                    print("删除照片文件成功")
+                                } else {
+                                    print("删除照片文件失败")
+                                }
+                            }
+                            
+                            // delete notebook from coredata
+                            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                                let context = appDelegate.persistentContainer.viewContext
+                                let notebookToDelete = self.fetchResultController.object(at: indexPath)
+                                context.delete(notebookToDelete)
+                                print("成功删除笔记本")
+                                appDelegate.saveContext()
+                            }
+                            UserDefaults.standard.set(1, forKey: "defaultNoteBookId")
+                        }))
+                        alertMessage.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
+                    } else {
+                        let warningMessage = NSLocalizedString("There are", comment: "There are") + String(self.diaries.count) + NSLocalizedString("notes in Notebook:", comment: "notes in Notebook:") + self.notebooks[indexPath.row].name! + NSLocalizedString(". Please delete them first!", comment: ". Please delete them first!")
+                        alertMessage = UIAlertController(title: NSLocalizedString("Warning", comment: "Warning"), message: warningMessage, preferredStyle: .alert)
+                        alertMessage.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "Done"), style: .default, handler: nil))
+                    }
+                    self.present(alertMessage, animated: true, completion: nil)
+                })
+                optionMenu.addAction(deleteAction)
+            }
 
             present(optionMenu, animated: true, completion: nil)
             

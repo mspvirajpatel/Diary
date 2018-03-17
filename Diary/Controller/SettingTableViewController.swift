@@ -34,7 +34,7 @@ class SettingTableViewController: UITableViewController {
         localAuthContext.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: resonText) { (success, error) in
             // Failure workflow
             if !success {
-                let alertController = UIAlertController(title: "设置失败",
+                let alertController = UIAlertController(title: NSLocalizedString("Setting failed", comment: "Setting failed"),
                                                         message: nil, preferredStyle: .alert)
                 //显示提示框
                 self.present(alertController, animated: true, completion: {

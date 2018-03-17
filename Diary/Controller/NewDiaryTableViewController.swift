@@ -31,7 +31,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         if !isSetPhoto && titleTextField.text == "" && (contentTextView.text == "" || contentTextView.text == placeholderString) {
-            let alertController = UIAlertController(title: "不能创建一片空的日记",
+            let alertController = UIAlertController(title: NSLocalizedString("Can't not create an empty note", comment: "Can't not create an empty note"),
                                                     message: nil, preferredStyle: .alert)
             //显示提示框
             self.present(alertController, animated: true, completion: nil)
@@ -189,9 +189,9 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     @IBAction func locationButtonTapped(_ sender: Any) {
         if CLLocationManager.authorizationStatus().rawValue < 3 {
-            let alertController = UIAlertController (title: nil, message: "前往设置地理位置权限", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-            alertController.addAction(UIAlertAction(title: "设置", style: .default) { (alertAction) in
+            let alertController = UIAlertController (title: nil, message: NSLocalizedString("Location Settings", comment: "Location Settings"), preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Setting", comment: "Setting"), style: .default) { (alertAction) in
                 guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
                     return
                 }
@@ -209,7 +209,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         } else {
-            locationButton.setTitle("请开启地理位置权限", for: UIControlState.normal)
+            locationButton.setTitle(NSLocalizedString("click to grant the access for location", comment: "click to grant the access for location"), for: UIControlState.normal)
         }
     }
     
@@ -256,9 +256,10 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         contentTextView.text = placeholderString
         contentTextView.textColor = .lightGray
+        titleTextField.placeholder = NSLocalizedString("Title", comment: "Title")
         currentDate = Date.init()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        dateFormatter.dateFormat = NSLocalizedString("yyyy-MM-dd HH:mm:ss", comment: "yyyy-MM-dd HH:mm:ss")
         dateFormatter.timeZone = TimeZone.current
         let dateString = dateFormatter.string(from: currentDate)
         dateLabel.text = dateString
@@ -269,7 +270,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         locationImageView.image = UIImage(named: "map")
         
         if CLLocationManager.authorizationStatus().rawValue < 3 {
-            locationButton.setTitle("请点击开启地理位置权限", for: UIControlState.normal)
+            locationButton.setTitle(NSLocalizedString("click to grant the access for location", comment: "click to grant the access for location"), for: UIControlState.normal)
         }
         
         if CLLocationManager.locationServicesEnabled() {
@@ -278,7 +279,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         } else {
-            locationButton.setTitle("请开启地理位置权限", for: UIControlState.normal)
+            locationButton.setTitle(NSLocalizedString("click to grant the access for location", comment: "click to grant the access for location"), for: UIControlState.normal)
         }
         
         if UserDefaults.standard.bool(forKey: "isNewPhoto") {
@@ -316,8 +317,8 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let photoSourceRequestController = UIAlertController(title: "", message: "请选择照片来源", preferredStyle: .actionSheet)
-            let cameraAction = UIAlertAction(title: "照相", style: .default, handler: { (action) in
+            let photoSourceRequestController = UIAlertController(title: "", message: NSLocalizedString("Please select the photo source", comment: "Please select the photo source"), preferredStyle: .actionSheet)
+            let cameraAction = UIAlertAction(title: NSLocalizedString("Camera", comment: "Camera"), style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
                     let imagePicker = UIImagePickerController()
                     imagePicker.delegate = self
@@ -328,7 +329,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 }
             })
             
-            let photoLibraryAction = UIAlertAction(title: "相册", style: .default, handler: { (action) in
+            let photoLibraryAction = UIAlertAction(title: NSLocalizedString("Photos", comment: "Photos"), style: .default, handler: { (action) in
                 if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                     let imagePicker = UIImagePickerController()
                     imagePicker.delegate = self
@@ -339,7 +340,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
                 }
             })
             
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
             
             photoSourceRequestController.addAction(cameraAction)
             photoSourceRequestController.addAction(photoLibraryAction)
@@ -361,7 +362,7 @@ class NewDiaryTableViewController: UITableViewController, UIImagePickerControlle
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(userCLLocation, completionHandler: { (placemarks, error) in
             if let error = error {
-                self.locationButton.setTitle("获取位置失败，点击重新获取", for: UIControlState.normal)
+                self.locationButton.setTitle(NSLocalizedString("Failed to get location, click to retrieve", comment: "Failed to get location, click to retrieve"), for: UIControlState.normal)
                 self.isGetUserLocation = false
                 print(error)
                 return

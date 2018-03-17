@@ -25,6 +25,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     var activityController: UIActivityViewController? = nil
     
     @IBOutlet var emptyDiaryView: UIView!
+    @IBOutlet var emptyTitle: UILabel!
+    @IBOutlet var emptySubTitle: UILabel!
     @IBOutlet var navTitle: UINavigationItem!
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
@@ -63,7 +65,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         searchController?.searchResultsUpdater = self
         searchController?.dimsBackgroundDuringPresentation = false
         
-        searchController?.searchBar.placeholder = "Search from tags, title, content..."
+        searchController?.searchBar.placeholder = NSLocalizedString("Search from tags, title, content...", comment: "Search from tags, title, content...")
         searchController?.searchBar.barTintColor = .white
         searchController?.searchBar.backgroundImage = UIImage()
         searchController?.searchBar.tintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
@@ -154,12 +156,21 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 print("date1:\(date)")
                 UserDefaults.standard.set(date, forKey: "notifyEverydayTime")
             }
-            let initTags:[String] = ["日记", "工作", "学习", "旅游", "生活", "备忘", "美食"]
+            let initTags:[String] = [
+                NSLocalizedString("diary", comment: "diary"),
+                NSLocalizedString("work", comment: "work"),
+                NSLocalizedString("learn", comment: "learn"),
+                NSLocalizedString("travel", comment: "travel"),
+                NSLocalizedString("life", comment: "life"),
+                NSLocalizedString("notes", comment: "notes"),
+                NSLocalizedString("food", comment: "food")
+            ]
+            
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
                 notebook.id = "1"
-                notebook.name = "Diary"
-                notebook.comment = "my diary"
+                notebook.name = NSLocalizedString("Diary", comment: "Diary")
+                notebook.comment = NSLocalizedString("my diary", comment: "my diary")
                 let currentDate = Date.init()
                 notebook.create = currentDate
                 notebook.update = currentDate
@@ -261,6 +272,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             searchController?.searchBar.isHidden = false
         } else {
             tableView.backgroundView?.isHidden = false
+            emptyTitle.text = NSLocalizedString("Nothing here", comment: "Nothing here")
+            emptySubTitle.text = NSLocalizedString("Tap to create a notes", comment: "Tap to create a notes")
 //            tableView.separatorStyle = .none
             searchController?.searchBar.isHidden = true
         }
@@ -319,7 +332,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Delete the row from the data source
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, sourceView, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "Delete"), handler: { (action, sourceView, completionHandler) in
             // Fetch and delete the record from the iCloud
             let diary = self.diaries[indexPath.row]
             let privateDatabase = CKContainer.default().privateCloudDatabase
@@ -365,7 +378,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             completionHandler(true)
         })
         
-        let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (action, sourceView, completionHandler) in
+        let shareAction = UIContextualAction(style: .normal, title: NSLocalizedString("Share", comment: "Share"), handler: { (action, sourceView, completionHandler) in
             let defaultTitle = self.diaries[indexPath.row].title!
             let defaultContent = self.diaries[indexPath.row].content!
             
@@ -389,7 +402,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                 if success {
                     switch activity!._rawValue {
                     case "com.apple.UIKit.activity.SaveToCameraRoll":
-                        let alertController = UIAlertController(title: "成功保存到相册!",
+                        let alertController = UIAlertController(title: NSLocalizedString("Successfully saved to Photos!", comment: "Successfully saved to Photos!"),
                                                                 message: nil, preferredStyle: .alert)
                         //显示提示框
                         self.present(alertController, animated: true, completion: nil)
@@ -400,7 +413,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 //                        print("成功保存到相册！")
                     case "com.apple.UIKit.activity.CopyToPasteboard":
 //                        print("成功复制到剪贴板！")
-                        let alertController = UIAlertController(title: "成功复制到剪贴板!",
+                        let alertController = UIAlertController(title: NSLocalizedString("Successfully copied to clipboard!", comment: "Successfully copied to clipboard!"),
                                                                 message: nil, preferredStyle: .alert)
                         //显示提示框
                         self.present(alertController, animated: true, completion: nil)
@@ -538,7 +551,7 @@ extension UIViewController {
         let currentInterval = Int(round(Date.init().timeIntervalSince1970))
         let diff = currentInterval - timeInterval
         if diff / (3600 * 24 * 365) >= 1 {
-            dateFormatString = "yyyy年"
+            dateFormatString = NSLocalizedString("yyyy", comment: "yyyy")
         } else {
             if diff / (3600 * 24) >= 7 {
                 dateFormatString = "HH:mm"
@@ -547,12 +560,12 @@ extension UIViewController {
                     dateFormatString = "HH:mm"
                 } else {
                     if diff / 3600 >= 1 {
-                        return String(diff / (3600)) + "小时前"
+                        return String(diff / (3600)) + NSLocalizedString("hours ago", comment: "hours ago")
                     } else {
                         if diff / 60 >= 1 {
-                            return String(diff / (60)) + "分钟前"
+                            return String(diff / (60)) + NSLocalizedString("minutes ago", comment: "minutes ago")
                         } else {
-                            return "刚刚"
+                            return NSLocalizedString("recently", comment: "recently")
                         }
                         
                     }
@@ -573,21 +586,21 @@ extension UIViewController {
         let currentInterval = Int(round(Date.init().timeIntervalSince1970))
         let diff = currentInterval - timeInterval
         if diff / (3600 * 24 * 365) >= 1 {
-            dateFormatString = "yyyy年MM月dd日"
+            dateFormatString = NSLocalizedString("yyyy-mm-dd", comment: "yyyy-mm-dd")
         } else {
             if diff / (3600 * 24) >= 7 {
-                dateFormatString = "MM月dd日"
+                dateFormatString = NSLocalizedString("mm-dd", comment: "mm-dd")
             } else {
                 if diff / 3600 >= 24 {
-                    return String(diff / (3600 * 24)) + "天前"
+                    return String(diff / (3600 * 24)) + NSLocalizedString("days ago", comment: "days ago")
                 } else {
                     if diff / 3600 >= 1 {
-                        return String(diff / (3600)) + "小时前"
+                        return String(diff / (3600)) + NSLocalizedString("hours ago", comment: "hours ago")
                     } else {
                         if diff / 60 >= 1 {
-                            return String(diff / (60)) + "分钟前"
+                            return String(diff / (60)) + NSLocalizedString("minutes ago", comment: "minutes ago")
                         } else {
-                            return "刚刚"
+                            return NSLocalizedString("recently", comment: "recently")
                         }
                         
                     }

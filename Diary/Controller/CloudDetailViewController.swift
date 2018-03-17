@@ -89,12 +89,12 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate, UITextFie
         
         if let location = diary.object(forKey: "location") as? CLLocation {
             if location.coordinate.latitude == 0.0 && location.coordinate.longitude == 0.0 {
-                locationButton.setTitle("无", for: UIControlState.normal)
+                locationButton.setTitle(NSLocalizedString("Locate failed", comment: "Locate failed"), for: UIControlState.normal)
             } else {
                 let geoCoder = CLGeocoder()
                 geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
                     if let error = error {
-                        self.locationButton.setTitle("无", for: UIControlState.normal)
+                        self.locationButton.setTitle(NSLocalizedString("Locate failed", comment: "Locate failed"), for: UIControlState.normal)
                         print(error)
                     }
                     if let placemarks = placemarks {
@@ -105,16 +105,16 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate, UITextFie
                 })
             }
         } else {
-            locationButton.setTitle("无", for: UIControlState.normal)
+            locationButton.setTitle(NSLocalizedString("Locate failed", comment: "Locate failed"), for: UIControlState.normal)
         }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        dateFormatter.dateFormat = NSLocalizedString("yyyy-MM-dd HH:mm:ss", comment: "yyyy-MM-dd HH:mm:ss")
         dateFormatter.timeZone = TimeZone.current
         
         dateLabel.text = dateFormatter.string(from: diary.object(forKey: "createdAt") as! Date)
-        creatDateLabel.text = "创建于" + dateFormatter.string(from: diary.object(forKey: "createdAt") as! Date)
-        updateDateLabel.text = "修改于" + dateFormatter.string(from: diary.object(forKey: "modifiedAt") as! Date)
+        creatDateLabel.text = NSLocalizedString("createdAt", comment: "createdAt") + dateFormatter.string(from: diary.object(forKey: "createdAt") as! Date)
+        updateDateLabel.text = NSLocalizedString("modifiedAt", comment: "modifiedAt") + dateFormatter.string(from: diary.object(forKey: "modifiedAt") as! Date)
         
         //        scrollView.contentInsetAdjustmentBehavior = .never
         

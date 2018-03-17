@@ -70,9 +70,9 @@ class NotifyTableViewController: UITableViewController {
             UserDefaults.standard.set(datePicker.date, forKey: "notifyEverydayTime")
             
             let content = UNMutableNotificationContent()
-            content.title = "Diary Reminder"
-            content.subtitle = "Write a Diary Today!"
-            content.body = "Record what happend today."
+            content.title = NSLocalizedString("Diary Reminder", comment: "Diary Reminder")
+            content.subtitle = NSLocalizedString("Write a Diary Today!", comment: "Write a Diary Today!")
+            content.body = NSLocalizedString("Record what happend today.", comment: "Record what happend today.")
             
             // Pick a image
 //            let randomNum = Int(arc4random_uniform(UInt32(7)))
