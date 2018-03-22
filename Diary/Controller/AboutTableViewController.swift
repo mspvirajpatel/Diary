@@ -51,15 +51,11 @@ class AboutTableViewController: UITableViewController {
         switch indexPath.section {
         case 2:
             if indexPath.row == 0 {
-                if let url = URL(string: "https://www.apple.com/itues/charts/paid-apps/") {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            } else if indexPath.row == 1 {
                 performSegue(withIdentifier: "showWebView", sender: self)
             }
         case 3:
             if indexPath.row == 0 {
-                if let url = URL(string: "https://niuran.cn") {
+                if let url = URL(string: "https://niuran.cn/diary") {
                     let safariController = SFSafariViewController(url: url)
                     present(safariController, animated: true, completion: nil)
                 }
@@ -74,8 +70,8 @@ class AboutTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWebView" {
             if let destinationController = segue.destination as? WebViewController, let indexPath = tableView.indexPathForSelectedRow {
-                if indexPath.row == 1 {
-                    destinationController.targetURL = "https://niuran.cn/info"
+                if indexPath.row == 0 {
+                    destinationController.targetURL = "https://niuran.cn/feedback"
                 }
             }
         }
