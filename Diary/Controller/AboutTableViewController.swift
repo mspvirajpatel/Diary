@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import StoreKit
 
 class AboutTableViewController: UITableViewController {
     @IBAction func closeReturnToAboutPage(segue: UIStoryboardSegue) {
@@ -51,6 +52,14 @@ class AboutTableViewController: UITableViewController {
         switch indexPath.section {
         case 2:
             if indexPath.row == 0 {
+                SKStoreReviewController.requestReview()
+            }
+            if indexPath.row == 1 {
+                if let url = URL(string: "itms-apps:itunes.apple.com/cn/app/apple-store/id1357419968?mt=8&action=write-review") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            if indexPath.row == 2 {
                 performSegue(withIdentifier: "showWebView", sender: self)
             }
         case 3:

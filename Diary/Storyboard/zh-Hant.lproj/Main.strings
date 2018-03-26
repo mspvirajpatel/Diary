@@ -28,6 +28,9 @@
 /* Class = "UILabel"; text = "Tags Management"; ObjectID = "A1e-7W-gl3"; */
 "A1e-7W-gl3.text" = "標簽管理";
 
+/* Class = "UILabel"; text = "In-app review"; ObjectID = "AFx-mA-avH"; */
+"AFx-mA-avH.text" = "應用內評論";
+
 /* Class = "UILabel"; text = "Diary"; ObjectID = "AYe-Uc-iDe"; */
 "AYe-Uc-iDe.text" = "日記";
 
