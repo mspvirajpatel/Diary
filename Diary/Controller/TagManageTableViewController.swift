@@ -51,10 +51,6 @@ class TagManageTableViewController: UITableViewController, NSFetchedResultsContr
         })
         present(alertController, animated: true, completion: nil)
     }
-    
-    
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,7 +165,7 @@ class TagManageTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let alertController = UIAlertController(title: nil, message: "edit the tag", preferredStyle: .alert)
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("edit the tag", comment: "edit the tag"), preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil))
         alertController.addTextField { (textField:UITextField!) in
             textField.text = self.tagsData[indexPath.row].name!

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import CloudKit
 
-class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
+class DetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
     var diary: DiaryMO!
     var fetchDiary: DiaryMO!
@@ -21,7 +21,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     var defaults = UserDefaults(suiteName: "group.com.niuran.diary")!
     
     override var previewActionItems: [UIPreviewActionItem] {
-        let cancelAction = UIPreviewAction.init(title: "Cancel", style: .destructive) { (action, viewController) in
+        let cancelAction = UIPreviewAction.init(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .destructive) { (action, viewController) in
             
         }
         return [cancelAction]
@@ -373,13 +373,16 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.hidesBarsOnSwipe = false
-        
+//        navigationController?.hidesBarsOnSwipe = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(image: UIImage(named: "arrow-left"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(back(_:)))
         self.navigationItem.leftBarButtonItem = newBackButton
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        scrollView.contentInsetAdjustmentBehavior = .never
         
         doneButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         doneButton.setTitle(NSLocalizedString("Done", comment: "Done"), for: UIControlState.normal)
@@ -433,8 +436,6 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         creatDateLabel.text = NSLocalizedString("createdAt", comment: "createdAt") + dateFormatter.string(from: diary.create!)
         updateDateLabel.text = NSLocalizedString("modifiedAt", comment: "modifiedAt") + dateFormatter.string(from: diary.update!)
         
-//        scrollView.contentInsetAdjustmentBehavior = .never
-        
         contentTextView.text = diary.content
         contentTextView.delegate = self
         contentTextView.sizeToFit()
@@ -459,6 +460,10 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
         self.hidesBottomBarWhenPushed = true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -515,6 +520,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         }
     }
+    
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let selectedUIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {

@@ -41,6 +41,8 @@ class CloudDetailViewController: UIViewController, UITextViewDelegate, UITextFie
         super.viewDidLoad()
 
         titleTextField.delegate = self
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.largeTitleDisplayMode = .never
         fullImageView.image = UIImage(named: "photo")
         titleTextField.text = diary.object(forKey: "title") as? String

@@ -26,7 +26,7 @@
 "Can't not create an empty note" = "不能創建壹片空的日記";
 
 /* Can't set more than 3 tags */
-"Can't set more than 3 tags" = "不能设置超过3条标签";
+"Can't set more than 3 tags" = "不能設置超過3條標簽";
 
 /* Cancel */
 "Cancel" = "取消";
@@ -88,9 +88,6 @@
 /* NEXT */
 "NEXT" = "下壹步";
 
-/* Nothing here */
-"Nothing here" = "無內容";
-
 /* Photos */
 "Photos" = "照片";
 
@@ -126,9 +123,6 @@
 
 /* Sync your notes to iCloud automatically */
 "Sync your notes to iCloud automatically" = "自動同步筆記至iCloud";
-
-/* Tap to create a notes */
-"Tap to create a notes" = "點擊創建壹篇筆記";
 
 /* The result of the execution */
 "The result of the execution" = "執行結果";
@@ -232,3 +226,26 @@
 /* yyyy-mm-dd */
 "yyyy-mm-dd" = "yyyy年MM月dd日";
 
+/* Start loading local data...\r\n */
+"Start loading local data...\r\n" = "加載本地數據...\r\n";
+
+/* Successfully loading local data...\r\n */
+"Successfully loading local data...\r\n" = "成功加載本地數據...\r\n";
+
+/* Start downloading iCloud data...\r\n */
+"Start downloading iCloud data...\r\n" = "下載iCloud數據...\r\n";
+
+/* Successfully download iCloud data...\r\n */
+"Successfully download iCloud data...\r\n" = "成功下載iCloud數據...\r\n";
+
+/* Starting to compare local data with iCloud data...\r\n */
+"Starting to compare local data with iCloud data...\r\n" = "對比本地數據與iCloud數據中...\r\n";
+
+/* edit the tag */
+"edit the tag" = "編輯標簽";
+
+/* I don't have diaries. */
+"I don't have diaries." = "沒有日記";
+
+/* Create a new diary on any of your devices, Then will automatically sync to iCloud. */
+"Create a new diary on any of your devices, Then will automatically sync to iCloud." = "在妳的任意設備上新建日記，就會自動同步到iCloud上";

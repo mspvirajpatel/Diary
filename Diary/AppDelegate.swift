@@ -19,16 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         print("didFinishLaunchingWithOptions")
         UNUserNotificationCenter.current().delegate = self
-//        // Override point for customization after application launch.
-//        let backButtonImage = UIImage(named: "back")
-//        UINavigationBar.appearance().backIndicatorImage = backButtonImage
-//        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backButtonImage
+
         UINavigationBar.appearance().tintColor = UIColor(red: 1.0/255.0, green: 50.0/255.0, blue: 67.0/255.0, alpha: 1.0)
         UIApplication.shared.statusBarStyle = .default
         
         // Customize the tab bar
-//        UITabBar.appearance().tintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
-//        UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         UITabBar.appearance().barTintColor = UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 250.0/255.0, alpha: 1.0)
         

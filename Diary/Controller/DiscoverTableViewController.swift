@@ -11,6 +11,8 @@ import CloudKit
 import MapKit
 
 class DiscoverTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+    @IBOutlet var emptyDiaryView: UIView!
+    @IBOutlet var emptyTitle: UILabel!
     
     var diaries: [CKRecord] = []
     var spinner = UIActivityIndicatorView()
@@ -29,10 +31,13 @@ class DiscoverTableViewController: UITableViewController, UIViewControllerPrevie
         }
         tableView.cellLayoutMarginsFollowReadableWidth = true
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         
-        // Configure navigation bar appearance
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
+        // Prepare the empty view
+        tableView.backgroundView = emptyDiaryView
+        tableView.backgroundView?.isHidden = true
+        
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         
         spinner.activityIndicatorViewStyle = .gray
@@ -118,6 +123,12 @@ class DiscoverTableViewController: UITableViewController, UIViewControllerPrevie
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
+        if diaries.count > 0 {
+            tableView.backgroundView?.isHidden = true
+        } else {
+            tableView.backgroundView?.isHidden = false
+            emptyTitle.text = NSLocalizedString("Create a new diary on any of your devices, Then will automatically sync to iCloud.", comment: "Create a new diary on any of your devices, Then will automatically sync to iCloud.")
+        }
         return 1
     }
 

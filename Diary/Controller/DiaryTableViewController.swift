@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CloudKit
+import Foundation
 
 class DiaryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate {
     
@@ -20,13 +21,21 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     let monthArray = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "June.", "July.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
     let weekArray = ["Sun.", "Mon.", "Tues.", "Wed.", "Thur.", "Fri.", "Sat."]
+    let colorWeek: [UIColor] = [
+        UIColor(red: 217.0/255.0, green: 30.0/255.0, blue: 24.0/255.0, alpha: 1.0),
+        UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0),
+        UIColor(red: 102.0/255.0, green: 51.0/255.0, blue: 153.0/255.0, alpha: 1.0),
+        UIColor(red: 65.0/255.0, green: 131.0/255.0, blue: 215.0/255.0, alpha: 1.0),
+        UIColor(red: 38.0/255.0, green: 166.0/255.0, blue: 91.0/255.0, alpha: 1.0),
+        UIColor(red: 232.0/255.0, green: 126.0/255.0, blue: 4.0/255.0, alpha: 1.0),
+        UIColor(red: 219.0/255.0, green: 10.0/255.0, blue: 91.0/255.0, alpha: 1.0)
+    ]
     
     var slideOutTransition = SlideOutTransitionAnimator()
     var activityController: UIActivityViewController? = nil
     
     @IBOutlet var emptyDiaryView: UIView!
     @IBOutlet var emptyTitle: UILabel!
-    @IBOutlet var emptySubTitle: UILabel!
     @IBOutlet var navTitle: UINavigationItem!
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
@@ -53,9 +62,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.hidesBarsOnSwipe = false
-//
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         
         // SearchBar
@@ -272,8 +280,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             searchController?.searchBar.isHidden = false
         } else {
             tableView.backgroundView?.isHidden = false
-            emptyTitle.text = NSLocalizedString("Nothing here", comment: "Nothing here")
-            emptySubTitle.text = NSLocalizedString("Tap to create a notes", comment: "Tap to create a notes")
+            emptyTitle.text = NSLocalizedString("I don't have diaries.", comment: "I don't have diaries.")
 //            tableView.separatorStyle = .none
             searchController?.searchBar.isHidden = true
         }
@@ -322,11 +329,16 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         dateFormatter.timeZone = TimeZone.current
         cell.weekLabel.text = weekArray[Calendar.current.component(.weekday, from: diary.create!) - 1]
         
+        cell.monthLabel.textColor = colorWeek[Calendar.current.component(.weekday, from: diary.create!) - 1]
+        cell.dayLabel.textColor = colorWeek[Calendar.current.component(.weekday, from: diary.create!) - 1]
+        cell.weekLabel.textColor = colorWeek[Calendar.current.component(.weekday, from: diary.create!) - 1]
+        
         cell.monthLabel.text = monthArray[Calendar.current.component(.month, from: diary.create!) - 1]
         dateFormatter.dateFormat = "d"
         cell.dayLabel.text = dateFormatter.string(from: diary.create!)
         cell.dateLabel.text = getFriendlyTime(date: diary.update!)
         cell.tagLabel.text = diary.tag
+        
         return cell
     }
     
@@ -525,6 +537,22 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func transformToPinyin(str: String, hasBlank: Bool = false) -> String {
+        let stringRef = NSMutableString(string: str) as CFMutableString
+        CFStringTransform(stringRef,nil, kCFStringTransformToLatin, false) // 转换为带音标的拼音
+        CFStringTransform(stringRef, nil, kCFStringTransformStripCombiningMarks, false) // 去掉音标
+        let pinyin = stringRef as String
+        return hasBlank ? pinyin : pinyin.replacingOccurrences(of: " ", with: "")
+    }
+    
+    //判断字符串中是否有中文
+    func isIncludeChinese(str: String) -> Bool {
+        for ch in str.unicodeScalars {
+            if (0x4e00 < ch.value  && ch.value < 0x9fff) { return true } // 中文字符范围：0x4e00 ~ 0x9fff
+        }
+        return false
     }
     
     func randomString(length: Int) -> String {
