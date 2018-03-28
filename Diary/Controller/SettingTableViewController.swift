@@ -20,7 +20,7 @@ class SettingTableViewController: UITableViewController {
     @IBAction func changedFaceIDSwitch(_ sender: UISwitch) {
         // Get the local authentication context.
         let localAuthContext = LAContext()
-        let resonText = "Authentication is required"
+        let resonText = NSLocalizedString("Authentication to continue", comment: "Authentication to continue")
         var authError: NSError?
         if !localAuthContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
             if let error = authError {

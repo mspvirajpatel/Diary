@@ -249,3 +249,6 @@
 
 /* Create a new diary on any of your devices, Then will automatically sync to iCloud. */
 "Create a new diary on any of your devices, Then will automatically sync to iCloud." = "在妳的任意設備上新建日記，就會自動同步到iCloud上";
+
+/* Authentication to continue */
+"Authentication to continue" = "認證以繼續";
