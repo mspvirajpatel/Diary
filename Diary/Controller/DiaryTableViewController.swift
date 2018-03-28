@@ -393,8 +393,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         let shareAction = UIContextualAction(style: .normal, title: NSLocalizedString("Share", comment: "Share"), handler: { (action, sourceView, completionHandler) in
             let defaultTitle = self.diaries[indexPath.row].title!
             let defaultContent = self.diaries[indexPath.row].content!
-            
-            if let imageName = self.diaries[indexPath.row].image, let imageToShare = UIImage(named: imageName) {
+            if let imageName = self.diaries[indexPath.row].image, let imageToShare = ImageStore(name: imageName).loadImage() {
                 self.activityController = UIActivityViewController(activityItems: [defaultTitle, imageToShare, defaultContent], applicationActivities: nil)
             } else {
                 self.activityController = UIActivityViewController(activityItems: [defaultTitle, defaultContent], applicationActivities: nil)
