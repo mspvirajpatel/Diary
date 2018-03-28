@@ -79,7 +79,7 @@ class AboutTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWebView" {
             if let destinationController = segue.destination as? WebViewController, let indexPath = tableView.indexPathForSelectedRow {
-                if indexPath.row == 0 {
+                if indexPath.row == 2 {
                     destinationController.targetURL = "https://niuran.cn/feedback"
                 }
             }
