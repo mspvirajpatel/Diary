@@ -184,8 +184,8 @@
 /* minutes ago */
 "minutes ago" = "分鐘前";
 
-/* mm-dd */
-"mm-dd" = "MM月dd日";
+/* MM-dd */
+"MM-dd" = "MM月dd日";
 
 /* modifiedAt */
 "modifiedAt" = "修改於";
@@ -223,8 +223,8 @@
 /* yyyy-MM-dd HH:mm:ss */
 "yyyy-MM-dd HH:mm:ss" = "yyyy年MM月dd日 HH:mm:ss";
 
-/* yyyy-mm-dd */
-"yyyy-mm-dd" = "yyyy年MM月dd日";
+/* yyyy-MM-dd */
+"yyyy-MM-dd" = "yyyy年MM月dd日";
 
 /* Start loading local data...\r\n */
 "Start loading local data...\r\n" = "加載本地數據...\r\n";

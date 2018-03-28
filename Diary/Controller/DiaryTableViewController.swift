@@ -613,10 +613,10 @@ extension UIViewController {
         let currentInterval = Int(round(Date.init().timeIntervalSince1970))
         let diff = currentInterval - timeInterval
         if diff / (3600 * 24 * 365) >= 1 {
-            dateFormatString = NSLocalizedString("yyyy-mm-dd", comment: "yyyy-mm-dd")
+            dateFormatString = NSLocalizedString("yyyy-MM-dd", comment: "yyyy-MM-dd")
         } else {
             if diff / (3600 * 24) >= 7 {
-                dateFormatString = NSLocalizedString("mm-dd", comment: "mm-dd")
+                dateFormatString = NSLocalizedString("MM-dd", comment: "MM-dd")
             } else {
                 if diff / 3600 >= 24 {
                     return String(diff / (3600 * 24)) + NSLocalizedString("days ago", comment: "days ago")
