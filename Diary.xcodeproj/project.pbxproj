@@ -22,6 +22,7 @@
 		CE191E5A205269E200878B5D /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE191E59205269E200878B5D /* LocalAuthentication.framework */; };
 		CE197BE72054EA5100C63670 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE197BE62054EA5100C63670 /* AuthViewController.swift */; };
 		CE19EBE5204E926E00B7AF6A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19EBE4204E926E00B7AF6A /* CloudKit.framework */; };
+		CE1A7960206B71D500B481CB /* FancyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1A795F206B71D500B481CB /* FancyButton.swift */; };
 		CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */; };
 		CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */; };
 		CE424E8A2056889A0003BE68 /* SyncDownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE424E892056889A0003BE68 /* SyncDownloadViewController.swift */; };
@@ -100,6 +101,7 @@
 		CE191E59205269E200878B5D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		CE197BE62054EA5100C63670 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CE19EBE4204E926E00B7AF6A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		CE1A795F206B71D500B481CB /* FancyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyButton.swift; sourceTree = "<group>"; };
 		CE234698203FAA6100BAD0BB /* NewDiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiaryTableViewController.swift; sourceTree = "<group>"; };
 		CE23469A203FBB4D00BAD0BB /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		CE424E892056889A0003BE68 /* SyncDownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncDownloadViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				CEC9CE7D2042C86A005FB426 /* RoundedTextFIeld.swift */,
 				CEF77E09204965A400C6C1A7 /* SlideOutTransitionAnimator.swift */,
 				CE0EC7DD20567232004885E8 /* DiscoverTableViewCell.swift */,
+				CE1A795F206B71D500B481CB /* FancyButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				CE449CD3203D69FE008702B4 /* Diary.xcdatamodeld in Sources */,
 				CE23469B203FBB4D00BAD0BB /* WeatherViewController.swift in Sources */,
 				CE449CE4203DBA9D008702B4 /* DiaryTableViewCell.swift in Sources */,
+				CE1A7960206B71D500B481CB /* FancyButton.swift in Sources */,
 				CE7EE0E9204CD9BC006A5BDD /* SettingTableViewController.swift in Sources */,
 				CE449CE0203D6A36008702B4 /* DiaryTableViewController.swift in Sources */,
 				CE234699203FAA6100BAD0BB /* NewDiaryTableViewController.swift in Sources */,
