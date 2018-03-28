@@ -252,3 +252,15 @@
 
 /* Authentication to continue */
 "Authentication to continue" = "認證以繼續";
+
+/* Show all diaries */
+"Show all diaries" = "顯示所有日記";
+
+/* Discover */
+"Discover" = "發現";
+
+/* Take a photo */
+"Take a photo" = "拍照";
+
+/* New Diary */
+"New Diary" = "記錄";

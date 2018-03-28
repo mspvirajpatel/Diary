@@ -1,5 +1,5 @@
 //
-//  DiscoverTableViewController.swift
+//  CloudTableViewController.swift
 //  Diary
 //
 //  Created by 牛苒 on 2018/2/28.
@@ -10,7 +10,7 @@ import UIKit
 import CloudKit
 import MapKit
 
-class DiscoverTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+class CloudTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     @IBOutlet var emptyDiaryView: UIView!
     @IBOutlet var emptyTitle: UILabel!
     

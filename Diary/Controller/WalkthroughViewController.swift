@@ -73,10 +73,10 @@ class WalkthroughViewController: UIViewController, WalkthroughViewControllerDele
         // Add Quick Actions
         if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
             if let bundleIdentifier = Bundle.main.bundleIdentifier {
-                let shortcutItem1 = UIApplicationShortcutItem(type: "\(bundleIdentifier).OpenDiaries", localizedTitle: "显示所有日记", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
-                let shortcutItem2 = UIApplicationShortcutItem(type: "\(bundleIdentifier).OpenDiscover", localizedTitle: "显示iCloud内容", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .favorite), userInfo: nil)
-                let shortcutItem3 = UIApplicationShortcutItem(type: "\(bundleIdentifier).NewPhoto", localizedTitle: "拍照", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .capturePhoto), userInfo: nil)
-                let shortcutItem4 = UIApplicationShortcutItem(type: "\(bundleIdentifier).NewDiary", localizedTitle: "新建日记", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .add), userInfo: nil)
+                let shortcutItem1 = UIApplicationShortcutItem(type: "\(bundleIdentifier).OpenDiaries", localizedTitle: NSLocalizedString("Show all diaries", comment: "Show all diaries"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
+                let shortcutItem2 = UIApplicationShortcutItem(type: "\(bundleIdentifier).OpenDiscover", localizedTitle: NSLocalizedString("Discover", comment: "Discover"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .favorite), userInfo: nil)
+                let shortcutItem3 = UIApplicationShortcutItem(type: "\(bundleIdentifier).NewPhoto", localizedTitle: NSLocalizedString("Take a photo", comment: "Take a photo"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .capturePhoto), userInfo: nil)
+                let shortcutItem4 = UIApplicationShortcutItem(type: "\(bundleIdentifier).NewDiary", localizedTitle: NSLocalizedString("New Diary", comment: "New Diary"), localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .add), userInfo: nil)
                 UIApplication.shared.shortcutItems = [shortcutItem1, shortcutItem2, shortcutItem3, shortcutItem4]
             }
         }

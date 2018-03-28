@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE01071B204695C400485171 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071A204695C400485171 /* UserLocation.swift */; };
-		CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */; };
+		CE01071D2046B04A00485171 /* CloudTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01071C2046B04A00485171 /* CloudTableViewController.swift */; };
 		CE0EC7DE20567232004885E8 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EC7DD20567232004885E8 /* DiscoverTableViewCell.swift */; };
 		CE0EC7E020567EF1004885E8 /* SyncTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EC7DF20567EF1004885E8 /* SyncTableViewController.swift */; };
 		CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD12041488400EAF407 /* AboutTableViewController.swift */; };
@@ -87,7 +87,7 @@
 /* Begin PBXFileReference section */
 		CE0107172046840E00485171 /* Diary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Diary.entitlements; sourceTree = "<group>"; };
 		CE01071A204695C400485171 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
-		CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
+		CE01071C2046B04A00485171 /* CloudTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudTableViewController.swift; sourceTree = "<group>"; };
 		CE0EC7DD20567232004885E8 /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
 		CE0EC7DF20567EF1004885E8 /* SyncTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD12041488400EAF407 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 				CEF6C863204108B500FBE069 /* WalkthroughViewController.swift */,
 				CEF6C8612041055300FBE069 /* WalkthroughPageViewController.swift */,
 				CEF6C85F2041048100FBE069 /* WalkthroughContentViewController.swift */,
-				CE01071C2046B04A00485171 /* DiscoverTableViewController.swift */,
+				CE01071C2046B04A00485171 /* CloudTableViewController.swift */,
 				CE4AA68C2058CB7600CC509C /* CloudDetailViewController.swift */,
 				CEF554CA205B6EF2008167BF /* CloudMapViewController.swift */,
 				CE0EC7DF20567EF1004885E8 /* SyncTableViewController.swift */,
@@ -456,7 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE0EC7E020567EF1004885E8 /* SyncTableViewController.swift in Sources */,
-				CE01071D2046B04A00485171 /* DiscoverTableViewController.swift in Sources */,
+				CE01071D2046B04A00485171 /* CloudTableViewController.swift in Sources */,
 				CE186481204F96FB00892BFF /* NotifyTableViewController.swift in Sources */,
 				CE4AA68D2058CB7600CC509C /* CloudDetailViewController.swift in Sources */,
 				CEEFDC15203EC85D00A5BC64 /* MapViewController.swift in Sources */,
