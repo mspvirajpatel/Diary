@@ -157,6 +157,9 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(false, forKey: "isOpenNotify")
             UserDefaults.standard.set(false, forKey: "isOpenFaceID")
             UserDefaults.standard.set(false, forKey: "isNewPhoto")
+            UserDefaults.standard.set(true, forKey: "isOpenTableView3D")
+            UserDefaults.standard.set(true, forKey: "isOpenRotation")
+            UserDefaults.standard.set(45, forKey: "tableView3DAngle")
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat =  "HH:mm"
             dateFormatter.timeZone = TimeZone.current
@@ -458,6 +461,20 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             return false
         } else {
             return true
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if UserDefaults.standard.bool(forKey: "isOpenTableView3D") {
+            if UserDefaults.standard.bool(forKey: "isOpenRotation") {
+                let rotationAngleInRadians = CGFloat(UserDefaults.standard.integer(forKey: "tableView3DAngle")) * CGFloat(Double.pi/180.0)
+                cell.layer.transform = CATransform3DMakeRotation(rotationAngleInRadians, 0, 0, 1)
+            } else {
+                cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, -500, 100, 0)
+            }
+            UIView.animate(withDuration: 1.0, animations: {
+                cell.layer.transform = CATransform3DIdentity
+            })
         }
     }
 

@@ -14,6 +14,7 @@
 		CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD12041488400EAF407 /* AboutTableViewController.swift */; };
 		CE169BD42041561000EAF407 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169BD32041561000EAF407 /* WebViewController.swift */; };
 		CE169F61204E42EF009DB8E3 /* TagManageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */; };
+		CE17A546206C82A800C6F09F /* AnimationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17A545206C82A800C6F09F /* AnimationTableViewController.swift */; };
 		CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */; };
 		CE186481204F96FB00892BFF /* NotifyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186480204F96FB00892BFF /* NotifyTableViewController.swift */; };
 		CE191E562052648000878B5D /* Tangerine-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE191E532052647F00878B5D /* Tangerine-Regular.ttf */; };
@@ -93,6 +94,7 @@
 		CE169BD12041488400EAF407 /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		CE169BD32041561000EAF407 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagManageTableViewController.swift; sourceTree = "<group>"; };
+		CE17A545206C82A800C6F09F /* AnimationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTableViewController.swift; sourceTree = "<group>"; };
 		CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		CE186480204F96FB00892BFF /* NotifyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableViewController.swift; sourceTree = "<group>"; };
 		CE191E532052647F00878B5D /* Tangerine-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tangerine-Regular.ttf"; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				CE7EE0E8204CD9BC006A5BDD /* SettingTableViewController.swift */,
 				CE169F60204E42EF009DB8E3 /* TagManageTableViewController.swift */,
 				CE186480204F96FB00892BFF /* NotifyTableViewController.swift */,
+				CE17A545206C82A800C6F09F /* AnimationTableViewController.swift */,
 				CE197BE62054EA5100C63670 /* AuthViewController.swift */,
 				CE169BD32041561000EAF407 /* WebViewController.swift */,
 				CEC9CE792042AE62005FB426 /* NotebookViewController.swift */,
@@ -478,6 +481,7 @@
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
+				CE17A546206C82A800C6F09F /* AnimationTableViewController.swift in Sources */,
 				CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */,
 				CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */,
 				CEEFDC10203EC49400A5BC64 /* UINavigationController+Ext.swift in Sources */,
