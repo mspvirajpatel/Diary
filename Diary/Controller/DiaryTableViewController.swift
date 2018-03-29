@@ -59,7 +59,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: view)
         }
-
+        
+        tableView.backgroundColor = UIColor.clear
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -74,13 +75,16 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         searchController?.dimsBackgroundDuringPresentation = false
         
         searchController?.searchBar.placeholder = NSLocalizedString("Search from tags, title, content...", comment: "Search from tags, title, content...")
+        
         searchController?.searchBar.barTintColor = .white
         searchController?.searchBar.backgroundImage = UIImage()
+        searchController?.searchBar.alpha = 0.6
         searchController?.searchBar.tintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         
         // Prepare the empty view
-        tableView.backgroundView = emptyDiaryView
-        tableView.backgroundView?.isHidden = true
+        tableView.backgroundView = UIImageView(image: UIImage(named: "background.jpg"))
+//        tableView.backgroundView = emptyDiaryView
+//        tableView.backgroundView?.isHidden = true
         tableView.tableFooterView = UIView()
         // Pull to refresh control
     }
@@ -278,11 +282,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         if diaries.count > 0 {
-            tableView.backgroundView?.isHidden = true
+//            tableView.backgroundView?.isHidden = true
 //            tableView.separatorStyle = .singleLine
             searchController?.searchBar.isHidden = false
         } else {
-            tableView.backgroundView?.isHidden = false
+//            tableView.backgroundView?.isHidden = false
             emptyTitle.text = NSLocalizedString("I don't have diaries.", comment: "I don't have diaries.")
 //            tableView.separatorStyle = .none
             searchController?.searchBar.isHidden = true
@@ -301,7 +305,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
-
+        cell.contentView.backgroundColor = UIColor.clear
         let diary = (searchController?.isActive)! ? searchResults[indexPath.row] : diaries[indexPath.row]
         
         // Configure the cell...
@@ -313,6 +317,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             if cell.contentLargeUILabel.frame.width > 100 {
                 cell.contentLargeUILabel.isHidden = false
                 cell.contentLargeUILabel.text = diary.content!
+            } else {
+                cell.contentLargeUILabel.isHidden = true
             }
         } else {
             cell.thumbnailImageView.image = UIImage()
@@ -444,10 +450,10 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             
         })
         
-        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
+        deleteAction.backgroundColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 0.6)
         deleteAction.image = UIImage(named: "delete")
         
-        shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 1.0)
+        shareAction.backgroundColor = UIColor(red: 254.0/255.0, green: 149.0/255.0, blue: 38.0/255.0, alpha: 0.6)
         shareAction.image = UIImage(named: "share")
         
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
@@ -465,6 +471,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = UIColor.clear
         if UserDefaults.standard.bool(forKey: "isOpenTableView3D") {
             if UserDefaults.standard.bool(forKey: "isOpenRotation") {
                 let rotationAngleInRadians = CGFloat(UserDefaults.standard.integer(forKey: "tableView3DAngle")) * CGFloat(Double.pi/180.0)

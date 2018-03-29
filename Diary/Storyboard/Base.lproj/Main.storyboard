@@ -332,13 +332,20 @@
                                                         <constraint firstAttribute="height" constant="138" id="qUM-wv-tDJ"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKH-Ui-ZfL" userLabel="Date blur View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="86" height="138"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15.0"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XoU-mr-TjZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="78" height="138"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" text="time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy0-Qy-YHI">
                                                             <rect key="frame" x="3" y="3" width="21" height="12"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zok-I2-mnk">
@@ -367,7 +374,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="78" id="2dw-vr-xEi"/>
                                                         <constraint firstItem="S9Z-rk-QyK" firstAttribute="leading" secondItem="XoU-mr-TjZ" secondAttribute="leading" constant="2" id="2fn-Gn-pnU"/>
@@ -424,12 +430,16 @@
                                             <constraints>
                                                 <constraint firstItem="lEK-Dv-KJR" firstAttribute="top" secondItem="mb5-Qw-lqc" secondAttribute="top" id="0Yt-QE-8OU"/>
                                                 <constraint firstItem="m88-ui-yWJ" firstAttribute="bottom" secondItem="A2O-31-jeY" secondAttribute="bottom" constant="5" id="2Oj-oV-RPT"/>
+                                                <constraint firstItem="ZKH-Ui-ZfL" firstAttribute="top" secondItem="mb5-Qw-lqc" secondAttribute="top" id="5L9-H3-bm8"/>
                                                 <constraint firstAttribute="bottom" secondItem="XoU-mr-TjZ" secondAttribute="bottom" id="929-7v-Sg1"/>
                                                 <constraint firstItem="XoU-mr-TjZ" firstAttribute="leading" secondItem="mb5-Qw-lqc" secondAttribute="leading" id="A7N-9F-3QS"/>
                                                 <constraint firstItem="s9L-4b-tcR" firstAttribute="leading" secondItem="Bch-xk-nzo" secondAttribute="leading" constant="8" id="EnK-LP-G6c"/>
                                                 <constraint firstAttribute="trailing" secondItem="Gtc-Yl-auk" secondAttribute="trailing" id="Ewa-B4-vw5"/>
                                                 <constraint firstAttribute="trailing" secondItem="m88-ui-yWJ" secondAttribute="trailing" id="FWB-KK-Mm4"/>
+                                                <constraint firstItem="ZKH-Ui-ZfL" firstAttribute="trailing" secondItem="m88-ui-yWJ" secondAttribute="leading" id="FeO-zw-blw"/>
                                                 <constraint firstItem="lEK-Dv-KJR" firstAttribute="trailing" secondItem="m88-ui-yWJ" secondAttribute="leading" id="Iww-9q-vK5"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZKH-Ui-ZfL" secondAttribute="bottom" id="NHZ-LB-ruo"/>
+                                                <constraint firstItem="ZKH-Ui-ZfL" firstAttribute="leading" secondItem="mb5-Qw-lqc" secondAttribute="leading" id="QWh-0U-wZW"/>
                                                 <constraint firstAttribute="bottom" secondItem="Bch-xk-nzo" secondAttribute="bottom" id="Xip-me-NKU"/>
                                                 <constraint firstAttribute="trailing" secondItem="A2O-31-jeY" secondAttribute="trailing" constant="8" id="XqQ-RI-ZMZ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s9L-4b-tcR" secondAttribute="trailing" constant="20" symbolic="YES" id="ant-aD-ttN"/>
@@ -2592,8 +2602,9 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="z4L-JY-ujC" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sCD-bd-vgU">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
