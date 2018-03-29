@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("didFinishLaunchingWithOptions")
         UNUserNotificationCenter.current().delegate = self
 
-        UINavigationBar.appearance().tintColor = UIColor(red: 1.0/255.0, green: 50.0/255.0, blue: 67.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor(red: 25.0/255.0, green: 181.0/255.0, blue: 254.0/255.0, alpha: 1.0)
         UIApplication.shared.statusBarStyle = .default
         
         // Customize the tab bar

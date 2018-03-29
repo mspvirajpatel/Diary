@@ -2289,7 +2289,7 @@
                             <constraint firstItem="wcb-co-K9o" firstAttribute="leading" secondItem="ati-s7-CNa" secondAttribute="leading" id="DfE-gQ-gvP"/>
                             <constraint firstItem="wcb-co-K9o" firstAttribute="trailing" secondItem="ati-s7-CNa" secondAttribute="trailing" id="U7b-9A-7eP"/>
                             <constraint firstItem="wcb-co-K9o" firstAttribute="bottom" secondItem="ati-s7-CNa" secondAttribute="bottom" id="YZ0-Zx-OZC"/>
-                            <constraint firstItem="wcb-co-K9o" firstAttribute="top" secondItem="ati-s7-CNa" secondAttribute="top" constant="44" id="qZQ-wq-2Iv"/>
+                            <constraint firstItem="wcb-co-K9o" firstAttribute="top" secondItem="ati-s7-CNa" secondAttribute="top" id="qZQ-wq-2Iv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c7L-i1-KNW"/>
                     </view>
