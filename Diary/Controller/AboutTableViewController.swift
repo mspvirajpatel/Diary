@@ -9,10 +9,15 @@
 import UIKit
 import SafariServices
 import StoreKit
+import MessageUI
 
-class AboutTableViewController: UITableViewController {
+class AboutTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBAction func closeReturnToAboutPage(segue: UIStoryboardSegue) {
         
+    }
+    
+    @IBAction func sendEmailButtonTapped(_ sender: UIButton) {
+        sendEmail()
     }
     
     override func viewDidLoad() {
@@ -84,6 +89,34 @@ class AboutTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["niuran1993@gmail.com"])
+            mail.setSubject(NSLocalizedString("customer feedback", comment: "customer feedback"))
+            var messageBody = "<p>" + NSLocalizedString("Please enter your feedback here.", comment: "Please enter your feedback here.") + "</p><p></p><br><br><div><table>"
+            
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+                messageBody = messageBody + "<tr><th>版本</th>&nbsp;<td>" + version + "." + buildVersion + "</td></tr>"
+            }
+            messageBody = messageBody + "</table></div>"
+            
+            mail.setMessageBody(messageBody, isHTML: true)
+            
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+            let alertController = UIAlertController(title: NSLocalizedString("Warning", comment: "Warning"), message: NSLocalizedString("Mail services are not available", comment: "Mail services are not available"), preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: "Done"), style: .cancel, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 
 }

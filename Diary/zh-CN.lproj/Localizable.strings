@@ -264,3 +264,12 @@
 
 /* New Diary */
 "New Diary" = "记录";
+
+/* Please enter your feedback here */
+"Please enter your feedback here." = "请在此处输入您的反馈意见。";
+
+/* customer feedback */
+"customer feedback" = "用户反馈";
+
+/* Mail services are not available */
+"Mail services are not available" = "邮件服务不可用";
