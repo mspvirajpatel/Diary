@@ -159,7 +159,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             UserDefaults.standard.set(false, forKey: "isNewPhoto")
             UserDefaults.standard.set(true, forKey: "isOpenTableView3D")
             UserDefaults.standard.set(true, forKey: "isOpenRotation")
-            UserDefaults.standard.set(45, forKey: "tableView3DAngle")
+            UserDefaults.standard.set(90, forKey: "tableView3DAngle")
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat =  "HH:mm"
             dateFormatter.timeZone = TimeZone.current
