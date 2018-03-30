@@ -920,7 +920,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWS-xb-Hl9">
                             <rect key="frame" x="97.5" y="239.5" width="180" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="180" id="51g-o3-lTA"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="51g-o3-lTA"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -980,6 +980,7 @@
                             <outlet property="delegate" destination="wdU-vN-KRn" id="RKa-SR-xrR"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="E8n-7D-pgO"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BHb-PH-3fC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1251,16 +1252,16 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Account" id="mDV-04-Amq">
+                            <tableViewSection id="mDV-04-Amq">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="180" id="GAZ-R4-Qnj">
-                                        <rect key="frame" x="0.0" y="452" width="375" height="180"/>
+                                        <rect key="frame" x="0.0" y="424" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GAZ-R4-Qnj" id="CQZ-vz-8FV">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggq-o1-9Wh" customClass="FancyButton" customModule="Diary" customModuleProvider="target">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggq-o1-9Wh" customClass="FancyButton" customModule="Diary" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="5" width="343" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
@@ -1279,7 +1280,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtQ-0B-kWV" customClass="FancyButton" customModule="Diary" customModuleProvider="target">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtQ-0B-kWV" customClass="FancyButton" customModule="Diary" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="63" width="343" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
