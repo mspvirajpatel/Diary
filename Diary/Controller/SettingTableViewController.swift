@@ -100,4 +100,15 @@ class SettingTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 3 {
+            if indexPath.row == 0 {
+                let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+                if let walkthroughViewController = storyboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+                    present(walkthroughViewController, animated: true, completion: nil)
+                }
+            }
+        }
+    }
 }

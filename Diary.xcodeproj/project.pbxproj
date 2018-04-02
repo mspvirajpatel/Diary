@@ -17,6 +17,7 @@
 		CE17A546206C82A800C6F09F /* AnimationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17A545206C82A800C6F09F /* AnimationTableViewController.swift */; };
 		CE17E011204D1AF800382EA6 /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */; };
 		CE186481204F96FB00892BFF /* NotifyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE186480204F96FB00892BFF /* NotifyTableViewController.swift */; };
+		CE189EDE2072244800342400 /* InitialDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE189EDD2072244800342400 /* InitialDiary.swift */; };
 		CE191E562052648000878B5D /* Tangerine-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE191E532052647F00878B5D /* Tangerine-Regular.ttf */; };
 		CE191E572052648000878B5D /* Tangerine-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE191E542052647F00878B5D /* Tangerine-Bold.ttf */; };
 		CE191E582052648000878B5D /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE191E552052648000878B5D /* OFL.txt */; };
@@ -97,6 +98,7 @@
 		CE17A545206C82A800C6F09F /* AnimationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationTableViewController.swift; sourceTree = "<group>"; };
 		CE17E010204D1AF800382EA6 /* TagsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; };
 		CE186480204F96FB00892BFF /* NotifyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableViewController.swift; sourceTree = "<group>"; };
+		CE189EDD2072244800342400 /* InitialDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDiary.swift; sourceTree = "<group>"; };
 		CE191E532052647F00878B5D /* Tangerine-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tangerine-Regular.ttf"; sourceTree = "<group>"; };
 		CE191E542052647F00878B5D /* Tangerine-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tangerine-Bold.ttf"; sourceTree = "<group>"; };
 		CE191E552052648000878B5D /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			children = (
 				CE01071A204695C400485171 /* UserLocation.swift */,
 				CE9045D9205A0BCD00276E3E /* ImageStore.swift */,
+				CE189EDD2072244800342400 /* InitialDiary.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				CEC9CE762042AC41005FB426 /* NotebookCollectionViewCell.swift in Sources */,
 				CEEFDC03203E5DC700A5BC64 /* DetailViewController.swift in Sources */,
 				CEF6C864204108B500FBE069 /* WalkthroughViewController.swift in Sources */,
+				CE189EDE2072244800342400 /* InitialDiary.swift in Sources */,
 				CE17A546206C82A800C6F09F /* AnimationTableViewController.swift in Sources */,
 				CEF6C8602041048100FBE069 /* WalkthroughContentViewController.swift in Sources */,
 				CE169BD22041488400EAF407 /* AboutTableViewController.swift in Sources */,

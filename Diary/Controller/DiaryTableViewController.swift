@@ -18,6 +18,13 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     var searchResults: [DiaryMO] = []
     var notebook: NotebookMO!
+    let initDiaryArray: [InitialDiary] = [
+        InitialDiary(title: "欢迎来到" + Bundle.main.displayName, content: "    " + Bundle.main.displayName + "是一款集记笔记、日记于一体的应用。", image: "iniDiary-1.jpg", tag: NSLocalizedString("diary", comment: "diary") + " " + NSLocalizedString("learn", comment: "learn") + " " + NSLocalizedString("notes", comment: "notes"), weather: "sunny"),
+        InitialDiary(title: "标签", content: "    你可以为自己的日记、笔记添加最多3个标签以方便搜索笔记。\r\n    " + Bundle.main.displayName + "会为你建立一些常用的标签，如果需要对标签进行管理，请在 关于->设置->标签管理 中去添加、修改和删除标签。", image: "iniDiary-2.jpg", tag: NSLocalizedString("work", comment: "work") + " " + NSLocalizedString("notes", comment: "notes"), weather: "cloudy"),
+        InitialDiary(title: "永不丢失", content: "    " + Bundle.main.displayName + "使用Apple的CloudKit实现同步，你的所有日记、笔记都会在iPad、iPhone之间同步。\r\n\r\n    tips:不过在你删除笔记后，云端也会自动删除～", image: "iniDiary-3.jpg", tag: NSLocalizedString("learn", comment: "learn"), weather: "rain"),
+        InitialDiary(title: "加密", content: "    你可以在 关于->设置->系统 中开启Face ID或Touch ID，来保护你的日记。每次你完全退出应用后，再次进入就会要求你验证身份。", image: "iniDiary-4.jpg", tag: NSLocalizedString("notes", comment: "notes"), weather: "snow"),
+        InitialDiary(title: "恢复你的笔记", content: "    如果你直接删除了" + Bundle.main.displayName + "，你的笔记依旧会保留在iCloud云端上，但只有你自己才能看到。\r\n    如果你再次下载了" + Bundle.main.displayName + "，你可以从 关于->设置->iCloud上的记录 查看到来自所有设备的笔记，点击右上角的同步按钮后，就可以自动从iCloud上恢复你的笔记。", image: "iniDiary-5.jpg", tag: NSLocalizedString("work", comment: "work"),  weather: "overcast")
+    ]
     
     let monthArray = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "June.", "July.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
     let weekArray = ["Sun.", "Mon.", "Tues.", "Wed.", "Thur.", "Fri.", "Sat."]
@@ -202,6 +209,28 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
                     tagMO.name = initTags[index]
                 }
                 
+                var iniDiaryDate: Double = 1
+                for iniDiary in initDiaryArray {
+                    let diary = DiaryMO(context: appDelegate.persistentContainer.viewContext)
+                    let currentMaxId = UserDefaults.standard.integer(forKey: "maxDiaryId")
+                    UserDefaults.standard.set(currentMaxId + 1, forKey: "maxDiaryId")
+                    diary.id = String(Int(currentDate.timeIntervalSince1970.rounded())) + randomString(length: 6) + String(currentMaxId + 1)
+                    diary.notebookid = "1"
+                    diary.title = iniDiary.title
+                    diary.content = iniDiary.content
+                    if let diaryImage = UIImage(named: iniDiary.image) {
+                        let imageName = String(Int(round(Date.init().timeIntervalSince1970))) + randomString(length: 6) + "-image.jpg"
+                        let imageStore = ImageStore(name: imageName)
+                        if imageStore.storeImage(image: diaryImage) {
+                            diary.image = imageName
+                        }
+                    }
+                    diary.tag = iniDiary.tag
+                    diary.weather = iniDiary.weather
+                    diary.create = Date.init(timeIntervalSince1970: currentDate.timeIntervalSince1970 - (3600 * 24 * iniDiaryDate))
+                    diary.update = Date.init(timeIntervalSince1970: currentDate.timeIntervalSince1970 - (3600 * 24 * iniDiaryDate))
+                    iniDiaryDate = iniDiaryDate + 1.0
+                }
                 print("Saving data to context")
                 appDelegate.saveContext()
             }
@@ -668,5 +697,12 @@ extension UIViewController {
 extension UIDevice {
     var iPhoneX: Bool {
         return UIScreen.main.nativeBounds.height == 2436
+    }
+}
+
+extension Bundle {
+    var displayName: String {
+        let name = object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+        return name ?? object(forInfoDictionaryKey: kCFBundleNameKey as String) as! String
     }
 }

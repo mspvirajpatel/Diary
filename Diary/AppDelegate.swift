@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch shortcutIdentifier {
         case .OpenDiaries:
             tabBarController.selectedIndex = 0
-        case .OpenDiscover:
-            tabBarController.selectedIndex = 1
+//        case .OpenDiscover:
+//            tabBarController.selectedIndex = 1
         case .NewPhoto:
             if let navController = tabBarController.viewControllers?[0] {
                 let diaryTableViewController = navController.childViewControllers[0]
@@ -146,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 enum QuickAction: String {
     case OpenDiaries = "OpenDiary"
-    case OpenDiscover = "OpenDiscover"
+//    case OpenDiscover = "OpenDiscover"
     case NewPhoto = "NewPhoto"
     case NewDiary = "NewDiary"
     init?(fullIdentifier: String) {

@@ -395,11 +395,12 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         navigationItem.largeTitleDisplayMode = .never
         
+        locationButton.isHidden = false
         // Json Decode the location information
         let jsonDecoder = JSONDecoder()
         if let location = diary.location {
             if location == "" {
-                locationButton.setTitle(NSLocalizedString("Locate failed", comment: "Locate failed"), for: UIControlState.normal)
+                locationButton.isHidden = true
             } else {
                 if let jsonData = location.data(using: .utf8) {
                     do {
@@ -411,7 +412,7 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
             }
         } else {
-            locationButton.setTitle(NSLocalizedString("Locate failed", comment: "Locate failed"), for: UIControlState.normal)
+            locationButton.isHidden = true
         }
         
         titleTextField.text = diary.title
