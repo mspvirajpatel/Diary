@@ -500,8 +500,12 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="setting" id="36j-o1-0FS"/>
-                            <barButtonItem systemItem="compose" id="fzD-eD-aQy">
+                            <barButtonItem image="setting" id="36j-o1-0FS">
+                                <connections>
+                                    <segue destination="UU4-c2-Dyk" kind="showDetail" id="Hkz-Th-RNj"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="add" id="fzD-eD-aQy">
                                 <connections>
                                     <segue destination="1dr-ki-cIr" kind="presentation" identifier="showNewDiary" id="kck-zT-rP2"/>
                                 </connections>
@@ -509,6 +513,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addDiaryBarButtomItem" destination="fzD-eD-aQy" id="iKE-mA-DZl"/>
                         <outlet property="emptyDiaryView" destination="37h-zb-EE4" id="AOe-Aq-3jd"/>
                         <outlet property="emptyTitle" destination="Pfc-O8-6cQ" id="J9g-dc-ejG"/>
                         <outlet property="navTitle" destination="T87-wg-w7V" id="njC-JA-Yn5"/>
@@ -1287,12 +1292,19 @@
                             <outlet property="delegate" destination="xgg-Sh-EhC" id="ZuG-wt-hhV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="About" id="Qju-nG-SZU"/>
+                    <navigationItem key="navigationItem" title="About" id="Qju-nG-SZU">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="close" id="BYl-a9-WaF">
+                            <connections>
+                                <segue destination="uEf-vl-BXx" kind="unwind" unwindAction="unwindToHomeWithSegue:" id="pLQ-eW-qof"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="ifz-50-jgL" kind="show" identifier="showWebView" id="Jpm-BY-jwA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcW-k8-EVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="uEf-vl-BXx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-594.39999999999998" y="2973.4632683658174"/>
         </scene>
@@ -1773,7 +1785,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x8H-rG-Mo8">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -2488,7 +2500,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="K0h-xW-7mw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2587,7 +2599,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="lJn-RX-Kyy" kind="relationship" relationship="viewControllers" id="048-NC-Ghb"/>
-                        <segue destination="UU4-c2-Dyk" kind="relationship" relationship="viewControllers" id="OfC-XK-ggO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIm-l6-ArD" userLabel="First Responder" sceneMemberID="firstResponder"/>

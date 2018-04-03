@@ -44,6 +44,13 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     @IBOutlet var emptyDiaryView: UIView!
     @IBOutlet var emptyTitle: UILabel!
     @IBOutlet var navTitle: UINavigationItem!
+    @IBOutlet weak var addDiaryBarButtomItem: UIBarButtonItem! {
+        didSet {
+            addDiaryBarButtomItem.title = ""
+            addDiaryBarButtomItem.isEnabled = false
+        }
+    }
+    
     var btn = UIButton(type: .custom)
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
@@ -86,6 +93,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)]
         
         // SearchBar
         searchController = UISearchController(searchResultsController: nil)
@@ -104,6 +112,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         // add button
         btn.frame = CGRect(x: screenWidth - 85, y: screenHeight - 85, width: 60, height: 60)
         btn.setImage(UIImage(named: "add-diary"), for: .normal)
+        btn.setImage(UIImage(named: "add-diary-choose"), for: .selected)
         btn.clipsToBounds = true
         btn.addTarget(self, action: #selector(addDiaryButtonTapped(_:)), for: .touchUpInside)
         view.addSubview(btn)
@@ -117,7 +126,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
 //        ])
         
         // Prepare the empty view
-        tableView.backgroundView = UIImageView(image: UIImage(named: "background.jpg"))
+        tableView.backgroundView = UIImageView(image: UIImage(named: "background"))
 //        tableView.backgroundView = emptyDiaryView
 //        tableView.backgroundView?.isHidden = true
         tableView.tableFooterView = UIView()
@@ -340,7 +349,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("scroll.....\(tableView.contentOffset.y)")
+        //print("scroll.....\(tableView.contentOffset.y)")
         let off = tableView.contentOffset.y
         self.btn.frame = CGRect(x: screenWidth - 85, y: off + screenHeight - 85, width: 60, height: 60)
     }

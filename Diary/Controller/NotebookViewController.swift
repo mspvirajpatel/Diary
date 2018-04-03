@@ -35,8 +35,8 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
         super.viewDidLoad()
         
         // Apply blurring effect
-        backgroundImageView.image = UIImage(named: "cloud")
-        let blurEffect = UIBlurEffect(style: .dark)
+        backgroundImageView.image = UIImage(named: "background")
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         backgroundImageView.addSubview(blurEffectView)
@@ -142,7 +142,7 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
         if indexPath.row == notebooks.count {
             cell.notebookNameLabel.isHidden = true
             cell.imageView.image = UIImage()
-            cell.imageView.backgroundColor = UIColor.lightGray
+            cell.imageView.backgroundColor = UIColor(red: 171.0/255.0, green: 183.0/255.0, blue: 183.0/255.0, alpha: 1.0)
             cell.plusImageView.isHidden = false
             cell.notebookDescriptionLabel.isHidden = true
             cell.infoButton.isHidden = true
