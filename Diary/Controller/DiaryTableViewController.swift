@@ -44,6 +44,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     @IBOutlet var emptyDiaryView: UIView!
     @IBOutlet var emptyTitle: UILabel!
     @IBOutlet var navTitle: UINavigationItem!
+    var btn = UIButton(type: .custom)
     
     @IBAction func unwindToHome(segue: UIStoryboardSegue) {
         
@@ -59,6 +60,16 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     public var screenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
+    
+    public var screenWidth: CGFloat {
+        return UIScreen.main.bounds.width
+    }
+    
+    @objc func addDiaryButtonTapped(_ sender: UIButton) {
+        if let newDiaryNavigationController = storyboard?.instantiateViewController(withIdentifier: "NewDiaryNavigationController") as? UINavigationController {
+            present(newDiaryNavigationController, animated: true, completion: nil)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +77,8 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: view)
         }
+        
+        print("screenHeight:\(screenHeight), screenWidth:\(screenWidth)")
         
         tableView.backgroundColor = UIColor.clear
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -88,6 +101,21 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         searchController?.searchBar.alpha = 0.6
         searchController?.searchBar.tintColor = UIColor(red: 231.0/255.0, green: 76.0/255.0, blue: 60.0/255.0, alpha: 1.0)
         
+        // add button
+        btn.frame = CGRect(x: screenWidth - 85, y: screenHeight - 85, width: 60, height: 60)
+        btn.setImage(UIImage(named: "add-diary"), for: .normal)
+        btn.clipsToBounds = true
+        btn.addTarget(self, action: #selector(addDiaryButtonTapped(_:)), for: .touchUpInside)
+        view.addSubview(btn)
+        
+//        btn.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            btn.trailingAnchor.constraint(equalTo: self.navigationController!.view.trailingAnchor, constant: 10),
+//            btn.bottomAnchor.constraint(equalTo: self.navigationController!.view.bottomAnchor, constant: 53),
+//            btn.widthAnchor.constraint(equalToConstant: 60),
+//            btn.heightAnchor.constraint(equalToConstant: 60)
+//        ])
+        
         // Prepare the empty view
         tableView.backgroundView = UIImageView(image: UIImage(named: "background.jpg"))
 //        tableView.backgroundView = emptyDiaryView
@@ -98,7 +126,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("diary viewwillappear")
+        self.tabBarController?.tabBar.isHidden = true
         if UserDefaults.standard.bool(forKey: "isOpenFaceID"){
             if UserDefaults.standard.bool(forKey: "isShouldAuth") {
                 performSegue(withIdentifier: "showAuth", sender: self)
@@ -242,6 +270,11 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
         }
     }
     
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        btn.removeFromSuperview()
+//    }
+    
     func addEmptyDiaryAndDelete() {
         // Save to CoreData
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -304,6 +337,12 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("scroll.....\(tableView.contentOffset.y)")
+        let off = tableView.contentOffset.y
+        self.btn.frame = CGRect(x: screenWidth - 85, y: off + screenHeight - 85, width: 60, height: 60)
     }
 
     // MARK: - Table view data source

@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -226,12 +227,12 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="3ze-0V-fhW">
-                                                    <rect key="frame" x="113" y="178" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-book" translatesAutoresizingMaskIntoConstraints="NO" id="3ze-0V-fhW">
+                                                    <rect key="frame" x="95.5" y="160.5" width="60" height="60"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="25" id="AI7-XF-1AU"/>
-                                                        <constraint firstAttribute="height" constant="25" id="j7n-35-7a1"/>
+                                                        <constraint firstAttribute="width" constant="60" id="AI7-XF-1AU"/>
+                                                        <constraint firstAttribute="height" constant="60" id="j7n-35-7a1"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -498,11 +499,14 @@
                                 <segue destination="Af6-2L-P26" kind="presentation" identifier="showNotebook" id="K2l-Fw-DlR"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="fzD-eD-aQy">
-                            <connections>
-                                <segue destination="1dr-ki-cIr" kind="presentation" identifier="showNewDiary" id="kck-zT-rP2"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="setting" id="36j-o1-0FS"/>
+                            <barButtonItem systemItem="compose" id="fzD-eD-aQy">
+                                <connections>
+                                    <segue destination="1dr-ki-cIr" kind="presentation" identifier="showNewDiary" id="kck-zT-rP2"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="emptyDiaryView" destination="37h-zb-EE4" id="AOe-Aq-3jd"/>
@@ -2555,7 +2559,7 @@
         <!--Navigation Controller-->
         <scene sceneID="oZ1-SB-LK7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1dr-ki-cIr" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NewDiaryNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="1dr-ki-cIr" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="2jK-PE-FMk">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
@@ -2611,6 +2615,7 @@
     </scenes>
     <resources>
         <image name="about" width="23" height="21"/>
+        <image name="add-book" width="229" height="229"/>
         <image name="chat" width="22" height="20"/>
         <image name="close" width="16" height="16"/>
         <image name="cross" width="33" height="32"/>
@@ -2619,7 +2624,6 @@
         <image name="list" width="16" height="16"/>
         <image name="list-white" width="32" height="32"/>
         <image name="photo" width="24" height="18"/>
-        <image name="plus" width="16" height="16"/>
         <image name="save" width="20" height="20"/>
         <image name="setting" width="24" height="24"/>
         <image name="store" width="22" height="21"/>
