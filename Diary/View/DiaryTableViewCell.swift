@@ -18,7 +18,12 @@ class DiaryTableViewCell: UITableViewCell {
         }
     }
     @IBOutlet var contentLargeUILabel: UILabel!
-    @IBOutlet var contentLabel: UILabel!
+    @IBOutlet var contentLabel: UILabel! {
+        didSet {
+            contentLabel.layer.cornerRadius = 5.0
+            contentLabel.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var tagLabel: UILabel! {

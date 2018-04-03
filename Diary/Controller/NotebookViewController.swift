@@ -19,6 +19,7 @@ class NotebookViewController: UIViewController, NSFetchedResultsControllerDelega
     var historyCommet = ""
     var nameTextField: UITextField!
     var commentTextField: UITextField!
+    var feedbackGenerator : UISelectionFeedbackGenerator? = nil
     
     var blockOperations: [BlockOperation] = []
     
@@ -170,6 +171,19 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == notebooks.count {
+            // Instantiate a new generator.
+            feedbackGenerator = UISelectionFeedbackGenerator()
+            
+            // Prepare the generator when the gesture begins.
+            feedbackGenerator?.prepare()
+            
+            // Trigger selection feedback.
+            feedbackGenerator?.selectionChanged()
+            
+            // Keep the generator in a prepared state.
+            feedbackGenerator?.prepare()
+            
+            feedbackGenerator = nil
             if let newNotebookNavigationController = storyboard?.instantiateViewController(withIdentifier: "NewNotebookNavigationController") as? UINavigationController {
                 present(newNotebookNavigationController, animated: true, completion: nil)
             }
@@ -218,7 +232,7 @@ extension NotebookViewController: UICollectionViewDelegate, UICollectionViewData
 extension NotebookViewController: NotebookCollectionCellDelegate {
     func didSeletInfoButton(cell: NotebookCollectionViewCell) {
         if let indexPath = collectionView.indexPath(for: cell) {
-            let optionMenu = UIAlertController(title: nil, message: "option", preferredStyle: .actionSheet)
+            let optionMenu = UIAlertController(title: nil, message: NSLocalizedString("Option", comment: "Option"), preferredStyle: .actionSheet)
 
             let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: nil)
             optionMenu.addAction(cancelAction)

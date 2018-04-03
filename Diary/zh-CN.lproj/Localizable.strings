@@ -16,6 +16,9 @@
 /* Are really want to delete Notebook: */
 "Are really want to delete Notebook:" = "确定删除笔记本：";
 
+/* Authentication to continue */
+"Authentication to continue" = "认证以继续";
+
 /* CREATE YOUR OWN DIARY OR NOTE */
 "CREATE YOUR OWN DIARY OR NOTE" = "创建你的日记或笔记";
 
@@ -40,6 +43,9 @@
 /* Cover Image */
 "Cover Image" = "封面图";
 
+/* Create a new diary on any of your devices, Then will automatically sync to iCloud. */
+"Create a new diary on any of your devices, Then will automatically sync to iCloud." = "在你的任意设备上新建日记，就会自动同步到iCloud上";
+
 /* DISCOVER NOTES ON DIFFERENT DEVICES */
 "DISCOVER NOTES ON DIFFERENT DEVICES" = "查看不同设备上的笔记";
 
@@ -51,6 +57,9 @@
 
 /* Diary Reminder */
 "Diary Reminder" = "日记提醒";
+
+/* Discover */
+"Discover" = "发现";
 
 /* Done */
 "Done" = "完成";
@@ -79,17 +88,32 @@
 /* GET STARTED */
 "GET STARTED" = "开始";
 
+/* I don't have diaries. */
+"I don't have diaries." = "没有日记";
+
 /* Locate failed */
 "Locate failed" = "定位失败";
 
 /* Location Settings */
 "Location Settings" = "前往设置地理位置权限";
 
+/* MM-dd */
+"MM-dd" = "MM月dd日";
+
+/* Mail services are not available */
+"Mail services are not available" = "邮件服务不可用";
+
 /* NEXT */
 "NEXT" = "下一步";
 
+/* New Diary */
+"New Diary" = "新笔记";
+
 /* Photos */
 "Photos" = "照片";
+
+/* Please enter your feedback here. */
+"Please enter your feedback here." = "请在此处输入您的反馈意见。";
 
 /* Please select the photo source */
 "Please select the photo source" = "请选择照片来源";
@@ -112,6 +136,9 @@
 /* Share */
 "Share" = "分享";
 
+/* Show all diaries */
+"Show all diaries" = "显示所有日记";
+
 /* Skip */
 "Skip" = "跳过";
 
@@ -123,6 +150,9 @@
 
 /* Sync your notes to iCloud automatically */
 "Sync your notes to iCloud automatically" = "自动同步笔记至iCloud";
+
+/* Take a photo */
+"Take a photo" = "拍照";
 
 /* The result of the execution */
 "The result of the execution" = "执行结果";
@@ -163,11 +193,17 @@
 /* createdAt */
 "createdAt" = "创建于";
 
+/* customer feedback */
+"customer feedback" = "用户反馈";
+
 /* days ago */
 "days ago" = "天前";
 
 /* diary */
 "diary" = "日记";
+
+/* edit the tag */
+"edit the tag" = "编辑标签";
 
 /* food */
 "food" = "美食";
@@ -183,9 +219,6 @@
 
 /* minutes ago */
 "minutes ago" = "分钟前";
-
-/* MM-dd */
-"MM-dd" = "MM月dd日";
 
 /* modifiedAt */
 "modifiedAt" = "修改于";
@@ -220,56 +253,11 @@
 /* yyyy */
 "yyyy" = "yyyy年";
 
-/* yyyy-MM-dd HH:mm:ss */
-"yyyy-MM-dd HH:mm:ss" = "yyyy年MM月dd日 HH:mm:ss";
-
 /* yyyy-MM-dd */
 "yyyy-MM-dd" = "yyyy年MM月dd日";
 
-/* Start loading local data...\r\n */
-"Start loading local data...\r\n" = "加载本地数据...\r\n";
+/* yyyy-MM-dd HH:mm:ss */
+"yyyy-MM-dd HH:mm:ss" = "yyyy年MM月dd日 HH:mm:ss";
 
-/* Successfully loading local data...\r\n */
-"Successfully loading local data...\r\n" = "成功加载本地数据...\r\n";
-
-/* Start downloading iCloud data...\r\n */
-"Start downloading iCloud data...\r\n" = "下载iCloud数据...\r\n";
-
-/* Successfully download iCloud data...\r\n */
-"Successfully download iCloud data...\r\n" = "成功下载iCloud数据...\r\n";
-
-/* Starting to compare local data with iCloud data...\r\n */
-"Starting to compare local data with iCloud data...\r\n" = "对比本地数据与iCloud数据中...\r\n";
-
-/* edit the tag */
-"edit the tag" = "编辑标签";
-
-/* I don't have diaries. */
-"I don't have diaries." = "没有日记";
-
-/* Create a new diary on any of your devices, Then will automatically sync to iCloud. */
-"Create a new diary on any of your devices, Then will automatically sync to iCloud." = "在你的任意设备上新建日记，就会自动同步到iCloud上";
-
-/* Authentication to continue */
-"Authentication to continue" = "认证以继续";
-
-/* Show all diaries */
-"Show all diaries" = "显示所有日记";
-
-/* Discover */
-"Discover" = "发现";
-
-/* Take a photo */
-"Take a photo" = "拍照";
-
-/* New Diary */
-"New Diary" = "记录";
-
-/* Please enter your feedback here */
-"Please enter your feedback here." = "请在此处输入您的反馈意见。";
-
-/* customer feedback */
-"customer feedback" = "用户反馈";
-
-/* Mail services are not available */
-"Mail services are not available" = "邮件服务不可用";
+/* Option */
+"Option" = "操作";

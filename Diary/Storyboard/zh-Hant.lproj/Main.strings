@@ -58,6 +58,9 @@
 /* Class = "UINavigationItem"; title = "About"; ObjectID = "Qju-nG-SZU"; */
 "Qju-nG-SZU.title" = "關於";
 
+/* Class = "UILabel"; text = "Rotation Angle"; ObjectID = "UFF-gZ-i5L"; */
+"UFF-gZ-i5L.text" = "旋轉角度";
+
 /* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "Usq-fG-nY3"; */
 "Usq-fG-nY3.title" = "保存";
 
@@ -70,17 +73,26 @@
 /* Class = "UILabel"; text = "download records from iCloud."; ObjectID = "WOZ-8Q-Kot"; */
 "WOZ-8Q-Kot.text" = "從iCloud上下載內容";
 
+/* Class = "UISegmentedControl"; WZC-wo-phW.segmentTitles[0] = "Rotation"; ObjectID = "WZC-wo-phW"; */
+"WZC-wo-phW.segmentTitles[0]" = "旋轉";
+
+/* Class = "UISegmentedControl"; WZC-wo-phW.segmentTitles[1] = "Fly-in"; ObjectID = "WZC-wo-phW"; */
+"WZC-wo-phW.segmentTitles[1]" = "飛入";
+
 /* Class = "UINavigationItem"; title = "New Notebook"; ObjectID = "XR2-Aq-ldE"; */
 "XR2-Aq-ldE.title" = "新建筆記本";
 
 /* Class = "UITableViewSection"; headerTitle = "Download"; ObjectID = "Xw3-xG-7AO"; */
 "Xw3-xG-7AO.headerTitle" = "下載";
 
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "ZQc-t9-LMu"; */
+"ZQc-t9-LMu.headerTitle" = "其他";
+
 /* Class = "UINavigationItem"; title = "Choose the Tag"; ObjectID = "Zi8-Bl-Uje"; */
 "Zi8-Bl-Uje.title" = "選擇標簽";
 
-/* Class = "UITableViewSection"; headerTitle = "Follow us"; ObjectID = "ahe-9v-yTj"; */
-"ahe-9v-yTj.headerTitle" = "關註";
+/* Class = "UITableViewSection"; headerTitle = "About"; ObjectID = "ahe-9v-yTj"; */
+"ahe-9v-yTj.headerTitle" = "關於";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "bSA-Bt-rO5"; */
 "bSA-Bt-rO5.normalTitle" = "保存";
@@ -100,14 +112,26 @@
 /* Class = "UILabel"; text = "Change Tags"; ObjectID = "esx-kJ-geV"; */
 "esx-kJ-geV.text" = "更改標簽";
 
+/* Class = "UILabel"; text = "Welcome Page"; ObjectID = "iz2-6G-ThY"; */
+"iz2-6G-ThY.text" = "歡迎頁面";
+
 /* Class = "UILabel"; text = "Notification Settings"; ObjectID = "l3r-x3-g4G"; */
 "l3r-x3-g4G.text" = "通知設置";
 
 /* Class = "UILabel"; text = "Notification"; ObjectID = "m4J-rR-86a"; */
 "m4J-rR-86a.text" = "通知";
 
+/* Class = "UILabel"; text = "Records in iCloud"; ObjectID = "n1X-bn-1Qa"; */
+"n1X-bn-1Qa.text" = "iCloud上的記錄";
+
+/* Class = "UILabel"; text = "Animation Settings"; ObjectID = "n4A-MZ-GlK"; */
+"n4A-MZ-GlK.text" = "動畫設置";
+
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "o96-K0-7JB"; */
 "o96-K0-7JB.title" = "取消";
+
+/* Class = "UILabel"; text = "Animation"; ObjectID = "qTs-G2-xf7"; */
+"qTs-G2-xf7.text" = "動畫";
 
 /* Class = "UITabBarItem"; title = "About"; ObjectID = "tKX-1G-fQA"; */
 "tKX-1G-fQA.title" = "關於";
