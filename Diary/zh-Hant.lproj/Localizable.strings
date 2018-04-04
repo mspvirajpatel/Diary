@@ -261,3 +261,51 @@
 
 /* Option */
 "Option" = "操作";
+
+/* Welcome to  */
+"Welcome to " = "歡迎來到";
+
+/* integrates notes with journals in one application. */
+"integrates notes with journals in one application." = "是壹款集記筆記、日記於壹體的應用。";
+
+/* Tags */
+"Tags" = "標簽";
+
+/*     You can add up to 3 tags for your own notes, to make it easier to search.\r\n         */
+"    You can add up to 3 tags for your own notes, to make it easier to search.\r\n    " = "    妳可以為自己的日記、筆記添加最多3個標簽以方便搜索筆記。\r\n    ";
+
+/* It will create some common tags for you. If you need to manage the tags, please add, modify, and delete tags in the upper right corner of Settings->Tag Management. */
+"It will create some common tags for you. If you need to manage the tags, please add, modify, and delete tags in the upper right corner of Settings->Tag Management." = "會為妳建立壹些常用的標簽，如果需要對標簽進行管理，請在 右上角設置->標簽管理 中去添加、修改和刪除標簽。";
+
+/* Never lose */
+"Never lose" = "永不丟失";
+
+/* Using Apple's CloudKit for synchronization, all your diaries and notes are synchronized between iPad and iPhone.\r\n\r\n    tips: However, after you delete your notes, the cloud will automatically be deleted. */
+"Using Apple's CloudKit for synchronization, all your diaries and notes are synchronized between iPad and iPhone.\r\n\r\n    tips: However, after you delete your notes, the cloud will automatically be deleted." = "使用Apple的CloudKit實現同步，妳的所有日記、筆記都會在iPad、iPhone之間同步。\r\n\r\n    tips:不過在妳刪除筆記後，雲端也會自動刪除～";
+
+/* Encryption */
+"Encryption" = "加密";
+
+/*     You can protect your diary by turning on Face ID or Touch ID in the upper right corner of Settings->System. Every time you completely exit the app, you will be asked to verify your identity */
+"    You can protect your diary by turning on Face ID or Touch ID in the upper right corner of Settings->System. Every time you completely exit the app, you will be asked to verify your identity" = "    妳可以在 右上角設置->系統 中開啟Face ID或Touch ID，來保護妳的日記。每次妳完全退出應用後，再次進入就會要求妳驗證身份。";
+
+/* Recover your notes */
+"Recover your notes" = "恢復妳的筆記";
+
+/*     If you delete */
+"    If you delete" = "    如果妳直接刪除了";
+
+/* ,Your notes will remain on the iCloud, And only you can see it.\r\n    If you download it again */
+",Your notes will remain on the iCloud, And only you can see it.\r\n    If you download it again" = "，妳的筆記依舊會保留在iCloud雲端上，但只有妳自己才能看到。\r\n    如果妳再次下載了";
+
+/* ,You can view the notes from every devices from the upper-right corner of Settings->iCloud. Click the sync button in the upper right corner to automatically restore your notes from iCloud. */
+",You can view the notes from every devices from the upper-right corner of Settings->iCloud. Click the sync button in the upper right corner to automatically restore your notes from iCloud." = "，妳可以從 右上角設置->iCloud上的記錄 查看到來自所有設備的筆記，點擊右上角的同步按鈕後，就可以自動從iCloud上恢復妳的筆記。";
+
+/* Notes without picture */
+"Notes without picture" = "無圖片的筆記";
+
+/* If your notes do not include pictures, then */
+"If your notes do not include pictures, then" = "如果妳的筆記沒有加入圖片，那麽";
+
+/* The content of the note will displayed directly. After you add a picture, the picture will be displayed. */
+"The content of the note will displayed directly. After you add a picture, the picture will be displayed." = "會直接顯示筆記的內容，在妳添加圖片後，則會重新顯示圖片。";

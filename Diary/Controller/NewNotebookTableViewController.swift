@@ -23,7 +23,11 @@ class NewNotebookTableViewController: UITableViewController, UIImagePickerContro
             notebook = NotebookMO(context: appDelegate.persistentContainer.viewContext)
             notebook.id = String(maxNoteBookId)
             notebook.name = nameTextField.text
-            notebook.comment = descriptionTextView.text
+            if descriptionTextView.text == NSLocalizedString("write the description of notebook...", comment: "write the description of notebook...") {
+                notebook.comment = ""
+            } else {
+                notebook.comment = descriptionTextView.text
+            }
             let currentDate = Date.init()
             notebook.create = currentDate
             notebook.update = currentDate

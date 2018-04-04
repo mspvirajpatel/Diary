@@ -346,14 +346,19 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                     photoSourceRequestController.addAction(photoLibraryAction)
                     photoSourceRequestController.addAction(cancelAction)
                     
-//                    if let popoverController = photoSourceRequestController.popoverPresentationController {
-//                        popoverController.sourceView = self.backgroundImageView
-//                        popoverController.sourceRect = self.backgroundImageView.bounds
-//                    }
+                    if let popoverController = photoSourceRequestController.popoverPresentationController {
+                        popoverController.sourceView = cell.infoButton
+                        popoverController.sourceRect = cell.infoButton.bounds
+                    }
                     
                     self.present(photoSourceRequestController, animated: true, completion: nil)
                 })
                 editOptionMenu.addAction(editImage)
+                
+                if let popoverController = editOptionMenu.popoverPresentationController {
+                    popoverController.sourceView = cell.infoButton
+                    popoverController.sourceRect = cell.infoButton.bounds
+                }
                 self.present(editOptionMenu, animated: true, completion: nil)
             })
             optionMenu.addAction(editAction)
@@ -417,7 +422,10 @@ extension NotebookViewController: NotebookCollectionCellDelegate {
                 })
                 optionMenu.addAction(deleteAction)
             }
-
+            if let popoverController = optionMenu.popoverPresentationController {
+                popoverController.sourceView = cell.infoButton
+                popoverController.sourceRect = cell.infoButton.bounds
+            }
             present(optionMenu, animated: true, completion: nil)
             
         }
