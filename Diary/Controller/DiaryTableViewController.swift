@@ -514,7 +514,7 @@ class DiaryTableViewController: UITableViewController, NSFetchedResultsControlle
             self.activityController?.completionWithItemsHandler = {
                 (activity, success, items, error) in
                 if success {
-                    switch activity!._rawValue {
+                    switch activity!.rawValue {
                     case "com.apple.UIKit.activity.SaveToCameraRoll":
                         let alertController = UIAlertController(title: NSLocalizedString("Successfully saved to Photos!", comment: "Successfully saved to Photos!"),
                                                                 message: nil, preferredStyle: .alert)
