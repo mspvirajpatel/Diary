@@ -309,3 +309,18 @@
 
 /* The content of the note will displayed directly. After you add a picture, the picture will be displayed. */
 "The content of the note will displayed directly. After you add a picture, the picture will be displayed." = "會直接顯示筆記的內容，在妳添加圖片後，則會重新顯示圖片。";
+
+/* Start loading local data...\r\n */
+"Start loading local data...\r\n" = "加載本地數據...\r\n";
+
+/* Successfully loading local data...\r\n */
+"Successfully loading local data...\r\n" = "成功加載本地數據...\r\n";
+
+/* Start downloading iCloud data...\r\n */
+"Start downloading iCloud data...\r\n" = "下載iCloud數據...\r\n";
+
+/* Successfully download iCloud data...\r\n */
+"Successfully download iCloud data...\r\n" = "成功下載iCloud數據...\r\n";
+
+/* Starting to compare local data with iCloud data...\r\n */
+"Starting to compare local data with iCloud data...\r\n" = "對比本地數據與iCloud數據中...\r\n";
