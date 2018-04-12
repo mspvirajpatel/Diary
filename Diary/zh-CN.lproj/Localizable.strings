@@ -265,8 +265,8 @@
 /* Welcome to  */
 "Welcome to " = "欢迎来到";
 
-/* integrates notes with journals in one application. */
-"integrates notes with journals in one application." = "是一款集记笔记、日记于一体的应用。";
+/*  integrates notes with journals in one application. */
+" integrates notes with journals in one application." = "是一款集记笔记、日记于一体的应用。";
 
 /* Tags */
 "Tags" = "标签";

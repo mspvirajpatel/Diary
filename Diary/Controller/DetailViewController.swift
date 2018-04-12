@@ -553,8 +553,8 @@ class DetailViewController: UIViewController, UIImagePickerControllerDelegate, U
             
                 // Fetch and save the record from the iCloud
                 let privateDatabase = CKContainer.default().privateCloudDatabase
-                print("recordName: \(diary.recordName!)")
                 if let recordName = diary.recordName {
+                    print("recordName: \(recordName)")
                     let recordID = CKRecordID(recordName: recordName)
                     privateDatabase.fetch(withRecordID: recordID, completionHandler: { (record, error) in
                         if let error = error {
